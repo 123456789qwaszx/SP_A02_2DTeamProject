@@ -1,0 +1,447 @@
+fileFormatVersion: 2
+guid: 4e7bc99b688d46a4d955ed9d4d93e847
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
+    mipMapMode: 0
+    enableMipMap: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+    convertToNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+    swizzle: 50462976
+    isReadable: 0
+    streamingMipmaps: 0
+    streamingMipmapsPriority: 0
+    vTOnly: 0
+    ignoreMipmapLimit: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 100
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationDetail: -1
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    flipbookRows: 0
+    flipbookColumns: 0
+    ignorePngGamma: 0
+    cookieMode: 0
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+    applyGammaDecoding: 0
+  previousAsepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    mosaicPadding: 4
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  asepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    mosaicPadding: 4
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  importFileNodeState: 1
+  platformSettingsDirtyTick: 0
+  textureAssetName: 
+  singleSpriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  animatedSpriteImportData:
+  - name: Vampires1_Death_front_Frame_0
+    originalName: 
+    pivot: {x: 0.5217391, y: -0.5862069}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 61
+      y: 77
+      width: 23
+      height: 29
+    spriteID: ab053241be51c024d8ae779c46d11170
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 61, y: 77}
+  - name: Vampires1_Death_front_Frame_1
+    originalName: 
+    pivot: {x: 0.5185185, y: -0.6296296}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 61
+      y: 42
+      width: 27
+      height: 27
+    spriteID: ca31c9de59c70c345951ba3640dd7087
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 61, y: 42}
+  - name: Vampires1_Death_front_Frame_2
+    originalName: 
+    pivot: {x: 0.51724136, y: -0.6538462}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 226
+      width: 29
+      height: 26
+    spriteID: b75fb70b33ddff44d89e0fd043dbf0dd
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 226}
+  - name: Vampires1_Death_front_Frame_3
+    originalName: 
+    pivot: {x: 0.52380955, y: -0.6296296}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 61
+      y: 150
+      width: 21
+      height: 27
+    spriteID: 3c5786b32ccb90a4ba8097620b972913
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 61, y: 150}
+  - name: Vampires1_Death_front_Frame_4
+    originalName: 
+    pivot: {x: 0.52380955, y: -0.60714287}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 61
+      y: 114
+      width: 21
+      height: 28
+    spriteID: 9b60b622d12384c4aa1317ef88a383d6
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 61, y: 114}
+  - name: Vampires1_Death_front_Frame_5
+    originalName: 
+    pivot: {x: 0.48, y: -0.60714287}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 99
+      y: 4
+      width: 25
+      height: 28
+    spriteID: 0f2904da0b226454eae9089e4708456d
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 99, y: 4}
+  - name: Vampires1_Death_front_Frame_6
+    originalName: 
+    pivot: {x: 0.53333336, y: -0.5666667}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 61
+      y: 4
+      width: 30
+      height: 30
+    spriteID: e01f8413db4d2d1489b4a8e0bd8236f9
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 61, y: 4}
+  - name: Vampires1_Death_front_Frame_7
+    originalName: 
+    pivot: {x: 0.4871795, y: -0.35897437}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 179
+      width: 39
+      height: 39
+    spriteID: 89d6f51b1b7b61f4d9c51c7a73e6e183
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 179}
+  - name: Vampires1_Death_front_Frame_8
+    originalName: 
+    pivot: {x: 0.5, y: -0.21739131}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 125
+      width: 42
+      height: 46
+    spriteID: 1bb26bbf2d56b8a438b4a7b1c3e0753c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 125}
+  - name: Vampires1_Death_front_Frame_9
+    originalName: 
+    pivot: {x: 0.4888889, y: -0.14}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 67
+      width: 45
+      height: 50
+    spriteID: acc449f92d6ab014fa6fafd3ef82d85a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 67}
+  - name: Vampires1_Death_front_Frame_10
+    originalName: 
+    pivot: {x: 0.48979592, y: -0.07272727}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 49
+      height: 55
+    spriteID: f5da8c27be0e08e46bf7642a7fdc3619
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 4}
+  spriteSheetImportData: []
+  asepriteLayers:
+  - layerIndex: 0
+    guid: -1363391057
+    name: Vampires1_Death_front
+    layerFlags: 0
+    layerType: 0
+    blendMode: 0
+    cells:
+    - name: Vampires1_Death_front_Frame_0
+      frameIndex: 0
+      cellRect:
+        x: 20
+        y: 17
+        width: 23
+        height: 29
+      spriteId: ab053241be51c024d8ae779c46d11170
+    - name: Vampires1_Death_front_Frame_1
+      frameIndex: 1
+      cellRect:
+        x: 18
+        y: 17
+        width: 27
+        height: 27
+      spriteId: ca31c9de59c70c345951ba3640dd7087
+    - name: Vampires1_Death_front_Frame_2
+      frameIndex: 2
+      cellRect:
+        x: 17
+        y: 17
+        width: 29
+        height: 26
+      spriteId: b75fb70b33ddff44d89e0fd043dbf0dd
+    - name: Vampires1_Death_front_Frame_3
+      frameIndex: 3
+      cellRect:
+        x: 21
+        y: 17
+        width: 21
+        height: 27
+      spriteId: 3c5786b32ccb90a4ba8097620b972913
+    - name: Vampires1_Death_front_Frame_4
+      frameIndex: 4
+      cellRect:
+        x: 21
+        y: 17
+        width: 21
+        height: 28
+      spriteId: 9b60b622d12384c4aa1317ef88a383d6
+    - name: Vampires1_Death_front_Frame_5
+      frameIndex: 5
+      cellRect:
+        x: 20
+        y: 17
+        width: 25
+        height: 28
+      spriteId: 0f2904da0b226454eae9089e4708456d
+    - name: Vampires1_Death_front_Frame_6
+      frameIndex: 6
+      cellRect:
+        x: 16
+        y: 17
+        width: 30
+        height: 30
+      spriteId: e01f8413db4d2d1489b4a8e0bd8236f9
+    - name: Vampires1_Death_front_Frame_7
+      frameIndex: 7
+      cellRect:
+        x: 13
+        y: 14
+        width: 39
+        height: 39
+      spriteId: 89d6f51b1b7b61f4d9c51c7a73e6e183
+    - name: Vampires1_Death_front_Frame_8
+      frameIndex: 8
+      cellRect:
+        x: 11
+        y: 10
+        width: 42
+        height: 46
+      spriteId: 1bb26bbf2d56b8a438b4a7b1c3e0753c
+    - name: Vampires1_Death_front_Frame_9
+      frameIndex: 9
+      cellRect:
+        x: 10
+        y: 7
+        width: 45
+        height: 50
+      spriteId: acc449f92d6ab014fa6fafd3ef82d85a
+    - name: Vampires1_Death_front_Frame_10
+      frameIndex: 10
+      cellRect:
+        x: 8
+        y: 4
+        width: 49
+        height: 55
+      spriteId: f5da8c27be0e08e46bf7642a7fdc3619
+    linkedCells: []
+    parentIndex: -1
+  platformSettings: []
+  generatePhysicsShape: 0
+  secondarySpriteTextures: []
+  spritePackingTag: 
+  canvasSize: {x: 64, y: 64}
