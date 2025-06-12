@@ -23,7 +23,7 @@ public class SkillController : MonoBehaviour
     Vector3 _moveDir;
     float _speed = 5.0f;
     public float lifeTime = 1.0f;
-    public int damage;
+    public int damage=10;
 
     bool _isvalid = false;
 
@@ -103,7 +103,7 @@ public class SkillController : MonoBehaviour
     // 몬스터와 충돌시 처리
     void OnTriggerEnter2D(Collider2D collision)
     {
-        TestMonster monster = collision.gameObject.GetComponent<TestMonster>();
+        MonsterBase monster = collision.gameObject.GetComponent<MonsterBase>();
         // 몬스터 풀링 완성되면 그때 추가.
         // if (monster.isvalid == false)
         //     return;
@@ -112,7 +112,7 @@ public class SkillController : MonoBehaviour
             return;
 
 
-        monster.OnDamaged(_owner, damage);
+        monster.TakeDamage(damage);
 
         switch (this.skillType)
         {
