@@ -45,7 +45,7 @@ public class MonsterSpawnManager : MonoBehaviour
 
         if (isFinalBossStage)   // 최종보스스테이지냐
         {
-            SpawnFinalBoss();
+            //SpawnFinalBoss();
         }
         else
         {
@@ -140,33 +140,33 @@ public class MonsterSpawnManager : MonoBehaviour
         Instantiate(bosses[Random.Range(0, bosses.Length)], pos, Quaternion.identity);
     }
 
-    void SpawnFinalBoss()   // 최종 보스 스폰
-    {
-        spawnedFinalBoss = Instantiate(finalBoss, player.position + Vector3.up * 5f, Quaternion.identity);
-        finalBossScript = spawnedFinalBoss.GetComponent<MonsterFinalBoss>();
-        StartCoroutine(FinalBossPhaseMonitor());
-    }
+    //void SpawnFinalBoss()   // 최종 보스 스폰
+    //{
+    //    spawnedFinalBoss = Instantiate(finalBoss, player.position + Vector3.up * 5f, Quaternion.identity);
+    //    finalBossScript = spawnedFinalBoss.GetComponent<MonsterFinalBoss>();
+    //    StartCoroutine(FinalBossPhaseMonitor());
+    //}
 
-    IEnumerator FinalBossPhaseMonitor() // 최종보스 체력 체크
-    {
-        while (spawnedFinalBoss != null)
-        {
-            float hpPercent = finalBossScript.CurrentHP / finalBossScript.MaxHP;
+    //IEnumerator FinalBossPhaseMonitor() // 최종보스 체력 체크
+    //{
+    //    while (spawnedFinalBoss != null)
+    //    {
+    //        float hpPercent = finalBossScript.CurrentHP / finalBossScript.MaxHP;
 
-            if (hpPercent <= phase3Threshold)
-            {
-                SpawnMidBoss();
-                SpawnEliteMonster();
-            }
-            else if (hpPercent <= phase2Threshold)
-            {
-                SpawnEliteMonster();
-                SpawnRegularMonsters();
-            }
+    //        if (hpPercent <= phase3Threshold)
+    //        {
+    //            SpawnMidBoss();
+    //            SpawnEliteMonster();
+    //        }
+    //        else if (hpPercent <= phase2Threshold)
+    //        {
+    //            SpawnEliteMonster();
+    //            SpawnRegularMonsters();
+    //        }
 
-            yield return new WaitForSeconds(10f);
-        }
-    }
+    //        yield return new WaitForSeconds(10f);
+    //    }
+    //}
 
     void OnStageClear() // 스테이지 클리어하면 스폰 중지
     {
