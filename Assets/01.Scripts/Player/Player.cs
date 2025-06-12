@@ -37,6 +37,9 @@ public class Player : MonoBehaviour
     [SerializeField] protected float skillAttack;      // 특수 공격력
     [SerializeField] protected float defense;          // 방어력
     [SerializeField] protected float critical;         // 크리티컬 확률 (%)
+
+    public float Attack => attack;
+    public float Critical => critical;
     
     [Header("회복 스탯")]
     [SerializeField] public float hpRecovery;

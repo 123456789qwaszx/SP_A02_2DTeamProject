@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     private Warrior warrior;
     private float attackCooldown = 0f; // 남은 쿨타임 시간
 
+    public WarriorAttackController attackController;
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -64,6 +65,8 @@ public class PlayerController : MonoBehaviour
 
         if (attackCooldown > 0f)
             attackCooldown -= Time.fixedDeltaTime;
+
+        GameManager.Instance.MoveDir = inputVector;
     }
 
     private void OnAttackPerformed(InputAction.CallbackContext context)
@@ -80,5 +83,14 @@ public class PlayerController : MonoBehaviour
         // 쿨타임 설정 (초당 공격 횟수 기준 → 간격은 1 / 속도)
         float delay = 1f / warrior.AttackSpeed;
         attackCooldown = delay;
+
+        // 1) 마우스 스크린→월드 좌표 변환
+        Vector3 ms = Mouse.current.position.ReadValue();
+        Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(ms);
+        mouseWorld.z = 0f;
+
+        // 2) 공격 컨트롤러 호출
+        attackController.AttackByMouse(mouseWorld);
+
     }
 }
