@@ -5,13 +5,17 @@ using UnityEngine;
 
 public class EnemyScanner : MonoBehaviour
 {
+    [SerializeField] private GameObject modelTransform;
 
     public float ViewAngle = 360;    //시야각
     public float ViewDistance = 15; //시야거리
+    
     public LayerMask _layermask;
 
     void Update()
     {
+        RotateModel();
+        
         DrawView();
         //FinaVisibleTargets();
     }
@@ -45,19 +49,27 @@ public class EnemyScanner : MonoBehaviour
 
     public void DrawView()
     {
-        Vector3 leftBoundary = DirFromAngle(-ViewAngle / 2);
-        Vector3 rightBoundary = DirFromAngle(ViewAngle / 2);
-        Debug.DrawLine(gameObject.transform.position, gameObject.transform.position + leftBoundary * ViewDistance, Color.green);
-        Debug.DrawLine(gameObject.transform.position, gameObject.transform.position + rightBoundary * ViewDistance, Color.green);
+        Vector2 leftBoundary = DirFromAngle(-ViewAngle / 2);
+        Vector2 rightBoundary = DirFromAngle(ViewAngle / 2);
+        Debug.DrawLine(gameObject.transform.position, (Vector2)gameObject.transform.position + leftBoundary * ViewDistance, Color.green);
+        Debug.DrawLine(gameObject.transform.position, (Vector2)gameObject.transform.position + rightBoundary * ViewDistance, Color.green);
     }
 
 
-    public Vector3 DirFromAngle(float angleInDegrees)
+    public Vector2 DirFromAngle(float angleInDegrees)
     {
         // 좌우 회전값 갱신
-        angleInDegrees += transform.eulerAngles.y;
+        angleInDegrees += Mathf.Abs(transform.eulerAngles.y)+Mathf.Abs(transform.eulerAngles.x);
         // 경계 벡터값 반환
-        return new Vector3(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), 0, Mathf.Cos(angleInDegrees * Mathf.Deg2Rad));
+        return new Vector2(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), Mathf.Cos(angleInDegrees * Mathf.Deg2Rad));
+    }
+
+    private void RotateModel()
+    {
+        Vector3 moveDir = GameManager.Instance.MoveDir;
+        Quaternion lookRotation = Quaternion.LookRotation(moveDir);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotation, Time.deltaTime * 50f);
+
     }
 
 }
