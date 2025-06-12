@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TestMonster : MonoBehaviour
 {
-    public bool IsValid;
+    public bool isvalid;
 
     void Start()
     {
@@ -13,5 +13,6 @@ public class TestMonster : MonoBehaviour
 
     public void OnDamaged(Player attacker, int damage)
     {
+        Debug.Log("몬스터대미지");
     }
 }

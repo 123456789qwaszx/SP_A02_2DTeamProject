@@ -5,8 +5,10 @@ using UnityEngine;
 public class SkillBook : MonoBehaviour
 {
     [Header("Projectile")]
-    public Transform _projectileSocket;
+    public Transform indicator;
     public float _projectileCooldown = 0.3f;
+    public float projectileLifeTime = 5f;
+    public int projectileDamage = 10;
 
 
     void Start()
@@ -28,13 +30,13 @@ public class SkillBook : MonoBehaviour
 
     IEnumerator CoStartProjectile()
     {
-        WaitForSeconds wait = new WaitForSeconds(_projectileCooldown);
+        new WaitForSeconds(_projectileCooldown);
 
         while (true)
         {
             SkillController skill = GameManager.Instance.SpawnProjectile(transform.position);
-            skill.SetInfo(GameManager.Instance.player, GameManager.Instance.MoveDir);
-            yield return wait;
+            skill.SetInfo(GameManager.Instance.player, -(transform.position - indicator.position).normalized, projectileLifeTime, projectileDamage);
+            yield return new WaitForSeconds(_projectileCooldown);
         }
     }
     #endregion
