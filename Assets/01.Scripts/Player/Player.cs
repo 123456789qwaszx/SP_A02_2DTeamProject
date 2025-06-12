@@ -12,6 +12,12 @@ public class Player : MonoBehaviour
     private CapsuleCollider col;
 
 
+    
+    public float GetHP() => hp;
+    public float GetMP() => mp;
+    public float GetMaxHP() => 100f; // 임시값, 나중에 성장 시스템 연동 가능
+    public float GetMaxMP() => 100f;
+
     [Header("플레이어 스탯")]
     [SerializeField] protected float moveSpeed;
     [SerializeField] protected float attackSpeed;
