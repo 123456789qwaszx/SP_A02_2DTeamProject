@@ -42,10 +42,10 @@ public class PlayerController : MonoBehaviour
         Vector2 move = inputVector * player.MoveSpeed * Time.fixedDeltaTime;
         player.Rb.MovePosition(player.Rb.position + move);
 
-        // ✅ 애니메이션 갱신
+        // 애니메이션 갱신
         animator.SetFloat("Run", inputVector.magnitude);
 
-        // ✅ 오른쪽 이동 중이면 flip, 왼쪽이면 원래 방향
+        // 오른쪽 이동 중이면 flip, 왼쪽이면 원래 방향
         if (inputVector.x > 0.01f)
             spriteRenderer.flipX = true;   // 오른쪽 → 반전
         else if (inputVector.x < -0.01f)
