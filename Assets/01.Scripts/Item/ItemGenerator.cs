@@ -7,23 +7,35 @@ public class ItemGenerator : MonoBehaviour
 {
     public List<OptionPool> optionPools;
 
+    private CharacterClass GetUsableClass(ItemType type)
+    {
+        return type switch
+        {
+            ItemType.Sword or ItemType.Axe => CharacterClass.Warrior,
+            ItemType.Bow or ItemType.Crossbow => CharacterClass.Archer,
+            ItemType.Staff or ItemType.Wand => CharacterClass.Mage,
+            _ => CharacterClass.Warrior
+        };
+    }
+
     public GeneratedItem GenerateRandomItem(ItemRarity rarity, ItemType itemType)
     {
-        GeneratedItem item = new();
-        item.rarity = rarity;
-        item.itemType = itemType;
-        item.usableClass = GetUsableClass(itemType);
-        item.itemName = $"{rarity} {itemType}";
+        GeneratedItem item = new()
+        {
+            rarity = rarity,
+            itemType = itemType,
+            usableClass = GetUsableClass(itemType),
+            itemName = $"{rarity} {itemType}"
+        };
 
-        // 옵션 풀 찾기
         var pool = optionPools.FirstOrDefault(p => p.itemType == itemType);
         if (pool == null)
         {
-            Debug.LogError("옵션 풀이 없습니다.");
+            Debug.LogError($"OptionPool for {itemType} not found.");
             return item;
         }
 
-        int baseOptionCount = rarity switch
+        int optionCount = rarity switch
         {
             ItemRarity.Normal => 2,
             ItemRarity.Magic => 3,
@@ -33,55 +45,62 @@ public class ItemGenerator : MonoBehaviour
             _ => 2
         };
 
-        var baseOptions = pool.possibleOptions.OrderBy(x => UnityEngine.Random.value).Take(baseOptionCount);
-        foreach (var opt in baseOptions)
-            item.options.Add((opt.optionName, opt.GetRandomValue()));
+        var selected = pool.possibleOptions
+            .OrderBy(x => Random.value)
+            .Take(optionCount);
 
-        return item;
-    }
-
-    public GeneratedItem GenerateUniqueItem(UniqueItemData uniqueData)
-    {
-        GeneratedItem item = new();
-        item.rarity = ItemRarity.Unique;
-        item.itemType = uniqueData.itemType;
-        item.usableClass = uniqueData.usableClass;
-        item.itemName = uniqueData.uniqueName;
-
-        foreach (var opt in uniqueData.fixedOptions)
-            item.options.Add((opt.optionName, opt.GetRandomValue()));
-
-        if (uniqueData.uniqueOption != null)
-            item.uniqueOption = (uniqueData.uniqueOption.optionName, uniqueData.uniqueOption.GetRandomValue());
-
-        return item;
-    }
-
-    public GeneratedItem GenerateSetItem(SetItemData setData)
-    {
-        GeneratedItem item = new();
-        item.rarity = ItemRarity.Set;
-        item.itemType = setData.itemType;
-        item.usableClass = setData.usableClass;
-        item.itemName = setData.itemName;
-
-        foreach (var opt in setData.fixedOptions)
-            item.options.Add((opt.optionName, opt.GetRandomValue()));
-
-        foreach (var bonus in setData.setBonusOptions)
-            item.setBonuses.Add((bonus.optionName, bonus.GetRandomValue()));
-
-        return item;
-    }
-
-    private CharacterClass GetUsableClass(ItemType type)
-    {
-        return type switch
+        foreach (var opt in selected)
         {
-            ItemType.Sword or ItemType.Axe => CharacterClass.Warrior,
-            ItemType.Bow or ItemType.Crossbow => CharacterClass.Archer,
-            ItemType.Staff or ItemType.Wand => CharacterClass.Mage,
-            _ => CharacterClass.Warrior // 기본값은 전사
+            float val = opt.GetRandomValue(rarity);
+            item.options.Add((opt.optionName, val));
+        }
+
+        return item;
+    }
+
+    public GeneratedItem GenerateUniqueItem(UniqueItemData data)
+    {
+        GeneratedItem item = new()
+        {
+            rarity = ItemRarity.Unique,
+            itemType = data.itemType,
+            usableClass = data.usableClass,
+            itemName = data.uniqueName
         };
+
+        foreach (var opt in data.fixedOptions)
+        {
+            item.options.Add((opt.optionName, opt.GetRandomValue(ItemRarity.Unique)));
+        }
+
+        if (data.uniqueOption != null)
+        {
+            item.uniqueOption = (data.uniqueOption.optionName, data.uniqueOption.GetRandomValue(ItemRarity.Unique));
+        }
+
+        return item;
+    }
+
+    public GeneratedItem GenerateSetItem(SetItemData data)
+    {
+        GeneratedItem item = new()
+        {
+            rarity = ItemRarity.Set,
+            itemType = data.itemType,
+            usableClass = data.usableClass,
+            itemName = data.itemName
+        };
+
+        foreach (var opt in data.fixedOptions)
+        {
+            item.options.Add((opt.optionName, opt.GetRandomValue(ItemRarity.Set)));
+        }
+
+        foreach (var bonus in data.setBonusOptions)
+        {
+            item.setBonuses.Add((bonus.optionName, bonus.GetRandomValue(ItemRarity.Set)));
+        }
+
+        return item;
     }
 }

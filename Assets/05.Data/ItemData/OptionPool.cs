@@ -6,5 +6,5 @@ using UnityEngine;
 public class OptionPool : ScriptableObject
 {
     public ItemType itemType;
-    public List<ItemOption> possibleOptions;
+    public List<ItemOptionWithRarity> possibleOptions;
 }

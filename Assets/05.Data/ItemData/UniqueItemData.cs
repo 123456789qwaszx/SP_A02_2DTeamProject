@@ -6,8 +6,9 @@ using UnityEngine;
 public class UniqueItemData : ScriptableObject
 {
     public string uniqueName;
+    public Sprite icon;
     public ItemType itemType;
     public CharacterClass usableClass;
-    public List<ItemOption> fixedOptions; // 옵션 4줄
-    public ItemOption uniqueOption; // 고유 옵션
+    public List<ItemOptionWithRarity> fixedOptions; // 옵션 4줄
+    public ItemOptionWithRarity uniqueOption; // 고유 옵션
 }
