@@ -20,12 +20,17 @@ public class SkillController : MonoBehaviour
     GameObject _owner;
     Vector3 _moveDir;
     float _speed = 10.0f;
-    float _lifeTime = 10.0f;
+    float _lifeTime = 1.0f;
+
+    Coroutine _coDestroy;
+
+    #region Temp
+    int Damage;
+
+    #endregion
 
 
     #region Destroy
-    Coroutine _coDestroy;
-
     public void StartDestroy(float delaySeconds)
     {
         StopDestroy();
@@ -50,8 +55,14 @@ public class SkillController : MonoBehaviour
             PoolManager.Instance.Pop(gameObject);
         }
     }
-
     #endregion
+
+    public void Start()
+    {
+        Init();
+    }
+
+
     public bool Init()
     {
         StartDestroy(_lifeTime);
@@ -73,9 +84,21 @@ public class SkillController : MonoBehaviour
     {
         transform.position += _moveDir * _speed * Time.deltaTime;
     }
+    
 
-    void OnTriggerEner2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
+        TestMonster monster = collision.gameObject.GetComponent<TestMonster>();
+        if (monster.IsValid == false)
+            return;
+        if (this.IsValid == false)
+            return;
+
+        monster.OnDamaged(_owner, Damage);
+
+        StopDestroy();
+
+        PoolManager.Instance.Push(gameObject);
         
     }
 

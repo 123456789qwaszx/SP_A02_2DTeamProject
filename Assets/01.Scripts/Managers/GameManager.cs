@@ -20,4 +20,8 @@ public class GameManager : Singleton<GameManager>
             _moveDir = value;
         }
     }
+
+    public GameObject projectile_Prefab;
+    public GameObject SpawnProjectile() { return PoolManager.Instance.Pop(projectile_Prefab); }
+    public void DespawnProJectile(GameObject go) { PoolManager.Instance.Push(go); } 
 }
