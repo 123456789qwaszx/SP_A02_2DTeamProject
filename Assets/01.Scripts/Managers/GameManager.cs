@@ -24,12 +24,12 @@ public class GameManager : Singleton<GameManager>
     }
 
     #region HolyProjectile
-    public GameObject projectile_Prefab;
+    public GameObject holyProjectile_Prefab;
     public HashSet<SkillController> HolyProjectiles { get; } = new HashSet<SkillController>();
 
     public SkillController SpawnProjectile(Vector2 position)
     {
-        GameObject go = PoolManager.Instance.Pop(projectile_Prefab);
+        GameObject go = PoolManager.Instance.Pop(holyProjectile_Prefab);
         go.transform.position = position;
 
         SkillController sc = go.GetComponent<SkillController>();
@@ -58,7 +58,6 @@ public class GameManager : Singleton<GameManager>
         go.transform.position = position;
 
         SkillController sc = go.GetComponent<SkillController>();
-        sc._lifeTime = 1;
         sc.Init();
 
         return sc;
