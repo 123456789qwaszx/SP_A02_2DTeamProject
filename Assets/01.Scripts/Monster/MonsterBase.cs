@@ -1,18 +1,27 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class MonsterBase : MonoBehaviour
+public interface IMonster
 {
-    // Start is called before the first frame update
-    void Start()
+    void ResetMonster();
+}
+public class MonsterBase : MonoBehaviour, IMonster
+{
+    public int maxHP = 100;
+    private int currentHP;
+
+    public void ResetMonster()
     {
-        
+        currentHP = maxHP;
+        // 기타 초기화 추가 예정
     }
 
-    // Update is called once per frame
-    void Update()
+    public void TakeDamage(int amount)
     {
-        
+        currentHP -= amount;
+        if (currentHP <= 0)
+        {
+            PoolManager.Instance.Push(this.gameObject);
+        }
     }
 }
