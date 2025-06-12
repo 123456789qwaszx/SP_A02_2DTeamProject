@@ -9,14 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 925cb927aba53cf4d97f42ad200165ec, type: 3}
-  m_Name: OptionPool
+  m_Script: {fileID: 11500000, guid: 09d2d699969283e4fa7aed785d58aefd, type: 3}
+  m_Name: SwordVD
   m_EditorClassIdentifier: 
   itemType: 0
-  possibleOptions:
-  - optionName: 
-    minValue: 0
-    maxValue: 0
-  - optionName: 
-    minValue: 0
-    maxValue: 0
+  itemIcon: {fileID: 21300000, guid: 4b04da03d60fbb246bce6d971df10d7f, type: 3}
