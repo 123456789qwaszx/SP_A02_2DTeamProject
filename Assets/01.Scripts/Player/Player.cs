@@ -12,6 +12,12 @@ public class Player : MonoBehaviour
     private CapsuleCollider col;
 
 
+    
+    public float GetHP() => hp;
+    public float GetMP() => mp;
+    public float GetMaxHP() => 100f; // 임시값, 나중에 성장 시스템 연동 가능
+    public float GetMaxMP() => 100f;
+
     [Header("플레이어 스탯")]
     [SerializeField] protected float moveSpeed;
     [SerializeField] protected float attackSpeed;
@@ -25,14 +31,21 @@ public class Player : MonoBehaviour
     public float MoveSpeed => moveSpeed;
 
     [Header("전투 스탯")]
-    [SerializeField] protected float attack;       // 공격력
-    [SerializeField] protected float defense;      // 방어력
-    [SerializeField] protected float critical;    // 크리티컬 확률 (%)
+    [SerializeField] protected float attack;           // 공격력
+    [SerializeField] protected float Specialattack;    // 특수 공격력
+    [SerializeField] protected float Skillattack;      // 특수 공격력
+    [SerializeField] protected float defense;          // 방어력
+    [SerializeField] protected float critical;         // 크리티컬 확률 (%)
 
     void Start()
     {
+        GameManager.Instance.player = this;
         tf = GetComponent<Transform>();
         rb = GetComponent<Rigidbody2D>();
+
+        if (Rb == null)
+            Debug.LogError("Rigidbody not found on Player!");
+
         col = GetComponent<CapsuleCollider>();
     }
 }
