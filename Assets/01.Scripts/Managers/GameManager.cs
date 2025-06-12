@@ -12,6 +12,7 @@ public class GameManager : Singleton<GameManager>
     */
 
     public Player player;
+    public PlayerController controller;
 
     Vector2 _moveDir;
     public Vector2 MoveDir
