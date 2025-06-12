@@ -23,7 +23,26 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    #region Projectile
     public GameObject projectile_Prefab;
-    public GameObject SpawnProjectile() { return PoolManager.Instance.Pop(projectile_Prefab); }
-    public void DespawnProJectile(GameObject go) { PoolManager.Instance.Push(go); } 
+    public HashSet<SkillController> Projectiles { get; } = new HashSet<SkillController>();
+
+    public SkillController SpawnProjectile(Vector3 position)
+    {
+        GameObject go = PoolManager.Instance.Pop(projectile_Prefab);
+        go.transform.position = position;
+
+        SkillController sc = go.GetComponent<SkillController>();
+        Projectiles.Add(sc);
+        sc.Init();
+
+        return sc;
+    }
+
+    public void DespawnProJectile(SkillController go)
+    {
+        Projectiles.Remove(go);
+        PoolManager.Instance.Push(go.gameObject);
+    }
+    #endregion
 }

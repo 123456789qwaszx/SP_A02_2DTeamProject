@@ -11,7 +11,7 @@ public class TestMonster : MonoBehaviour
         
     }
 
-    public void OnDamaged(GameObject attacker, int damage)
+    public void OnDamaged(Player attacker, int damage)
     {
     }
 }

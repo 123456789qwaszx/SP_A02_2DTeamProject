@@ -17,7 +17,7 @@ public class SkillController : MonoBehaviour
     public SkillType SkillType { get; set; }
     public bool IsValid;
 
-    GameObject _owner;
+    Player _owner;
     Vector3 _moveDir;
     float _speed = 10.0f;
     float _lifeTime = 1.0f;
@@ -62,6 +62,11 @@ public class SkillController : MonoBehaviour
         Init();
     }
 
+    public void Update()
+    {
+        transform.position += _moveDir * _speed * Time.deltaTime;
+    }
+
 
     public bool Init()
     {
@@ -70,27 +75,18 @@ public class SkillController : MonoBehaviour
         return true;
     }
 
-    public void SetInfo(int templateID, GameObject owner, Vector3 moveDir)
+    public void SetInfo(Player owner, Vector2 moveDir)
     {
-        // 데이터 받아오기
-        // 만약 데이터가 없다면
-
         _owner = owner;
         _moveDir = moveDir;
-        // 템플릿 아이디를 토대로 스킬데이터를 받아오기
     }
 
-    public void UpdateController()
-    {
-        transform.position += _moveDir * _speed * Time.deltaTime;
-    }
-    
 
     void OnTriggerEnter2D(Collider2D collision)
     {
         TestMonster monster = collision.gameObject.GetComponent<TestMonster>();
-        if (monster.IsValid == false)
-            return;
+        Debug.Log("Monster 충돌");
+        Debug.Log(monster);
         if (this.IsValid == false)
             return;
 
@@ -98,8 +94,6 @@ public class SkillController : MonoBehaviour
 
         StopDestroy();
 
-        PoolManager.Instance.Push(gameObject);
-        
+        GameManager.Instance.DespawnProJectile(this);
     }
-
 }

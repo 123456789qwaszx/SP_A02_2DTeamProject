@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class SkillBook : MonoBehaviour
 {
-    Coroutine _coProjectile;
+    [Header("Projectile")]
+    public Transform _projectileSocket;
+    public float _projectileCooldown = 0.3f;
 
-    void Update()
+
+    void Start()
     {
         StartProjectile();
     }
+
+
+    #region Projectile
+    Coroutine _coProjectile;
 
     void StartProjectile()
     {
@@ -21,13 +28,14 @@ public class SkillBook : MonoBehaviour
 
     IEnumerator CoStartProjectile()
     {
-        WaitForSeconds wait = new WaitForSeconds(0.5f);
+        WaitForSeconds wait = new WaitForSeconds(_projectileCooldown);
 
         while (true)
         {
-            GameObject skill = GameManager.Instance.SpawnProjectile();
-            skill.transform.position = this.transform.position;
+            SkillController skill = GameManager.Instance.SpawnProjectile(transform.position);
+            skill.SetInfo(GameManager.Instance.player, GameManager.Instance.MoveDir);
             yield return wait;
         }
     }
+    #endregion
 }
