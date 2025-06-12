@@ -2,18 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//해결할 것
-// 1. 오브젝트 풀링
-// 2. 특정 범위 벗어나면 파괴
-// 3. 풀링됐을 때, IsValid체크
-
-public enum SkillType
-{
-    HolyProjectile,
-    HolyImpact,
-    HolyPulse
-    //만들 것을 나중에 추가
-}
 
 public class SkillController : MonoBehaviour
 {

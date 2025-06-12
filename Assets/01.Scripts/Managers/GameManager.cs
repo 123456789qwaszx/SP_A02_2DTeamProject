@@ -69,8 +69,8 @@ public class GameManager : Singleton<GameManager>
         PoolManager.Instance.Push(go.gameObject);
     }
     #endregion
-    
-    
+
+
     #region HolyPulse
     public GameObject holyPulse_Prefab;
     public HashSet<SkillController> HolyPulsces { get; } = new HashSet<SkillController>();
@@ -92,4 +92,5 @@ public class GameManager : Singleton<GameManager>
         PoolManager.Instance.Push(go.gameObject);
     }
     #endregion
+    
 }

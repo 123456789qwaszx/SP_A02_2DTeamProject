@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41ecb1750091ae741b339afce7833228, type: 3}
+  m_Name: 01_HolyPulse
+  m_EditorClassIdentifier: 
+  SkillDataID: 1
+  Name: "\uC2E0\uC131\uBE54"
+  Description: "\uBC94\uC704\uACF5\uACA9, \uAD00\uD1B5\uAC00\uB2A5"
+  Type: 2
+  Icon: {fileID: 0}
+  SkillPrefabs: {fileID: 0}
+  DamageMultiplire: 15
+  AttackInterval: 0.7
+  CoolTime: 0.7
+  CastingEffect: 0
+  CastingEffectPercentage: 0
+  NumPenerations: 10
+  ProjSpeed: 3
+  Duration: 5
