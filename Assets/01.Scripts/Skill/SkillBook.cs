@@ -10,6 +10,9 @@ public class SkillBook : MonoBehaviour
     public float projectileLifeTime = 5f;
     public int projectileDamage = 10;
 
+    [Header("Swing")]
+    public Transform Swing;
+
 
     void Start()
     {
@@ -34,10 +37,20 @@ public class SkillBook : MonoBehaviour
 
         while (true)
         {
+            Vector2 dir = -(transform.position - indicator.position).normalized;
+
             SkillController skill = GameManager.Instance.SpawnProjectile(transform.position);
+            skill.transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
+
             skill.SetInfo(GameManager.Instance.player, -(transform.position - indicator.position).normalized, projectileLifeTime, projectileDamage);
             yield return new WaitForSeconds(_projectileCooldown);
         }
     }
     #endregion
+
+    #region Swing
+
+    
+    #endregion
+
 }
