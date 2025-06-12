@@ -10,9 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 7273570470020617261}
   - component: {fileID: 6056864728164619506}
+$
   - component: {fileID: 5829783742942450185}
   m_Layer: 0
   m_Name: Body
+
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73,8 +75,10 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
+
   m_SortingOrder: 50
   m_Sprite: {fileID: 758735442, guid: d4779473f09e844edb6f0e5506c1fc0e, type: 3}
+
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -85,6 +89,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+
 --- !u!95 &5829783742942450185
 Animator:
   serializedVersion: 5
@@ -106,6 +111,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+
 --- !u!1 &6751208540167889232
 GameObject:
   m_ObjectHideFlags: 0
