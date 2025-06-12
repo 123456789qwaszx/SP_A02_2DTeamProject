@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +10,8 @@ public class GameManager : Singleton<GameManager>
     public GameObject SpawnBear() { return PoolManager.Instance.Pop(bear_Prefab); }
     public void DespawnBear(GameObject bear) { PoolManager.Instance.Push(bear); }
     */
+
+    public Player player;
 
     Vector2 _moveDir;
     public Vector2 MoveDir

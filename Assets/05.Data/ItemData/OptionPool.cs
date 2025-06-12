@@ -5,6 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Item/Option Pool")]
 public class OptionPool : ScriptableObject
 {
-    ItemType itemType;
+    public ItemType itemType;
     public List<ItemOption> possibleOptions;
 }

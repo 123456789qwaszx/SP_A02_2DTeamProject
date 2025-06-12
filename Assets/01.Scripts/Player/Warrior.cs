@@ -1,0 +1,62 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Warrior : Player
+{
+    [Header("크리티컬 배수 증가량")]
+    [SerializeField] private float critBonus_Normal;
+    [SerializeField] private float critBonus_Special;
+    [SerializeField] private float critBonus_Skill;
+
+    [Header("크리티컬 데미지")]
+    public float critDamage_Normal;
+    public float critDamage_Special;
+    public float critDamage_Skill;
+
+    void Awake()
+    {
+        // 기본 스탯
+        STR = 20;
+        DEX = 10;
+        INT = 10;
+        hp = 120;
+        mp = 50;
+        itemAP = 10;
+
+        moveSpeed = 1 + DEX * 0.05f;
+        attackSpeed = 1 + DEX * 0.02f;
+
+        // 전투 스탯
+        attack = 10 + STR * 0.2f;
+        skillAttack = 20 + STR * 0.3f;
+        specialAttack = 20 + STR * 0.4f;
+
+        defense = 20;
+        critical = 5 + DEX * 0.05f;
+
+        // 회복
+        hpRecovery = 5 + STR * 0.1f;
+        mpRecovery = 5 + INT * 0.1f;
+
+        // 크리티컬 데미지 증가 배수 (아이템 및 효과 증가량은 일단 0으로 가정)
+        float itemBonus = 0f;
+        float effectBonus = 0f;
+
+        critBonus_Normal = 1f + (0.2f + itemBonus + effectBonus);
+        critBonus_Special = 1f + (0.4f + itemBonus + effectBonus);
+        critBonus_Skill = 1f + (0.3f + itemBonus + effectBonus);
+
+        // 최종 크리티컬 데미지 계산
+        critDamage_Normal = attack * critBonus_Normal;
+        critDamage_Special = specialAttack * critBonus_Special;
+        critDamage_Skill = skillAttack * critBonus_Skill;
+    }
+
+    // 데미지 계산 메서드 예시
+    public float GetDamageTaken(float monsterDamage)
+    {
+        float damage = monsterDamage - defense;
+        return Mathf.Max(0, hp - damage); // 피격 데미지 적용 후 남은 HP
+    }
+}
