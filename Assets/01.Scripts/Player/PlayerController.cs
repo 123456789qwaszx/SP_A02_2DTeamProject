@@ -15,6 +15,9 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 inputVector;
 
+    private Warrior warrior;
+    private float attackCooldown = 0f; // 남은 쿨타임 시간
+
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -22,6 +25,14 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>(); // Body 안에서 찾아짐
+
+        warrior = GetComponentInChildren<Warrior>();
+        if (warrior == null)
+        {
+            Debug.LogError("Warrior 스크립트를 찾을 수 없습니다.");
+        }
+
+        player = warrior != null ? warrior : GetComponent<Player>();
     }
 
     private void OnEnable()
@@ -50,13 +61,24 @@ public class PlayerController : MonoBehaviour
             spriteRenderer.flipX = true;   // 오른쪽 → 반전
         else if (inputVector.x < -0.01f)
             spriteRenderer.flipX = false;  // 왼쪽 → 기본
+
+        if (attackCooldown > 0f)
+            attackCooldown -= Time.fixedDeltaTime;
     }
 
     private void OnAttackPerformed(InputAction.CallbackContext context)
     {
+        if (attackCooldown > 0f || warrior == null)
+            return;
+
+        // 공격 애니메이션 실행
         if (inputVector.magnitude > 0.1f)
             animator.SetTrigger("Run_Attack");
         else
             animator.SetTrigger("Idle_Attack");
+
+        // 쿨타임 설정 (초당 공격 횟수 기준 → 간격은 1 / 속도)
+        float delay = 1f / warrior.AttackSpeed;
+        attackCooldown = delay;
     }
 }
