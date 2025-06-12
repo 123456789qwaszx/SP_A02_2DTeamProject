@@ -9,9 +9,9 @@ using UnityEngine;
 
 public enum SkillType
 {
-    Projectile,
-    Impact,
-    Swing
+    HolyProjectile,
+    HolyImpact,
+    HolyPulse
     //만들 것을 나중에 추가
 }
 
@@ -22,8 +22,8 @@ public class SkillController : MonoBehaviour
     Player _owner;
     Vector3 _moveDir;
     float _speed = 5.0f;
-    public float _lifeTime = 1.0f;
-    int _damage;
+    public float lifeTime = 1.0f;
+    public int damage;
 
     bool _isvalid = false;
 
@@ -55,11 +55,14 @@ public class SkillController : MonoBehaviour
             _isvalid = false;
             switch (this.skillType)
             {
-                case SkillType.Projectile:
-                    GameManager.Instance.DespawnProJectile(this);
+                case SkillType.HolyProjectile:
+                    GameManager.Instance.DespawnHolyProJectile(this);
                     break;
-                case SkillType.Impact:
+                case SkillType.HolyImpact:
                     GameManager.Instance.DeSpawnHolyImpact(this);
+                    break;
+                case SkillType.HolyPulse:
+                    GameManager.Instance.DeSpawnHolyPulse(this);
                     break;
                 default:
                     break;
@@ -85,16 +88,16 @@ public class SkillController : MonoBehaviour
         {
             _isvalid = true;
         }
-        StartDestroy(_lifeTime);
+        StartDestroy(lifeTime);
     }
 
     // 나중에 자동으로 스킬데이터 읽어오게 할 것
     public virtual void SetInfo(Player owner, Vector2 moveDir, float lifeTime, int damage)
     {
-        _lifeTime = lifeTime;
+        this.lifeTime = lifeTime;
         _owner = owner;
         _moveDir = moveDir;
-        _damage = damage;
+        this.damage = damage;
     }
 
     // 몬스터와 충돌시 처리
@@ -108,11 +111,24 @@ public class SkillController : MonoBehaviour
         if (this._isvalid == false)
             return;
 
-        monster.OnDamaged(_owner, _damage);
 
-        StopDestroy();
+        monster.OnDamaged(_owner, damage);
 
-        GameManager.Instance.DespawnProJectile(this);
+        switch (this.skillType)
+        {
+            case SkillType.HolyProjectile:
+                StopDestroy();
+                GameManager.Instance.DespawnHolyProJectile(this);
+                break;
+            case SkillType.HolyImpact:
+                StopDestroy();
+                GameManager.Instance.DeSpawnHolyImpact(this);
+                break;
+            case SkillType.HolyPulse:
+                break;
+            default:
+                break;
+        }
         _isvalid = false;
     }
 }

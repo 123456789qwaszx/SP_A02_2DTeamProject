@@ -64,6 +64,8 @@ public class PlayerController : MonoBehaviour
 
         if (attackCooldown > 0f)
             attackCooldown -= Time.fixedDeltaTime;
+
+        GameManager.Instance.MoveDir = inputVector;
     }
 
     private void OnAttackPerformed(InputAction.CallbackContext context)

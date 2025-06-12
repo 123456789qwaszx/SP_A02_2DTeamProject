@@ -170,6 +170,7 @@ MonoBehaviour:
   player: {fileID: 0}
   holyProjectile_Prefab: {fileID: 1306458764}
   holyImpact_Prefab: {fileID: 1982574422}
+  holyPulse_Prefab: {fileID: 685189737}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -279,6 +280,11 @@ MonoBehaviour:
   maxCameraBoundary: {x: 11, y: 11}
   smoothing: 0.2
   Target: {fileID: 0}
+--- !u!1 &685189737 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5770933307029178560, guid: 4d03f659247acf946855a4f296cf23b2, type: 3}
+  m_PrefabInstance: {fileID: 7584285181287536999}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1306458764 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 806308866007636309, guid: 79ccc83fa431b0e4fbb91651fc94a9e9, type: 3}
@@ -1037,8 +1043,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   indicator: {fileID: 1811623734}
   _projectileCooldown: 0.3
-  projectileLifeTime: 5
-  projectileDamage: 10
   Swing: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

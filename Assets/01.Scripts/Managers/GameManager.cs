@@ -27,7 +27,7 @@ public class GameManager : Singleton<GameManager>
     public GameObject holyProjectile_Prefab;
     public HashSet<SkillController> HolyProjectiles { get; } = new HashSet<SkillController>();
 
-    public SkillController SpawnProjectile(Vector2 position)
+    public SkillController SpawnHolyProjectile(Vector2 position)
     {
         GameObject go = PoolManager.Instance.Pop(holyProjectile_Prefab);
         go.transform.position = position;
@@ -39,7 +39,7 @@ public class GameManager : Singleton<GameManager>
         return sc;
     }
 
-    public void DespawnProJectile(SkillController go)
+    public void DespawnHolyProJectile(SkillController go)
     {
         HolyProjectiles.Remove(go);
         Instance.SpawnHolyImpact(go.transform.position);
@@ -48,7 +48,7 @@ public class GameManager : Singleton<GameManager>
 
     }
     #endregion
-    
+
     #region HolyImpact
     public GameObject holyImpact_Prefab;
 
@@ -65,6 +65,29 @@ public class GameManager : Singleton<GameManager>
 
     public void DeSpawnHolyImpact(SkillController go)
     {
+        PoolManager.Instance.Push(go.gameObject);
+    }
+    #endregion
+    
+    
+    #region HolyPulse
+    public GameObject holyPulse_Prefab;
+    public HashSet<SkillController> HolyPulsces { get; } = new HashSet<SkillController>();
+
+    public SkillController SpawnHolyPulse(Vector2 position)
+    {
+        GameObject go = PoolManager.Instance.Pop(holyPulse_Prefab);
+        go.transform.position = position;
+
+        SkillController sc = go.GetComponent<SkillController>();
+        sc.Init();
+
+        return sc;
+    }
+
+    public void DeSpawnHolyPulse(SkillController go)
+    {
+        HolyProjectiles.Remove(go);
         PoolManager.Instance.Push(go.gameObject);
     }
     #endregion
