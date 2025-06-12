@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     [SerializeField] protected float itemAP;            // Item Acquisition Probability 아이템 획득 확률
 
     public float MoveSpeed => moveSpeed;
+    public float AttackSpeed => attackSpeed;
 
     [Header("전투 스탯")]
     [SerializeField] protected float attack;           // 공격력
@@ -30,8 +31,10 @@ public class Player : MonoBehaviour
     [SerializeField] protected float skillAttack;      // 특수 공격력
     [SerializeField] protected float defense;          // 방어력
     [SerializeField] protected float critical;         // 크리티컬 확률 (%)
-    [SerializeField] protected float hpRecovery;       // 
-    [SerializeField] protected float mpRecovery;       // 
+    
+    [Header("회복 스탯")]
+    [SerializeField] public float hpRecovery;
+    [SerializeField] public float mpRecovery;
 
 
     void Start()

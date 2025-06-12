@@ -9,13 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2277484492139006827}
-  - component: {fileID: 6977608371386359744}
   - component: {fileID: 223188752730463399}
   - component: {fileID: 4561135171629635827}
   - component: {fileID: 701772863888440967}
   - component: {fileID: 5027815575980141099}
+  - component: {fileID: 9152137681243963932}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Player_Warrior
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37,31 +37,6 @@ Transform:
   - {fileID: 1460615594122522421}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6977608371386359744
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1574102941186125765}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5d5a1044af0a44428a070ca6c9fa6e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
-  attackSpeed: 0
-  STR: 0
-  DEX: 0
-  INT: 0
-  hp: 0
-  mp: 0
-  itemAP: 0
-  attack: 0
-  Specialattack: 0
-  Skillattack: 0
-  defense: 0
-  critical: 0
 --- !u!50 &223188752730463399
 Rigidbody2D:
   serializedVersion: 4
@@ -176,6 +151,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed8568c1abaa76e4985fe1c8d528c34d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &9152137681243963932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1574102941186125765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 256f1f9e609d86f49958b01b77b74ef8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 0
+  attackSpeed: 0
+  STR: 0
+  DEX: 0
+  INT: 0
+  hp: 0
+  mp: 0
+  itemAP: 0
+  attack: 0
+  specialAttack: 0
+  skillAttack: 0
+  defense: 0
+  critical: 0
+  hpRecovery: 0
+  mpRecovery: 0
+  hpRecovery: 0
+  mpRecovery: 0
+  critBonus_Normal: 0
+  critBonus_Special: 0
+  critBonus_Skill: 0
+  critDamage_Normal: 0
+  critDamage_Special: 0
+  critDamage_Skill: 0
 --- !u!1 &6498834440950153914
 GameObject:
   m_ObjectHideFlags: 0
