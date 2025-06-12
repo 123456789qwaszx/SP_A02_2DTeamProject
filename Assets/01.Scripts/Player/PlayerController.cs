@@ -1,45 +1,35 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
+// PlayerInput 컴포넌트를 요구하도록 지정
+[RequireComponent(typeof(PlayerInput))]
 public class PlayerController : MonoBehaviour
 {
-    Vector2 _moveDir = Vector2.zero;
-    float _speed = 5.0f;
+    private PlayerInput playerInput;            // PlayerInput: 인풋 시스템을 처리할 객체
+    private InputAction moveAction;             // 이동에 사용할 InputAction
 
-    public Vector2 MoveDir
+    private Rigidbody rb;                       // Rigidbody를 통해 이동 처리
+
+    private Player player;                      // Player 스크립트 참조
+
+    private void Awake()
     {
-        get { return _moveDir; }
-        set { _moveDir = value.normalized; }
+        playerInput = GetComponent<PlayerInput>(); 
+        player = GetComponent<Player>();
     }
 
-    void Update()
+    // 오브젝트가 활성화될 때 InputAction 연결
+    private void OnEnable()
     {
-        UpdateInput();
-        MovePlayer();
-	}
+        moveAction = playerInput.actions["Move"]; // "Move" 액션 불러오기
+    }
 
-    void UpdateInput()
+    // 고정된 간격으로 물리 기반 이동 처리
+    private void FixedUpdate()
     {
-        Vector2 moveDir = Vector2.zero;
 
-        if (Input.GetKey(KeyCode.W))
-            moveDir.y += 1;
-		if (Input.GetKey(KeyCode.S))
-			moveDir.y -= 1;
-		if (Input.GetKey(KeyCode.A))
-			moveDir.x -= 1;
-		if (Input.GetKey(KeyCode.D))
-			moveDir.x += 1;
-
-        _moveDir = moveDir.normalized;
-	}
-
-    void MovePlayer()
-    {
-        //_moveDir = GameManager.Instance.MoveDir;
-
-        Vector3 dir = _moveDir * _speed *Time.deltaTime;
-        transform.position += dir;
+        Vector2 inputVector = moveAction.ReadValue<Vector2>();                    // 이동 입력값 가져오기 (Vector2: x = 좌우, y = 상하)
+        Vector2 move = inputVector * player.MoveSpeed * Time.fixedDeltaTime;      // 입력값을 2D 
+        player.Rb.MovePosition(player.Rb.position + move);                        // Rigidbody를 사용한 이동 (충돌 감지 가능)
     }
 }
