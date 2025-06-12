@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
 
     [Header("전투 스탯")]
     [SerializeField] protected float attack;           // 공격력
-    [SerializeField] protected float speciAlattack;    // 특수 공격력
+    [SerializeField] protected float specialAttack;    // 특수 공격력
     [SerializeField] protected float skillAttack;      // 특수 공격력
     [SerializeField] protected float defense;          // 방어력
     [SerializeField] protected float critical;         // 크리티컬 확률 (%)
