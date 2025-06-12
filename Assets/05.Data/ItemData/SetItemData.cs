@@ -2,17 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SetItemData : MonoBehaviour
+[CreateAssetMenu(menuName = "Item/Set Item")]
+public class SetItemData : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public string setName;
+    public string itemName;
+    public ItemType itemType;
+    public CharacterClass usableClass;
+    public List<ItemOption> fixedOptions; // 옵션 4줄
+    public List<ItemOption> setBonusOptions; // 세트 효과
 }
