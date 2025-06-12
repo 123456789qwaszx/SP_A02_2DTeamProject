@@ -10,6 +10,7 @@ using UnityEngine;
 public enum SkillType
 {
     Projectile,
+    Swing
     //만들 것을 나중에 추가
 }
 
@@ -19,7 +20,7 @@ public class SkillController : MonoBehaviour
 
     Player _owner;
     Vector3 _moveDir;
-    float _speed = 10.0f;
+    float _speed = 5.0f;
     float _lifeTime = 1.0f;
     int _damage;
     
@@ -63,7 +64,7 @@ public class SkillController : MonoBehaviour
 
 
     // 게임매니저의 Spawn함수에서 사용됨. Pooling 관련 처리.
-    public void Init()
+    public virtual void Init()
     {
         if (_isvalid)
         {
@@ -77,7 +78,7 @@ public class SkillController : MonoBehaviour
     }
 
     // 나중에 자동으로 스킬데이터 읽어오게 할 것
-    public void SetInfo(Player owner, Vector2 moveDir, float lifeTime, int damage)
+    public virtual void SetInfo(Player owner, Vector2 moveDir, float lifeTime, int damage)
     {
         _lifeTime = lifeTime;
         _owner = owner;
