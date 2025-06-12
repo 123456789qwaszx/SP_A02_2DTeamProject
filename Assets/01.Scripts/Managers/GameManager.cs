@@ -23,17 +23,17 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    #region Projectile
+    #region HolyProjectile
     public GameObject projectile_Prefab;
-    public HashSet<SkillController> Projectiles { get; } = new HashSet<SkillController>();
+    public HashSet<SkillController> HolyProjectiles { get; } = new HashSet<SkillController>();
 
-    public SkillController SpawnProjectile(Vector3 position)
+    public SkillController SpawnProjectile(Vector2 position)
     {
         GameObject go = PoolManager.Instance.Pop(projectile_Prefab);
         go.transform.position = position;
 
         SkillController sc = go.GetComponent<SkillController>();
-        Projectiles.Add(sc);
+        HolyProjectiles.Add(sc);
         sc.Init();
 
         return sc;
@@ -41,7 +41,31 @@ public class GameManager : Singleton<GameManager>
 
     public void DespawnProJectile(SkillController go)
     {
-        Projectiles.Remove(go);
+        HolyProjectiles.Remove(go);
+        Instance.SpawnHolyImpact(go.transform.position);
+
+        PoolManager.Instance.Push(go.gameObject);
+
+    }
+    #endregion
+    
+    #region HolyImpact
+    public GameObject holyImpact_Prefab;
+
+    public SkillController SpawnHolyImpact(Vector2 position)
+    {
+        GameObject go = PoolManager.Instance.Pop(holyImpact_Prefab);
+        go.transform.position = position;
+
+        SkillController sc = go.GetComponent<SkillController>();
+        sc._lifeTime = 1;
+        sc.Init();
+
+        return sc;
+    }
+
+    public void DeSpawnHolyImpact(SkillController go)
+    {
         PoolManager.Instance.Push(go.gameObject);
     }
     #endregion

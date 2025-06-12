@@ -10,20 +10,21 @@ using UnityEngine;
 public enum SkillType
 {
     Projectile,
+    Impact,
     Swing
     //만들 것을 나중에 추가
 }
 
 public class SkillController : MonoBehaviour
 {
-    public SkillType SkillType { get; set; }
+    public SkillType skillType;
 
     Player _owner;
     Vector3 _moveDir;
     float _speed = 5.0f;
-    float _lifeTime = 1.0f;
+    public float _lifeTime = 1.0f;
     int _damage;
-    
+
     bool _isvalid = false;
 
     // 스킬 파괴함수. 모든 스킬이 공용으로 사용할 예정
@@ -52,7 +53,17 @@ public class SkillController : MonoBehaviour
         if (_isvalid)
         {
             _isvalid = false;
-            GameManager.Instance.DespawnProJectile(this);
+            switch (this.skillType)
+            {
+                case SkillType.Projectile:
+                    GameManager.Instance.DespawnProJectile(this);
+                    break;
+                case SkillType.Impact:
+                    GameManager.Instance.DeSpawnHolyImpact(this);
+                    break;
+                default:
+                    break;
+            }
         }
     }
     #endregion
