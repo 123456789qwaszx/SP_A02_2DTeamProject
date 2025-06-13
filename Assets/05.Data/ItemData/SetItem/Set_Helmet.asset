@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bad305ec736b064db9de391cfe46ee8, type: 3}
+  m_Name: Set_Helmet
+  m_EditorClassIdentifier: 
+  setName: "\uBD88\uBA78\uC758 \uC138\uD2B8"
+  itemName: "\uBD88\uBA78\uC758 \uD22C\uAD6C"
+  setIcon: {fileID: -5881797872434412005, guid: 37dc72fee7a3d6d4c9f7b8fce751c4cc, type: 3}
+  itemType: 6
+  fixedOptions:
+  - optionType: 1
+    minValue: 10
+    maxValue: 30
+  - optionType: 7
+    minValue: 5
+    maxValue: 15
+  - optionType: 11
+    minValue: 10
+    maxValue: 15
+  - optionType: 9
+    minValue: 30
+    maxValue: 50
+  setBonusOptions:
+  - requiredCount: 2
+    optionName: "\uD2B9\uC218\uACF5\uACA9\uB825"
+    value: 30
+  - requiredCount: 4
+    optionName: "\uCD5C\uB300HP\uC99D\uAC00"
+    value: 300
+  - requiredCount: 6
+    optionName: "\uBD80\uD65C1\uD68C\uCD94\uAC00"
+    value: 1

@@ -22,7 +22,7 @@ public class Warrior : Player
         INT = 10;
         hp = 120;
         mp = 50;
-        itemAP = 10;
+        itemAP = 0.1f;
 
         moveSpeed = 1 + DEX * 0.05f;
         attackSpeed = 1 + DEX * 0.02f;
@@ -33,7 +33,7 @@ public class Warrior : Player
         specialAttack = 20 + STR * 0.4f;
 
         defense = 20;
-        critical = 5 + DEX * 0.05f;
+        critical = 0.05f;
 
         // 회복
         hpRecovery = 5 + STR * 0.1f;
@@ -51,6 +51,23 @@ public class Warrior : Player
         critDamage_Normal = attack * critBonus_Normal;
         critDamage_Special = specialAttack * critBonus_Special;
         critDamage_Skill = skillAttack * critBonus_Skill;
+    }
+
+    /// <summary>
+    /// 랜덤 값에 따라 일반 공격(Attack) 또는 크리티컬 공격(critDamage_Normal)의 데미지를 결정하여 반환
+    /// </summary>
+    /// <returns>최종 데미지 값</returns>
+    public float GetDamage()
+    {
+        // 랜덤 값(Random.value, 0~1 사이)을 통해 크리티컬 여부 판정
+        if (Random.value < critical)
+        {
+            return critDamage_Normal;
+        }
+        else
+        {
+            return Attack;
+        }
     }
 
     // 데미지 계산 메서드 예시
