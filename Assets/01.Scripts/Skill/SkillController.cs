@@ -44,13 +44,13 @@ public class SkillController : MonoBehaviour
             switch (this.skillType)
             {
                 case SkillType.HolyProjectile:
-                    GameManager.Instance.DespawnHolyProJectile(this);
+                    SkillManager.Instance.DespawnHolyProJectile(this);
                     break;
                 case SkillType.HolyImpact:
-                    GameManager.Instance.DeSpawnHolyImpact(this);
+                    SkillManager.Instance.DeSpawnHolyImpact(this);
                     break;
                 case SkillType.HolyPulse:
-                    GameManager.Instance.DeSpawnHolyPulse(this);
+                    SkillManager.Instance.DeSpawnHolyPulse(this);
                     break;
                 default:
                     break;
@@ -106,11 +106,11 @@ public class SkillController : MonoBehaviour
         {
             case SkillType.HolyProjectile:
                 StopDestroy();
-                GameManager.Instance.DespawnHolyProJectile(this);
+                SkillManager.Instance.DespawnHolyProJectile(this);
                 break;
             case SkillType.HolyImpact:
                 StopDestroy();
-                GameManager.Instance.DeSpawnHolyImpact(this);
+                SkillManager.Instance.DeSpawnHolyImpact(this);
                 break;
             case SkillType.HolyPulse:
                 break;

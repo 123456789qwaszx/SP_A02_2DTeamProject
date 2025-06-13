@@ -45,17 +45,19 @@ public class SkillBase : MonoBehaviour
 
     [SerializeField]
     public SkillData _skillData;
-    public SkillData SkillData 
+    public SkillData SkillData
     {
         get
-        { 
+        {
             return _skillData;
         }
-        set 
-        { 
+        set
+        {
             _skillData = value;
         }
     }
+
+    public bool IsLearnedSkill { get { return Level > 0; } }
 
     #region 동적 SkillData
     public int NumProjectiles; //회당 공격 횟수 그런데 레벨당으로 지정할거면 공격이긴함.
@@ -65,8 +67,23 @@ public class SkillBase : MonoBehaviour
 
     public int TotalDamage { get; set; } = 0;
     // SetInfoSkillData 스크립터블 읽어와서 쏵 세팅해주기.
-    public void UpdateSkillData()
+    public SkillData UpdateSkillData(int dataId = 0)
     {
+        int id = 0;
+        if (dataId == 0)
+            id = Level < 2 ? (int)SkillType : (int)SkillType + Level - 1;
+        else
+            id = dataId;
+
+        SkillData skillData = new SkillData();
+        SkillManager.Instance._objects.TryGetValue($"{id}", out UnityEngine.Object obj);
+        if (!skillData == obj)
+            return SkillData;
+
+        SkillData = skillData;
+
+        return SkillData;
+
 
     }
 
@@ -98,11 +115,19 @@ public class SkillBase : MonoBehaviour
 
         _init = true;
         return true;
-    } 
-}
-/*
-1. 레벨
-2. 쿨타임
-3. 캐스팅타임
+    }
 
-*/
+    protected virtual void GenerateProjectile(PlayerController Owner, string prefabName, Vector3 startPos, Vector3 dir, Vector3 targetPos, SkillBase skill)
+    {
+        ProjectileController pc = SkillManager.Instance.SpawnProjectile(startPos, prefabName: prefabName);
+        pc.SetInfo(Owner, startPos, dir, targetPos, skill);
+    }
+
+    public virtual void OnLevelUp()
+    {
+        if (Level == 0)
+            ActivateSkill();
+        Level++;
+        UpdateSkillData();
+    }
+}

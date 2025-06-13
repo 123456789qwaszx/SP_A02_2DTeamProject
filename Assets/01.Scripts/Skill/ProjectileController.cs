@@ -16,7 +16,6 @@ public class ProjectileController : SkillBase
     Rigidbody2D _rigid;
     int _numPenerations;
     public int _bounceCount = 1;
-    GameObject _meteorShadow;
 
     // 나중에 몬스터도 스킬 쏘면 바꿀 것
     List<MonsterBase> _enteredColliderList = new List<MonsterBase>();
@@ -207,7 +206,7 @@ public class ProjectileController : SkillBase
 
     public void DestroyProjectile()
     {
-        GameManager.Instance.DespawnProjectile(this);
+        SkillManager.Instance.DespawnProjectile(this);
     }
     
     

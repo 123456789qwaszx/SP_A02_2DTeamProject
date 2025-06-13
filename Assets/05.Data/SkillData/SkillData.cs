@@ -44,11 +44,13 @@ public class SkillData : ScriptableObject
     public int projectileCount = 1; // 투사체 수
     public float ScaleMultiplier = 1; // 투사체 크기계수
     public float projectileSpeed = 1.0f; // 발사체 속도 배율
+    
 
     public int NumPenerations; // 관통 횟수
 
     public int NumBounce; // 투사체 튀는 횟수
     public float BounceSpeed; // 투사체 튕기는 속도
+    public float AngleBetweenProj;// 투사체 사이 각도
 
     public float Duration; // 스킬 지속 시간
     public float attackRangeMultiplier = 1.0f; // 공격 범위 배율
