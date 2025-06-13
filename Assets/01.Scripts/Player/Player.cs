@@ -7,8 +7,12 @@ public interface IEquipable
     void ApplyOption(ItemOptionType type, float value);
     void RemoveOption(ItemOptionType type, float value);
 }
+public interface IDamagable
+{
+    void TakeDamage(int damage);
+}
 
-public class Player : MonoBehaviour, IEquipable
+public class Player : MonoBehaviour, IEquipable, IDamagable
 {
     protected Rigidbody2D rb;
     protected Transform tf;
@@ -106,5 +110,21 @@ public class Player : MonoBehaviour, IEquipable
     public void RemoveOption(ItemOptionType type, float value)
     {
         ApplyOption(type, -value);
+    }
+
+    public void TakeDamage(int damage)
+    {
+        hp -= damage;
+        hp = Mathf.Max(hp, 0);
+
+        if (hp <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        // 사망 했을 때 어떻게 될지
     }
 }

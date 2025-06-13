@@ -69,11 +69,4 @@ public class Warrior : Player
             return Attack;
         }
     }
-
-    // 데미지 계산 메서드 예시
-    public float GetDamageTaken(float monsterDamage)
-    {
-        float damage = monsterDamage - defense;
-        return Mathf.Max(0, hp - damage); // 피격 데미지 적용 후 남은 HP
-    }
 }
