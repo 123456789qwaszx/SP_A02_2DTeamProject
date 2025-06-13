@@ -5,15 +5,18 @@ public class MonsterData : ScriptableObject
 {
     public string monsterName;
 
-    [Header("스탯")]
+    [Header("Status")]
     public int maxHP;
     public int attackPower;
     public float moveSpeed;
     public float attackCooldown;
     public float attackRange;
 
-    [Header("분류")]
+    [Header("몬스터타입 분류")]
     public MonsterType type;
+
+    [Header("발사체")]
+    public GameObject projectilePrefab;
 
     public enum MonsterType
     {

@@ -55,6 +55,7 @@ MonoBehaviour:
     m_Bits: 128
   knockbackForce: 5
   knockbackDuration: 0.1
+  projectilePrefab: {fileID: 0}
 --- !u!95 &9072439782336633115
 Animator:
   serializedVersion: 5
@@ -264,6 +265,6 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.65, y: 0.64}
+  m_Offset: {x: 0.003532499, y: 0.06711784}
+  m_Size: {x: 0.76, y: 0.35}
   m_Direction: 0
