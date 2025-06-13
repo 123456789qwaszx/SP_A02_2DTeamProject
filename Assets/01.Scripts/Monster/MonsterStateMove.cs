@@ -12,7 +12,7 @@ public class MonsterStateMove : MonsterStateBase
     public override void Update()
     {
         monster.MoveToTarget();
-
+        monster.Flip();
         if (monster.CanAttack())
         {
             monster.ChangeState(monster.StateMeleeAttack);

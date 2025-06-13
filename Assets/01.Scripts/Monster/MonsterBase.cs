@@ -9,9 +9,10 @@ public interface IMonster
     void TakeDamage(int amount);
 }
 
-public class MonsterBase : MonoBehaviour, IMonster
+public class MonsterBase : MonoBehaviour, IMonster, IDamagable
 {
     [SerializeField] private MonsterData monsterData;
+    [SerializeField] private LayerMask playerLayer;
     [SerializeField] private float knockbackForce = 5f;
     [SerializeField] private float knockbackDuration = 0.1f;
 
@@ -40,7 +41,9 @@ public class MonsterBase : MonoBehaviour, IMonster
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalColor = spriteRenderer.color;
 
-        player = GameManager.Instance.player.transform;
+        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+        if (playerObj != null)
+            player = playerObj.transform;
 
         StateIdle = new MonsterStateIdle(this, animator);
         StateMove = new MonsterStateMove(this, animator);
@@ -137,6 +140,12 @@ public class MonsterBase : MonoBehaviour, IMonster
         transform.position += dir * monsterData.moveSpeed * Time.deltaTime;
     }
 
+    public void Flip()
+    {
+        Vector2 direction = player.position - transform.position;
+        spriteRenderer.flipX = direction.x < 0;
+    }
+
     public void StopMoving()
     {
         animator.SetBool("Move", false);    // Idle
@@ -145,6 +154,19 @@ public class MonsterBase : MonoBehaviour, IMonster
     public bool CanAttack()
     {
         return InAttackRange() && Time.time >= lastAttackTime + monsterData.attackCooldown;
+    }
+    public void OnAttack()  // Attack 애니메이션 이벤트
+    {
+        Collider2D hit = Physics2D.OverlapCircle(transform.position, monsterData.attackRange, playerLayer);
+
+        if (hit != null)
+        {
+            IDamagable damagable = hit.GetComponent<IDamagable>();
+            if (damagable != null)
+            {
+                damagable.TakeDamage(monsterData.attackPower);
+            }
+        }
     }
 
     public bool InAttackRange()
@@ -162,16 +184,22 @@ public class MonsterBase : MonoBehaviour, IMonster
 
     public void OnAttackEnd()   // Attack 애니메이션 이벤트
     {
-        ReturnToMove();
+        if (CanAttack())
+        {
+            ChangeState(StateMeleeAttack);
+        }
+        else if (InAttackRange())
+        {
+            ChangeState(StateIdle);
+        }
+        else
+        {
+            ChangeState(StateMove);
+        }
     }
 
     public void OnDeadEnd() // Dead 애니메이션 이벤트
     {
         PoolManager.Instance.Push(this.gameObject);
-    }
-
-    public void ReturnToMove()
-    {
-        ChangeState(StateMove);
     }
 }

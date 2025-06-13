@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2460352805846603884}
   - component: {fileID: 9072439782336633115}
   - component: {fileID: 937601464925381220}
-  - component: {fileID: 7575986385246329645}
+  - component: {fileID: 4416030521890661791}
   m_Layer: 8
   m_Name: Pig_01
   m_TagString: Monster
@@ -48,6 +48,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterData: {fileID: 11400000, guid: 5e2a6e0244884cf42818bb0fb7004122, type: 2}
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
   knockbackForce: 5
   knockbackDuration: 0.1
 --- !u!95 &9072439782336633115
@@ -123,7 +126,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &7575986385246329645
+--- !u!61 &4416030521890661791
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -152,10 +155,10 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.020370483, y: -0.09777695}
+  m_Offset: {x: 0.010964155, y: -0.10233301}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -166,5 +169,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9385166, y: 1.1511115}
+  m_Size: {x: 0.9096427, y: 1.1561431}
   m_EdgeRadius: 0

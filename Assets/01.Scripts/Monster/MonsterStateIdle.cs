@@ -12,8 +12,12 @@ public class MonsterStateIdle : MonsterStateBase
     public override void Update()
     {
         if (monster.CanAttack())
+        {
             monster.ChangeState(monster.StateMeleeAttack);
-        else
+        }
+        else if (!monster.InAttackRange())
+        {
             monster.ChangeState(monster.StateMove);
+        }
     }
 }
