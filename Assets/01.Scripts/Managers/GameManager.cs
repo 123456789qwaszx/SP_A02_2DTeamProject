@@ -15,7 +15,7 @@ public class GameManager : Singleton<GameManager>
     public PlayerController controller;
 
     // 5개의 던전 클리어 여부 저장 (0~4번 인덱스)
-    public bool[] dungeonCleared = new bool[5]; 
+    public bool[] dungeonCleared = new bool[5];
     public int currentDungeonLevel = 0;
 
 
@@ -99,5 +99,10 @@ public class GameManager : Singleton<GameManager>
         PoolManager.Instance.Push(go.gameObject);
     }
     #endregion
+
+    public T Spawn<T>(Vector3 position, SkillBase Skill)
+    {
+        
+    }
     
 }

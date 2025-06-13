@@ -10,7 +10,7 @@ public class SkillStat
     public int Level;
 }
 
-public abstract class SkillBase : MonoBehaviour
+public class SkillBase : MonoBehaviour
 {
     //임시
     public float CoolTime = 0.5f;
@@ -19,22 +19,6 @@ public abstract class SkillBase : MonoBehaviour
     void Awake()
     {
         Init();
-    }
-
-    Coroutine _coSkill;
-    
-    protected abstract void DoSkillJob();
-
-    protected virtual IEnumerator CoStartSkill()
-    {
-        WaitForSeconds wait = new WaitForSeconds(CoolTime);
-
-        yield return wait;
-        while (true)
-        {
-            DoSkillJob();
-            yield return wait;
-        }
     }
 
 
@@ -59,6 +43,26 @@ public abstract class SkillBase : MonoBehaviour
 
     //SkillData
 
+    [SerializeField]
+    public SkillData _skillData;
+    public SkillData SkillData 
+    {
+        get
+        { 
+            return _skillData;
+        }
+        set 
+        { 
+            _skillData = value;
+        }
+    }
+
+    #region 동적 SkillData
+    public int NumProjectiles; //회당 공격 횟수 그런데 레벨당으로 지정할거면 공격이긴함.
+    public float ProjectileSpacing; // 투사체 간의 간격 (발사 갯수와 쿨타임 있는 스킬)
+    #endregion
+
+
     public float TotalDamage { get; set; } = 0;
     // SetInfoSkillData 스크립터블 읽어와서 쏵 세팅해주기.
     public void UpdateSkillData()
@@ -70,12 +74,6 @@ public abstract class SkillBase : MonoBehaviour
     public virtual void ActivateSkill()
     {
         UpdateSkillData();
-        
-        if (_coSkill != null)
-            StopCoroutine(_coSkill);
-
-        gameObject.SetActive(true);
-        _coSkill = StartCoroutine(CoStartSkill());
     }
 
     public virtual void OnLevel()

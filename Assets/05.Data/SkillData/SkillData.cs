@@ -9,7 +9,8 @@ public enum SkillType
     HolyProjectile,
     HolyImpact,
     HolyPulse,
-    FireSkill
+    FireSkill,
+    IceSkill
     //만들 것을 나중에 추가
 }
 
@@ -25,7 +26,7 @@ public class SkillDamage
 public class SkillData : ScriptableObject
 {
     public int SkillDataID;
-    public string Name;
+    public string PrefabLabel;
     public string Description;
 
     public SkillType Type;
@@ -34,15 +35,15 @@ public class SkillData : ScriptableObject
 
     public float DamageMultiplire; // 스킬 데미지
     public float AttackInterval; // 공격속도
-    public string CoolTime; // 쿨타임
+    public float CoolTime; // 쿨타임
 
     public int CastingEffect; // 스킬 발동 시 효과
     public float CastingEffectPercentage; // 스킬 발동 효과 확률
 
+    public int projectileCount = 1; // 투사체 수
     public float NumPenerations; // 관통 횟수
-    public float ProjSpeed; // 발사체 이동속도
+    public float projectileSpeed = 1.0f; // 발사체 속도 배율
 
     public float Duration; // 스킬 지속 시간
-
-
+    public float attackRangeMultiplier = 1.0f; // 공격 범위 배율
 }

@@ -41,7 +41,7 @@ public class EnemyScanner : MonoBehaviour
 
                 if (Physics.Raycast(gameObject.transform.position, dirToTarget, distToTarget, _layermask))
                 {
-                    //
+                    Debug.DrawLine(gameObject.transform.position, target.position, Color.red);
                 }
             }
         }
