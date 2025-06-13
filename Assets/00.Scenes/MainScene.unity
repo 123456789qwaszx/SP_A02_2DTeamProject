@@ -1039,8 +1039,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40037c97de9e62e4591b1ce123cdbdfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minCameraBoundary: {x: -10, y: -10}
-  maxCameraBoundary: {x: 10, y: 10}
   smoothing: 1
   Target: {fileID: 542850928}
 --- !u!114 &519420034
@@ -1911,7 +1909,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2975451316816963630, guid: f0190b40e57ef46279dadbf1380157e1, type: 3}
       propertyPath: dungeonSceneName
-      value: DungeonScene
+      value: Lv1Dun
       objectReference: {fileID: 0}
     - target: {fileID: 7734495300682202500, guid: f0190b40e57ef46279dadbf1380157e1, type: 3}
       propertyPath: m_IsTrigger
@@ -2254,6 +2252,10 @@ PrefabInstance:
     - target: {fileID: 1069877443798866768, guid: f0190b40e57ef46279dadbf1380157e1, type: 3}
       propertyPath: m_Name
       value: map_gate_1 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2975451316816963630, guid: f0190b40e57ef46279dadbf1380157e1, type: 3}
+      propertyPath: dungeonSceneName
+      value: Lv2Dun
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2918041323524051248, guid: f0190b40e57ef46279dadbf1380157e1, type: 3}
