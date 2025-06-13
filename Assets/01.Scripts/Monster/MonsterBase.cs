@@ -16,6 +16,7 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
     [SerializeField] private float knockbackForce = 5f;
     [SerializeField] private float knockbackDuration = 0.1f;
 
+    private Rigidbody2D rb;
     private Animator animator;
     private Transform player;
 
@@ -38,6 +39,7 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
 
     private void Awake()
     {
+        rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalColor = spriteRenderer.color;
@@ -134,11 +136,10 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
         stateMachine.ChangeState(newState);
     }
 
-    public void MoveToTarget()
+    public void MoveToPlayer()
     {
-        if (player == null) return;
-        Vector3 dir = (player.position - transform.position).normalized;
-        transform.position += dir * monsterData.moveSpeed * Time.deltaTime;
+        Vector2 dir = (player.position - transform.position).normalized;
+        rb.velocity = dir * monsterData.moveSpeed;
     }
 
     public void Flip()
@@ -149,6 +150,7 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
 
     public void StopMoving()
     {
+        rb.velocity = Vector2.zero;
         animator.SetBool("Move", false);    // Idle
     }
 
