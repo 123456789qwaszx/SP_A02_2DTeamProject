@@ -16,7 +16,7 @@ public class InfiniteTileManager : MonoBehaviour
     public List<DecorSet> decorSetsPerLevel; // 각 레벨별 장식 프리팹 세트
     public float decorSpawnChance = 0.3f; // 장식 생성 확률 (30%)
 
-    public float tileSize = 10f;
+    public float tileSize = 15f;
     private Dictionary<Vector2Int, GameObject> spawnedTiles = new();
     private Dictionary<Vector2Int, GameObject> spawnedDecorations = new();
 
