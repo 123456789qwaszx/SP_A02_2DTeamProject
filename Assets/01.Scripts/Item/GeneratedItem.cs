@@ -8,7 +8,8 @@ public class GeneratedItem
     public ItemRarity rarity;
     public ItemType itemType;
     public CharacterClass usableClass;
-    public List<(string optionName, float value)> options = new();
+
+    public List<(ItemOptionType optionType, float value)> options = new();
     public (string optionName, float value)? uniqueOption;
     public List<(string optionName, float value)> setBonuses = new();
 }
