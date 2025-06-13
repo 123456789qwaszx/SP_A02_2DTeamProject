@@ -5,12 +5,18 @@ public class DungeonGate : MonoBehaviour
 {
     public int dungeonLevel; // 0 ~ 4 사이 값
     public string dungeonSceneName;
-    public GameObject lockOverlay; // 잠금 이미지 또는 이펙트
 
     private bool isUnlocked = false;
+    private SpriteRenderer spriteRenderer;
 
     private void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer == null)
+        {
+            Debug.LogWarning("SpriteRenderer가 없습니다: DungeonGate");
+        }
+
         CheckUnlockCondition();
     }
 
@@ -23,25 +29,35 @@ public class DungeonGate : MonoBehaviour
         }
         else
         {
-            // 이전 레벨이 클리어 되었는지 확인
             if (GameManager.Instance.dungeonCleared[dungeonLevel - 1])
                 isUnlocked = true;
         }
 
-        if (lockOverlay != null)
-            lockOverlay.SetActive(!isUnlocked);
+        UpdateGateVisual();
     }
 
-   
-private void OnTriggerEnter2D(Collider2D other)
-{
-    if (!isUnlocked) return;
-
-    if (other.CompareTag("Player"))
+    void UpdateGateVisual()
     {
-        GameManager.Instance.currentDungeonLevel = dungeonLevel;
-        SceneManager.LoadScene(dungeonSceneName);
-    }
-}
+        if (spriteRenderer == null) return;
 
+        if (isUnlocked)
+        {
+            spriteRenderer.color = Color.white; // 원래 색
+        }
+        else
+        {
+            spriteRenderer.color = new Color(0.4f, 0.4f, 0.4f, 1f); // 어두운 회색
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (!isUnlocked) return;
+
+        if (other.CompareTag("Player"))
+        {
+            GameManager.Instance.currentDungeonLevel = dungeonLevel;
+            SceneManager.LoadScene(dungeonSceneName);
+        }
+    }
 }
