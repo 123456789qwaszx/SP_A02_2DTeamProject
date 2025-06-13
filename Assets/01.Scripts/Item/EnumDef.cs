@@ -9,7 +9,7 @@ public enum ItemType
     Helmet, Armor, Belt, Boots, Gloves, Cloak,
     Necklace, Ring1, Ring2
 }
-public enum CharacterClass { Warrior, Archer, Mage }
+public enum CharacterClass { Warrior, Archer, Mage, All }
 
 public enum ItemOptionType
 {
