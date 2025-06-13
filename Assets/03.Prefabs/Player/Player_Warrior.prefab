@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 3215843578996477708}
   - component: {fileID: 8166582688296708884}
   - component: {fileID: 8001135491693849236}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player_Warrior
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -173,12 +173,22 @@ MonoBehaviour:
   INT: 0
   hp: 0
   mp: 0
+  maxHP: 0
+  maxMP: 0
+  hpRegenAmount: 0
+  mpRegenAmount: 0
+  hpRegenInterval: 0
+  mpRegenInterval: 0
   itemAP: 0
+  projectileSpeed: 1
+  projectileCount: 1
+  attackRangeMultiplier: 1
   attack: 0
   specialAttack: 0
   skillAttack: 0
   defense: 0
   critical: 0
+  critMultiplier: 0
   hpRecovery: 0
   mpRecovery: 0
   critBonus_Normal: 0
@@ -219,7 +229,7 @@ GameObject:
   - component: {fileID: 7269079845700669508}
   - component: {fileID: 1700340028514749911}
   - component: {fileID: 2832945576941220576}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -365,7 +375,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6070432333829240094}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AttackView
   m_TagString: Untagged
   m_Icon: {fileID: 0}

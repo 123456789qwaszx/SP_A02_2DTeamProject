@@ -98,7 +98,7 @@ public class MonsterSpawnManager : MonoBehaviour
             if (playTime >= 900f) yield break;  // 15분까지만
 
             float radius = (minSpawnDistance + maxSpawnDistance) / 2f;
-            GameObject prefab = regularMonsterPrefabs[Random.Range(0, 2)]; // 일반형, 탱커형 중 랜덤
+            GameObject prefab = regularMonsterPrefabs[Random.Range(0, 2)]; // 일반형, 탱커형 중 한마리 랜덤
 
             for (int i = 0; i < surroundMonstersCount; i++)
             {
@@ -128,7 +128,7 @@ public class MonsterSpawnManager : MonoBehaviour
         monster.transform.rotation = Quaternion.identity;   // 반전처리 해야함
         monster.SetActive(true);
 
-        IMonster resettable = monster.GetComponent<IMonster>();
+        IMonster resettable = monster.GetComponent<IMonster>(); // 스탯 초기화 (최종보스제외)
         if (resettable != null)
             resettable.ResetMonster();
     }
@@ -185,7 +185,7 @@ public class MonsterSpawnManager : MonoBehaviour
         return viewPos.x < 0 || viewPos.x > 1 || viewPos.y < 0 || viewPos.y > 1;
     }
 
-    public void OnStageClear()
+    public void OnStageClear()  // 스테이지 클리어하면 호출할거 (스폰 중단)
     {
         isSpawning = false;
         StopAllCoroutines();
