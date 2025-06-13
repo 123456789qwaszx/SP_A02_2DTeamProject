@@ -11,7 +11,7 @@ public class MonsterStateMove : MonsterStateBase
 
     public override void Update()
     {
-        monster.MoveToTarget();
+        monster.MoveToPlayer();
         monster.Flip();
         if (monster.CanAttack())
         {
