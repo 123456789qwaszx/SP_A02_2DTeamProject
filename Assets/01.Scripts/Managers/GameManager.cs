@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -100,9 +101,39 @@ public class GameManager : Singleton<GameManager>
     }
     #endregion
 
-    public T Spawn<T>(Vector3 position, SkillBase Skill)
+    #region SkillData
+    Dictionary<string, Object> _objects = new Dictionary<string, Object>();
+
+    public T Load<T>(string key) where T : Object
     {
-        
+        if (_objects.TryGetValue(key, out Object obj))
+        {
+            return obj as T;
+        }
+        return null;
     }
+    #endregion
+
+    #region 투사체 통합예정
+    public HashSet<ProjectileController> Projectiles { get; } = new HashSet<ProjectileController>();
+
+    public ProjectileController SpawnProjectile(Vector3 position, string key)
+    {
+        GameObject prefab = Load<GameObject>($"{key}");
+        GameObject go = PoolManager.Instance.Pop(prefab);
+        go.transform.position = position;
+
+        ProjectileController projectile = go.GetComponent<ProjectileController>();
+        Projectiles.Add(projectile);
+
+        return projectile;
+    }
+
+    public void DespawnProjectile(ProjectileController Skill)
+    {
+        // 모든 투사체를 관리하는 하나의 해쉬셋 준비할 것.
+        PoolManager.Instance.Push(Skill.gameObject);
+    }
+    #endregion
     
 }

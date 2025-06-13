@@ -63,7 +63,7 @@ public class SkillBase : MonoBehaviour
     #endregion
 
 
-    public float TotalDamage { get; set; } = 0;
+    public int TotalDamage { get; set; } = 0;
     // SetInfoSkillData 스크립터블 읽어와서 쏵 세팅해주기.
     public void UpdateSkillData()
     {
