@@ -14,7 +14,7 @@ public class ItemGenerator : MonoBehaviour
             ItemType.Sword or ItemType.Axe => CharacterClass.Warrior,
             ItemType.Bow or ItemType.Crossbow => CharacterClass.Archer,
             ItemType.Staff or ItemType.Wand => CharacterClass.Mage,
-            _ => CharacterClass.Warrior
+            _ => CharacterClass.All
         };
     }
 
@@ -64,7 +64,7 @@ public class ItemGenerator : MonoBehaviour
         {
             rarity = ItemRarity.Unique,
             itemType = data.itemType,
-            usableClass = data.usableClass,
+            usableClass = GetUsableClass(data.itemType),
             itemName = data.uniqueName
         };
 
@@ -87,7 +87,7 @@ public class ItemGenerator : MonoBehaviour
         {
             rarity = ItemRarity.Set,
             itemType = data.itemType,
-            usableClass = data.usableClass,
+            usableClass = GetUsableClass(data.itemType),
             itemName = data.itemName
         };
 
@@ -99,7 +99,8 @@ public class ItemGenerator : MonoBehaviour
         // 실제 발동 조건은 외부에서 처리, 여기선 전체 보너스를 다 저장해도 됨
         foreach (var bonus in data.setBonusOptions)
         {
-            item.setBonuses.Add((bonus.optionName, bonus.GetValue()));
+            // item.setBonuses.Add((bonus.optionName, bonus.GetValue()));
+            item.setBonuses.Add((bonus.optionName, bonus.value));
         }
 
         return item;

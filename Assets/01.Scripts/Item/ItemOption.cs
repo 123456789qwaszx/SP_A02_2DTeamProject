@@ -59,8 +59,9 @@ public class SetBonusOption
     public int requiredCount;
 
     public string optionName;
-    public float minValue;
-    public float maxValue;
-
-    public float GetValue() => UnityEngine.Random.Range(minValue, maxValue);
+    public float value;
+    // public float minValue;
+    // public float maxValue;
+    //
+    // public float GetValue() => UnityEngine.Random.Range(minValue, maxValue);
 }

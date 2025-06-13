@@ -14,6 +14,13 @@ public class GameManager : Singleton<GameManager>
     public Player player;
     public PlayerController controller;
 
+    // 5개의 던전 클리어 여부 저장 (0~4번 인덱스)
+    public bool[] dungeonCleared = new bool[5]; 
+    public int currentDungeonLevel = 0;
+
+
+    // 예: 저장/로드 시스템과 연동하여 dungeonCleared를 유지
+
     Vector2 _moveDir;
     public Vector2 MoveDir
     {
