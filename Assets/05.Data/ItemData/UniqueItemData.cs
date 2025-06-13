@@ -9,6 +9,6 @@ public class UniqueItemData : ScriptableObject
     public Sprite icon;
     public ItemType itemType;
     public CharacterClass usableClass;
-    public List<ItemOptionWithRarity> fixedOptions; // 옵션 4줄
-    public ItemOptionWithRarity uniqueOption; // 고유 옵션
+    public List<FixedItemOption> fixedOptions; // 옵션 4줄
+    public UniqueItemOption uniqueOption; // 고유 옵션
 }

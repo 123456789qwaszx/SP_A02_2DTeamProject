@@ -52,7 +52,7 @@ public class ItemGenerator : MonoBehaviour
         foreach (var opt in selected)
         {
             float val = opt.GetRandomValue(rarity);
-            item.options.Add((opt.optionName, val));
+            item.options.Add((opt.optionType, val));
         }
 
         return item;
@@ -70,20 +70,20 @@ public class ItemGenerator : MonoBehaviour
 
         foreach (var opt in data.fixedOptions)
         {
-            item.options.Add((opt.optionName, opt.GetRandomValue(ItemRarity.Unique)));
+            item.options.Add((opt.optionType, opt.GetValue()));
         }
 
         if (data.uniqueOption != null)
         {
-            item.uniqueOption = (data.uniqueOption.optionName, data.uniqueOption.GetRandomValue(ItemRarity.Unique));
+            item.uniqueOption = (data.uniqueOption.optionName, data.uniqueOption.GetValue());
         }
 
         return item;
     }
 
-    public GeneratedItem GenerateSetItem(SetItemData data)
+    public GeneratedItem GenerateSetItem(SetItemData data, int equippedCount = 1)
     {
-        GeneratedItem item = new()
+        var item = new GeneratedItem
         {
             rarity = ItemRarity.Set,
             itemType = data.itemType,
@@ -93,12 +93,13 @@ public class ItemGenerator : MonoBehaviour
 
         foreach (var opt in data.fixedOptions)
         {
-            item.options.Add((opt.optionName, opt.GetRandomValue(ItemRarity.Set)));
+            item.options.Add((opt.optionType, opt.GetValue()));
         }
 
+        // 실제 발동 조건은 외부에서 처리, 여기선 전체 보너스를 다 저장해도 됨
         foreach (var bonus in data.setBonusOptions)
         {
-            item.setBonuses.Add((bonus.optionName, bonus.GetRandomValue(ItemRarity.Set)));
+            item.setBonuses.Add((bonus.optionName, bonus.GetValue()));
         }
 
         return item;

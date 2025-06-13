@@ -10,6 +10,8 @@ public class SetItemData : ScriptableObject
     public Sprite setIcon;
     public ItemType itemType;
     public CharacterClass usableClass;
-    public List<ItemOptionWithRarity> fixedOptions; // 옵션 4줄
-    public List<ItemOptionWithRarity> setBonusOptions; // 세트 효과
+    public List<FixedItemOption> fixedOptions; // 옵션 4줄
+    
+    [Header("세트 효과 (개수별 보너스)")]
+    public List<SetBonusOption> setBonusOptions;
 }
