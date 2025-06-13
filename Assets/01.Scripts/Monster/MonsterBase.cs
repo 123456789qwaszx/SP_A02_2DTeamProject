@@ -20,6 +20,7 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
     private Transform player;
 
     private MonsterStateMachine stateMachine;
+    private ItemDropManager itemDropManager;
     public MonsterStateIdle StateIdle { get; private set; }
     public MonsterStateMove StateMove { get; private set; }
     public MonsterStateMeleeAttack StateMeleeAttack { get; private set; }
@@ -200,6 +201,7 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
 
     public void OnDeadEnd() // Dead 애니메이션 이벤트
     {
+        itemDropManager.TryDropItem(transform.position);
         PoolManager.Instance.Push(this.gameObject);
     }
 }
