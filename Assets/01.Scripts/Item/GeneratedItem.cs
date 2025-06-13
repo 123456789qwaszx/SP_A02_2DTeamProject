@@ -12,4 +12,5 @@ public class GeneratedItem
     public List<(ItemOptionType optionType, float value)> options = new();
     public (string optionName, float value)? uniqueOption;
     public List<(string optionName, float value)> setBonuses = new();
+    public SetItemData setItemData;
 }
