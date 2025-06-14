@@ -107,4 +107,13 @@ public class SkillManager : Singleton<SkillManager>
         PoolManager.Instance.Push(Skill.gameObject);
     }
     #endregion
+
+    
+    void Start()
+    {
+        ResourceManager.Instance.LoadAllAsync<GameObject>("Skill_Prefabs", (key, count, totalCount) =>
+        {
+            Debug.Log($"{key} {count}/{totalCount}");
+        });
+    }
 }
