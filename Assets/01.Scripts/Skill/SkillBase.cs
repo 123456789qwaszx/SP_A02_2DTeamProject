@@ -117,10 +117,10 @@ public class SkillBase : MonoBehaviour
         return true;
     }
 
-    protected virtual void GenerateProjectile(PlayerController Owner, string prefabName, Vector3 startPos, Vector3 dir, Vector3 targetPos, SkillBase skill)
+    protected virtual void GenerateProjectile(PlayerController Owner, string prefabName, Vector3 startPos, Vector3 dir, Vector3 targetPos, GameObject skill_prefab)
     {
         ProjectileController pc = SkillManager.Instance.SpawnProjectile(startPos, prefabName: prefabName);
-        pc.SetInfo(Owner, startPos, dir, targetPos, skill);
+        pc.SetInfo(Owner, startPos, dir, targetPos, skill_prefab);
     }
 
     public virtual void OnLevelUp()

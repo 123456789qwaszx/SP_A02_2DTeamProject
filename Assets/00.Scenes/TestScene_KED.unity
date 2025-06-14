@@ -1001,6 +1001,17 @@ MonoBehaviour:
   _skillList: []
   indicator: {fileID: 95941269}
   _projectileCooldown: 0.3
+--- !u!114 &542850939 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3215843578996477708, guid: 7cc8fc202efe2f14798e023948e11f84, type: 3}
+  m_PrefabInstance: {fileID: 814804907}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 542850928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed8568c1abaa76e4985fe1c8d528c34d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &564980706 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1182983939509066860, guid: bcaf0571eb649483dbc71c5fbbb320d6, type: 3}
@@ -1490,6 +1501,122 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3039952341000402216, guid: fe5126c8f46a0438dacd9e16d59108ed, type: 3}
   m_PrefabInstance: {fileID: 289951209}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1034967730
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1034967733}
+  - component: {fileID: 1034967732}
+  - component: {fileID: 1034967731}
+  - component: {fileID: 1034967734}
+  m_Layer: 0
+  m_Name: Circle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1034967731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1034967730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb542f658a441614f884ed2ac296dcb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  holyProjectile_Prefab: {fileID: 0}
+  holyImpact_Prefab: {fileID: 0}
+  holyPulse_Prefab: {fileID: 0}
+--- !u!212 &1034967732
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1034967730}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!4 &1034967733
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1034967730}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1034967734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1034967730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4698937f93e5d774798196e7e5efb895, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _skillList: []
+  indicator: {fileID: 95941269}
+  _projectileCooldown: 0.3
 --- !u!1 &1226143417
 GameObject:
   m_ObjectHideFlags: 0
@@ -1688,8 +1815,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1379130344}
   - component: {fileID: 1379130343}
-  - component: {fileID: 1379130345}
-  - component: {fileID: 1379130346}
   m_Layer: 0
   m_Name: GamaManager
   m_TagString: Untagged
@@ -1710,7 +1835,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  controller: {fileID: 0}
+  controller: {fileID: 542850939}
   dungeonCleared: 0000000000
   currentDungeonLevel: 0
 --- !u!4 &1379130344
@@ -1728,35 +1853,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1379130345
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1379130342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78b95f2f22db8ab4f9a3a5a526ba07df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fireSkill_Prefab: {fileID: 7216923816343179940, guid: 6c6264778d2f4944da438454d5c98dda, type: 3}
-  iceSkill_Prefab: {fileID: -2958398033029066838, guid: 883c0ea06d007924194b7de80b94a14a, type: 3}
---- !u!114 &1379130346
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1379130342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb542f658a441614f884ed2ac296dcb0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  holyProjectile_Prefab: {fileID: 806308866007636309, guid: 79ccc83fa431b0e4fbb91651fc94a9e9, type: 3}
-  holyImpact_Prefab: {fileID: 3719929905020187563, guid: 74ff37cf9532ee04ba018c1ec43405ec, type: 3}
-  holyPulse_Prefab: {fileID: 5770933307029178560, guid: 4d03f659247acf946855a4f296cf23b2, type: 3}
 --- !u!1001 &1426697516
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3000,3 +3096,4 @@ SceneRoots:
   - {fileID: 95941269}
   - {fileID: 494971186}
   - {fileID: 7591135510708025639}
+  - {fileID: 1034967733}

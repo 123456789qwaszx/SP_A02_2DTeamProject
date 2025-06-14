@@ -8,7 +8,7 @@ public class ProjectileController : SkillBase
 {
     // 혹시 나중에 몬스터도 쏘면 바꿀 것
     PlayerController _owner;
-    public SkillBase Skill;
+    SkillBase Skill;
     Vector2 _spawnPos;
     Vector3 _dir = Vector3.zero;
     Vector3 _target = Vector3.zero;
@@ -35,8 +35,10 @@ public class ProjectileController : SkillBase
         return true;
     }
 
-    public void SetInfo(PlayerController owner, Vector2 position, Vector2 dir, Vector2 target, SkillBase skill)
+    public void SetInfo(PlayerController owner, Vector2 position, Vector2 dir, Vector2 target, GameObject go)
     {
+        SkillBase skill = go.GetComponent<SkillBase>();
+        
         _owner = owner;
         _spawnPos = position;
         _dir = dir;
@@ -49,7 +51,8 @@ public class ProjectileController : SkillBase
         switch (skill.SkillType)
         {
             case SkillType.HolyProjectile:
-                CoFireSkill();
+                CoHolyProjectile();
+                
                 break;
             case SkillType.HolyPulse:
                 if (gameObject.activeInHierarchy)
@@ -176,6 +179,30 @@ public class ProjectileController : SkillBase
         }
     }
 
+    IEnumerator CoHolyProjectile()
+    {
+        List<MonsterBase> target = ObjectManager.Instance.GetMonsterWithinCamera(1);
+        while (true)
+        {
+            _timer += Time.deltaTime;
+            if (_timer > 3 || target == null)
+            {
+                DestroyProjectile();
+                _timer = 0;
+                break;
+            }
+
+            Vector2 direction = (Vector2)target[0].transform.position - _rigid.position;
+            float rotateSpeed = Vector3.Cross(direction.normalized, transform.up).z;
+            _rigid.angularVelocity = -_rotateAmount * rotateSpeed;
+            _rigid.velocity = transform.up * Skill.SkillData.projectileSpeed;
+
+            yield return new WaitForFixedUpdate();
+        }
+    }
+
+    
+
     IEnumerator CoCheckDestory()
     {
         while (true)
@@ -233,8 +260,6 @@ public class ProjectileController : SkillBase
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-
-
         MonsterBase creature = collision.transform.GetComponent<MonsterBase>();
         // if (creature.IsValid() == false)
         //     return;

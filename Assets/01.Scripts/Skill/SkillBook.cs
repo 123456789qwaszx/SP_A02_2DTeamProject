@@ -74,17 +74,11 @@ public class SkillBook : MonoBehaviour
     public Transform indicator;
     public float _projectileCooldown = 0.3f;
 
-    void Start()
-    {
-        // StartProjectile();
-        // StartPulse();
-    }
-
 
     #region HolyProjectile
     Coroutine _coProjectile;
 
-    void StartProjectile()
+    public void StartProjectile()
     {
         if (_coProjectile != null)
             StopCoroutine(_coProjectile);
@@ -100,10 +94,13 @@ public class SkillBook : MonoBehaviour
         {
             Vector2 dir = -(transform.position - indicator.position).normalized;
 
-            SkillController skill = SkillManager.Instance.SpawnHolyProjectile(transform.position);
+            //구조설계가 잘못 되었음.
+            Debug.Log("??");
+            ProjectileController skill = SkillManager.Instance.SpawnHolyProjectile(transform.position);
             skill.transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
+            Debug.Log(skill);
 
-            skill.SetInfo(GameManager.Instance.player, -(transform.position - indicator.position).normalized, skill.lifeTime, skill.damage);
+            skill.SetInfo(GameManager.Instance.controller, GameManager.Instance.controller.transform.position, -(transform.position - indicator.position).normalized, indicator.transform.position, SkillManager.Instance.holyProjectile_Prefab);
             yield return new WaitForSeconds(_projectileCooldown);
         }
     }
@@ -126,9 +123,9 @@ public class SkillBook : MonoBehaviour
 
         while (true)
         {
-            SkillController skill = SkillManager.Instance.SpawnHolyPulse(transform.position);
+            ProjectileController skill = SkillManager.Instance.SpawnHolyPulse(transform.position);
 
-            skill.SetInfo(GameManager.Instance.player, GameManager.Instance.MoveDir, skill.lifeTime = 2f, skill.damage);
+            skill.SetInfo(GameManager.Instance.controller, GameManager.Instance.controller.transform.position, -(transform.position - indicator.position).normalized, indicator.transform.position, SkillManager.Instance.holyPulse_Prefab);
             yield return new WaitForSeconds(_projectileCooldown);
         }
     }

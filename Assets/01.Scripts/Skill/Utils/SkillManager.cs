@@ -6,23 +6,22 @@ public class SkillManager : Singleton<SkillManager>
 {
     #region HolyProjectile
     public GameObject holyProjectile_Prefab;
-    public HashSet<SkillController> HolyProjectiles { get; } = new HashSet<SkillController>();
 
-    public SkillController SpawnHolyProjectile(Vector2 position)
+    public ProjectileController SpawnHolyProjectile(Vector2 position)
     {
         GameObject go = PoolManager.Instance.Pop(holyProjectile_Prefab);
         go.transform.position = position;
 
-        SkillController sc = go.GetComponent<SkillController>();
-        HolyProjectiles.Add(sc);
+        ProjectileController sc = go.GetComponent<ProjectileController>();
+        Projectiles.Add(sc);
         sc.Init();
 
         return sc;
     }
 
-    public void DespawnHolyProJectile(SkillController go)
+    public void DespawnHolyProJectile(ProjectileController go)
     {
-        HolyProjectiles.Remove(go);
+        Projectiles.Remove(go);
         Instance.SpawnHolyImpact(go.transform.position);
 
         PoolManager.Instance.Push(go.gameObject);
@@ -33,18 +32,18 @@ public class SkillManager : Singleton<SkillManager>
     #region HolyImpact
     public GameObject holyImpact_Prefab;
 
-    public SkillController SpawnHolyImpact(Vector2 position)
+    public ProjectileController SpawnHolyImpact(Vector2 position)
     {
         GameObject go = PoolManager.Instance.Pop(holyImpact_Prefab);
         go.transform.position = position;
 
-        SkillController sc = go.GetComponent<SkillController>();
+        ProjectileController sc = go.GetComponent<ProjectileController>();
         sc.Init();
 
         return sc;
     }
 
-    public void DeSpawnHolyImpact(SkillController go)
+    public void DeSpawnHolyImpact(ProjectileController go)
     {
         PoolManager.Instance.Push(go.gameObject);
     }
@@ -53,22 +52,21 @@ public class SkillManager : Singleton<SkillManager>
 
     #region HolyPulse
     public GameObject holyPulse_Prefab;
-    public HashSet<SkillController> HolyPulsces { get; } = new HashSet<SkillController>();
 
-    public SkillController SpawnHolyPulse(Vector2 position)
+    public ProjectileController SpawnHolyPulse(Vector2 position)
     {
         GameObject go = PoolManager.Instance.Pop(holyPulse_Prefab);
         go.transform.position = position;
 
-        SkillController sc = go.GetComponent<SkillController>();
+        ProjectileController sc = go.GetComponent<ProjectileController>();
         sc.Init();
 
         return sc;
     }
 
-    public void DeSpawnHolyPulse(SkillController go)
+    public void DeSpawnHolyPulse(ProjectileController go)
     {
-        HolyProjectiles.Remove(go);
+        Projectiles.Remove(go);
         PoolManager.Instance.Push(go.gameObject);
     }
     #endregion
@@ -123,16 +121,22 @@ public class SkillManager : Singleton<SkillManager>
             if (count == totalCount)
             {
                 StartSkillLoad();
+
+                SkillBook skillBook = GetComponent<SkillBook>();
+                skillBook.StartProjectile();
+    
             }
         });
     }
 
     void StartSkillLoad()
     {
-        fire00_Prefab = ResourceManager.Instance.Load<GameObject>("Skill_10_Fire00.prefab");
-        holyImpact_Prefab = ResourceManager.Instance.Load<GameObject>("Skill_01_HolyImpact.prefab");
         holyProjectile_Prefab = ResourceManager.Instance.Load<GameObject>("Skill_00_HolyProjectile.prefab");
+        holyImpact_Prefab = ResourceManager.Instance.Load<GameObject>("Skill_01_HolyImpact.prefab");
         holyPulse_Prefab = ResourceManager.Instance.Load<GameObject>("Skill_02_HolyPulse.prefab");
+        fire00_Prefab = ResourceManager.Instance.Load<GameObject>("Skill_10_Fire00.prefab");
+
+        
 
         _objects.Add("0", holyProjectile_Prefab);
         _objects.Add("1", holyImpact_Prefab);

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5754541974089564078}
   - component: {fileID: 5856890948568443156}
   - component: {fileID: 8324359162345603804}
-  - component: {fileID: 2959661871590002485}
+  - component: {fileID: 8053926404088231491}
   m_Layer: 6
   m_Name: HolyProjectile
   m_TagString: Untagged
@@ -181,7 +181,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &2959661871590002485
+--- !u!114 &8053926404088231491
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -190,9 +190,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 806308866007636309}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b411d5ee4874b4d99b63bc9a4dc8ca, type: 3}
+  m_Script: {fileID: 11500000, guid: ace88a3780a848240a6fd3c0f7d62da7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillType: 0
-  lifeTime: 1
-  damage: 10
+  CoolTime: 0.5
+  _skillData: {fileID: 11400000, guid: b675e70fd445f8545ab16461be5264b5, type: 2}
+  NumProjectiles: 1
+  ProjectileSpacing: 1
+  Skill: {fileID: 0}
+  _bounceCount: 3
