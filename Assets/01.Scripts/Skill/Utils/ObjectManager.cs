@@ -18,7 +18,6 @@ public class ObjectManager : Singleton<ObjectManager>
 
         if (randomMonsters.Count == 0) return null;
 
-        // ��� ������ count�� �ٸ� ��� ������ ��� �ݺ��ؼ� �߰�
         while (randomMonsters.Count < count)
         {
             randomMonsters.Add(randomMonsters.Last());
@@ -59,7 +58,6 @@ public class ObjectManager : Singleton<ObjectManager>
             float dot = Vector3.Dot((target.transform.position - origin).normalized, forward);
             float theta = Mathf.Acos(dot);
             float degree = Mathf.Rad2Deg * theta;
-            // �þ߰� �Ǻ�
             if (degree <= angleRange / 2f)
                 listMonster.Add(target.transform);
         }

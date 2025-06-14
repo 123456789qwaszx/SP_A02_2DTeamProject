@@ -6,7 +6,16 @@ using UnityEngine;
 
 public class SkillBook : MonoBehaviour
 {
+    [SerializeField]
+    private List<SkillBase> _skillList = new List<SkillBase>();
+    public List<SkillBase> SkillList { get { return _skillList; }}
 
+    public List<SkillBase> ActivatedSkills
+    {
+        get { return SkillList.Where(skill => skill.IsLearnedSkill).ToList(); }
+    }
+    
+    public Dictionary<SkillType, int> SavedBattleSkill = new Dictionary<SkillType, int>();
 
     public void LoadSkill(SkillType skillType, int level)
     {
@@ -22,31 +31,31 @@ public class SkillBook : MonoBehaviour
     {
         string className = skillType.ToString();
 
-        RepeatSkill skillBase = TestSkill.Instance.fireSkill_Prefab;//gameObject.GetComponent(Type.GetType(className)) as RepeatSkill;
+        RepeatSkill skillBase = gameObject.GetComponent(Type.GetType(className)) as RepeatSkill;
             Debug.Log(skillBase);
-        GameManager.Instance.SkillList.Add(skillBase);
-        if (GameManager.Instance.SavedBattleSkill.ContainsKey(skillType))
-            GameManager.Instance.SavedBattleSkill[skillType] = skillBase.Level;
+        SkillList.Add(skillBase);
+        if (SavedBattleSkill.ContainsKey(skillType))
+            SavedBattleSkill[skillType] = skillBase.Level;
         else
-            GameManager.Instance.SavedBattleSkill.Add(skillType, skillBase.Level);
+            SavedBattleSkill.Add(skillType, skillBase.Level);
     }
 
 
     public void AddActivatedSkills(SkillBase skill)
     {
-        GameManager.Instance.ActivatedSkills.Add(skill);
+        ActivatedSkills.Add(skill);
     }
 
     public void LevelUpSkill(SkillType skillType)
     {
-        for (int i = 0; i < GameManager.Instance.SkillList.Count; i++)
+        for (int i = 0; i < SkillList.Count; i++)
         {
-            if (GameManager.Instance.SkillList[i].SkillType == skillType)
+            if (SkillList[i].SkillType == skillType)
             {
-                GameManager.Instance.SkillList[i].OnLevelUp();
-                if (GameManager.Instance.SavedBattleSkill.ContainsKey(skillType))
+                SkillList[i].OnLevelUp();
+                if (SavedBattleSkill.ContainsKey(skillType))
                 {
-                    GameManager.Instance.SavedBattleSkill[skillType] = GameManager.Instance.SkillList[i].Level;
+                    SavedBattleSkill[skillType] = SkillList[i].Level;
                 }
             }
         }
@@ -55,7 +64,7 @@ public class SkillBook : MonoBehaviour
 
     public void Clear()
     {
-        GameManager.Instance.SavedBattleSkill.Clear();
+        SavedBattleSkill.Clear();
     }
 
 
@@ -69,8 +78,6 @@ public class SkillBook : MonoBehaviour
     {
         StartProjectile();
         StartPulse();
-        AddSkill(SkillType.FireSkill, 1);
-        AddSkill(SkillType.FireSkill, 2);
     }
 
 

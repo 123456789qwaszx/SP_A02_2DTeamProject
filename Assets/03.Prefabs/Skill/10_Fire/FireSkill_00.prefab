@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7768796732310810376}
   - component: {fileID: -7463352972862389682}
   m_Layer: 0
-  m_Name: 06_0
+  m_Name: FireSkill_00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -121,9 +121,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CoolTime: 0.5
-  _skillData: {fileID: 0}
-  NumProjectiles: 0
-  ProjectileSpacing: 0
+  _skillData: {fileID: 11400000, guid: c40e0ba608d0b1d4ba9e372bcda8b39f, type: 2}
+  NumProjectiles: 1
+  ProjectileSpacing: 1
 --- !u!114 &-7463352972862389682
 MonoBehaviour:
   m_ObjectHideFlags: 0

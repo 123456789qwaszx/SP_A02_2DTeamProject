@@ -32,16 +32,4 @@ public class GameManager : Singleton<GameManager>
             _moveDir = value;
         }
     }
-
-    
-    [SerializeField]
-    private List<SkillBase> _skillList = new List<SkillBase>();
-    public List<SkillBase> SkillList { get { return _skillList; }}
-
-    public List<SkillBase> ActivatedSkills
-    {
-        get { return SkillList.Where(skill => skill.IsLearnedSkill).ToList(); }
-    }
-    
-    public Dictionary<SkillType, int> SavedBattleSkill = new Dictionary<SkillType, int>();
 }
