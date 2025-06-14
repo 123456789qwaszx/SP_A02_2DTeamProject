@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -1106714129496748374}
   - component: {fileID: 4951447088090059378}
   m_Layer: 0
-  m_Name: Pig_01
+  m_Name: Pig_01_Tank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,8 +31,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.07, y: -0.02, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8199098567097171251}
   m_Father: {fileID: 0}
@@ -49,13 +49,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a1ec2a330df5594bb5642855ef59d2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterData: {fileID: 11400000, guid: 5e2a6e0244884cf42818bb0fb7004122, type: 2}
-  playerLayer:
+  monsterData: {fileID: 11400000, guid: b1787da11b5b76b408d19bd7da4af907, type: 2}
+  targetLayer:
     serializedVersion: 2
     m_Bits: 128
   knockbackForce: 5
   knockbackDuration: 0.1
-  projectilePrefab: {fileID: 0}
 --- !u!95 &9072439782336633115
 Animator:
   serializedVersion: 5
@@ -119,7 +118,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 1608151955, guid: e62adff7a84471247b499e5a08d0d423, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7914766, g: 0.5801887, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
