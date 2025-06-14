@@ -108,12 +108,41 @@ public class SkillManager : Singleton<SkillManager>
     }
     #endregion
 
-    
+
+    GameObject fire00_Prefab;
+
+    SkillBase iceSkill_Prefab;
+
+
     void Start()
     {
         ResourceManager.Instance.LoadAllAsync<GameObject>("Skill_Prefabs", (key, count, totalCount) =>
         {
             Debug.Log($"{key} {count}/{totalCount}");
+
+            if (count == totalCount)
+            {
+                StartSkillLoad();
+            }
         });
     }
+
+    void StartSkillLoad()
+    {
+        fire00_Prefab = ResourceManager.Instance.Load<GameObject>("Skill_10_Fire00.prefab");
+        holyImpact_Prefab = ResourceManager.Instance.Load<GameObject>("Skill_01_HolyImpact.prefab");
+        holyProjectile_Prefab = ResourceManager.Instance.Load<GameObject>("Skill_00_HolyProjectile.prefab");
+        holyPulse_Prefab = ResourceManager.Instance.Load<GameObject>("Skill_02_HolyPulse.prefab");
+
+        _objects.Add("0", holyProjectile_Prefab);
+        _objects.Add("1", holyImpact_Prefab);
+        _objects.Add("2", holyPulse_Prefab);
+        _objects.Add("3", fire00_Prefab);
+    }
+
+    void Update()
+    {
+    }
+    
+
 }

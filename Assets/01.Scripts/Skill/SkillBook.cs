@@ -76,8 +76,8 @@ public class SkillBook : MonoBehaviour
 
     void Start()
     {
-        StartProjectile();
-        StartPulse();
+        // StartProjectile();
+        // StartPulse();
     }
 
 
