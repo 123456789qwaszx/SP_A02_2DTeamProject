@@ -75,7 +75,7 @@ public class ItemGenerator : MonoBehaviour
 
         if (data.uniqueOption != null)
         {
-            item.uniqueOption = (data.uniqueOption.optionName, data.uniqueOption.value);
+            item.uniqueOption = (data.uniqueOption.optionName, data.uniqueOption.GetValue());
         }
 
         return item;
@@ -88,8 +88,7 @@ public class ItemGenerator : MonoBehaviour
             rarity = ItemRarity.Set,
             itemType = data.itemType,
             usableClass = GetUsableClass(data.itemType),
-            itemName = data.itemName,
-            setItemData = data,
+            itemName = data.itemName
         };
 
         foreach (var opt in data.fixedOptions)

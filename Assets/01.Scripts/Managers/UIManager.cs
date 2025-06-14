@@ -51,15 +51,15 @@ public class UIManager : Singleton<UIManager>
                     // 스테이지에 따라 다른 테마 씬으로 로드
                     if (stageIndex <= 3)
                     {
-                        SceneManager.LoadScene("Dungeon_Lv.1_CastleScene");
+                        SceneManager.LoadScene("Dungeon_CastleScene");
                     }
                     else if (stageIndex <= 9)
                     {
-                        SceneManager.LoadScene("Dungeon_Lv.2_PoisonScene");
+                        SceneManager.LoadScene("Dungeon_PoisonScene");
                     }
                     else
                     {
-                        SceneManager.LoadScene("Dungeon_Lv.3_DesertScene");
+                        SceneManager.LoadScene("Dungeon_DesertScene");
                     }
                 });
             }

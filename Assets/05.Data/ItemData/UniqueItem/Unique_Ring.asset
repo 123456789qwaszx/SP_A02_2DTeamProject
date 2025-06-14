@@ -12,22 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7efea5f2749d81e4c997193e928e68eb, type: 3}
   m_Name: Unique_Ring
   m_EditorClassIdentifier: 
-  uniqueName: "\uC808\uB300\uBC18\uC9C0"
-  icon: {fileID: 21300000, guid: e3cebba5cd6ca664ebb0e3b81c020260, type: 3}
+  uniqueName: 
+  icon: {fileID: 0}
   itemType: 13
   fixedOptions:
-  - optionType: 6
-    minValue: 5
-    maxValue: 5
-  - optionType: 16
-    minValue: 2
-    maxValue: 2
-  - optionType: 18
-    minValue: 20
-    maxValue: 20
+  - optionType: 0
+    minValue: 0
+    maxValue: 0
   - optionType: 3
-    minValue: 10
-    maxValue: 10
+    minValue: 0
+    maxValue: 0
+  - optionType: 13
+    minValue: 0
+    maxValue: 0
+  - optionType: 18
+    minValue: 0
+    maxValue: 0
   uniqueOption:
-    optionName: "\uD2B9\uC218\uACF5\uACA9MP\uC18C\uBAA8\uB7C950%\uAC10\uC18C"
-    value: -50
+    optionName: 
+    minValue: 0
+    maxValue: 0
