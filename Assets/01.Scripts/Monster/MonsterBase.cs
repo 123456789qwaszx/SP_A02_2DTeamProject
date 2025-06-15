@@ -9,7 +9,7 @@ public interface IMonster
 
 public class MonsterBase : MonoBehaviour, IMonster, IDamagable
 {
-    [SerializeField] private MonsterData monsterData;
+    [SerializeField] protected MonsterData monsterData;
     [SerializeField] private LayerMask targetLayer;
     [SerializeField] private float knockbackForce = 5f;
     [SerializeField] private float knockbackDuration = 0.1f;
@@ -26,7 +26,7 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
     public MonsterStateRangedAttack StateRangedAttack { get; private set; }
     public MonsterStateDead StateDead { get; private set; }
 
-    private int currentHP;
+    protected int currentHP;
     private float lastAttackTime;
 
     private SpriteRenderer spriteRenderer;
@@ -67,13 +67,13 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
         ResetMonster();
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         stateMachine?.Update();
     }
 
     // 몬스터 초기화
-    public void ResetMonster()
+    public virtual void ResetMonster()
     {
         currentHP = monsterData.maxHP;
         /// 추후 초기화 할 거 있으면 추가
@@ -82,7 +82,7 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
     }
 
     // 피격 메서드
-    public void TakeDamage(int amount)
+    public virtual void TakeDamage(int amount)
     {
         currentHP -= amount;
         PlayHitFlash(); // 맞으면 반짝
@@ -235,7 +235,7 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
     }
 
     // [이벤트함수] Dead 애니메이션 마지막 프레임에 추가
-    public void OnDeadEnd()
+    public virtual void OnDeadEnd()
     {
         itemDropManager.TryDropItem(transform.position);
         PoolManager.Instance.Push(this.gameObject);

@@ -7,6 +7,7 @@ public class StageManager : Singleton<StageManager>
     public StageType currentStageType;
 
     [SerializeField] private MonsterSpawnManager monsterSpawnManager;
+
     private float stageTimer = 0f;
     private bool isStageCleared = false;
 
@@ -21,20 +22,11 @@ public class StageManager : Singleton<StageManager>
 
         stageTimer += Time.deltaTime;
 
-        if (currentStageType == StageType.Normal && stageTimer >= 900f) // 일반 스테이지는 15분 버티기
+        if (currentStageType == StageType.Normal && stageTimer >= 900f)
         {
             StageClear();
         }
-        else if (currentStageType == StageType.Boss)
-        {
-            // if 보스가 죽으면
-            StageClear();
-        }
-        else if (currentStageType == StageType.FinalBoss)
-        {
-            // if 최종 보스가 죽으면
-            StageClear();
-        }
+        // 보스와 최종보스는 죽는 순간에 StageClear가 호출됨 (OnDeadEnd()에서)
     }
 
     public void SetupStage(int stage)
@@ -42,30 +34,30 @@ public class StageManager : Singleton<StageManager>
         isStageCleared = false;
         stageTimer = 0f;
 
-        // 스테이지 맵테마 설정
         SetupTheme(stage);
+        DetermineStageType(stage);
+    }
 
-        // 스테이지 타입 결정
+    void DetermineStageType(int stage)
+    {
         if (stage == 16)
         {
             currentStageType = StageType.FinalBoss;
-            monsterSpawnManager.SetupFinalBossStage();
         }
         else if (stage == 5 || stage == 10 || stage == 15)
         {
             currentStageType = StageType.Boss;
-            monsterSpawnManager.SetupBossStage();
         }
         else if (stage == 3 || stage == 8 || stage == 13)
         {
             currentStageType = StageType.Event;
-            monsterSpawnManager.SetupEventStage();
         }
         else
         {
             currentStageType = StageType.Normal;
-            monsterSpawnManager.SetupNormalStage();
         }
+
+        monsterSpawnManager.SetupStage(currentStageType);
     }
 
     void SetupTheme(int stage)
@@ -94,24 +86,7 @@ public class StageManager : Singleton<StageManager>
 
     void ApplyTheme(string themeName)
     {
-        // 추후 오디오매니저 셋팅
-
-        //case "Lv.1 Castle":
-        //AudioManager.Instance.PlayBGM("CastleTheme");
-        //break;
-
-        //case "Lv.2 Poison":
-        //    AudioManager.Instance.PlayBGM("PoisonTheme");
-        //    break;
-
-        //case "Lv.3 Desert":
-        //    AudioManager.Instance.PlayBGM("DesertTheme");
-        //    break;
-
-        //case "FinalBoss":
-        //    AudioManager.Instance.PlayBGM("FinalBossTheme");
-        //    break;
-        //}
+        // AudioManager.Instance.PlayBGM(themeName);
     }
 
     public void StageClear()
@@ -121,7 +96,7 @@ public class StageManager : Singleton<StageManager>
         GameManager.Instance.UdateStageInfo();
     }
 
-    public void ForceClear() // 디버그용 강제 클리어
+    public void ForceClear()
     {
         StageClear();
     }

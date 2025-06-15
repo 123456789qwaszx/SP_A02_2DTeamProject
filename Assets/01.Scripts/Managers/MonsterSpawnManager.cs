@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static StageManager;
 
-public class MonsterSpawnManager : MonoBehaviour
+public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
 {
     [Header("몬스터 프리팹")]
     public GameObject[] regularMonsterPrefabs;
@@ -21,7 +22,6 @@ public class MonsterSpawnManager : MonoBehaviour
     [Header("스폰 타이밍 트리거")]
     private float[] eliteSpawnTimes = { 180f, 420f, 780f };
     private float[] midBossTimes = { 720f };
-    private bool isBossStage = false;
 
     private Transform player;
     private float playTime;
@@ -31,30 +31,27 @@ public class MonsterSpawnManager : MonoBehaviour
 
     private GameObject spawnedFinalBoss;
     private MonsterFinalBoss finalBossScript;
-    private bool isFinalBossStage;
+
+    private StageType currentStageType = StageType.Normal;
 
     void Start()
     {
-        // 나중에 GameManger.Instance로 플레이어를 가져오도록 변경
         player = FindObjectOfType<PlayerController>().transform;
-
-        if (isFinalBossStage)
-        {
-            //SpawnFinalBoss();   // 최종 보스 스테이지
-        }
-        else
-        {
-            StartCoroutine(SpawnRegularMonsters()); // 일반 몬스터 지속 스폰
-            StartCoroutine(SurroundSpawnRoutine()); // 원형진 몬스터 스폰
-        }
+        SetupStage(StageType.Normal);
     }
 
     void Update()
     {
-        playTime += Time.deltaTime;
         if (!isSpawning) return;
 
-        // 엘리트 몬스터 스폰 타이밍 체크 (3분, 7분, 13분)
+        playTime += Time.deltaTime;
+
+        if (currentStageType == StageType.FinalBoss)
+        {
+            MonitorFinalBossPhase();
+            return;
+        }
+
         foreach (float timing in eliteSpawnTimes)
         {
             if (playTime >= timing && !triggeredTimes.Contains(timing))
@@ -64,8 +61,7 @@ public class MonsterSpawnManager : MonoBehaviour
             }
         }
 
-        // 중간보스 스폰 타이밍 체크 (12분)
-        foreach (float timing in midBossTimes)  
+        foreach (float timing in midBossTimes)
         {
             if (playTime >= timing && !triggeredTimes.Contains(timing))
             {
@@ -74,16 +70,20 @@ public class MonsterSpawnManager : MonoBehaviour
             }
         }
 
-        // 보스 스테이지면 보스 스폰 (15분)
-        if (isBossStage && playTime >= 900f && !bossSpawned)    
+        if (currentStageType == StageType.Boss && playTime >= 900f && !bossSpawned)
         {
-            SpawnFromPool(bossPrefabs);
+            if (GameManager.Instance.currentStage == 5)
+                SpawnFromPool(bossPrefabs[0]);
+            else if (GameManager.Instance.currentStage == 10)
+                SpawnFromPool(bossPrefabs[1]);
+            else if (GameManager.Instance.currentStage == 15)
+                SpawnFromPool(bossPrefabs[2]);
+
             bossSpawned = true;
         }
     }
 
-    // 일반몬스터 스폰 코루틴
-    IEnumerator SpawnRegularMonsters()  
+    IEnumerator SpawnRegularMonsters()
     {
         while (isSpawning)
         {
@@ -95,16 +95,15 @@ public class MonsterSpawnManager : MonoBehaviour
         }
     }
 
-    // 원형진 몬스터 스폰 코루틴
-    IEnumerator SurroundSpawnRoutine()  
+    IEnumerator SurroundSpawnRoutine()
     {
         while (isSpawning)
         {
             yield return new WaitForSeconds(surroundInterval);
-            if (playTime >= 900f) yield break;  // 15분까지만
+            if (playTime >= 900f) yield break;
 
             float radius = (minSpawnDistance + maxSpawnDistance) / 2f;
-            GameObject prefab = regularMonsterPrefabs[Random.Range(0, 2)]; // 일반형, 탱커형 중 한마리 랜덤 (추후 확장)
+            GameObject prefab = regularMonsterPrefabs[Random.Range(0, 2)];
 
             for (int i = 0; i < surroundMonstersCount; i++)
             {
@@ -128,50 +127,22 @@ public class MonsterSpawnManager : MonoBehaviour
         InitPooledMonster(monster, GetValidSpawnPosition());
     }
 
-    // 스폰 몬스터 필드에 셋팅
-    void InitPooledMonster(GameObject monster, Vector3 pos) 
+    public void SpawnFromPool(GameObject prefab)
+    {
+        GameObject monster = PoolManager.Instance.Pop(prefab);
+        InitPooledMonster(monster, GetValidSpawnPosition());
+    }
+
+    void InitPooledMonster(GameObject monster, Vector3 pos)
     {
         monster.transform.position = pos;
-        monster.transform.rotation = Quaternion.identity;   // 반전처리 해야함
+        monster.transform.rotation = Quaternion.identity;
         monster.SetActive(true);
 
-        IMonster resettable = monster.GetComponent<IMonster>(); // 스탯 초기화 (최종보스제외)
+        IMonster resettable = monster.GetComponent<IMonster>();
         if (resettable != null)
             resettable.ResetMonster();
     }
-
-    /// <summary>
-    /// 최종 몬스터 스폰은 연출을 더해서 제작해도 좋을 것 같습니다.
-    /// (스폰시키지 않고 최종보스 스테이지씬에 플레이어와 배치해두고 시작)
-    /// </summary>
-
-    //void SpawnFinalBoss() 
-    //{
-    //    Vector3 spawnPos = player.position + Vector3.up * 5f;
-    //    spawnedFinalBoss = Instantiate(finalBossPrefab, spawnPos, Quaternion.identity);
-    //    finalBossScript = spawnedFinalBoss.GetComponent<MonsterFinalBoss>();
-    //    StartCoroutine(FinalBossPhaseMonitor());
-    //}
-    //IEnumerator FinalBossPhaseMonitor()
-    //{
-    //    while (spawnedFinalBoss != null)
-    //    {
-    //        float hpPercent = finalBossScript.CurrentHP / finalBossScript.MaxHP;
-
-    //        if (hpPercent <= 0.3f)
-    //        {
-    //            SpawnFromPool(midBossPrefabs);
-    //            SpawnFromPool(eliteMonsterPrefabs);
-    //        }
-    //        else if (hpPercent <= 0.6f)
-    //        {
-    //            SpawnFromPool(eliteMonsterPrefabs);
-    //            SpawnFromPool(regularMonsterPrefabs);
-    //        }
-
-    //        yield return new WaitForSeconds(10f); // 주기적 체크
-    //    }
-    //}
 
     Vector3 GetValidSpawnPosition()
     {
@@ -192,45 +163,83 @@ public class MonsterSpawnManager : MonoBehaviour
         return viewPos.x < 0 || viewPos.x > 1 || viewPos.y < 0 || viewPos.y > 1;
     }
 
-    // StageManager에서 호출 (스폰 중단)
-    public void StopSpawn()  
+    public void StopSpawn()
     {
         isSpawning = false;
         StopAllCoroutines();
     }
 
-    // StageManger에서 호출하여 스테이지 설정
-    public void SetupNormalStage()
+    public void SetupStage(StageType type)
     {
+        currentStageType = type;
         isSpawning = true;
-        isBossStage = false;
-        isFinalBossStage = false;
-        StartCoroutine(SpawnRegularMonsters());
-        StartCoroutine(SurroundSpawnRoutine());
-    }
-    public void SetupBossStage()
-    {
-        isSpawning = true;
-        isBossStage = true;
-        isFinalBossStage = false;
-        StartCoroutine(SpawnRegularMonsters());
-        StartCoroutine(SurroundSpawnRoutine());
+        playTime = 0f;
+        bossSpawned = false;
+        triggeredTimes.Clear();
+
+        switch (type)
+        {
+            case StageType.Normal:
+            case StageType.Boss:
+                StartCoroutine(SpawnRegularMonsters());
+                StartCoroutine(SurroundSpawnRoutine());
+                break;
+            case StageType.FinalBoss:
+                SpawnFinalBoss();
+                break;
+            case StageType.Event:
+                isSpawning = false;
+                break;
+        }
     }
 
-    public void SetupFinalBossStage()
+    void SpawnFinalBoss()
     {
-        isSpawning = true;
-        isBossStage = false;
-        isFinalBossStage = true;
-        // SpawnFinalBoss();
+        // 플레이어 위쪽에 스폰
+        Vector3 spawnPos = player.position + Vector3.up * 10f;
+        spawnedFinalBoss = Instantiate(finalBossPrefab, spawnPos, Quaternion.identity);
+        finalBossScript = spawnedFinalBoss.GetComponent<MonsterFinalBoss>();
     }
 
-    public void SetupEventStage()
+    void MonitorFinalBossPhase()
     {
-        isSpawning = false;
-        isBossStage = false;
-        isFinalBossStage = false;
-        // NPC랑 연출 관련 부분은 따로 처리
+        if (spawnedFinalBoss == null || finalBossScript == null) return;
+
+        float hpPercent = finalBossScript.HPPercent;
+
+        // 2페이즈일때 중간보스도 추가로 10초마다 스폰
+        if (hpPercent <= 0.3f && !triggeredTimes.Contains(0.3f))
+        {
+            finalBossScript.EnterPhase(3);
+            StartCoroutine(FinalBossPhaseRoutine(phase: 3));
+            triggeredTimes.Add(0.3f);
+        }
+        // 1페이즈일때 일반 몬스터, 엘리트 몬스터 10초마다 스폰
+        else if (hpPercent <= 0.6f && !triggeredTimes.Contains(0.6f))
+        {
+            finalBossScript.EnterPhase(2);
+            StartCoroutine(FinalBossPhaseRoutine(phase: 2));
+            triggeredTimes.Add(0.6f);
+        }
+    }
+
+    IEnumerator FinalBossPhaseRoutine(int phase)
+    {
+        while (spawnedFinalBoss != null)
+        {
+            switch (phase)
+            {
+                case 2:
+                    SpawnFromPool(eliteMonsterPrefabs);
+                    SpawnFromPool(regularMonsterPrefabs);
+                    break;
+
+                case 3:
+                    SpawnFromPool(midBossPrefabs);
+                    break;
+            }
+
+            yield return new WaitForSeconds(10f);
+        }
     }
 }
-
