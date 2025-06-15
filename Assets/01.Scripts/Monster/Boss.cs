@@ -71,6 +71,7 @@ public class Boss : MonsterBase
     // [이벤트함수] 1페이즈 원거리공격 애니메이션
     public void OnRangedAttack()
     {
+        StopMoving();
         // 세 갈래로 발사
         var directions = GetMultiShotDirections();
 
@@ -83,7 +84,7 @@ public class Boss : MonsterBase
 
     private IEnumerator DelayedFire(List<Vector3> directions)
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         FireProjectiles(directions);
     }
 
@@ -108,9 +109,9 @@ public class Boss : MonsterBase
             GameObject warning = Instantiate(warningPrefab, transform.position, Quaternion.identity);
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             warning.transform.rotation = Quaternion.Euler(0, 0, angle);
-            warning.transform.position += dir.normalized * 1.5f; // 살짝 앞쪽으로
+            warning.transform.position += dir.normalized * 1f; // 살짝 앞쪽으로
 
-            Destroy(warning, 0.5f); // 0.5초 후 사라지게
+            Destroy(warning, 1f); // 0.5초 후 사라지게
         }
     }
     private void FireProjectiles(List<Vector3> directions)
