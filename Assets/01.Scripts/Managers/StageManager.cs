@@ -70,17 +70,21 @@ public class StageManager : Singleton<StageManager>
 
     void SetupTheme(int stage)
     {
-        if (stage >= 1 && stage <= 5)
+        if (stage >= 1 && stage <= 4)
         {
             ApplyTheme("Lv.1 Castle");
         }
-        else if (stage >= 6 && stage <= 10)
+        else if (stage >= 5 && stage <= 8)
         {
             ApplyTheme("Lv.2 Poison");
         }
-        else if (stage >= 11 && stage <= 15)
+        else if (stage >= 9 && stage <= 12)
         {
             ApplyTheme("Lv.3 Desert");
+        }
+        else if (stage >= 13 && stage <= 15)
+        {
+            ApplyTheme("Lv.4 GoldGarden");
         }
         else if (stage == 16)
         {
