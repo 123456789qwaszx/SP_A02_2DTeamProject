@@ -6,16 +6,6 @@ using UnityEngine;
 
 public class SkillBook : MonoBehaviour
 {
-    [SerializeField]
-    private List<SkillBase> _skillList = new List<SkillBase>();
-    public List<SkillBase> SkillList { get { return _skillList; }}
-
-    public List<SkillBase> ActivatedSkills
-    {
-        get { return SkillList.Where(skill => skill.IsLearnedSkill).ToList(); }
-    }
-    
-    public Dictionary<SkillType, int> SavedBattleSkill = new Dictionary<SkillType, int>();
 
     public void LoadSkill(SkillType skillType, int level)
     {
@@ -25,8 +15,8 @@ public class SkillBook : MonoBehaviour
             LevelUpSkill(skillType);
         }
     }
-    
-    
+
+
     void Start()
     {
         ResourceManager.Instance.LoadAllAsync<GameObject>("Skill_Prefabs", (key, count, totalCount) =>
@@ -37,8 +27,17 @@ public class SkillBook : MonoBehaviour
             {
                 SkillManager.Instance.StartSkillLoad();
 
-                StartProjectile();
-    
+                SkillType type = Util.GetSkillTypeFromInt(10001);
+                Debug.Log(type);
+
+                if (type != SkillType.None)
+                {
+                    AddSkill(type, 10001);
+                    LevelUpSkill(type);
+                }
+
+                //StartProjectile();
+
             }
         });
     }
@@ -47,32 +46,38 @@ public class SkillBook : MonoBehaviour
     public void AddSkill(SkillType skillType, int skillId = 0)
     {
         string className = skillType.ToString();
+        Debug.Log(skillType);
+        Debug.Log(className);
+
 
         RepeatSkill skillBase = gameObject.GetComponent(Type.GetType(className)) as RepeatSkill;
         Debug.Log(skillBase);
-        SkillList.Add(skillBase);
-        if (SavedBattleSkill.ContainsKey(skillType))
-            SavedBattleSkill[skillType] = skillBase.Level;
+
+        SkillManager.Instance.SkillList.Add(skillBase);
+        if (SkillManager.Instance.SavedBattleSkill.ContainsKey(skillType))
+            SkillManager.Instance.SavedBattleSkill[skillType] = skillBase.Level;
         else
-            SavedBattleSkill.Add(skillType, skillBase.Level);
+            SkillManager.Instance.SavedBattleSkill.Add(skillType, skillBase.Level);
     }
 
 
     public void AddActivatedSkills(SkillBase skill)
     {
-        ActivatedSkills.Add(skill);
+        SkillManager.Instance.ActivatedSkills.Add(skill);
     }
 
     public void LevelUpSkill(SkillType skillType)
     {
-        for (int i = 0; i < SkillList.Count; i++)
+        for (int i = 0; i < SkillManager.Instance.SkillList.Count; i++)
         {
-            if (SkillList[i].SkillType == skillType)
+            Debug.Log(SkillManager.Instance.SkillList.Count);
+            Debug.Log(SkillManager.Instance.SkillList[i]);
+            if (SkillManager.Instance.SkillList[i].SkillType == skillType)
             {
-                SkillList[i].OnLevelUp();
-                if (SavedBattleSkill.ContainsKey(skillType))
+                SkillManager.Instance.SkillList[i].OnLevelUp();
+                if (SkillManager.Instance.SavedBattleSkill.ContainsKey(skillType))
                 {
-                    SavedBattleSkill[skillType] = SkillList[i].Level;
+                    SkillManager.Instance.SavedBattleSkill[skillType] = SkillManager.Instance.SkillList[i].Level;
                 }
             }
         }
@@ -81,7 +86,7 @@ public class SkillBook : MonoBehaviour
 
     public void Clear()
     {
-        SavedBattleSkill.Clear();
+        SkillManager.Instance.SavedBattleSkill.Clear();
     }
 
 
@@ -110,7 +115,7 @@ public class SkillBook : MonoBehaviour
 
             ProjectileController skill = SkillManager.Instance.SpawnHolyProjectile(transform.position);
             skill.transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
-            Debug.Log(skill);
+
 
             skill.SetInfo(GameManager.Instance.controller, GameManager.Instance.controller.transform.position, -(transform.position - indicator.position).normalized, indicator.transform.position, SkillManager.Instance.holyProjectile_Prefab);
             yield return new WaitForSeconds(skill._attackInterval);
@@ -128,7 +133,7 @@ public class SkillBook : MonoBehaviour
         if (_coPulse != null)
             StopCoroutine(_coPulse);
 
-            _coPulse = StartCoroutine(CoStartPulse());
+        _coPulse = StartCoroutine(CoStartPulse());
     }
 
     IEnumerator CoStartPulse()

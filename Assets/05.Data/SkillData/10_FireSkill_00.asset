@@ -12,10 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41ecb1750091ae741b339afce7833228, type: 3}
   m_Name: 10_FireSkill_00
   m_EditorClassIdentifier: 
-  SkillDataID: 10
-  Name: FireSkill10
+  SkillIndex: 10041
   Description: 
-  Type: 3
+  Type: 4
   Icon: {fileID: 0}
   SkillPrefabs: {fileID: 7768796732310810376, guid: b9858cf437e36174783005afb2148c68, type: 3}
   DamageMultiplire: 15
@@ -23,6 +22,12 @@ MonoBehaviour:
   CoolTime: 1.2
   CastingEffect: 0
   CastingEffectPercentage: 0
+  projectileCount: 1
+  ScaleMultiplier: 1
+  projectileSpeed: 1
   NumPenerations: 0
-  ProjSpeed: 0
+  NumBounce: 0
+  BounceSpeed: 0
+  AngleBetweenProj: 0
   Duration: 3
+  attackRangeMultiplier: 1

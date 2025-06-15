@@ -11,7 +11,6 @@ public class IceSkill : RepeatSkill
 
     IEnumerator SetIceSkill()
     {
-        string prefabName = SkillData.PrefabLabel;
 
         if (GameManager.Instance.player != null)
         {

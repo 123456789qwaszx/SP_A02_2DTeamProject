@@ -3,30 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable]
-public class SkillStat
+public enum SkillType
 {
-    public SkillType SkillType;
-    public int Level;
+    None = 0,
+    HolyProjectile = 10001,
+    HolyImpact = 10011,
+    HolyPulse = 10021,
+    FireSkill = 10031,
+    IceSkill = 10041
+    //만들 것을 나중에 추가
 }
 
 public class SkillBase : MonoBehaviour
 {
-    //임시
-    public float CoolTime = 0.5f;
     bool _init = false;
+    public bool IsLearnedSkill { get { return Level > 0; } }
 
-    void Awake()
-    {
-        Init();
-    }
-
-
-    public PlayerController Owner { get; set; }
     SkillType skillType;
-
-    //스크립터블 오브젝트로 추가
-    // 레벨에 따른 스탯값 모두 작성해두기. 
     public SkillType SkillType
     {
         get
@@ -41,10 +34,7 @@ public class SkillBase : MonoBehaviour
         set { level = value; }
     }
 
-    //SkillData
-
-    [SerializeField]
-    public SkillData _skillData;
+    SkillData _skillData;
     public SkillData SkillData
     {
         get
@@ -57,7 +47,6 @@ public class SkillBase : MonoBehaviour
         }
     }
 
-    public bool IsLearnedSkill { get { return Level > 0; } }
 
     #region 동적 SkillData
     public int NumProjectiles; //회당 공격 횟수 그런데 레벨당으로 지정할거면 공격이긴함.
@@ -66,7 +55,13 @@ public class SkillBase : MonoBehaviour
 
 
     public int TotalDamage { get; set; } = 0;
-    // SetInfoSkillData 스크립터블 읽어와서 쏵 세팅해주기.
+
+    
+    void Awake()
+    {
+        Init();
+    }
+
     public SkillData UpdateSkillData(int dataId = 0)
     {
         int id = 0;
@@ -74,17 +69,15 @@ public class SkillBase : MonoBehaviour
             id = Level < 2 ? (int)SkillType : (int)SkillType + Level - 1;
         else
             id = dataId;
-
+        // 이부분 수정할것
+        Debug.Log("수정필요");
         SkillData skillData = new SkillData();
         SkillManager.Instance._objects.TryGetValue($"{id}", out UnityEngine.Object obj);
         if (!skillData == obj)
             return SkillData;
-
         SkillData = skillData;
 
         return SkillData;
-
-
     }
 
     // 스킬 None에서 활성화 될때 실행
@@ -101,11 +94,6 @@ public class SkillBase : MonoBehaviour
         Level++;
 
         UpdateSkillData();
-    }
-
-    protected void HitEvent(Collider2D collision)
-    {
-
     }
 
     public virtual bool Init()

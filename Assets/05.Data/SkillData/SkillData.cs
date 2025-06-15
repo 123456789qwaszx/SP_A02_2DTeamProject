@@ -4,17 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public enum SkillType
-{
-    None,
-    HolyProjectile,
-    HolyImpact,
-    HolyPulse,
-    FireSkill,
-    IceSkill
-    //만들 것을 나중에 추가
-}
-
 [Serializable]
 public class SkillDamage
 {
@@ -26,8 +15,7 @@ public class SkillDamage
 
 public class SkillData : ScriptableObject
 {
-    public int SkillDataID;
-    public string PrefabLabel;
+    public int SkillIndex;
     public string Description;
 
     public SkillType Type;

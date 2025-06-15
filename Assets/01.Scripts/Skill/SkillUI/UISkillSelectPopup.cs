@@ -1,16 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class UISkillSelectPopup : MonoBehaviour
 {
-    void Start()
+
+    private void OnEnable()
     {
-        
+        //Init();
+
     }
 
-    void Update()
-    {
-        
-    }
+    // SkillBook _skillBook;
+    // public void Init()
+    // {
+    //     List<SkillBase> activeSkills = Managers.Game.Player.Skills.SkillList.Where(skill => skill.IsLearnedSkill).ToList();
+    // }
 }

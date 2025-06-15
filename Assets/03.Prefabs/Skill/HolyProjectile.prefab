@@ -193,9 +193,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ace88a3780a848240a6fd3c0f7d62da7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CoolTime: 0.5
-  _skillData: {fileID: 11400000, guid: b675e70fd445f8545ab16461be5264b5, type: 2}
   NumProjectiles: 1
   ProjectileSpacing: 1
-  Skill: {fileID: 0}
   _bounceCount: 3
+  _projectileSpeed: 1
+  _attackInterval: 0
