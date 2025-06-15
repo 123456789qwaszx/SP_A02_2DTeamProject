@@ -19,9 +19,9 @@ public class MonsterSpawnManager : MonoBehaviour
     public int surroundMonstersCount = 20;
 
     [Header("스폰 타이밍 트리거")]
-    public float[] eliteSpawnTimes = { 180f, 420f, 780f };
-    public float[] midBossTimes = { 600f, 900f };
-    public bool isBossStage = false;
+    private float[] eliteSpawnTimes = { 180f, 420f, 780f };
+    private float[] midBossTimes = { 720f };
+    private bool isBossStage = false;
 
     private Transform player;
     private float playTime;
@@ -35,7 +35,8 @@ public class MonsterSpawnManager : MonoBehaviour
 
     void Start()
     {
-        player = GameManager.Instance.player.transform;
+        // 나중에 GameManger.Instance로 플레이어를 가져오도록 변경
+        player = FindObjectOfType<PlayerController>().transform;
 
         if (isFinalBossStage)
         {
@@ -53,7 +54,8 @@ public class MonsterSpawnManager : MonoBehaviour
         playTime += Time.deltaTime;
         if (!isSpawning) return;
 
-        foreach (float timing in eliteSpawnTimes)   // 엘리트 몬스터 스폰 타이밍 체크 (3분, 7분, 13분)
+        // 엘리트 몬스터 스폰 타이밍 체크 (3분, 7분, 13분)
+        foreach (float timing in eliteSpawnTimes)
         {
             if (playTime >= timing && !triggeredTimes.Contains(timing))
             {
@@ -62,7 +64,8 @@ public class MonsterSpawnManager : MonoBehaviour
             }
         }
 
-        foreach (float timing in midBossTimes)  // 중간보스 스폰 타이밍 체크 (10분, 15분)
+        // 중간보스 스폰 타이밍 체크 (12분)
+        foreach (float timing in midBossTimes)  
         {
             if (playTime >= timing && !triggeredTimes.Contains(timing))
             {
@@ -71,14 +74,16 @@ public class MonsterSpawnManager : MonoBehaviour
             }
         }
 
-        if (isBossStage && playTime >= 900f && !bossSpawned)    // 보스 스테이지면 보스 스폰 (15분)
+        // 보스 스테이지면 보스 스폰 (15분)
+        if (isBossStage && playTime >= 900f && !bossSpawned)    
         {
             SpawnFromPool(bossPrefabs);
             bossSpawned = true;
         }
     }
 
-    IEnumerator SpawnRegularMonsters()  // 일반몬스터 스폰 코루틴
+    // 일반몬스터 스폰 코루틴
+    IEnumerator SpawnRegularMonsters()  
     {
         while (isSpawning)
         {
@@ -90,7 +95,8 @@ public class MonsterSpawnManager : MonoBehaviour
         }
     }
 
-    IEnumerator SurroundSpawnRoutine()  // 원형진 몬스터 스폰 코루틴
+    // 원형진 몬스터 스폰 코루틴
+    IEnumerator SurroundSpawnRoutine()  
     {
         while (isSpawning)
         {
@@ -98,7 +104,7 @@ public class MonsterSpawnManager : MonoBehaviour
             if (playTime >= 900f) yield break;  // 15분까지만
 
             float radius = (minSpawnDistance + maxSpawnDistance) / 2f;
-            GameObject prefab = regularMonsterPrefabs[Random.Range(0, 2)]; // 일반형, 탱커형 중 한마리 랜덤
+            GameObject prefab = regularMonsterPrefabs[Random.Range(0, 2)]; // 일반형, 탱커형 중 한마리 랜덤 (추후 확장)
 
             for (int i = 0; i < surroundMonstersCount; i++)
             {
@@ -122,7 +128,8 @@ public class MonsterSpawnManager : MonoBehaviour
         InitPooledMonster(monster, GetValidSpawnPosition());
     }
 
-    void InitPooledMonster(GameObject monster, Vector3 pos) // 스폰 몬스터 필드에 셋팅
+    // 스폰 몬스터 필드에 셋팅
+    void InitPooledMonster(GameObject monster, Vector3 pos) 
     {
         monster.transform.position = pos;
         monster.transform.rotation = Quaternion.identity;   // 반전처리 해야함
@@ -185,10 +192,45 @@ public class MonsterSpawnManager : MonoBehaviour
         return viewPos.x < 0 || viewPos.x > 1 || viewPos.y < 0 || viewPos.y > 1;
     }
 
-    public void OnStageClear()  // 스테이지 클리어하면 호출할거 (스폰 중단)
+    // StageManager에서 호출 (스폰 중단)
+    public void StopSpawn()  
     {
         isSpawning = false;
         StopAllCoroutines();
+    }
+
+    // StageManger에서 호출하여 스테이지 설정
+    public void SetupNormalStage()
+    {
+        isSpawning = true;
+        isBossStage = false;
+        isFinalBossStage = false;
+        StartCoroutine(SpawnRegularMonsters());
+        StartCoroutine(SurroundSpawnRoutine());
+    }
+    public void SetupBossStage()
+    {
+        isSpawning = true;
+        isBossStage = true;
+        isFinalBossStage = false;
+        StartCoroutine(SpawnRegularMonsters());
+        StartCoroutine(SurroundSpawnRoutine());
+    }
+
+    public void SetupFinalBossStage()
+    {
+        isSpawning = true;
+        isBossStage = false;
+        isFinalBossStage = true;
+        // SpawnFinalBoss();
+    }
+
+    public void SetupEventStage()
+    {
+        isSpawning = false;
+        isBossStage = false;
+        isFinalBossStage = false;
+        // NPC랑 연출 관련 부분은 따로 처리
     }
 }
 

@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37314c0bef24a034c943a9351ff468c7, type: 3}
-  m_Name: Melee_Normal01
+  m_Name: Goblin_01_Normal
   m_EditorClassIdentifier: 
-  monsterName: Pig_01
+  monsterName: Goblin_01
   maxHP: 5
   attackPower: 1
-  moveSpeed: 1
-  attackCooldown: 2
-  attackRange: 0.8
-  type: 0
+  moveSpeed: 0.4
+  attackCooldown: 5
+  attackRange: 4
+  type: 4
+  projectilePrefab: {fileID: 3395379805850720308, guid: 5503b27d1a86386418168cee0874ebae, type: 3}

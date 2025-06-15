@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
-/// <summary>
-/// ToDO: 애니메이션 이벤트 함수 등록
-/// </summary>
+
 public interface IMonster
 {
     void ResetMonster();
@@ -12,7 +10,7 @@ public interface IMonster
 public class MonsterBase : MonoBehaviour, IMonster, IDamagable
 {
     [SerializeField] private MonsterData monsterData;
-    [SerializeField] private LayerMask playerLayer;
+    [SerializeField] private LayerMask targetLayer;
     [SerializeField] private float knockbackForce = 5f;
     [SerializeField] private float knockbackDuration = 0.1f;
 
@@ -25,6 +23,7 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
     public MonsterStateIdle StateIdle { get; private set; }
     public MonsterStateMove StateMove { get; private set; }
     public MonsterStateMeleeAttack StateMeleeAttack { get; private set; }
+    public MonsterStateRangedAttack StateRangedAttack { get; private set; }
     public MonsterStateDead StateDead { get; private set; }
 
     private int currentHP;
@@ -50,7 +49,14 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
 
         StateIdle = new MonsterStateIdle(this, animator);
         StateMove = new MonsterStateMove(this, animator);
-        StateMeleeAttack = new MonsterStateMeleeAttack(this, animator);
+        if (IsRangedMonster())
+        {
+            StateRangedAttack = new MonsterStateRangedAttack(this, animator);
+        }
+        else
+        {
+            StateMeleeAttack = new MonsterStateMeleeAttack(this, animator);
+        }
         StateDead = new MonsterStateDead(this, animator);
 
         stateMachine = new MonsterStateMachine();
@@ -66,6 +72,7 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
         stateMachine?.Update();
     }
 
+    // 몬스터 초기화
     public void ResetMonster()
     {
         currentHP = monsterData.maxHP;
@@ -74,6 +81,7 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
         ChangeState(StateIdle);
     }
 
+    // 피격 메서드
     public void TakeDamage(int amount)
     {
         currentHP -= amount;
@@ -85,6 +93,8 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
             ChangeState(StateDead);
         }
     }
+
+    // 맞으면 반짝
     private void PlayHitFlash()
     {
         if (hitFlashRoutine != null)
@@ -108,6 +118,8 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
 
         spriteRenderer.color = originalColor;
     }
+
+    // 넉백
     public void KnockbackFrom(Vector3 playerPosition)
     {
         if (knockbackRoutine != null)
@@ -131,36 +143,43 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
         knockbackRoutine = null;
     }
 
+    // 상태 전환
     public void ChangeState(IMonsterState newState)
     {
         stateMachine.ChangeState(newState);
     }
 
+    // 움직이기
     public void MoveToPlayer()
     {
         Vector2 dir = (player.position - transform.position).normalized;
         rb.velocity = dir * monsterData.moveSpeed;
     }
 
+    // 플레이어방향으로 좌우반전
     public void Flip()
     {
         Vector2 direction = player.position - transform.position;
         spriteRenderer.flipX = direction.x < 0;
     }
 
+    // 그만 움직이기 (Idle로 전환)
     public void StopMoving()
     {
         rb.velocity = Vector2.zero;
         animator.SetBool("Move", false);    // Idle
     }
 
+    // 공격범위 안에 있고 쿨 돌았는지
     public bool CanAttack()
     {
         return InAttackRange() && Time.time >= lastAttackTime + monsterData.attackCooldown;
     }
-    public void OnAttack()  // Attack 애니메이션 이벤트
+
+    // [이벤트함수] MeleeAttack 애니메이션 - 피격
+    public void OnAttack()  
     {
-        Collider2D hit = Physics2D.OverlapCircle(transform.position, monsterData.attackRange, playerLayer);
+        Collider2D hit = Physics2D.OverlapCircle(transform.position, monsterData.attackRange, targetLayer);
 
         if (hit != null)
         {
@@ -172,6 +191,18 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
         }
     }
 
+    // [이벤트함수] RangedAttack 애니메이션 - 발사
+    public void OnFireProjectile()
+    {
+        if (monsterData.projectilePrefab == null || player == null) return;
+
+        GameObject proj = Instantiate(monsterData.projectilePrefab, transform.position, Quaternion.identity);
+        Vector3 dir = (player.position - transform.position).normalized;
+        proj.GetComponent<MonsterProjectile>().SetDirection(dir);
+        RecordAttackTime();
+    }
+
+    // 공격 범위 체크
     public bool InAttackRange()
     {
         if (player == null) return false;
@@ -180,12 +211,14 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
         return distance <= monsterData.attackRange;
     }
 
+    // 공격 쿨 기록
     public void RecordAttackTime()
     {
         lastAttackTime = Time.time;
     }
 
-    public void OnAttackEnd()   // Attack 애니메이션 이벤트
+    // [이벤트함수] Attack 애니메이션 마지막 프레임에 추가
+    public void OnAttackEnd()   
     {
         if (CanAttack())
         {
@@ -201,9 +234,17 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
         }
     }
 
-    public void OnDeadEnd() // Dead 애니메이션 이벤트
+    // [이벤트함수] Dead 애니메이션 마지막 프레임에 추가
+    public void OnDeadEnd()
     {
         itemDropManager.TryDropItem(transform.position);
         PoolManager.Instance.Push(this.gameObject);
+    }
+
+    // 원거리공격몬스터인지
+    public bool IsRangedMonster()
+    {
+        return monsterData.type == MonsterData.MonsterType.Ranged_Normal ||
+               monsterData.type == MonsterData.MonsterType.Ranged_Elite;
     }
 }

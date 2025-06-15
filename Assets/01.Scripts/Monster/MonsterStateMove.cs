@@ -15,7 +15,10 @@ public class MonsterStateMove : MonsterStateBase
         monster.Flip();
         if (monster.CanAttack())
         {
-            monster.ChangeState(monster.StateMeleeAttack);
+            if (monster.IsRangedMonster())
+                monster.ChangeState(monster.StateRangedAttack);
+            else
+                monster.ChangeState(monster.StateMeleeAttack);
         }
     }
 
