@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-public class MonsterStateRangedAttack : MonsterStateBase
+public class MonsterStateAttackRanged : MonsterStateBase
 {
-    public MonsterStateRangedAttack(MonsterBase monster, Animator animator) : base(monster, animator) { }
+    public MonsterStateAttackRanged(MonsterBase monster, Animator animator) : base(monster, animator) { }
 
     private float lastAttackTime;
     

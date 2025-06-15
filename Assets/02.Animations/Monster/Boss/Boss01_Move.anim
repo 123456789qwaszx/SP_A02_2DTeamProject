@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Goblin_01_Move
+  m_Name: Boss01_Move
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,13 +21,13 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: -463088652, guid: 676a2c4273278a643a57a28947f2204a, type: 3}
+      value: {fileID: 568015075, guid: 3873ee6986237b64086e409fa17856a8, type: 3}
     - time: 0.21666667
-      value: {fileID: 849663702, guid: 676a2c4273278a643a57a28947f2204a, type: 3}
+      value: {fileID: 576282273, guid: 3873ee6986237b64086e409fa17856a8, type: 3}
     - time: 0.45
-      value: {fileID: -63499975, guid: 676a2c4273278a643a57a28947f2204a, type: 3}
+      value: {fileID: 1661889885, guid: 3873ee6986237b64086e409fa17856a8, type: 3}
     - time: 0.6666667
-      value: {fileID: -1155513321, guid: 676a2c4273278a643a57a28947f2204a, type: 3}
+      value: {fileID: 948425547, guid: 3873ee6986237b64086e409fa17856a8, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -50,10 +50,10 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: -463088652, guid: 676a2c4273278a643a57a28947f2204a, type: 3}
-    - {fileID: 849663702, guid: 676a2c4273278a643a57a28947f2204a, type: 3}
-    - {fileID: -63499975, guid: 676a2c4273278a643a57a28947f2204a, type: 3}
-    - {fileID: -1155513321, guid: 676a2c4273278a643a57a28947f2204a, type: 3}
+    - {fileID: 568015075, guid: 3873ee6986237b64086e409fa17856a8, type: 3}
+    - {fileID: 576282273, guid: 3873ee6986237b64086e409fa17856a8, type: 3}
+    - {fileID: 1661889885, guid: 3873ee6986237b64086e409fa17856a8, type: 3}
+    - {fileID: 948425547, guid: 3873ee6986237b64086e409fa17856a8, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

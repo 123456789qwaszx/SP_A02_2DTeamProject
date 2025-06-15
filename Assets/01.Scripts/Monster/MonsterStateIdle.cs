@@ -6,7 +6,7 @@ public class MonsterStateIdle : MonsterStateBase
 
     public override void Enter()
     {
-        animator.SetBool("Move", false);
+        monster.StopMoving();
     }
 
     public override void Update()

@@ -35,10 +35,10 @@ public class StageManager : Singleton<StageManager>
         stageTimer = 0f;
 
         SetupTheme(stage);
-        DetermineStageType(stage);
+        SetupStageType(stage);
     }
 
-    void DetermineStageType(int stage)
+    void SetupStageType(int stage)
     {
         if (stage == 16)
         {
