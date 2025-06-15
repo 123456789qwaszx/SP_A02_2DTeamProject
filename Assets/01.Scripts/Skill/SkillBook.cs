@@ -108,8 +108,6 @@ public class SkillBook : MonoBehaviour
         {
             Vector2 dir = -(transform.position - indicator.position).normalized;
 
-            //구조설계가 잘못 되었음.
-            Debug.Log("??");
             ProjectileController skill = SkillManager.Instance.SpawnHolyProjectile(transform.position);
             skill.transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
             Debug.Log(skill);

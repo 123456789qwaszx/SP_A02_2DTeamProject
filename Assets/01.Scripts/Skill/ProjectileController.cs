@@ -23,6 +23,7 @@ public class ProjectileController : SkillBase
     List<MonsterBase> _enteredColliderList = new List<MonsterBase>();
     Coroutine _coDotDamage;
     List<Transform> _chainLightningList = new List<Transform> ();
+    
     private void OnDisable()
     {
         StopAllCoroutines();
@@ -56,9 +57,15 @@ public class ProjectileController : SkillBase
         switch (skill.SkillType)
         {
             case SkillType.HolyProjectile:
-                CoHolyProjectile();
-
+                if (gameObject.activeInHierarchy)
+                    StartCoroutine(CoTestSkill());
                 break;
+
+            // case SkillType.HolyProjectile:
+            //     if(gameObject.activeInHierarchy)
+            //     StartCoroutine(CoHolyProjectile());
+
+            //     break;
             case SkillType.HolyPulse:
                 if (gameObject.activeInHierarchy)
                     StartCoroutine(CoFireSkill());
@@ -84,6 +91,18 @@ public class ProjectileController : SkillBase
 
     float _timer = 0;
     private float _rotateAmount = 1000;
+
+    IEnumerator CoTestSkill()
+    {
+        List<MonsterBase> target = ObjectManager.Instance.GetMonsterWithinCamera(1);
+        while (true)
+        {
+            Debug.Log("!!");
+            Vector2 dir = (Vector2)target[0].transform.position - _rigid.position;
+            transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
+            yield return new WaitForSeconds(_attackInterval);
+        }
+    }
 
     IEnumerator CoChainLightning(Vector3 startPos, Vector3 endPos, bool isFollow = false)
     {
