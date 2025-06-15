@@ -16,6 +16,8 @@ public class ProjectileController : SkillBase
     Rigidbody2D _rigid;
     int _numPenerations;
     public int _bounceCount = 1;
+    public float _projectileSpeed = 1;
+    public float _attackInterval;
 
     // 나중에 몬스터도 스킬 쏘면 바꿀 것
     List<MonsterBase> _enteredColliderList = new List<MonsterBase>();
@@ -48,11 +50,14 @@ public class ProjectileController : SkillBase
         transform.localScale = Vector3.one * Skill.SkillData.ScaleMultiplier;
         _numPenerations = skill.SkillData.NumPenerations;
          _bounceCount = skill.SkillData.NumBounce;
+        _projectileSpeed = skill.SkillData.projectileSpeed;
+        _attackInterval = skill.SkillData.AttackInterval;
+
         switch (skill.SkillType)
         {
             case SkillType.HolyProjectile:
                 CoHolyProjectile();
-                
+
                 break;
             case SkillType.HolyPulse:
                 if (gameObject.activeInHierarchy)

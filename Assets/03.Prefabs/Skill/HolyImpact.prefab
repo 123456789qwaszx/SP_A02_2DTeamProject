@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8921191062819301495}
   - component: {fileID: 2138419697641803927}
   - component: {fileID: 1325595109690105809}
-  - component: {fileID: 6255684643976606329}
   - component: {fileID: 195621506506489583}
   m_Layer: 6
   m_Name: HolyImpact
@@ -108,21 +107,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &6255684643976606329
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3719929905020187563}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b411d5ee4874b4d99b63bc9a4dc8ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skillType: 0
-  lifeTime: 1
-  damage: 10
 --- !u!61 &195621506506489583
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -836,7 +836,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &494971186
 Transform:
   m_ObjectHideFlags: 0
@@ -1000,7 +1000,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _skillList: []
   indicator: {fileID: 95941269}
-  _projectileCooldown: 0.3
 --- !u!114 &542850939 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3215843578996477708, guid: 7cc8fc202efe2f14798e023948e11f84, type: 3}
@@ -1616,7 +1615,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _skillList: []
   indicator: {fileID: 95941269}
-  _projectileCooldown: 0.3
 --- !u!1 &1226143417
 GameObject:
   m_ObjectHideFlags: 0
@@ -2090,7 +2088,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1585866418
 SpriteRenderer:
   m_ObjectHideFlags: 0

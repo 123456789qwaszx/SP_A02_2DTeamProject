@@ -13,16 +13,22 @@ MonoBehaviour:
   m_Name: 00_HolyProjectile
   m_EditorClassIdentifier: 
   SkillDataID: 1
-  Name: "\uC2E0\uC131\uD654\uC0B4"
+  PrefabLabel: 
   Description: "\uAC00\uC7A5 \uAE30\uBCF8\uC801\uC778 \uACF5\uACA9"
   Type: 0
   Icon: {fileID: 0}
   SkillPrefabs: {fileID: 0}
   DamageMultiplire: 10
-  AttackInterval: 0.3
+  AttackInterval: 3
   CoolTime: 0.3
   CastingEffect: 0
   CastingEffectPercentage: 0
+  projectileCount: 1
+  ScaleMultiplier: 1
+  projectileSpeed: 1
   NumPenerations: 0
-  ProjSpeed: 5
+  NumBounce: 0
+  BounceSpeed: 0
+  AngleBetweenProj: 0
   Duration: 3
+  attackRangeMultiplier: 1

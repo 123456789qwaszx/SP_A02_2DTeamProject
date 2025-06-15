@@ -25,6 +25,23 @@ public class SkillBook : MonoBehaviour
             LevelUpSkill(skillType);
         }
     }
+    
+    
+    void Start()
+    {
+        ResourceManager.Instance.LoadAllAsync<GameObject>("Skill_Prefabs", (key, count, totalCount) =>
+        {
+            Debug.Log($"{key} {count}/{totalCount}");
+
+            if (count == totalCount)
+            {
+                SkillManager.Instance.StartSkillLoad();
+
+                StartProjectile();
+    
+            }
+        });
+    }
 
 
     public void AddSkill(SkillType skillType, int skillId = 0)
@@ -32,7 +49,7 @@ public class SkillBook : MonoBehaviour
         string className = skillType.ToString();
 
         RepeatSkill skillBase = gameObject.GetComponent(Type.GetType(className)) as RepeatSkill;
-            Debug.Log(skillBase);
+        Debug.Log(skillBase);
         SkillList.Add(skillBase);
         if (SavedBattleSkill.ContainsKey(skillType))
             SavedBattleSkill[skillType] = skillBase.Level;
@@ -72,7 +89,6 @@ public class SkillBook : MonoBehaviour
     #region Refactor예정
     [Header("HolyProjectile")]
     public Transform indicator;
-    public float _projectileCooldown = 0.3f;
 
 
     #region HolyProjectile
@@ -88,9 +104,7 @@ public class SkillBook : MonoBehaviour
 
     IEnumerator CoStartProjectile()
     {
-        new WaitForSeconds(_projectileCooldown);
-
-        while (true)
+        do
         {
             Vector2 dir = -(transform.position - indicator.position).normalized;
 
@@ -101,8 +115,10 @@ public class SkillBook : MonoBehaviour
             Debug.Log(skill);
 
             skill.SetInfo(GameManager.Instance.controller, GameManager.Instance.controller.transform.position, -(transform.position - indicator.position).normalized, indicator.transform.position, SkillManager.Instance.holyProjectile_Prefab);
-            yield return new WaitForSeconds(_projectileCooldown);
+            yield return new WaitForSeconds(skill._attackInterval);
         }
+
+        while (true);
     }
     #endregion
 
@@ -119,15 +135,16 @@ public class SkillBook : MonoBehaviour
 
     IEnumerator CoStartPulse()
     {
-        new WaitForSeconds(_projectileCooldown);
+        do
 
-        while (true)
         {
             ProjectileController skill = SkillManager.Instance.SpawnHolyPulse(transform.position);
 
             skill.SetInfo(GameManager.Instance.controller, GameManager.Instance.controller.transform.position, -(transform.position - indicator.position).normalized, indicator.transform.position, SkillManager.Instance.holyPulse_Prefab);
-            yield return new WaitForSeconds(_projectileCooldown);
+            yield return new WaitForSeconds(skill._attackInterval);
         }
+
+        while (true);
     }
     #endregion
     #endregion

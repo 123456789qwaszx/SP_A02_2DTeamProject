@@ -111,25 +111,7 @@ public class SkillManager : Singleton<SkillManager>
 
     SkillBase iceSkill_Prefab;
 
-
-    void Start()
-    {
-        ResourceManager.Instance.LoadAllAsync<GameObject>("Skill_Prefabs", (key, count, totalCount) =>
-        {
-            Debug.Log($"{key} {count}/{totalCount}");
-
-            if (count == totalCount)
-            {
-                StartSkillLoad();
-
-                SkillBook skillBook = GetComponent<SkillBook>();
-                skillBook.StartProjectile();
-    
-            }
-        });
-    }
-
-    void StartSkillLoad()
+    public void StartSkillLoad()
     {
         holyProjectile_Prefab = ResourceManager.Instance.Load<GameObject>("Skill_00_HolyProjectile.prefab");
         holyImpact_Prefab = ResourceManager.Instance.Load<GameObject>("Skill_01_HolyImpact.prefab");
