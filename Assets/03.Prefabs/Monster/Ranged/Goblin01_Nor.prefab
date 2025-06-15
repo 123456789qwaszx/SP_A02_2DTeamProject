@@ -82,7 +82,7 @@ GameObject:
   - component: {fileID: 76065471143881770}
   - component: {fileID: 6919816417547946113}
   m_Layer: 0
-  m_Name: Goblin_01
+  m_Name: Goblin01_Nor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -190,8 +190,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 10
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_LinearDrag: 7
+  m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:

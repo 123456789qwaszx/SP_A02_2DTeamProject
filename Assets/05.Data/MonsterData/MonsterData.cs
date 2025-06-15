@@ -17,6 +17,7 @@ public class MonsterData : ScriptableObject
 
     [Header("발사체")]
     public GameObject projectilePrefab;
+    public GameObject bossProjectilePrefab;
 
     public enum MonsterType
     {

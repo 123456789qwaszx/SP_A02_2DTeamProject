@@ -9,27 +9,27 @@ public interface IMonster
 
 public class MonsterBase : MonoBehaviour, IMonster, IDamagable
 {
-    [SerializeField] private MonsterData monsterData;
-    [SerializeField] private LayerMask targetLayer;
+    [SerializeField] protected MonsterData monsterData;
+    [SerializeField] protected LayerMask targetLayer;
     [SerializeField] private float knockbackForce = 5f;
     [SerializeField] private float knockbackDuration = 0.1f;
 
-    private Rigidbody2D rb;
-    private Animator animator;
-    private Transform player;
+    public MonsterStateIdle StateIdle { get; protected set; }
+    public MonsterStateMove StateMove { get; protected set; }
+    public MonsterStateAttackMelee StateMeleeAttack { get; private set; }
+    public MonsterStateAttackRanged StateRangedAttack { get; private set; }
+    public MonsterStateDead StateDead { get; protected set; }
 
     private MonsterStateMachine stateMachine;
     private ItemDropManager itemDropManager;
-    public MonsterStateIdle StateIdle { get; private set; }
-    public MonsterStateMove StateMove { get; private set; }
-    public MonsterStateMeleeAttack StateMeleeAttack { get; private set; }
-    public MonsterStateRangedAttack StateRangedAttack { get; private set; }
-    public MonsterStateDead StateDead { get; private set; }
 
-    private int currentHP;
+    protected int currentHP;
     private float lastAttackTime;
 
-    private SpriteRenderer spriteRenderer;
+    protected Animator animator;
+    protected Transform player;
+    protected Rigidbody2D rb;
+    protected SpriteRenderer spriteRenderer;
     private Coroutine hitFlashRoutine;
     private Coroutine knockbackRoutine;
     private Color hitColor = Color.red;
@@ -43,23 +43,25 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalColor = spriteRenderer.color;
 
-        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
-        if (playerObj != null)
-            player = playerObj.transform;
-
-        StateIdle = new MonsterStateIdle(this, animator);
-        StateMove = new MonsterStateMove(this, animator);
-        if (IsRangedMonster())
-        {
-            StateRangedAttack = new MonsterStateRangedAttack(this, animator);
-        }
-        else
-        {
-            StateMeleeAttack = new MonsterStateMeleeAttack(this, animator);
-        }
-        StateDead = new MonsterStateDead(this, animator);
+        player = GameObject.FindGameObjectWithTag("Player")?.transform;
+        itemDropManager = FindObjectOfType<ItemDropManager>();
 
         stateMachine = new MonsterStateMachine();
+
+        InitializeStates();
+    }
+
+    // 보스, 최종보스는 오버라이드
+    protected virtual void InitializeStates()
+    {
+        StateIdle = new MonsterStateIdle(this, animator);
+        StateMove = new MonsterStateMove(this, animator);
+        StateDead = new MonsterStateDead(this, animator);
+
+        if (IsRangedMonster())
+            StateRangedAttack = new MonsterStateAttackRanged(this, animator);
+        else
+            StateMeleeAttack = new MonsterStateAttackMelee(this, animator);
     }
 
     private void OnEnable()
@@ -67,13 +69,13 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
         ResetMonster();
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         stateMachine?.Update();
     }
 
     // 몬스터 초기화
-    public void ResetMonster()
+    public virtual void ResetMonster()
     {
         currentHP = monsterData.maxHP;
         /// 추후 초기화 할 거 있으면 추가
@@ -82,7 +84,7 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
     }
 
     // 피격 메서드
-    public void TakeDamage(int amount)
+    public virtual void TakeDamage(int amount)
     {
         currentHP -= amount;
         PlayHitFlash(); // 맞으면 반짝
@@ -218,7 +220,7 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
     }
 
     // [이벤트함수] Attack 애니메이션 마지막 프레임에 추가
-    public void OnAttackEnd()   
+    public virtual void OnAttackEnd()   
     {
         if (CanAttack())
         {
@@ -235,7 +237,7 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
     }
 
     // [이벤트함수] Dead 애니메이션 마지막 프레임에 추가
-    public void OnDeadEnd()
+    public virtual void OnDeadEnd()
     {
         itemDropManager.TryDropItem(transform.position);
         PoolManager.Instance.Push(this.gameObject);
