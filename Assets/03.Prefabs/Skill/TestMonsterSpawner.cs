@@ -15,7 +15,6 @@ public class TestMonsterSpawner : MonoBehaviour
     void Update()
     {
         SpawnFromPool2(eliteMonsterPrefabs);
-        Debug.Log(ObjectManager.Instance.Monsters.Count);
     }
 
 
