@@ -6,15 +6,19 @@ using Random = UnityEngine.Random;
 
 public class PlayerEquipmentManager : MonoBehaviour
 {
+    public static PlayerEquipmentManager Instance { get; private set; }
+    
     private Dictionary<ItemType, GeneratedItem> equipped = new();
     private IEquipable playerStats;
+    private Player player;
     
     private Dictionary<string, int> equippedSetCounts = new(); // 세트 이름별 장착 개수
     private Dictionary<string, int> appliedSetBonusCounts = new(); // 세트 보너스 적용 수
 
     private void Awake()
     {
-        playerStats = GetComponent<IEquipable>();
+        Instance = this;
+        player = FindObjectOfType<Player>();
     }
 
     public void Equip(GeneratedItem item)
@@ -22,7 +26,7 @@ public class PlayerEquipmentManager : MonoBehaviour
         // 일반 옵션 적용
         foreach (var opt in item.options)
         {
-            playerStats.ApplyOption(opt.optionType, opt.value);
+            player.ApplyOption(opt.optionType, opt.value);
         }
 
         // 유니크 고유 옵션 적용
@@ -51,7 +55,7 @@ public class PlayerEquipmentManager : MonoBehaviour
         // 일반 옵션 제거
         foreach (var opt in item.options)
         {
-            playerStats.RemoveOption(opt.optionType, opt.value);
+            player.RemoveOption(opt.optionType, opt.value);
         }
 
         // 유니크 고유 옵션 해제 (옵션당 해제 로직 필요 시 추가)

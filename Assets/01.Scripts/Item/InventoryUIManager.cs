@@ -33,17 +33,25 @@ public class InventoryUIManager : MonoBehaviour
 
     public void RefreshInventory()
     {
-        RefreshInventory(InventoryManager.Instance.Items);
+        var currentItems = InventoryManager.Instance.Items
+                                           .Where(item => item != null)
+                                           .ToList(); // 순서 유지
+
+        RefreshInventory(currentItems);
     }
 
     public void RefreshInventory(List<GeneratedItem> itemList)
     {
         for (int i = 0; i < slotUIs.Count; i++)
         {
-            if (i < itemList.Count)
+            if (i < itemList.Count && itemList[i] != null)
+            {
                 slotUIs[i].SetItem(itemList[i]);
+            }
             else
+            {
                 slotUIs[i].Clear();
+            }
         }
     }
 
@@ -55,7 +63,7 @@ public class InventoryUIManager : MonoBehaviour
         switch (tabType)
         {
             case InventoryTabType.All:
-                filtered = allItems;
+                filtered = new List<GeneratedItem>(allItems);
                 break;
             case InventoryTabType.Weapon:
                 filtered = allItems.Where(i => i.itemType.ToString().Contains("Sword") || i.itemType.ToString().Contains("Axe") ||
@@ -87,5 +95,16 @@ public class InventoryUIManager : MonoBehaviour
             
         }
         Debug.Log($"슬롯 {count} 생성됨");
+    }
+    
+    public void DelayedRefresh()
+    {
+        StartCoroutine(RefreshNextFrame());
+    }
+
+    private IEnumerator RefreshNextFrame()
+    {
+        yield return null; // 한 프레임 뒤로 미룸
+        RefreshInventory(); // 원래 함수 호출
     }
 }

@@ -14,6 +14,7 @@ public class InventoryUIController : MonoBehaviour
             bool isOpen = !inventoryPanel.activeSelf;
             inventoryPanel.SetActive(isOpen);
             equipmentPanel.SetActive(isOpen);
+            InventoryUIManager.instance.RefreshInventory();
         }
     }
 }

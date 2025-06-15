@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 
-public class EquipmentslotUI : MonoBehaviour
+public class EquipmentslotUI : MonoBehaviour, IPointerClickHandler
 {
     public List<ItemType> allowedItemTypes; // 이 슬롯에 장착 가능한 아이템 타입
     public Image iconImage;
@@ -15,26 +16,15 @@ public class EquipmentslotUI : MonoBehaviour
     public void SetItem(GeneratedItem item)
     {
         equippedItem = item;
-
-        if (item != null)
-        {
-            iconImage.sprite = ItemIconManager.Instance.GetIcon(item.itemType);
-            iconImage.color = Color.white;
-
-            rarityBorder.color = GetRarityColor(item.rarity);
-            rarityBorder.enabled = true;
-        }
-        else
-        {
-            iconImage.sprite = null;
-            iconImage.color = new Color(1, 1, 1, 0); // 투명하게
-            rarityBorder.enabled = false;
-        }
+        iconImage.enabled = true;
+        iconImage.sprite = ItemIconManager.Instance.GetIcon(item.itemType);
+        rarityBorder.enabled = true;
+        rarityBorder.color = GetRarityColor(item.rarity);
     }
 
-    public bool CanEquip(GeneratedItem item)
+    public bool CanEquip(ItemType type)
     {
-        return allowedItemTypes.Contains(item.itemType);
+        return allowedItemTypes.Contains(type);
     }
 
     private Color GetRarityColor(ItemRarity rarity)
@@ -57,6 +47,22 @@ public class EquipmentslotUI : MonoBehaviour
 
     public void ClearSlot()
     {
-        SetItem(null);
+        equippedItem = null;
+        iconImage.enabled = false;
+        rarityBorder.enabled = false;
+    }
+    
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (equippedItem == null) return;
+
+        if (eventData.button == PointerEventData.InputButton.Right)
+        {
+            var itemToUnequip = equippedItem; // 캐싱
+            ClearSlot(); // 먼저 비움
+            PlayerEquipmentManager.Instance.Unequip(itemToUnequip);
+            InventoryManager.Instance.AddItem(itemToUnequip); // 여기만 1회 호출
+            InventoryUIManager.instance.RefreshInventory(); // 정렬 갱신 추가
+        }
     }
 }
