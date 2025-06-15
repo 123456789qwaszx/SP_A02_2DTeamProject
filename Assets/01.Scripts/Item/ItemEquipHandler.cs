@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ItemEquipHandler : MonoBehaviour
@@ -11,27 +12,22 @@ public class ItemEquipHandler : MonoBehaviour
     /// </summary>
     public bool TryEquipItem(GeneratedItem item)
     {
-        foreach (var slot in equipmentSlots)
+        var slot = equipmentSlots.FirstOrDefault(s => s.CanEquip(item.itemType));
+        if (slot == null) return false;
+
+        var previouslyEquipped = slot.GetEquippedItem();
+        if (previouslyEquipped != null)
         {
-            if (slot.CanEquip(item))
-            {
-                // 기존 아이템 제거
-                var previousItem = slot.GetEquippedItem();
-                if (previousItem != null)
-                {
-                    // 추후 장착 해제 시 작업이 있다면 여기에
-                    Debug.Log($"기존 아이템 {previousItem.itemName} 제거");
-                }
-
-                // 장착 처리
-                slot.SetItem(item);
-
-                Debug.Log($"아이템 {item.itemName} 장착 완료");
-                return true;
-            }
+            InventoryManager.Instance.AddItem(previouslyEquipped);
+            PlayerEquipmentManager.Instance.Unequip(previouslyEquipped);
         }
 
-        Debug.LogWarning("장착 가능한 슬롯이 없습니다.");
-        return false;
+        slot.SetItem(item);
+        PlayerEquipmentManager.Instance.Equip(item);
+        InventoryManager.Instance.RemoveItem(item);
+
+        InventoryUIManager.instance.RefreshInventory(); // 추가!
+
+        return true;
     }
 }

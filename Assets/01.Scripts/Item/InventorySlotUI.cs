@@ -14,14 +14,11 @@ public class InventorySlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExit
     public void SetItem(GeneratedItem newItem)
     {
         item = newItem;
-        gameObject.SetActive(true);
-
         var sprite = ItemIconManager.Instance.GetIcon(item.itemType);
-        // Debug.Log($"[InventorySlotUI] {item.itemName} 아이콘: {(sprite == null ? "null" : sprite.name)}");
-
         iconImage.sprite = sprite;
-        iconImage.enabled = (sprite != null); // <- 아이콘이 null이면 안 보이게
+        iconImage.enabled = sprite != null;
         rarityBorder.color = GetRarityColor(item.rarity);
+        rarityBorder.enabled = true;
     }
     
     public void Clear()
@@ -29,7 +26,7 @@ public class InventorySlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExit
         item = null;
         iconImage.sprite = null;
         iconImage.enabled = false;
-        rarityBorder.color = Color.clear;
+        rarityBorder.enabled = false;
     }
 
     public bool IsEmpty => item == null;

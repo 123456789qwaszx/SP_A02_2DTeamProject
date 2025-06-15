@@ -11,7 +11,7 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private int maxSlotCount = 30;
     public int MaxSlotCount => maxSlotCount;
 
-    public List<GeneratedItem> Items => items;
+    public List<GeneratedItem> Items => new List<GeneratedItem>(items); // 항상 복사본 제공
 
     private void Awake()
     {
@@ -30,7 +30,7 @@ public class InventoryManager : MonoBehaviour
     public void AddItem(GeneratedItem item)
     {
         items.Add(item);
-        Debug.Log($"아이템 추가됨: {item.itemName}");
+        Debug.Log($"[AddItem] 현재 아이템 수: {items.Count}");
         InventoryUIManager.instance?.RefreshInventory(); // UI 갱신
     }
 
@@ -39,8 +39,10 @@ public class InventoryManager : MonoBehaviour
     /// </summary>
     public void RemoveItem(GeneratedItem item)
     {
-        items.Remove(item);
-        InventoryUIManager.instance?.RefreshInventory();
+        // items.Remove(item);
+        items.RemoveAll(i => i.id == item.id); // 같은 ID를 가진 아이템만 제거
+        // InventoryUIManager.instance?.RefreshInventory();
+        InventoryUIManager.instance?.DelayedRefresh();
     }
 
     public GeneratedItem GetItem(int index)

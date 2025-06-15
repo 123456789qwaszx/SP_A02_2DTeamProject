@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GeneratedItem
 {
+    public string id = System.Guid.NewGuid().ToString(); // 유일 ID
     public string itemName;
     public ItemRarity rarity;
     public ItemType itemType;
