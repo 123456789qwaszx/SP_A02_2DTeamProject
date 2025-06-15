@@ -9,13 +9,17 @@ public enum ItemDisplayMode { Drop, Full }
 
 public class DroppedItemDisplay : MonoBehaviour
 {
+    private GeneratedItem item;
+    
     public Image iconImage;
     public Image borderImage; // 등급 테두리용
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI optionText;
 
-    public void Setup(GeneratedItem item, Sprite icon, ItemDisplayMode mode)
+    public void Setup(GeneratedItem newItem, Sprite icon, ItemDisplayMode mode)
     {
+        item = newItem;
+        
         iconImage.sprite = icon;
 
         // 등급별 테두리 색상
@@ -56,5 +60,10 @@ public class DroppedItemDisplay : MonoBehaviour
         {
             Debug.Log($" - {opt.optionType}: {opt.value}");
         }
+    }
+    
+    public GeneratedItem GetItem()
+    {
+        return item;
     }
 }

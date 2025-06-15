@@ -17,12 +17,28 @@ public class ItemTooltipUI : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
         Instance = this;
         Hide();
     }
 
     public void Show(GeneratedItem item, Vector3 position)
     {
+        if (item == null) return;
+        
+        panel.SetActive(true);
+        Vector3 offset = new Vector3(210f, -210f, 0f);
+        Vector3 pos = position + offset;
+
+        // 화면 밖으로 안 나가게 제한
+        pos.x = Mathf.Min(pos.x, Screen.width - panel.GetComponent<RectTransform>().rect.width);
+        pos.y = Mathf.Max(pos.y, panel.GetComponent<RectTransform>().rect.height);
+        panel.transform.position = pos;
+        
         iconImage.sprite = ItemIconManager.Instance.GetIcon(item.itemType);
         itemNameText.text = item.itemName;
         itemNameText.color = GetRarityColor(item.rarity);
@@ -57,9 +73,7 @@ public class ItemTooltipUI : MonoBehaviour
                 text.text = $"[세트] {bonus.Item1}: +{bonus.Item2}";
             }
         }
-
-        panel.transform.position = Input.mousePosition + new Vector3(100, -50);
-        panel.SetActive(true);
+        
     }
 
     public void Hide()

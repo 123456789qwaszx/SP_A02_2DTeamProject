@@ -14,20 +14,25 @@ public class InventorySlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExit
     public void SetItem(GeneratedItem newItem)
     {
         item = newItem;
+        gameObject.SetActive(true);
 
-        iconImage.sprite = ItemIconManager.Instance.GetIcon(item.itemType); // 아이콘 설정
-        iconImage.enabled = true;
+        var sprite = ItemIconManager.Instance.GetIcon(item.itemType);
+        // Debug.Log($"[InventorySlotUI] {item.itemName} 아이콘: {(sprite == null ? "null" : sprite.name)}");
 
-        rarityBorder.color = GetRarityColor(item.rarity); // 테두리 색상 설정
-        rarityBorder.enabled = true;
+        iconImage.sprite = sprite;
+        iconImage.enabled = (sprite != null); // <- 아이콘이 null이면 안 보이게
+        rarityBorder.color = GetRarityColor(item.rarity);
     }
-
-    public void ClearSlot()
+    
+    public void Clear()
     {
         item = null;
+        iconImage.sprite = null;
         iconImage.enabled = false;
-        rarityBorder.enabled = false;
+        rarityBorder.color = Color.clear;
     }
+
+    public bool IsEmpty => item == null;
 
     private Color GetRarityColor(ItemRarity rarity)
     {
@@ -62,7 +67,7 @@ public class InventorySlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExit
             bool equipped = FindObjectOfType<ItemEquipHandler>()?.TryEquipItem(item) ?? false;
 
             if (equipped)
-                ClearSlot(); // 장착 성공 시 슬롯 비움
+                Clear(); // 장착 성공 시 슬롯 비움
         }
     }
 }
