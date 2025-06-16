@@ -18,7 +18,7 @@ public class SkillBase : MonoBehaviour
 {
     bool _init = false;
     public bool IsLearnedSkill { get { return Level > 0; } }
-    public Transform indicator;
+    public GameObject indicator;
 
     SkillType skillType;
     public SkillType SkillType
@@ -35,18 +35,7 @@ public class SkillBase : MonoBehaviour
         set { level = value; }
     }
 
-    SkillData _skillData;
-    public SkillData SkillData
-    {
-        get
-        {
-            return _skillData;
-        }
-        set
-        {
-            _skillData = value;
-        }
-    }
+    public SkillData SkillData;
 
 
     #region 동적 SkillData
@@ -73,6 +62,8 @@ public class SkillBase : MonoBehaviour
         // 이부분 수정할것
         // 지금은 바로바로 ScriptableObject로 뽑아오고 있다보니 고정 값인데,
         // Level 같이 동적인 데이터를 보관하기 위한 별도의 static 공간이 필요함.
+        
+        // 만약 바로 수정할거면, 키에서 Type을 받은 다음. 그 타입의 데이터를 가져오면 됨.
         Debug.Log("수정필요");
         SkillData skillData = new SkillData();
         SkillManager.Instance._objects.TryGetValue($"{id}", out UnityEngine.Object obj);
@@ -80,8 +71,13 @@ public class SkillBase : MonoBehaviour
             return SkillData;
         SkillData = skillData;
 
+        OnChangedSkillData();
+
         return SkillData;
     }
+
+    // 레벨업 시 실제로 스킬의 Data를 레벨에 맞게 변화시킴
+    public virtual void OnChangedSkillData() { }
 
     // 스킬 None에서 활성화 될때 실행
     public virtual void ActivateSkill()
@@ -108,10 +104,12 @@ public class SkillBase : MonoBehaviour
         return true;
     }
 
-    protected virtual void GenerateProjectile(PlayerController Owner, string prefabName, Vector3 startPos, Vector3 dir, Vector3 targetPos)
+    protected virtual void GenerateProjectile(PlayerController Owner, string prefabName, Vector3 startPos, Vector3 dir, Vector3 targetPos, SkillBase skill)
     {
         ProjectileController pc = SkillManager.Instance.SpawnProjectile(startPos, prefabName: prefabName);
-        pc.SetInfo(Owner, startPos, dir, targetPos);
+        Debug.Log(prefabName);
+        Debug.Log(pc);
+        pc.SetInfo(Owner, startPos, dir, targetPos, skill);
     }
 
     public virtual void OnLevelUp()

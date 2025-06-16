@@ -102,11 +102,14 @@ public class SkillManager : Singleton<SkillManager>
 
     public ProjectileController SpawnProjectile(Vector3 position, string prefabName = "")
     {
-        GameObject prefab = Load<GameObject>($"{prefabName}");
+        GameObject prefab = ResourceManager.Instance.Load<GameObject>($"{prefabName}");
         GameObject go = PoolManager.Instance.Pop(prefab);
         go.transform.position = position;
+        // GameObject go = ResourceManager.Instance.Instantiate(prefabName, pooling: true);
+        // Debug.Log(go);
 
         ProjectileController projectile = go.GetComponent<ProjectileController>();
+        //go.transform.position = position;
         Projectiles.Add(projectile);
 
         return projectile;
@@ -133,10 +136,10 @@ public class SkillManager : Singleton<SkillManager>
 
 
         // 스킬고유 인덱스와 skill을 넣어준다. scriptableObject를 활용했기때문에 prefab만 넣어도 데이터를 추출가능하다.
-        SkillBase skill10001 = holyProjectile_Prefab.GetComponent<SkillBase>();
-        SkillBase skill10011 = holyImpact_Prefab.GetComponent<SkillBase>();
-        SkillBase skill10021 = holyPulse_Prefab.GetComponent<SkillBase>();
-        SkillBase skill10031 = fire00_Prefab.GetComponent<SkillBase>();
+        // SkillBase skill10001 = holyProjectile_Prefab.GetComponent<SkillBase>();
+        // SkillBase skill10011 = holyImpact_Prefab.GetComponent<SkillBase>();
+        // SkillBase skill10021 = holyPulse_Prefab.GetComponent<SkillBase>();
+        // SkillBase skill10031 = fire00_Prefab.GetComponent<SkillBase>();
 
         _objects.Add("10001", holyProjectile_Prefab);
         _objects.Add("10011", holyImpact_Prefab);

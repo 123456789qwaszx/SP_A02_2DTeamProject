@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6568014525134402972}
   - component: {fileID: 704969807626781965}
   - component: {fileID: 8006203492874224563}
+  - component: {fileID: -5752677909494740475}
   m_Layer: 6
   m_Name: HolyPulse
   m_TagString: Untagged
@@ -180,3 +181,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &-5752677909494740475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5770933307029178560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ace88a3780a848240a6fd3c0f7d62da7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  indicator: {fileID: 0}
+  NumProjectiles: 0
+  ProjectileSpacing: 0
+  _bounceCount: 1
+  _projectileSpeed: 1
+  _attackInterval: 0

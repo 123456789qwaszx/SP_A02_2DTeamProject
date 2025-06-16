@@ -38,10 +38,8 @@ public class ProjectileController : SkillBase
         return true;
     }
 
-    public void SetInfo(PlayerController owner, Vector2 position, Vector2 dir, Vector2 target)
+    public void SetInfo(PlayerController owner, Vector2 position, Vector2 dir, Vector2 target, SkillBase skill)
     {
-        SkillBase skill = gameObject.GetComponent<SkillBase>();
-        
         _owner = owner;
         _spawnPos = position;
         _dir = dir;
@@ -58,8 +56,7 @@ public class ProjectileController : SkillBase
         switch (Skill.SkillType)
         {
             case SkillType.HolyProjectile:
-                if (gameObject.activeInHierarchy)
-                    StartCoroutine(CoTestSkill());
+                    StartCoroutine(CoHolyProjectile());
                 break;
 
             // case SkillType.HolyProjectile:
@@ -116,9 +113,10 @@ public class ProjectileController : SkillBase
             
         for (int i = 0; i < SkillData.projectileCount; i++)
             {
-                Vector3 dir = -(position - indicator.position).normalized;
+                Vector3 dir = GameManager.Instance.MoveDir/*-(position - indicator.transform.position)*/.normalized;
 
-                GenerateProjectile(GameManager.Instance.controller, prefabName, position, dir, indicator.transform.position);
+
+                GenerateProjectile(GameManager.Instance.controller, prefabName, position, dir, GameManager.Instance.controller.transform.position,SkillData.SkillPrefabs);
 
                 yield return wait;//new WaitForSeconds(SkillData.AttackInterval);
 

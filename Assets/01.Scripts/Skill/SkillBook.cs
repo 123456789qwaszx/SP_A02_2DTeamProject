@@ -32,6 +32,9 @@ public class SkillBook : MonoBehaviour
 
                 SkillType type = Util.GetSkillTypeFromInt(10001);
 
+                //Test
+                //SkillType type2 = Util.GetSkillTypeFromInt(10021);
+
                 if (type != SkillType.None)
                 {
                     // 처음 무조건 들고 있는 스킬들.
@@ -40,6 +43,11 @@ public class SkillBook : MonoBehaviour
                     AddSkill(type, 10001);
                     LevelUpSkill(type);
                     // 이렇게 직접 레벨업 시키는 건 처음 시작시 세팅만 이렇고, 이후는 스킬카드UI의 버튼을 통해 LevelUpSkill이 실행됨
+
+                    //Test
+                    // AddSkill(type2, 10021);
+                    // LevelUpSkill(type2);
+
                 }
             }
         });
@@ -71,7 +79,7 @@ public class SkillBook : MonoBehaviour
         // 당장은 무조건 플레이어에 붙여서 반복해서 쏘는 Repeat 스킬만 해당됨.
         // 스킬 종류가 늘어나면 여기서 추가로 분리해줄 것.
         string className = skillType.ToString();
-
+        Debug.Log(className);
         RepeatSkill skillBase = gameObject.GetComponent(Type.GetType(className)) as RepeatSkill;
         SkillManager.Instance.SkillList.Add(skillBase);
         if (SkillManager.Instance.SavedBattleSkill.ContainsKey(skillType))
@@ -136,7 +144,7 @@ public class SkillBook : MonoBehaviour
             skill.transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
 
 
-            skill.SetInfo(GameManager.Instance.controller, GameManager.Instance.controller.transform.position, -(transform.position - indicator.position).normalized, indicator.transform.position);
+            skill.SetInfo(GameManager.Instance.controller, GameManager.Instance.controller.transform.position, -(transform.position - indicator.position).normalized, indicator.transform.position, skill);
             yield return new WaitForSeconds(skill._attackInterval);
         }
 
@@ -145,29 +153,29 @@ public class SkillBook : MonoBehaviour
     #endregion
 
     #region HolyPulse
-    Coroutine _coPulse;
+    // Coroutine _coPulse;
 
-    void StartPulse()
-    {
-        if (_coPulse != null)
-            StopCoroutine(_coPulse);
+    // void StartPulse()
+    // {
+    //     if (_coPulse != null)
+    //         StopCoroutine(_coPulse);
 
-        _coPulse = StartCoroutine(CoStartPulse());
-    }
+    //     _coPulse = StartCoroutine(CoStartPulse());
+    // }
 
-    IEnumerator CoStartPulse()
-    {
-        do
+    // IEnumerator CoStartPulse()
+    // {
+    //     do
 
-        {
-            ProjectileController skill = SkillManager.Instance.SpawnHolyPulse(transform.position);
+    //     {
+    //         ProjectileController skill = SkillManager.Instance.SpawnHolyPulse(transform.position);
 
-            skill.SetInfo(GameManager.Instance.controller, GameManager.Instance.controller.transform.position, -(transform.position - indicator.position).normalized, indicator.transform.position);
-            yield return new WaitForSeconds(skill._attackInterval);
-        }
+    //         skill.SetInfo(GameManager.Instance.controller, GameManager.Instance.controller.transform.position, -(transform.position - indicator.position).normalized, indicator.transform.position, );
+    //         yield return new WaitForSeconds(skill._attackInterval);
+    //     }
 
-        while (true);
-    }
+    //     while (true);
+    // }
     #endregion
     #endregion
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HolyProjectile : RepeatSkill
 {
+    //public SkillData _skillData;
     private void Awake()
     {
         SkillType = SkillType.HolyProjectile;
@@ -19,27 +20,30 @@ public class HolyProjectile : RepeatSkill
 
     protected override void DoSkillJob()
     {
+        StartCoroutine(SetHolyProjectile());
+        Debug.Log("스킬 실시q");
     }
 
     public override void ActivateSkill()
     {
         base.ActivateSkill();
-        gameObject.SetActive(true);
+        StartCoroutine(SetHolyProjectile());
+        //gameObject.SetActive(true);
     }
     IEnumerator SetHolyProjectile()
     {
         WaitForSeconds wait = new WaitForSeconds(0.5f);
         // 아이템 데이터를 올바르게 바꿔야할 수도...
-        string prefabName = SkillData.name;
+        string prefabName = SkillType.ToString();
         Vector3 position = GameManager.Instance.controller.transform.position;
         while (true)
         {
-            
+            Debug.Log(SkillData);
         for (int i = 0; i < SkillData.projectileCount; i++)
             {
-                Vector3 dir = -(position - indicator.position).normalized;
+                Vector3 dir = -(position - indicator.transform.position).normalized;
 
-                GenerateProjectile(GameManager.Instance.controller, prefabName, position, dir, indicator.transform.position);
+                GenerateProjectile(GameManager.Instance.controller, prefabName, position, dir, indicator.transform.position, this);
 
                 yield return wait;//new WaitForSeconds(SkillData.AttackInterval);
 
