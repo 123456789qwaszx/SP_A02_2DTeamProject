@@ -59,8 +59,12 @@ public class ProjectileController : SkillBase
         switch (Skill.SkillType)
         {
             case SkillType.HolyProjectile:
+                if (gameObject.activeInHierarchy)
+                {
+                 StartCoroutine(CoBoomerang());
+                }
                 //StartCoroutine(CoTestSkill());
-                break;
+                    break;
 
             // case SkillType.HolyProjectile:
             //     if(gameObject.activeInHierarchy)
@@ -92,6 +96,35 @@ public class ProjectileController : SkillBase
 
     float _timer = 0;
     private float _rotateAmount = 1000;
+
+    IEnumerator CoBoomerang()
+    {
+        Vector3 targePoint = GameManager.Instance.controller.transform.position + _dir * Skill.SkillData.projectileSpeed;
+        transform.localScale = Vector3.zero;
+        transform.localScale = Vector3.one * Skill.SkillData.ScaleMultiplier;
+
+        Sequence seq = DOTween.Sequence();
+
+        float projectileTravelTime = 1f;
+        float secondSeqStartTime = 0.7f;
+        float secondSeqDuringTime = 1.8f;
+
+        seq.Append(transform.DOMove(targePoint, projectileTravelTime).SetEase(Ease.OutExpo))
+            .Insert(secondSeqStartTime, transform.DOMove(targePoint + _dir, secondSeqDuringTime).SetEase(Ease.Linear));
+
+        yield return new WaitForSeconds(3f/*Skill.SkillData.Duration*/);
+
+        while (true)
+        {
+            transform.position = Vector2.MoveTowards(this.transform.position, GameManager.Instance.controller.transform.position, Time.deltaTime * Skill.SkillData.projectileSpeed * 4f);
+            if (GameManager.Instance.controller.transform.position == transform.position)
+            {
+                DestroyProjectile();
+                break;
+            }
+            yield return new WaitForFixedUpdate();
+        }
+    }
 
     IEnumerator CoTestSkill()
     {
