@@ -20,7 +20,7 @@ public class HolyProjectile : RepeatSkill
 
     protected override void DoSkillJob()
     {
-        StartCoroutine(SetHolyProjectile());
+        //StartCoroutine(SetHolyProjectile());
         Debug.Log("스킬 실시q");
     }
 
