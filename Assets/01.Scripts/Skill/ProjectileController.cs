@@ -38,23 +38,24 @@ public class ProjectileController : SkillBase
         return true;
     }
 
-    public void SetInfo(PlayerController owner, Vector2 position, Vector2 dir, Vector2 target, GameObject go)
+    public void SetInfo(PlayerController owner, Vector2 position, Vector2 dir, Vector2 target)
     {
-        SkillBase skill = go.GetComponent<SkillBase>();
+        SkillBase skill = gameObject.GetComponent<SkillBase>();
         
         _owner = owner;
         _spawnPos = position;
         _dir = dir;
         Skill = skill;
         _rigid = GetComponent<Rigidbody2D>();
+
         _target = target;
         transform.localScale = Vector3.one * Skill.SkillData.ScaleMultiplier;
-        _numPenerations = skill.SkillData.NumPenerations;
-         _bounceCount = skill.SkillData.NumBounce;
-        _projectileSpeed = skill.SkillData.projectileSpeed;
-        _attackInterval = skill.SkillData.AttackInterval;
+        _numPenerations = Skill.SkillData.NumPenerations;
+         _bounceCount = Skill.SkillData.NumBounce;
+        _projectileSpeed = Skill.SkillData.projectileSpeed;
+        _attackInterval = Skill.SkillData.AttackInterval;
 
-        switch (skill.SkillType)
+        switch (Skill.SkillType)
         {
             case SkillType.HolyProjectile:
                 if (gameObject.activeInHierarchy)
@@ -101,6 +102,50 @@ public class ProjectileController : SkillBase
             Vector2 dir = (Vector2)target[0].transform.position - _rigid.position;
             transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
             yield return new WaitForSeconds(_attackInterval);
+        }
+    }
+    
+    IEnumerator CoHolyProjectile()
+    {
+        WaitForSeconds wait = new WaitForSeconds(0.5f);
+        // 아이템 데이터를 올바르게 바꿔야할 수도...
+        string prefabName = SkillData.name;
+        Vector3 position = GameManager.Instance.controller.transform.position;
+        while (true)
+        {
+            
+        for (int i = 0; i < SkillData.projectileCount; i++)
+            {
+                Vector3 dir = -(position - indicator.position).normalized;
+
+                GenerateProjectile(GameManager.Instance.controller, prefabName, position, dir, indicator.transform.position);
+
+                yield return wait;//new WaitForSeconds(SkillData.AttackInterval);
+
+            }
+        }
+    }
+
+    
+    IEnumerator CoIceKill()
+    {
+        List<MonsterBase> target = ObjectManager.Instance.GetMonsterWithinCamera(1);
+        while (true)
+        {
+            _timer += Time.deltaTime;
+            if (_timer > 3 || target == null)
+            {
+                DestroyProjectile();
+                _timer = 0;
+                break;
+            }
+
+            Vector2 direction = (Vector2)target[0].transform.position - _rigid.position;
+            float rotateSpeed = Vector3.Cross(direction.normalized, transform.up).z;
+            _rigid.angularVelocity = -_rotateAmount * rotateSpeed;
+            _rigid.velocity = transform.up * Skill.SkillData.projectileSpeed;
+
+            yield return new WaitForFixedUpdate();
         }
     }
 
@@ -202,30 +247,6 @@ public class ProjectileController : SkillBase
             yield return new WaitForFixedUpdate();
         }
     }
-
-    IEnumerator CoHolyProjectile()
-    {
-        List<MonsterBase> target = ObjectManager.Instance.GetMonsterWithinCamera(1);
-        while (true)
-        {
-            _timer += Time.deltaTime;
-            if (_timer > 3 || target == null)
-            {
-                DestroyProjectile();
-                _timer = 0;
-                break;
-            }
-
-            Vector2 direction = (Vector2)target[0].transform.position - _rigid.position;
-            float rotateSpeed = Vector3.Cross(direction.normalized, transform.up).z;
-            _rigid.angularVelocity = -_rotateAmount * rotateSpeed;
-            _rigid.velocity = transform.up * Skill.SkillData.projectileSpeed;
-
-            yield return new WaitForFixedUpdate();
-        }
-    }
-
-    
 
     IEnumerator CoCheckDestory()
     {

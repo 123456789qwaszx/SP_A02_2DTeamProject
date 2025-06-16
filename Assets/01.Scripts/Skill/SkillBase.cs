@@ -18,6 +18,7 @@ public class SkillBase : MonoBehaviour
 {
     bool _init = false;
     public bool IsLearnedSkill { get { return Level > 0; } }
+    public Transform indicator;
 
     SkillType skillType;
     public SkillType SkillType
@@ -70,6 +71,8 @@ public class SkillBase : MonoBehaviour
         else
             id = dataId;
         // 이부분 수정할것
+        // 지금은 바로바로 ScriptableObject로 뽑아오고 있다보니 고정 값인데,
+        // Level 같이 동적인 데이터를 보관하기 위한 별도의 static 공간이 필요함.
         Debug.Log("수정필요");
         SkillData skillData = new SkillData();
         SkillManager.Instance._objects.TryGetValue($"{id}", out UnityEngine.Object obj);
@@ -105,10 +108,10 @@ public class SkillBase : MonoBehaviour
         return true;
     }
 
-    protected virtual void GenerateProjectile(PlayerController Owner, string prefabName, Vector3 startPos, Vector3 dir, Vector3 targetPos, GameObject skill_prefab)
+    protected virtual void GenerateProjectile(PlayerController Owner, string prefabName, Vector3 startPos, Vector3 dir, Vector3 targetPos)
     {
         ProjectileController pc = SkillManager.Instance.SpawnProjectile(startPos, prefabName: prefabName);
-        pc.SetInfo(Owner, startPos, dir, targetPos, skill_prefab);
+        pc.SetInfo(Owner, startPos, dir, targetPos);
     }
 
     public virtual void OnLevelUp()

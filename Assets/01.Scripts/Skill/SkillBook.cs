@@ -28,16 +28,20 @@ public class SkillBook : MonoBehaviour
                 SkillManager.Instance.StartSkillLoad();
 
                 SkillType type = Util.GetSkillTypeFromInt(10001);
-                Debug.Log(type);
 
                 if (type != SkillType.None)
                 {
+                    // 처음 무조건 들고 있는 스킬들.
+                    // 직업 추가 등의 이유로 바꾸거나, 종류를 늘려주고 싶다면
+                    // 뒤의 SkillIndex를 바꾸거나 추가로 AddSkill()을 할 것.
                     AddSkill(type, 10001);
                     LevelUpSkill(type);
+
+                    Debug.Log(SkillManager.Instance.SkillList[0]);
+                    Debug.Log(SkillManager.Instance.ActivatedSkills[0]);
+                    Debug.Log(SkillManager.Instance.SavedBattleSkill[SkillType.HolyProjectile]);
+                    Debug.Log(SkillManager.Instance.SavedBattleSkill.Count);
                 }
-
-                //StartProjectile();
-
             }
         });
     }
@@ -45,14 +49,11 @@ public class SkillBook : MonoBehaviour
 
     public void AddSkill(SkillType skillType, int skillId = 0)
     {
+        // 당장은 무조건 플레이어에 붙여서 반복해서 쏘는 Repeat 스킬만 해당됨.
+        // 스킬 종류가 늘어나면 여기서 추가로 분리해줄 것.
         string className = skillType.ToString();
-        Debug.Log(skillType);
-        Debug.Log(className);
-
 
         RepeatSkill skillBase = gameObject.GetComponent(Type.GetType(className)) as RepeatSkill;
-        Debug.Log(skillBase);
-
         SkillManager.Instance.SkillList.Add(skillBase);
         if (SkillManager.Instance.SavedBattleSkill.ContainsKey(skillType))
             SkillManager.Instance.SavedBattleSkill[skillType] = skillBase.Level;
@@ -70,8 +71,6 @@ public class SkillBook : MonoBehaviour
     {
         for (int i = 0; i < SkillManager.Instance.SkillList.Count; i++)
         {
-            Debug.Log(SkillManager.Instance.SkillList.Count);
-            Debug.Log(SkillManager.Instance.SkillList[i]);
             if (SkillManager.Instance.SkillList[i].SkillType == skillType)
             {
                 SkillManager.Instance.SkillList[i].OnLevelUp();
@@ -117,7 +116,7 @@ public class SkillBook : MonoBehaviour
             skill.transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
 
 
-            skill.SetInfo(GameManager.Instance.controller, GameManager.Instance.controller.transform.position, -(transform.position - indicator.position).normalized, indicator.transform.position, SkillManager.Instance.holyProjectile_Prefab);
+            skill.SetInfo(GameManager.Instance.controller, GameManager.Instance.controller.transform.position, -(transform.position - indicator.position).normalized, indicator.transform.position);
             yield return new WaitForSeconds(skill._attackInterval);
         }
 
@@ -143,7 +142,7 @@ public class SkillBook : MonoBehaviour
         {
             ProjectileController skill = SkillManager.Instance.SpawnHolyPulse(transform.position);
 
-            skill.SetInfo(GameManager.Instance.controller, GameManager.Instance.controller.transform.position, -(transform.position - indicator.position).normalized, indicator.transform.position, SkillManager.Instance.holyPulse_Prefab);
+            skill.SetInfo(GameManager.Instance.controller, GameManager.Instance.controller.transform.position, -(transform.position - indicator.position).normalized, indicator.transform.position);
             yield return new WaitForSeconds(skill._attackInterval);
         }
 

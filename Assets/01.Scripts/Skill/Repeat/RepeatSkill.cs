@@ -20,7 +20,7 @@ public abstract class RepeatSkill : SkillBase
             StopCoroutine(_coSkill);
 
         gameObject.SetActive(true);
-        _coSkill = StartCoroutine(CoStartSkill());
+       // _coSkill = StartCoroutine(CoStartSkill());
     }
 
     protected abstract void DoSkillJob();

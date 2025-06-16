@@ -85,7 +85,6 @@ public class SkillManager : Singleton<SkillManager>
     public Dictionary<SkillType, int> SavedBattleSkill = new Dictionary<SkillType, int>();
 
     #region SkillData
-    public Dictionary<string, SkillBase> _skills = new Dictionary<string, SkillBase>();
     public Dictionary<string, Object> _objects = new Dictionary<string, Object>();
 
     public T Load<T>(string key) where T : Object
@@ -145,15 +144,10 @@ public class SkillManager : Singleton<SkillManager>
         _objects.Add("10031", fire00_Prefab);
 
         // 이렇게 추가하는 걸 아래처럼 직접하는 게 아니라, AddSkill()메소드로 뺄것 : SkillBook에 추가
-        //_skillList.Add(skill10001);
+        // _skillList.Add(skill10001);
         // _skillList.Add(skill10011);
         // _skillList.Add(skill10021);
         // _skillList.Add(skill10031);
-
-        _skills.Add("10001", skill10001);
-
-        //Debug.Log(_skills["10011"].SkillData.SkillIndex);
-        Debug.Log(SkillList.Count);
     }
 
     void Update()

@@ -25,7 +25,7 @@ public class FireSkill : RepeatSkill
             float angle = SkillData.AngleBetweenProj * (i - (SkillData.projectileCount - 1) / 2f);
             Vector3 res = Quaternion.AngleAxis(angle, Vector3.forward) * dir;
             Debug.Log("임시 생성중");
-            GenerateProjectile(GameManager.Instance.controller, PrefabName, startPos, res.normalized, Vector3.zero, SkillManager.Instance.holyPulse_Prefab);
+            GenerateProjectile(GameManager.Instance.controller, PrefabName, startPos, res.normalized, Vector3.zero);
         }
     }
 
