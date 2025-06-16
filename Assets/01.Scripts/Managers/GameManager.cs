@@ -16,12 +16,23 @@ public class GameManager : Singleton<GameManager>
     public Player player;
     public PlayerController controller;
 
-    // 5개의 던전 클리어 여부 저장 (0~4번 인덱스)
-    public bool[] dungeonCleared = new bool[5];
-    public int currentDungeonLevel = 0;
+    // 16개의 던전 클리어 여부 저장
+    // 예: 저장/로드 시스템과 연동하여 stageCleared를 유지
+    public int currentStage = 1;
+    public int maxUnlockedStage = 1;
+    public bool[] stageCleared = new bool[16];
 
+    public void UdateStageInfo()
+    {
+        int stage = currentStage;
+        stageCleared[stage - 1] = true;
 
-    // 예: 저장/로드 시스템과 연동하여 dungeonCleared를 유지
+        // 다음 스테이지 언락
+        if (stage > maxUnlockedStage)
+            maxUnlockedStage = stage;
+
+        UIManager.Instance.UpdateStageButtons();
+    }
 
     Vector2 _moveDir;
     public Vector2 MoveDir

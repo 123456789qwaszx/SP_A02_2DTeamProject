@@ -42,14 +42,15 @@ public class FixedItemOption
 public class UniqueItemOption
 {
     public string optionName;
-    public float minValue;
-    public float maxValue;
-    
-
-    public float GetValue()
-    {
-        return Random.Range(minValue, maxValue);
-    }
+    public float value;
+//     public float minValue;
+//     public float maxValue;
+//     
+//
+//     public float GetValue()
+//     {
+//         return Random.Range(minValue, maxValue);
+//     }
 }
 
 [System.Serializable]

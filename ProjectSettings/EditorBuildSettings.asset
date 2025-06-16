@@ -6,10 +6,19 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/00.Scenes/TitleScene.unity
+    guid: 2855f8f2078b64861bbc61862cc2e575
+  - enabled: 1
     path: Assets/00.Scenes/MainScene.unity
     guid: 26508abbea8035c4780a2f086a3a9f94
   - enabled: 1
-    path: Assets/00.Scenes/DungeonScene.unity
+    path: Assets/00.Scenes/Dun_Lv.1_CastleScene.unity
     guid: 87adf5d7874f644c189cc4d060b93040
+  - enabled: 1
+    path: Assets/00.Scenes/Dun_Lv.2_PoisonScene.unity
+    guid: 6185b301db5b14188b0ebbcfd3264285
+  - enabled: 1
+    path: Assets/00.Scenes/Dun_Lv.3_DesertScene.unity
+    guid: ea172b78c7048428290d3041e8f66051
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: a6fae79582e177b4baa8880aba268060, type: 2}
