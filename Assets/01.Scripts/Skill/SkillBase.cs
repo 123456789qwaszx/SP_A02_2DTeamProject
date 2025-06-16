@@ -107,8 +107,6 @@ public class SkillBase : MonoBehaviour
     protected virtual void GenerateProjectile(PlayerController Owner, string prefabName, Vector3 startPos, Vector3 dir, Vector3 targetPos, SkillBase skill)
     {
         ProjectileController pc = SkillManager.Instance.SpawnProjectile(startPos, prefabName: prefabName);
-        Debug.Log(prefabName);
-        Debug.Log(pc);
         pc.SetInfo(Owner, startPos, dir, targetPos, skill);
     }
 

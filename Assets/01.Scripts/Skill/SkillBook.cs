@@ -24,7 +24,7 @@ public class SkillBook : MonoBehaviour
     {
         ResourceManager.Instance.LoadAllAsync<GameObject>("Skill_Prefabs", (key, count, totalCount) =>
         {
-            Debug.Log($"{key} {count}/{totalCount}");
+            //Debug.Log($"{key} {count}/{totalCount}");
 
             if (count == totalCount)
             {
@@ -79,7 +79,6 @@ public class SkillBook : MonoBehaviour
         // 당장은 무조건 플레이어에 붙여서 반복해서 쏘는 Repeat 스킬만 해당됨.
         // 스킬 종류가 늘어나면 여기서 추가로 분리해줄 것.
         string className = skillType.ToString();
-        Debug.Log(className);
         RepeatSkill skillBase = gameObject.GetComponent(Type.GetType(className)) as RepeatSkill;
         SkillManager.Instance.SkillList.Add(skillBase);
         if (SkillManager.Instance.SavedBattleSkill.ContainsKey(skillType))

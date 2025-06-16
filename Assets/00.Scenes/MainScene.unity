@@ -1098,8 +1098,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   indicator: {fileID: 95941269}
-  _projectileCooldown: 0.3
-  Swing: {fileID: 0}
 --- !u!114 &542850937 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3215843578996477708, guid: 7cc8fc202efe2f14798e023948e11f84, type: 3}
@@ -1127,6 +1125,22 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4711814515959704177, guid: 7cc8fc202efe2f14798e023948e11f84, type: 3}
   m_PrefabInstance: {fileID: 814804907}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &542850949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 542850928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8a501ec0c82c9d4b8127e6eda2e35c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  indicator: {fileID: 95941267}
+  SkillData: {fileID: 11400000, guid: b675e70fd445f8545ab16461be5264b5, type: 2}
+  NumProjectiles: 1
+  ProjectileSpacing: 1
 --- !u!4 &564980706 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1182983939509066860, guid: bcaf0571eb649483dbc71c5fbbb320d6, type: 3}
@@ -1389,6 +1403,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2538152942525263616, guid: 7cc8fc202efe2f14798e023948e11f84, type: 3}
       insertIndex: -1
       addedObject: {fileID: 542850936}
+    - targetCorrespondingSourceObject: {fileID: 2538152942525263616, guid: 7cc8fc202efe2f14798e023948e11f84, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 542850949}
   m_SourcePrefab: {fileID: 100100000, guid: 7cc8fc202efe2f14798e023948e11f84, type: 3}
 --- !u!1001 &855924553
 PrefabInstance:
@@ -2047,9 +2064,6 @@ MonoBehaviour:
   currentStage: 1
   maxUnlockedStage: 1
   stageCleared: 00000000000000000000000000000000
-  holyProjectile_Prefab: {fileID: 806308866007636309, guid: 79ccc83fa431b0e4fbb91651fc94a9e9, type: 3}
-  holyImpact_Prefab: {fileID: 3719929905020187563, guid: 74ff37cf9532ee04ba018c1ec43405ec, type: 3}
-  holyPulse_Prefab: {fileID: 5770933307029178560, guid: 4d03f659247acf946855a4f296cf23b2, type: 3}
 --- !u!4 &1379130344
 Transform:
   m_ObjectHideFlags: 0
@@ -2868,9 +2882,6 @@ MonoBehaviour:
   currentStage: 1
   maxUnlockedStage: 1
   stageCleared: 00000000000000000000000000000000
-  holyProjectile_Prefab: {fileID: 0}
-  holyImpact_Prefab: {fileID: 0}
-  holyPulse_Prefab: {fileID: 0}
 --- !u!4 &1832789559
 Transform:
   m_ObjectHideFlags: 0
