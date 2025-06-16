@@ -6,7 +6,7 @@ public class MonsterStateIdle : MonsterStateBase
 
     public override void Enter()
     {
-        animator.SetBool("Move", false);
+        monster.StopMoving();
     }
 
     public override void Update()
@@ -14,10 +14,17 @@ public class MonsterStateIdle : MonsterStateBase
         monster.Flip();
         if (monster.CanAttack())
         {
-            if (monster.IsRangedMonster())
-                monster.ChangeState(monster.StateRangedAttack);
+            if (monster is Boss boss)
+            {
+                monster.ChangeState(boss.StateAttackBoss);
+            }
             else
-                monster.ChangeState(monster.StateMeleeAttack);
+            {
+                if (monster.IsRangedMonster())
+                    monster.ChangeState(monster.StateRangedAttack);
+                else
+                    monster.ChangeState(monster.StateMeleeAttack);
+            }
         }
         else if (!monster.InAttackRange())
         {

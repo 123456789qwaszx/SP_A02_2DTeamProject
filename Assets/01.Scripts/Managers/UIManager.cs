@@ -35,6 +35,7 @@ public class UIManager : Singleton<UIManager>
         {
             int stageIndex = i;
 
+            // 잠금 해제 여부 판단: 첫 번째 스테이지는 항상 열려 있고, 나머지는 이전 스테이지가 클리어되었는지 체크
             bool unlocked = (i == 0) || GameManager.Instance.stageCleared[i - 1];
             stageButtons[i].SetActive(true);
 
@@ -48,18 +49,26 @@ public class UIManager : Singleton<UIManager>
                     int selectedStage = stageIndex + 1;
                     GameManager.Instance.currentStage = selectedStage;
 
-                    // 스테이지에 따라 다른 테마 씬으로 로드
+                    // ~4 Stage: Castle
                     if (stageIndex <= 3)
                     {
                         SceneManager.LoadScene("Dun_Lv.1_CastleScene");
                     }
-                    else if (stageIndex <= 9)
+                    else if (stageIndex <= 7)
                     {
                         SceneManager.LoadScene("Dun_Lv.2_PoisonScene");
                     }
-                    else
+                    else if (stageIndex <= 11)
                     {
                         SceneManager.LoadScene("Dun_Lv.3_DesertScene");
+                    }
+                    else if (stageIndex <= 14)
+                    {
+                        SceneManager.LoadScene("Dun_Lv.4_GoldScene");
+                    }
+                    else if (stageIndex == 15)
+                    {
+                        SceneManager.LoadScene("Dun_FinalScene");
                     }
                 });
             }
