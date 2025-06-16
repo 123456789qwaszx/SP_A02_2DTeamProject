@@ -60,8 +60,23 @@ public class ProjectileController : SkillBase
             case SkillType.HolyProjectile:
                 if (gameObject.activeInHierarchy)
                 {
-                    StartCoroutine(CoBoomerang());
+                    StartCoroutine(CoArrow());
                 }
+                break;
+            case SkillType.HolyPulse:
+                StartCoroutine(CoHolyPulse());
+                break;
+            case SkillType.WindCutter:
+                if (gameObject.activeInHierarchy)
+                    StartCoroutine(CoBoomerang());
+                break;
+            case SkillType.BloodChain:
+                StartCoroutine(CoChainLightning(_spawnPos, _target, true));
+                break;
+            default:
+                transform.rotation = Quaternion.FromToRotation(Vector3.up, _dir);
+                _numPenerations = Skill.SkillData.NumPenerations;
+                _rigid.velocity = _dir * Skill.SkillData.projectileSpeed;
                 break;
         }
 
@@ -72,6 +87,41 @@ public class ProjectileController : SkillBase
 
     float _timer = 0;
     private float _rotateAmount = 1000;
+
+    
+    IEnumerator CoHolyPulse()
+    {
+        List<MonsterBase> target = ObjectManager.Instance.GetMonsterWithinCamera(1);
+        while (true)
+        {
+            _timer += Time.deltaTime;
+            if (_timer > 3 || target == null)
+            {
+                DestroyProjectile();
+                _timer = 0;
+                break;
+            }
+
+            // if (target[0].IsValid() == false)
+            //     break;
+
+            Vector2 direction = (Vector2)target[0].transform.position - _rigid.position;
+            float rotateSpeed = Vector3.Cross(direction.normalized, transform.up).z;
+            _rigid.angularVelocity = -_rotateAmount * rotateSpeed;
+            _rigid.velocity = transform.up * Skill.SkillData.projectileSpeed;
+
+            //if (Vector2.Distance(_rigid.position, targetPos) < 0.3f)
+            //    ExplosionMeteor();
+            yield return new WaitForFixedUpdate();
+        }
+    }
+
+    
+    IEnumerator CoChainLightning(Vector3 startPos, Vector3 endPos, bool isFollow = false)
+    {
+        yield return new WaitForSeconds(0.25f);
+        DestroyProjectile();
+    }
 
 
     IEnumerator CoArrow()
@@ -115,6 +165,27 @@ public class ProjectileController : SkillBase
         }
     }
 
+
+
+    void BounceProjectile(MonsterBase creature)
+    {
+        List<Transform> list = new List<Transform>();
+        list = ObjectManager.Instance.GetFindMonstersInFanShape(creature.transform.position, _dir, 5.5f, 240);
+
+        List<Transform> sortedList = (from t in list orderby Vector3.Distance(t.position, transform.position) descending select t).ToList();
+
+        if (sortedList.Count == 0)
+        {
+            DestroyProjectile();
+        }
+        else
+        {
+            int index = Random.Range(sortedList.Count / 2, sortedList.Count);
+            _dir = (sortedList[index].position - transform.position).normalized;
+            _rigid.velocity = _dir * Skill.SkillData.BounceSpeed;
+        }
+    }
+
     IEnumerator CoCheckDestory()
     {
         while (true)
@@ -148,6 +219,7 @@ public class ProjectileController : SkillBase
         SkillManager.Instance.DespawnProjectile(this);
     }
 
+
     void OnTriggerEnter2D(Collider2D collision)
     {
         MonsterBase creature = collision.transform.GetComponent<MonsterBase>();
@@ -168,7 +240,21 @@ public class ProjectileController : SkillBase
                     DestroyProjectile();
                 }
                 break;
-            case SkillType.FireSkill:
+            case SkillType.PoisionBomb:
+                _enteredColliderList.Add(creature);
+                if (_coDotDamage == null)
+                    _coDotDamage = StartCoroutine(CoStartDotDamage());
+                break;
+            case SkillType.DarkArrow:
+                _bounceCount--;
+                BounceProjectile(creature);
+                if (_bounceCount < 0)
+                {
+                    _rigid.velocity = Vector3.zero;
+                    DestroyProjectile();
+                }
+                break;
+            case SkillType.WindCutter:
                 _enteredColliderList.Add(creature);
                 if (_coDotDamage == null)
                     _coDotDamage = StartCoroutine(CoStartDotDamage());
@@ -176,6 +262,7 @@ public class ProjectileController : SkillBase
             default:
                 break;
         }
+        Debug.Log(creature);
         creature.TakeDamage(Skill.TotalDamage);
     }
 

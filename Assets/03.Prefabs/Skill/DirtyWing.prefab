@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 3479446130996616137}
   - component: {fileID: 2145426440382042571}
   - component: {fileID: 9065674747136508933}
-  m_Layer: 0
+  - component: {fileID: -7887578740612878512}
+  m_Layer: 6
   m_Name: DirtyWing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,3 +107,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-7887578740612878512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7942606817142747569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ace88a3780a848240a6fd3c0f7d62da7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  indicator: {fileID: 0}
+  SkillData: {fileID: 11400000, guid: 014882acae61723419e71799332889d1, type: 2}
+  NumProjectiles: 0
+  ProjectileSpacing: 0
+  _bounceCount: 1
+  _projectileSpeed: 1
+  _attackInterval: 0

@@ -11,9 +11,8 @@ GameObject:
   - component: {fileID: 7998351636777462374}
   - component: {fileID: 4855847917571311590}
   - component: {fileID: 3644552765478951552}
-  - component: {fileID: 8020505536686404338}
-  - component: {fileID: 2004842660185618022}
-  m_Layer: 0
+  - component: {fileID: 6212355277506504087}
+  m_Layer: 6
   m_Name: FireSwing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +107,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &8020505536686404338
+--- !u!114 &6212355277506504087
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -117,26 +116,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 3392855372606437924}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db512c75d049f6a4fa5b9fcb751b6e9f, type: 3}
+  m_Script: {fileID: 11500000, guid: ace88a3780a848240a6fd3c0f7d62da7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   indicator: {fileID: 0}
-  SkillData: {fileID: 0}
-  NumProjectiles: 1
-  ProjectileSpacing: 1
---- !u!114 &2004842660185618022
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3392855372606437924}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20e465f86f2a43741be65af61134e2fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  indicator: {fileID: 0}
-  SkillData: {fileID: 0}
-  NumProjectiles: 1
-  ProjectileSpacing: 0.5
+  SkillData: {fileID: 11400000, guid: 44bcca42fae3ee94f84c3fdcef6dcf6a, type: 2}
+  NumProjectiles: 0
+  ProjectileSpacing: 0
+  _bounceCount: 1
+  _projectileSpeed: 1
+  _attackInterval: 0

@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 4129866151729516859}
   - component: {fileID: 7518940155155670577}
   - component: {fileID: 6037879143990394588}
-  m_Layer: 0
+  - component: {fileID: -3578616081814334202}
+  m_Layer: 6
   m_Name: DirtyHalo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,3 +107,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-3578616081814334202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3486600074120470012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ace88a3780a848240a6fd3c0f7d62da7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  indicator: {fileID: 0}
+  SkillData: {fileID: 11400000, guid: 1695e0fe32a3f6343aaed9f97d0221e1, type: 2}
+  NumProjectiles: 0
+  ProjectileSpacing: 0
+  _bounceCount: 1
+  _projectileSpeed: 1
+  _attackInterval: 0

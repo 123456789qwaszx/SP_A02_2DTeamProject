@@ -10,28 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 41ecb1750091ae741b339afce7833228, type: 3}
-  m_Name: 00_HolyProjectile
+  m_Name: 03_DirtySwing
   m_EditorClassIdentifier: 
-  SkillIndex: 10001
-  Description: "\uAC00\uC7A5 \uAE30\uBCF8\uC801\uC778 \uACF5\uACA9"
-  Type: 10001
+  SkillIndex: 10031
+  Description: "\uBC94\uC704\uACF5\uACA9, \uAD00\uD1B5\uAC00\uB2A5"
+  Type: 10031
   Icon: {fileID: 0}
-  SkillPrefabs: {fileID: 669544968024767998, guid: 79ccc83fa431b0e4fbb91651fc94a9e9, type: 3}
-  PrefabLabel: HolyProjectile
-  DamageMultiplire: 1
-  AttackInterval: 0.5
-  CoolTime: 1
+  SkillPrefabs: {fileID: -2600564982684947179, guid: 40925d71a21585f41b7b62a194f09f24, type: 3}
+  PrefabLabel: DirtySwing
+  DamageMultiplire: 15
+  AttackInterval: 0.7
+  CoolTime: 0.7
   CastingEffect: 0
   CastingEffectPercentage: 0
   projectileCount: 1
   ScaleMultiplier: 1
-  projectileSpeed: 5
-  NumPenerations: 0
+  projectileSpeed: 1
+  NumPenerations: 10
   NumBounce: 0
   BounceSpeed: 0
   AngleBetweenProj: 0
   BounceDist: 0
   ProjRange: 0
-  ProjectileSpacing: 0
-  Duration: 3
+  Duration: 5
   attackRangeMultiplier: 1
