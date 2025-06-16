@@ -16,6 +16,7 @@ public class Wizard : Player
 
     void Awake()
     {
+        CharacterClass = CharacterClass.Wizard;
         // 기본 스탯
         str = 10;
         dex = 20;

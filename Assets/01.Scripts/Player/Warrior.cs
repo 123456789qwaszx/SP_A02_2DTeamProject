@@ -16,6 +16,7 @@ public class Warrior : Player
 
     void Awake()
     {
+        CharacterClass = CharacterClass.Warrior;
         // 기본 스탯
         str = 20;
         dex = 10;
