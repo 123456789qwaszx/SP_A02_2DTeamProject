@@ -28,8 +28,18 @@ public class ItemDropManager : MonoBehaviour
     public ItemIconManager iconManager;         // 아이콘 매니저 참조
     
     // 몬스터 사망시 호출될 아이템 드랍 시도 매서드 ItemDropManager.TryDropItem(transform.position)
-    public void TryDropItem(Vector3 dropPosition)
+    public void TryDropItem(Vector3 dropPosition, float itemAcquisitionBonus = 0f)
     {
+        float baseDropChance = 10f; // 기본 드랍률 예: 10%
+        float finalDropChance = baseDropChance + (baseDropChance * itemAcquisitionBonus);
+
+        float roll = Random.Range(0f, 100f);
+        if (roll > finalDropChance)
+        {
+            // 드랍 실패
+            return;
+        }
+        
         ItemRarity rarity = GetRandomRarity();
 
         GeneratedItem item;
