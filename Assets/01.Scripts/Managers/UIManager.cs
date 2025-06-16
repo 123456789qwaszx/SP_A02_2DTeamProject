@@ -49,6 +49,8 @@ public class UIManager : Singleton<UIManager>
                     int selectedStage = stageIndex + 1;
                     GameManager.Instance.currentStage = selectedStage;
 
+                    UIManager.Instance.CloseStageSelectUI();
+
                     // ~4 Stage: Castle
                     if (stageIndex <= 3)
                     {
