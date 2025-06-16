@@ -57,10 +57,11 @@ public class ItemDropManager : MonoBehaviour
         Sprite icon = iconManager.GetIcon(item.itemType);
 
         // 드랍 UI 생성 (드랍 상태로 표시)
-        GameObject ui = Instantiate(dropItemUIPrefab, dropPosition + Vector3.up * 1.5f, Quaternion.identity);
-        ui.GetComponent<DroppedItemDisplay>().Setup(item, icon, ItemDisplayMode.Drop);
+        Vector2 offset = Random.insideUnitCircle.normalized * Random.Range(0.5f, 1.5f);
+        Vector3 dropPos = dropPosition + new Vector3(offset.x, offset.y, 0f);
 
-        // Debug.Log($"[드랍됨] {item.itemName} ({item.rarity})");
+        GameObject ui = Instantiate(dropItemUIPrefab, dropPos + Vector3.up * 1.5f, Quaternion.identity);
+        ui.GetComponent<DroppedItemDisplay>().Setup(item, icon, ItemDisplayMode.Drop);
     }
 
     private ItemRarity GetRandomRarity()
