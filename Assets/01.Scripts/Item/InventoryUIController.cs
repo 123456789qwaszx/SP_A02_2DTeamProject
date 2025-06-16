@@ -6,6 +6,7 @@ public class InventoryUIController : MonoBehaviour
 {
     public GameObject inventoryPanel;
     public GameObject equipmentPanel;
+    public GameObject tooltipPanel;
 
     private void Update()
     {
@@ -14,6 +15,7 @@ public class InventoryUIController : MonoBehaviour
             bool isOpen = !inventoryPanel.activeSelf;
             inventoryPanel.SetActive(isOpen);
             equipmentPanel.SetActive(isOpen);
+            tooltipPanel.SetActive(isOpen);
             InventoryUIManager.instance.RefreshInventory();
         }
     }

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
 
-public class EquipmentslotUI : MonoBehaviour, IPointerClickHandler
+public class EquipmentslotUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public List<ItemType> allowedItemTypes; // 이 슬롯에 장착 가능한 아이템 타입
     public Image iconImage;
@@ -51,6 +51,18 @@ public class EquipmentslotUI : MonoBehaviour, IPointerClickHandler
         iconImage.enabled = false;
         rarityBorder.enabled = false;
     }
+    
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (equippedItem != null)
+            ItemTooltipUI.Instance.Show(equippedItem, transform.position);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        ItemTooltipUI.Instance.Hide();
+    }
+
     
     public void OnPointerClick(PointerEventData eventData)
     {
