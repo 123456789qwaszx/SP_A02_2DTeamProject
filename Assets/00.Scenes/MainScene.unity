@@ -1220,6 +1220,10 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2538152942525263616, guid: 7cc8fc202efe2f14798e023948e11f84, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2538152942525263616, guid: 7cc8fc202efe2f14798e023948e11f84, type: 3}
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
@@ -1286,6 +1290,10 @@ PrefabInstance:
     - target: {fileID: 7979052885293814827, guid: 7cc8fc202efe2f14798e023948e11f84, type: 3}
       propertyPath: m_Constraints
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8001135491693849236, guid: 7cc8fc202efe2f14798e023948e11f84, type: 3}
+      propertyPath: monsterLayer.m_Bits
+      value: 256
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

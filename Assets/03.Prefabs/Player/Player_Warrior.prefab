@@ -169,7 +169,7 @@ MonoBehaviour:
   attackAngle: 60
   monsterLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   showTime: 0.3
   attackCircleRadius: 0.8
 --- !u!70 &1831569839382918159
@@ -219,6 +219,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8073fba75cacf864eb4114e49f9a6db1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentLevel: 1
+  currentExp: 0
 --- !u!1 &2565699394120561261
 GameObject:
   m_ObjectHideFlags: 0

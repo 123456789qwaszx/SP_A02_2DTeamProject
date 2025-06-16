@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 4250111705174036627}
   - component: {fileID: 6981749895698235422}
   - component: {fileID: 7664207981912055069}
-  - component: {fileID: 5149045102760332285}
   - component: {fileID: 8451542275327377258}
-  m_Layer: 0
+  - component: {fileID: 5149045102760332285}
+  m_Layer: 8
   m_Name: Boss01
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -161,27 +161,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.856862, y: 2.234283}
   m_EdgeRadius: 0
---- !u!114 &5149045102760332285
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 565693731309111933}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a487fbd26152b8c49b8162eb42dbf1a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monsterData: {fileID: 11400000, guid: 669f6c72251a49b49aada46510acab8e, type: 2}
-  targetLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  knockbackForce: 3
-  knockbackDuration: 0.1
-  phaseChangeEffect: {fileID: 0}
-  phaseChangeSound: {fileID: 0}
-  warningPrefab: {fileID: 5039214428068450727, guid: 338d98dccbd42384f9ddbb85687cb89a, type: 3}
 --- !u!95 &8451542275327377258
 Animator:
   serializedVersion: 5
@@ -203,6 +182,28 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5149045102760332285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 565693731309111933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a487fbd26152b8c49b8162eb42dbf1a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monsterData: {fileID: 11400000, guid: 669f6c72251a49b49aada46510acab8e, type: 2}
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  knockbackForce: 3
+  knockbackDuration: 0.1
+  phaseChangeEffect: {fileID: 0}
+  phaseChangeSound: {fileID: 0}
+  warningPrefab: {fileID: 5039214428068450727, guid: 338d98dccbd42384f9ddbb85687cb89a, type: 3}
+  canDashAttack: 1
 --- !u!1 &4226210471101452738
 GameObject:
   m_ObjectHideFlags: 0
@@ -213,7 +214,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1062120643059480906}
   - component: {fileID: 8656803878477392964}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
