@@ -96,6 +96,12 @@ public class Player : MonoBehaviour, IEquipable, IDamagable
 
     void Start()
     {
+        // DontDestroyOnLoad 적용으로 씬 전환 시에도 삭제되지 않음
+        DontDestroyOnLoad(gameObject);
+
+        // 씬 전환 시 자동으로 (0,0,0) 위치로 재배치
+        transform.position = Vector3.zero;
+
         GameManager.Instance.player = this;
         tf = GetComponent<Transform>();
         rb = GetComponent<Rigidbody2D>();
