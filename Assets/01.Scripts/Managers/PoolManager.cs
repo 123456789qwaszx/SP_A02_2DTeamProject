@@ -77,7 +77,6 @@ public class PoolManager : Singleton<PoolManager>
 
     public GameObject Pop(GameObject prefab)
     {
-        Debug.Log(prefab);
         if (_pools.ContainsKey(prefab.name) == false)
             CreatePool(prefab);
 

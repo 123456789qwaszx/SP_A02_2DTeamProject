@@ -21,7 +21,6 @@ public class HolyProjectile : RepeatSkill
     protected override void DoSkillJob()
     {
         //StartCoroutine(SetHolyProjectile());
-        Debug.Log("스킬 실시q");
     }
 
     public override void ActivateSkill()
@@ -38,7 +37,6 @@ public class HolyProjectile : RepeatSkill
         Vector3 position = GameManager.Instance.controller.transform.position;
         while (true)
         {
-            Debug.Log(SkillData);
         for (int i = 0; i < SkillData.projectileCount; i++)
             {
                 Vector3 dir = -(position - indicator.transform.position).normalized;
