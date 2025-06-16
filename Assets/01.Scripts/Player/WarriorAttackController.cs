@@ -43,10 +43,6 @@ public class WarriorAttackController : MonoBehaviour
         SpriteRenderer sr = GetComponentInChildren<SpriteRenderer>();
         Vector3 playerFacing = (sr != null) ? (sr.flipX ? Vector3.right : Vector3.left) : Vector3.right;
 
-        // 플레이어가 보는 방향에 맞게 computedDir의 x값 보정
-        computedDir.x = Mathf.Sign(playerFacing.x) * Mathf.Abs(computedDir.x);
-        computedDir = computedDir.normalized;
-
         // 공격 판정: 부채꼴 영역 내의 몬스터에 대해 한 번만 판정
         Collider2D[] hits = Physics2D.OverlapCircleAll(attackOrigin, attackRange, monsterLayer);
         float halfAngle = attackAngle * 0.5f;

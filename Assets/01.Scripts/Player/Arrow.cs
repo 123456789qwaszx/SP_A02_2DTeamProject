@@ -8,7 +8,7 @@ public class Arrow : ArcherAttackController
     private Vector2 direction;             // 화살 진행 방향
     private float damage;                  // 화살 데미지 값 (부모 아처의 GetDamage() 값 사용)
 
-    // 초기 설정: 화살의 진행 방향을 설정하고 부모 아처의 데미지 값을 가져옵니다.
+    // 초기 설정: 화살의 진행 방향을 설정하고 부모 아처의 데미지 값을 가져 옴
     public void Initialize(Vector2 shootDirection)
     {
         direction = shootDirection.normalized;  // 정규화된 방향 설정
@@ -22,7 +22,7 @@ public class Arrow : ArcherAttackController
         }
 
         // 화살이 진행 방향에 맞게 회전 (local right 방향이 진행 방향이라고 가정)
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
         transform.rotation = Quaternion.Euler(0f, 0f, angle);
     }
 

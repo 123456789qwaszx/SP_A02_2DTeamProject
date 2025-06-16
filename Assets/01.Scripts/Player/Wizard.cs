@@ -19,14 +19,14 @@ public class Wizard : Player
         CharacterClass = CharacterClass.Wizard;
         // 기본 스탯
         str = 10;
-        dex = 20;
-        ints = 10;
+        dex = 10;
+        ints = 20;
         hp = 120;
         mp = 50;
         itemAP = 0.1f;
 
-        moveSpeed = 1 + DEX * 0.06f;
-        attackSpeed = 1 + DEX * 0.1f;
+        moveSpeed = 0.8f + DEX * 0.04f;
+        attackSpeed = 0.7f + DEX * 0.005f;
 
         // 전투 스탯
         attack = 10 + DEX * 0.2f;
