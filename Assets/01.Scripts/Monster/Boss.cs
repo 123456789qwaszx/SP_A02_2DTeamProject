@@ -8,8 +8,7 @@ public class Boss : MonsterBase
     [SerializeField] private GameObject phaseChangeEffect;
     [SerializeField] private AudioClip phaseChangeSound;
 
-    [Header("장판")]
-    [SerializeField] private GameObject warningPrefab;
+    
 
     private bool isDashing = false;
     public bool canDashAttack = true;
@@ -47,7 +46,13 @@ public class Boss : MonsterBase
 
         //빨갛게
         if (spriteRenderer != null)
-            spriteRenderer.color = new Color(1f, 0.8f, 0.8f);
+        {
+            Color newColor = new Color(1f, 0.1f, 0.1f); // 원하는 색
+            spriteRenderer.color = newColor;
+
+            // 원래 색상도 덮어쓰기
+            originalColor = newColor;
+        }
     }
 
     public override void ResetMonster()

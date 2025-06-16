@@ -14,6 +14,9 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
     [SerializeField] private float knockbackForce = 5f;
     [SerializeField] private float knockbackDuration = 0.1f;
 
+    [Header("장판")]
+    [SerializeField] protected GameObject warningPrefab;
+
     public MonsterStateIdle StateIdle { get; protected set; }
     public MonsterStateMove StateMove { get; protected set; }
     public MonsterStateAttackMelee StateMeleeAttack { get; private set; }
@@ -30,11 +33,11 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
     protected Transform player;
     protected Rigidbody2D rb;
     protected SpriteRenderer spriteRenderer;
+    protected Color originalColor;
     private Coroutine hitFlashRoutine;
     private Coroutine knockbackRoutine;
     private Color hitColor = Color.red;
     private float flashDuration = 0.2f;
-    private Color originalColor;
 
     private void Awake()
     {
