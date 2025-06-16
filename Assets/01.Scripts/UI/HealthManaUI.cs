@@ -16,6 +16,12 @@ public class HealthManaUI : MonoBehaviour
 
     [SerializeField] private float smoothSpeed = 5f; // 부드럽게 전환되는 속도
 
+    private void Awake()
+{
+    DontDestroyOnLoad(gameObject);
+}
+
+
     private void Start()
     {
         player = FindObjectOfType<Player>();
