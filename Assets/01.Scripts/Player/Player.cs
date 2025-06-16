@@ -92,10 +92,13 @@ public class Player : MonoBehaviour, IEquipable, IDamagable
 
     
 
+    void Awake()
+    {
+        GameManager.Instance.player = this;
+    }
 
     void Start()
     {
-        GameManager.Instance.player = this;
         tf = GetComponent<Transform>();
         rb = GetComponent<Rigidbody2D>();
 

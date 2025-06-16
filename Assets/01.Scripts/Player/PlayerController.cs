@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     public WarriorAttackController attackController;
     private void Awake()
     {
+        GameManager.Instance.controller = this;
         playerInput = GetComponent<PlayerInput>();
         player = GetComponent<Player>();
         rb = GetComponent<Rigidbody>();
