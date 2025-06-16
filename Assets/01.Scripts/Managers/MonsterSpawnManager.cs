@@ -30,7 +30,7 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
     private bool bossSpawned = false;
 
     private GameObject spawnedFinalBoss;
-    private MonsterFinalBoss finalBossScript;
+    private FinalBoss finalBossScript;
 
     private StageType currentStageType = StageType.Normal;
 
@@ -198,7 +198,7 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
         // 플레이어 위쪽에 스폰
         Vector3 spawnPos = player.position + Vector3.up * 10f;
         spawnedFinalBoss = Instantiate(finalBossPrefab, spawnPos, Quaternion.identity);
-        finalBossScript = spawnedFinalBoss.GetComponent<MonsterFinalBoss>();
+        finalBossScript = spawnedFinalBoss.GetComponent<FinalBoss>();
     }
 
     void MonitorFinalBossPhase()

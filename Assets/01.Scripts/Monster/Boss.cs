@@ -12,8 +12,10 @@ public class Boss : MonsterBase
     [SerializeField] private GameObject warningPrefab;
 
     private bool isDashing = false;
+    public bool canDashAttack = true;
     private bool isPhase2 = false;
     public bool IsPhase2 => isPhase2;
+
 
     public MonsterStateAttackBoss StateAttackBoss { get; private set; }
 
@@ -41,16 +43,18 @@ public class Boss : MonsterBase
         isPhase2 = true;
         monsterData.attackPower += 10;
         monsterData.moveSpeed += 1;
+        monsterData.attackCooldown -= 0.5f;
 
         //빨갛게
         if (spriteRenderer != null)
-            spriteRenderer.color = new Color(1f, 0.6f, 0.6f);
+            spriteRenderer.color = new Color(1f, 0.8f, 0.8f);
     }
 
     public override void ResetMonster()
     {
         base.ResetMonster();
         isPhase2 = false;
+        canDashAttack = true;
         if (spriteRenderer != null)
             spriteRenderer.color = Color.white;
     }

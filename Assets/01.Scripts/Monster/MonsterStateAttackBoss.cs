@@ -12,9 +12,22 @@ public class MonsterStateAttackBoss : MonsterStateBase
     public override void Enter()
     {
         if (boss.IsPhase2)
-            animator.SetTrigger("Attack_Dash"); // 돌격 애니메이션
+        {
+            if (boss.canDashAttack)
+            {
+                animator.SetTrigger("Attack_Dash");
+            }
+            else
+            {
+                animator.SetTrigger("Attack_Ranged");
+            }
+
+            boss.canDashAttack = !boss.canDashAttack;
+        }
         else
-            animator.SetTrigger("Attack_Ranged"); // 원거리 애니메이션
+        {
+            animator.SetTrigger("Attack_Ranged");
+        }
     }
 
     public override void Update()
