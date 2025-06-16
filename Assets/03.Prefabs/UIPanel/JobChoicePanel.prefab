@@ -152,7 +152,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5421639379645133613
 RectTransform:
   m_ObjectHideFlags: 0
@@ -252,9 +252,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9f7bc09df07cd742816cf1cefc5efa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerWarrior: {fileID: 0}
-  playerArcher: {fileID: 0}
-  playerWizard: {fileID: 0}
+  playerWarrior: {fileID: 2538152942525263616, guid: 7cc8fc202efe2f14798e023948e11f84, type: 3}
+  playerArcher: {fileID: 7077670872666168251, guid: 76c797dc2d247c546b16d2b7dc611e02, type: 3}
+  playerWizard: {fileID: 6273740758479994372, guid: 2edb897d9bc751c4eafeb4f936ca14e9, type: 3}
   warriorButton: {fileID: 1568829995219582461}
   archerButton: {fileID: 1353768152171077409}
   wizardButton: {fileID: 6403307375482225717}

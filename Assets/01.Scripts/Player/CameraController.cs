@@ -12,27 +12,47 @@ public class CameraController : MonoBehaviour
     void Start()
     {
         if (Target == null)
-            Target = GameObject.FindWithTag("Player");
+            Target = GetPlayerFromLayer();
+
+        if (Target == null)
+            Debug.LogWarning("Player not found in the Player layer!");
     }
 
     void LateUpdate()
     {
         if (Target == null)
         {
-            Target = GameObject.FindWithTag("Player");
+            Target = GetPlayerFromLayer();
             if (Target == null)
             {
-                Debug.LogWarning("Player not found!");
+                Debug.LogWarning("Player not found in the Player layer!");
                 return;
             }
         }
-        // 플레이어 위치 기준의 목표 카메라 위치 (Z축은 고정)
+        // 플레이어 위치 기준의 목표 카메라 위치
         Vector3 targetPos = new Vector3(Target.transform.position.x, Target.transform.position.y, transform.position.z);
 
         // 부드럽게 이동
         transform.position = Vector3.Lerp(transform.position, targetPos, smoothing);
-
-        //transform.position = new Vector3(Target.transform.position.x, Target.transform.position.y, -10);
     }
 
+    /// <summary>
+    /// 현재 활성화된 오브젝트 중 레이어가 "Player"인 게임오브젝트를 찾아서 반환
+    /// </summary>
+    /// <returns>Player 레이어에 속한 게임오브젝트, 없으면 null</returns>
+    private GameObject GetPlayerFromLayer()
+    {
+        int playerLayer = LayerMask.NameToLayer("Player");
+
+        // 모든 활성화된 게임오브젝트를 검색
+        GameObject[] allObjects = GameObject.FindObjectsOfType<GameObject>();
+        foreach (GameObject obj in allObjects)
+        {
+            if (obj.activeInHierarchy && obj.layer == playerLayer)
+            {
+                return obj;
+            }
+        }
+        return null;
+    }
 }
