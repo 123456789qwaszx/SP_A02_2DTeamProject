@@ -47,6 +47,26 @@ public class FinalBoss : MonsterBase
         base.ResetMonster();    // HP, 애니메이션, 상태머신 등 공통 리셋
     }
 
+    //public void OnFinalBossAttack()
+    //{
+    //    float hpPercent = HPPercent;
+
+    //    if (hpPercent > 0.6f)
+    //    {
+    //        FireSingleProjectile(); // 1페이즈
+    //    }
+    //    else if (hpPercent > 0.3f)
+    //    {
+    //        ShowWarningAndFireMulti(); // 2페이즈
+    //    }
+    //    else
+    //    {
+    //        StartCoroutine(ExplodingAoE()); // 3페이즈
+    //    }
+
+    //    RecordAttackTime();
+    //}
+
     public override void OnDeadEnd()
     {
         base.OnDeadEnd();
