@@ -31,7 +31,7 @@ public class ItemTooltipUI : MonoBehaviour
         if (item == null) return;
         
         panel.SetActive(true);
-        Vector3 offset = new Vector3(210f, -210f, 0f);
+        Vector3 offset = new Vector3(260f, -210f, 0f);
         Vector3 pos = position + offset;
 
         // 화면 밖으로 안 나가게 제한

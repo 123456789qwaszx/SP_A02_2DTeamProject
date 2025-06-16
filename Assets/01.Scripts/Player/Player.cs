@@ -31,9 +31,9 @@ public class Player : MonoBehaviour, IEquipable, IDamagable
     [Header("플레이어 스탯")]
     [SerializeField] protected float moveSpeed;
     [SerializeField] protected float attackSpeed;
-    [SerializeField] protected float STR;               // 힘
-    [SerializeField] protected float DEX;               // 민첩
-    [SerializeField] protected float INT;               // 지능
+    [SerializeField] protected float str;               // 힘
+    [SerializeField] protected float dex;               // 민첩
+    [SerializeField] protected float ints;               // 지능
     [SerializeField] protected float hp;
     [SerializeField] protected float mp;
     [SerializeField] protected float maxHP;
@@ -47,10 +47,7 @@ public class Player : MonoBehaviour, IEquipable, IDamagable
     [SerializeField] protected float projectileSpeed = 1.0f;  // 투사체 속도 배율
     [SerializeField] protected int projectileCount = 1;       // 투사체 수
     [SerializeField] protected float attackRangeMultiplier = 1.0f; // 공격 범위 배율
-
-    public float MoveSpeed => moveSpeed;
-    public float AttackSpeed => attackSpeed;
-
+    
     [Header("전투 스탯")]
     [SerializeField] protected float attack;           // 공격력
     [SerializeField] protected float specialAttack;    // 특수 공격력
@@ -58,13 +55,42 @@ public class Player : MonoBehaviour, IEquipable, IDamagable
     [SerializeField] protected float defense;          // 방어력
     [SerializeField] protected float critical;         // 크리티컬 확률 (%)
     [SerializeField] protected float critMultiplier;   // 치명타 피해량 증가
-
-    public float Attack => attack;
-    public float Critical => critical;
     
     [Header("회복 스탯")]
     [SerializeField] public float hpRecovery;
     [SerializeField] public float mpRecovery;
+
+    public float MoveSpeed => moveSpeed;
+    public float AttackSpeed => attackSpeed;
+    public float STR => str;
+    public float DEX => dex;
+    public float INT => ints;
+    public float HP => hp;
+    public float MP => mp;
+    public float MaxHP => maxHP;
+    public float MaxMP => maxMP;
+    public float HPRegenAmount => hpRegenAmount;
+    public float MPRegenAmount => mpRegenAmount;
+    public float HPRegenInterval => hpRegenInterval;
+    public float MPRegenInterval => mpRegenInterval;
+    public float ItemAcquisitionProbability => itemAP;
+
+    public float ProjectileSpeed => projectileSpeed;
+    public int ProjectileCount => projectileCount;
+    public float AttackRangeMultiplier => attackRangeMultiplier;
+    // 전투 스탯
+    public float Attack => attack;
+    public float SpecialAttack => specialAttack;
+    public float SkillAttack => skillAttack;
+    public float Defense => defense;
+    public float Critical => critical;
+    public float CritMultiplier => critMultiplier;
+
+// 회복 스탯
+    public float HpRecovery => hpRecovery;
+    public float MpRecovery => mpRecovery;
+
+    
 
 
     void Start()
@@ -87,9 +113,9 @@ public class Player : MonoBehaviour, IEquipable, IDamagable
             case ItemOptionType.방어력: defense += value; break;
             case ItemOptionType.치명타확률: critical += value; break;
             case ItemOptionType.치명타피해량: critMultiplier += value; break;
-            case ItemOptionType.힘: STR += value; break;
-            case ItemOptionType.민첩: DEX += value; break;
-            case ItemOptionType.지능: INT += value; break;
+            case ItemOptionType.힘: str += value; break;
+            case ItemOptionType.민첩: dex += value; break;
+            case ItemOptionType.지능: ints += value; break;
             case ItemOptionType.공격속도: attackSpeed += value; break;
             case ItemOptionType.이동속도: moveSpeed += value; break;
             case ItemOptionType.행운: itemAP += value; break;

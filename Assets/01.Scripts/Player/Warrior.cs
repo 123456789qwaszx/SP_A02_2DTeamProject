@@ -17,9 +17,9 @@ public class Warrior : Player
     void Awake()
     {
         // 기본 스탯
-        STR = 20;
-        DEX = 10;
-        INT = 10;
+        str = 20;
+        dex = 10;
+        ints = 10;
         hp = 120;
         mp = 50;
         itemAP = 0.1f;
