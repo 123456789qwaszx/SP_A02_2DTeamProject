@@ -16,6 +16,7 @@ public class Archer : Player
 
     void Awake()
     {
+        CharacterClass = CharacterClass.Archer;
         // 기본 스탯
         str = 10;
         dex = 20;

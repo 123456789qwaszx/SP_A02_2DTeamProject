@@ -90,6 +90,7 @@ public class Player : MonoBehaviour, IEquipable, IDamagable
     public float HpRecovery => hpRecovery;
     public float MpRecovery => mpRecovery;
 
+    public CharacterClass CharacterClass { get; protected set; } = CharacterClass.Warrior;
     
 
 
