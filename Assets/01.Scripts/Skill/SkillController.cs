@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -101,18 +101,20 @@ public class SkillController : MonoBehaviour
     }
 
     // 몬스터와 충돌시 처리
-    void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D col)
     {
-        TestMonster monster = collision.gameObject.GetComponent<TestMonster>();
-        // 몬스터 풀링 완성되면 그때 추가.
-        // if (monster.isvalid == false)
-        //     return;
-        //
         if (this._isvalid == false)
             return;
 
-
-        monster.OnDamaged(_owner, damage);
+        MonsterBase monster = col.gameObject.GetComponent<MonsterBase>();
+        if (col != null)
+        {
+            IDamagable damagable = col.GetComponent<IDamagable>();
+            if (damagable != null)
+            {
+                damagable.TakeDamage(damage);
+            }
+        }
 
         switch (this.skillType)
         {
