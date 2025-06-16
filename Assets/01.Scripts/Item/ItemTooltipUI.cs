@@ -60,17 +60,33 @@ public class ItemTooltipUI : MonoBehaviour
         {
             var go = Instantiate(optionTextPrefab, optionContainer);
             var text = go.GetComponent<TextMeshProUGUI>();
+            text.color = new Color(0.9f, 0.4f, 0f);
             text.text = $"<i>고유 효과: {item.uniqueOption.Value.optionName} +{item.uniqueOption.Value.value}</i>";
         }
 
         // 세트 효과
-        if (item.rarity == ItemRarity.Set)
+        if (item.rarity == ItemRarity.Set && item.setItemData != null)
         {
-            foreach (var bonus in item.setBonuses)
+            string setName = item.setItemData.setName;
+            int equippedCount = 0;
+
+            if (PlayerEquipmentManager.Instance != null)
+            {
+                PlayerEquipmentManager.Instance.equippedSetCounts.TryGetValue(setName, out equippedCount);
+            }
+
+            foreach (var bonus in item.setItemData.setBonusOptions)
             {
                 var go = Instantiate(optionTextPrefab, optionContainer);
                 var text = go.GetComponent<TextMeshProUGUI>();
-                text.text = $"[세트] {bonus.Item1}: +{bonus.Item2}";
+
+                // 발동 여부에 따라 색상 지정
+                if (equippedCount >= bonus.requiredCount)
+                    text.color = Color.green;
+                else
+                    text.color = Color.gray;
+
+                text.text = $"[세트 {bonus.requiredCount}개] {bonus.optionName} +{bonus.value}";
             }
         }
         
