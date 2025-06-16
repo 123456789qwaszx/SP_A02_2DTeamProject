@@ -26,6 +26,8 @@ public class PlayerController : MonoBehaviour
     private Archer archer;
     private Wizard wizard;
 
+    public SkillBook sklilbook;
+
     private void Awake()
     {
         GameManager.Instance.controller = this;

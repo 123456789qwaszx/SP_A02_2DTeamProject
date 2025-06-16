@@ -24,7 +24,7 @@ public class SkillBook : MonoBehaviour
     {
         ResourceManager.Instance.LoadAllAsync<GameObject>("Skill_Prefabs", (key, count, totalCount) =>
         {
-            //Debug.Log($"{key} {count}/{totalCount}");
+            Debug.Log($"{key} {count}/{totalCount}");
 
             if (count == totalCount)
             {
