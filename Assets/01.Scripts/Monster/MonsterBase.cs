@@ -16,6 +16,11 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
 
     [Header("장판")]
     [SerializeField] protected GameObject warningPrefab;
+    
+    [Header("드랍 관련")]
+    [SerializeField] private float baseDropChance = 5f;   // 기본 드랍 확률
+    [SerializeField] private int minDropCount = 1;         // 최소 드랍 수
+    [SerializeField] private int maxDropCount = 1;         // 최대 드랍 수 (보스는 3~5 등)
 
     public MonsterStateIdle StateIdle { get; protected set; }
     public MonsterStateMove StateMove { get; protected set; }
@@ -242,10 +247,19 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
     // [이벤트함수] Dead 애니메이션 마지막 프레임에 추가
     public virtual void OnDeadEnd()
     {
-        //var dropManager = FindObjectOfType<ItemDropManager>();
         var player = GameManager.Instance.player;
         float itemAP = player != null ? player.ItemAcquisitionProbability : 0f;
-        itemDropManager.TryDropItem(transform.position);
+
+        float bonusChance = baseDropChance * itemAP;
+        float finalDropChance = baseDropChance + bonusChance;
+
+        int dropCount = Random.Range(minDropCount, maxDropCount + 1);
+
+        for (int i = 0; i < dropCount; i++)
+        {
+            itemDropManager.TryDropItem(transform.position, finalDropChance);
+        }
+
         PoolManager.Instance.Push(this.gameObject);
     }
 
