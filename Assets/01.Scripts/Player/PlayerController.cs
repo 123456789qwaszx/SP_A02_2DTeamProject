@@ -79,7 +79,8 @@ public class PlayerController : MonoBehaviour
 
         animator.SetFloat("Run", inputVector.magnitude);
 
-        // 방향 처리
+        // 기본적으로는 이동 입력에 따라 좌우 판단하지만, 공격 시 마우스 클릭에 의한 방향 전환
+        // 가 있을 경우 그 값이 덮어씌워질 수 있으므로, 조건에 따라 분리할 수 있습니다.
         if (inputVector.x > 0.01f)
             spriteRenderer.flipX = true;
         else if (inputVector.x < -0.01f)
@@ -96,14 +97,32 @@ public class PlayerController : MonoBehaviour
         if (attackCooldown > 0f || player == null)
             return;
 
+        // 공격 애니메이션 트리거 설정
         if (inputVector.magnitude > 0.1f)
             animator.SetTrigger("Run_Attack");
         else
             animator.SetTrigger("Idle_Attack");
 
+        // 마우스 위치를 스크린 좌표에서 월드 좌표로 변환
         Vector3 ms = Mouse.current.position.ReadValue();
-        Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(ms);
+        // 카메라와 플레이어 간의 Z 거리 차이를 활용하여 월드 좌표 계산
+        Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(new Vector3(ms.x, ms.y, Mathf.Abs(Camera.main.transform.position.z - transform.position.z)));
         mouseWorld.z = 0f;
+
+        // 여기에 플레이어의 좌우 방향 전환 로직 추가
+        // 만약 마우스가 플레이어 기준 오른쪽에 있으면 오른쪽, 왼쪽에 있으면 왼쪽으로 바라보게 설정
+        if (mouseWorld.x > transform.position.x)
+        {
+            // 마우스가 오른쪽에 있으면 flipX = true (즉, 오른쪽을 바라보도록)
+            spriteRenderer.flipX = true;
+            Debug.Log("플레이어: 오른쪽 바라봄");
+        }
+        else
+        {
+            // 마우스가 왼쪽에 있으면 flipX = false (즉, 왼쪽을 바라보도록)
+            spriteRenderer.flipX = false;
+            Debug.Log("플레이어: 왼쪽 바라봄");
+        }
 
         // 직업별 공격 처리
         if (warrior != null && warriorAttackController != null)
