@@ -17,9 +17,9 @@ public class Wizard : Player
     void Awake()
     {
         // 기본 스탯
-        STR = 10;
-        DEX = 20;
-        INT = 10;
+        str = 10;
+        dex = 20;
+        ints = 10;
         hp = 120;
         mp = 50;
         itemAP = 0.1f;
