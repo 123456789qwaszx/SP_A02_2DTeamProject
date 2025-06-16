@@ -9,14 +9,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 658185415599067090}
-  - component: {fileID: 2460352805846603884}
   - component: {fileID: 9072439782336633115}
   - component: {fileID: 937601464925381220}
   - component: {fileID: -1106714129496748374}
   - component: {fileID: 4951447088090059378}
-  m_Layer: 0
+  - component: {fileID: 2460352805846603884}
+  m_Layer: 8
   m_Name: Pig01_Tank
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -37,24 +37,6 @@ Transform:
   - {fileID: 8199098567097171251}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2460352805846603884
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3255926119417431729}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a1ec2a330df5594bb5642855ef59d2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monsterData: {fileID: 11400000, guid: b1787da11b5b76b408d19bd7da4af907, type: 2}
-  targetLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  knockbackForce: 5
-  knockbackDuration: 0.1
 --- !u!95 &9072439782336633115
 Animator:
   serializedVersion: 5
@@ -200,6 +182,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.8825928, y: 1.1454029}
   m_EdgeRadius: 0
+--- !u!114 &2460352805846603884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3255926119417431729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a1ec2a330df5594bb5642855ef59d2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monsterData: {fileID: 11400000, guid: b1787da11b5b76b408d19bd7da4af907, type: 2}
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  knockbackForce: 5
+  knockbackDuration: 0.1
 --- !u!1 &5572624263206689661
 GameObject:
   m_ObjectHideFlags: 0

@@ -58,7 +58,14 @@ public class WarriorAttackController : MonoBehaviour
             Vector3 toTarget = (col.transform.position - attackOrigin).normalized;
             if (Vector3.Angle(computedDir, toTarget) <= halfAngle)
             {
-                //col.GetComponent<Monster>()?.TakeDamage(finalDamage);
+                if (col != null)
+                {
+                    IDamagable damagable = col.GetComponent<IDamagable>();
+                    if (damagable != null)
+                    {
+                        damagable.TakeDamage(finalDamage);
+                    }
+                }
             }
         }
 

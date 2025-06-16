@@ -9,7 +9,7 @@ public interface IEquipable
 }
 public interface IDamagable
 {
-    void TakeDamage(int damage);
+    void TakeDamage(float damage);
 }
 
 public class Player : MonoBehaviour, IEquipable, IDamagable
@@ -112,7 +112,7 @@ public class Player : MonoBehaviour, IEquipable, IDamagable
         ApplyOption(type, -value);
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         hp -= damage;
         hp = Mathf.Max(hp, 0);
