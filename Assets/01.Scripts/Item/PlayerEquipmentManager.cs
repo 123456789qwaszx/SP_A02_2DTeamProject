@@ -12,7 +12,7 @@ public class PlayerEquipmentManager : MonoBehaviour
     private IEquipable playerStats;
     private Player player;
     
-    private Dictionary<string, int> equippedSetCounts = new(); // 세트 이름별 장착 개수
+    public Dictionary<string, int> equippedSetCounts = new(); // 세트 이름별 장착 개수
     private Dictionary<string, int> appliedSetBonusCounts = new(); // 세트 보너스 적용 수
 
     private void Awake()
@@ -93,11 +93,22 @@ public class PlayerEquipmentManager : MonoBehaviour
             if (bonus.requiredCount > count || bonus.requiredCount <= alreadyApplied)
                 continue;
 
-            // 텍스트 기반 세트 효과 처리
-            // if (bonus.optionName == "죽음 시 1회 부활")
-            //     playerStats.EnableRebirthOnce();
-            // else if (bonus.optionName == "화염 면역")
-            //     playerStats.AddResistance(DamageType.Fire, 100);
+            // === 여기서 보너스 적용 ===
+            switch (bonus.optionName)
+            {
+                case "특수공격력":
+                    player.ApplyOption(ItemOptionType.특수공격력증가, bonus.value);
+                    break;
+
+                case "최대HP증가":
+                    player.ApplyOption(ItemOptionType.최대HP량증가, bonus.value);
+                    break;
+
+                case "부활1회추가":
+                    // 추후 구현 예정
+                    // player.EnableRebirthOnce();
+                    break;
+            }
 
             appliedSetBonusCounts[setName] = bonus.requiredCount;
         }
@@ -122,11 +133,22 @@ public class PlayerEquipmentManager : MonoBehaviour
 
             if (bonus.requiredCount > count)
             {
-                // 해제 조건 만족 시 해제 로직 수행
-                // if (bonus.optionName == "죽음 시 1회 부활")
-                //     playerStats.DisableRebirth();
-                // else if (bonus.optionName == "화염 면역")
-                //     playerStats.RemoveResistance(DamageType.Fire);
+                // === 여기서 보너스 해제 ===
+                switch (bonus.optionName)
+                {
+                    case "특수공격력":
+                        player.RemoveOption(ItemOptionType.특수공격력증가, bonus.value);
+                        break;
+
+                    case "최대HP증가":
+                        player.RemoveOption(ItemOptionType.최대HP량증가, bonus.value);
+                        break;
+
+                    case "부활1회추가":
+                        // 추후 구현 예정
+                        // player.DisableRebirth();
+                        break;
+                }
 
                 appliedSetBonusCounts[setName] = bonus.requiredCount - 1;
             }
