@@ -2,8 +2,11 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TreeEditor;
 using UnityEngine;
 
+// 생성된 Projectile 움직임을 정하는 클래스
+// 생성 된 후 코루틴을 돌려 파괴될 때 까지 계속 지정한 대로 움직임
 public class ProjectileController : SkillBase
 {
     // 혹시 나중에 몬스터도 쏘면 바꿀 것
@@ -22,8 +25,8 @@ public class ProjectileController : SkillBase
     // 나중에 몬스터도 스킬 쏘면 바꿀 것
     List<MonsterBase> _enteredColliderList = new List<MonsterBase>();
     Coroutine _coDotDamage;
-    List<Transform> _chainLightningList = new List<Transform> ();
-    
+    List<Transform> _chainLightningList = new List<Transform>();
+
     private void OnDisable()
     {
         StopAllCoroutines();
@@ -49,14 +52,14 @@ public class ProjectileController : SkillBase
         _target = target;
         transform.localScale = Vector3.one * Skill.SkillData.ScaleMultiplier;
         _numPenerations = Skill.SkillData.NumPenerations;
-         _bounceCount = Skill.SkillData.NumBounce;
+        _bounceCount = Skill.SkillData.NumBounce;
         _projectileSpeed = Skill.SkillData.projectileSpeed;
         _attackInterval = Skill.SkillData.AttackInterval;
 
         switch (Skill.SkillType)
         {
             case SkillType.HolyProjectile:
-                    StartCoroutine(CoHolyProjectile());
+                //StartCoroutine(CoTestSkill());
                 break;
 
             // case SkillType.HolyProjectile:
@@ -92,16 +95,13 @@ public class ProjectileController : SkillBase
 
     IEnumerator CoTestSkill()
     {
-        List<MonsterBase> target = ObjectManager.Instance.GetMonsterWithinCamera(1);
         while (true)
         {
-            Debug.Log("!!");
-            Vector2 dir = (Vector2)target[0].transform.position - _rigid.position;
-            transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
+            gameObject.transform.position += Vector3.forward* Time.deltaTime * SkillData.projectileSpeed;
             yield return new WaitForSeconds(_attackInterval);
         }
     }
-    
+
     IEnumerator CoHolyProjectile()
     {
         WaitForSeconds wait = new WaitForSeconds(0.5f);
@@ -110,13 +110,13 @@ public class ProjectileController : SkillBase
         Vector3 position = GameManager.Instance.controller.transform.position;
         while (true)
         {
-            
-        for (int i = 0; i < SkillData.projectileCount; i++)
+
+            for (int i = 0; i < SkillData.projectileCount; i++)
             {
                 Vector3 dir = GameManager.Instance.MoveDir/*-(position - indicator.transform.position)*/.normalized;
 
 
-                GenerateProjectile(GameManager.Instance.controller, prefabName, position, dir, GameManager.Instance.controller.transform.position,SkillData.SkillPrefabs);
+                GenerateProjectile(GameManager.Instance.controller, prefabName, position, dir, GameManager.Instance.controller.transform.position, SkillData.SkillPrefabs);
 
                 yield return wait;//new WaitForSeconds(SkillData.AttackInterval);
 
@@ -124,7 +124,35 @@ public class ProjectileController : SkillBase
         }
     }
 
-    
+    IEnumerator TestHoly()
+    {
+
+        List<MonsterBase> target = ObjectManager.Instance.GetMonsterWithinCamera(1);
+        while (true)
+        {
+            _timer += Time.deltaTime;
+            if (_timer > 3 || target == null)
+            {
+                DestroyProjectile();
+                _timer = 0;
+                break;
+            }
+
+            // if (target[0].IsValid() == false)
+            //     break;
+
+            Vector2 direction = (Vector2)target[0].transform.position - _rigid.position;
+            float rotateSpeed = Vector3.Cross(direction.normalized, transform.up).z;
+            _rigid.angularVelocity = -_rotateAmount * rotateSpeed;
+            _rigid.velocity = transform.up * Skill.SkillData.projectileSpeed;
+
+            //if (Vector2.Distance(_rigid.position, targetPos) < 0.3f)
+            //    ExplosionMeteor();
+            yield return new WaitForFixedUpdate();
+        }
+    }
+
+
     IEnumerator CoIceKill()
     {
         List<MonsterBase> target = ObjectManager.Instance.GetMonsterWithinCamera(1);
@@ -153,11 +181,11 @@ public class ProjectileController : SkillBase
         yield return new WaitForSeconds(0.25f);
         DestroyProjectile();
     }
-   
+
     void SetParticleSize(Vector3 startPos, Vector3 endPos)
     {
         ParticleSystem particle = GetComponent<ParticleSystem>();
-        ParticleSystem childParticle =  Util.FindChild<ParticleSystem>(gameObject);//Util.FindChild<ParticleSystem>(gameObject);
+        ParticleSystem childParticle = Util.FindChild<ParticleSystem>(gameObject);//Util.FindChild<ParticleSystem>(gameObject);
         var main = particle.main;
         var main2 = childParticle.main;
 
@@ -180,7 +208,7 @@ public class ProjectileController : SkillBase
         //Vector2 boxSize = new Vector2(300, 399);
         float angleRad = angle * Mathf.Deg2Rad;
 
-        RaycastHit2D[] colliders = Physics2D.BoxCastAll(midPos, boxSize, 0, dir, dist * 1.3f, targetLayer); 
+        RaycastHit2D[] colliders = Physics2D.BoxCastAll(midPos, boxSize, 0, dir, dist * 1.3f, targetLayer);
 
         foreach (RaycastHit2D hit in colliders)
         {
@@ -278,15 +306,16 @@ public class ProjectileController : SkillBase
     {
         SkillManager.Instance.DespawnProjectile(this);
     }
-    
-    
+
+
     void BounceProjectile(MonsterBase creature)
     {
         List<Transform> list = new List<Transform>();
         list = ObjectManager.Instance.GetFindMonstersInFanShape(creature.transform.position, _dir, 5.5f, 240);
 
         List<Transform> sortedList = (from t in list
-                                      orderby Vector3.Distance(t.position, transform.position)                  descending select t).ToList(); 
+                                      orderby Vector3.Distance(t.position, transform.position) descending
+                                      select t).ToList();
 
         if (sortedList.Count == 0)
         {
@@ -306,7 +335,7 @@ public class ProjectileController : SkillBase
         MonsterBase creature = collision.transform.GetComponent<MonsterBase>();
         // if (creature.IsValid() == false)
         //     return;
-        
+
         if (this.IsValid() == false)
             return;
 
