@@ -4,7 +4,7 @@ using UnityEngine;
 public interface IMonster
 {
     void ResetMonster();
-    void TakeDamage(int amount);
+    void TakeDamage(float amount);
 }
 
 public class MonsterBase : MonoBehaviour, IMonster, IDamagable
@@ -23,7 +23,7 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
     private MonsterStateMachine stateMachine;
     private ItemDropManager itemDropManager;
 
-    protected int currentHP;
+    protected float currentHP;
     private float lastAttackTime;
 
     protected Animator animator;
@@ -84,7 +84,7 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
     }
 
     // 피격 메서드
-    public virtual void TakeDamage(int amount)
+    public virtual void TakeDamage(float amount)
     {
         currentHP -= amount;
         PlayHitFlash(); // 맞으면 반짝
@@ -239,6 +239,7 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
     // [이벤트함수] Dead 애니메이션 마지막 프레임에 추가
     public virtual void OnDeadEnd()
     {
+        Debug.Log($"[사망] {transform.position}");
         itemDropManager.TryDropItem(transform.position);
         PoolManager.Instance.Push(this.gameObject);
     }

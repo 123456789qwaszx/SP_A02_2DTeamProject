@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2130071739173274438}
   - component: {fileID: 5940475169387936310}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Collision
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81,9 +81,9 @@ GameObject:
   - component: {fileID: 8611314366559004344}
   - component: {fileID: 76065471143881770}
   - component: {fileID: 6919816417547946113}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Goblin01_Nor
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -264,6 +264,6 @@ MonoBehaviour:
   monsterData: {fileID: 11400000, guid: 19921b1ceaed546489c72c27be278a23, type: 2}
   targetLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   knockbackForce: 5
   knockbackDuration: 0.1
