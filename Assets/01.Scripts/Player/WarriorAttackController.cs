@@ -87,6 +87,7 @@ public class WarriorAttackController : MonoBehaviour
         GameObject effectGo = new GameObject("AttackEffect");
         effectGo.transform.position = effectCenter;
         effectGo.transform.rotation = Quaternion.identity;
+        effectGo.tag = "AttackEffect";
 
         // Mesh 컴포넌트 추가
         MeshFilter mf = effectGo.AddComponent<MeshFilter>();
