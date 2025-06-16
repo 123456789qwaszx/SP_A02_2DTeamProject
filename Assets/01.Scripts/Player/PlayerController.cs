@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        GameManager.Instance.controller = this;
         playerInput = GetComponent<PlayerInput>();
         rb = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>();

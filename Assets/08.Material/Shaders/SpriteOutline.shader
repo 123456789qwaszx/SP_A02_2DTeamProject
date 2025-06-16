@@ -1,0 +1,104 @@
+﻿Shader "Custom/SpriteOutline"
+{
+    Properties
+    {
+        _MainTex ("Sprite Texture", 2D) = "white" {}
+        _Color ("Tint", Color) = (1,1,1,1)
+        _OutlineColor ("Outline Color", Color) = (1,0,0,1)
+        _OutlineSize ("Outline Size", Float) = 0.03
+    }
+    SubShader
+    {
+        Tags { "Queue"="Transparent" "RenderType"="Transparent" }
+        Blend SrcAlpha OneMinusSrcAlpha
+        Cull Off
+        Lighting Off
+        ZWrite Off
+
+        Pass
+        {
+            Name "OUTLINE"
+            Tags { "LightMode"="Always" }
+
+            CGPROGRAM
+            #pragma vertex vert
+            #pragma fragment frag
+            #include "UnityCG.cginc"
+
+            struct appdata_t
+            {
+                float4 vertex : POSITION;
+                float2 texcoord : TEXCOORD0;
+            };
+
+            struct v2f
+            {
+                float4 vertex : SV_POSITION;
+                float2 uv : TEXCOORD0;
+            };
+
+            sampler2D _MainTex;
+            float4 _MainTex_ST;
+            float _OutlineSize;
+            fixed4 _OutlineColor;
+
+            v2f vert(appdata_t v)
+            {
+                v.vertex.xy += normalize(v.vertex.xy) * _OutlineSize;
+                v2f o;
+                o.vertex = UnityObjectToClipPos(v.vertex);
+                o.uv = TRANSFORM_TEX(v.texcoord, _MainTex);
+                return o;
+            }
+
+            fixed4 frag(v2f i) : SV_Target
+            {
+                fixed4 tex = tex2D(_MainTex, i.uv);
+                return fixed4(_OutlineColor.rgb, tex.a * _OutlineColor.a);
+            }
+            ENDCG
+        }
+
+        Pass
+        {
+            Name "SPRITE"
+            Tags { "LightMode"="Always" }
+
+            CGPROGRAM
+            #pragma vertex vert
+            #pragma fragment frag
+            #include "UnityCG.cginc"
+
+            struct appdata_t
+            {
+                float4 vertex : POSITION;
+                float2 texcoord : TEXCOORD0;
+            };
+
+            struct v2f
+            {
+                float4 vertex : SV_POSITION;
+                float2 uv : TEXCOORD0;
+            };
+
+            sampler2D _MainTex;
+            float4 _MainTex_ST;
+            fixed4 _Color;
+
+            v2f vert(appdata_t v)
+            {
+                v2f o;
+                o.vertex = UnityObjectToClipPos(v.vertex);
+                o.uv = TRANSFORM_TEX(v.texcoord, _MainTex);
+                return o;
+            }
+
+            fixed4 frag(v2f i) : SV_Target
+            {
+                fixed4 tex = tex2D(_MainTex, i.uv);
+                return tex * _Color;
+            }
+            ENDCG
+        }
+    }
+}

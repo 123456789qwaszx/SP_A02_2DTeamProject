@@ -34,9 +34,19 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
 
     private StageType currentStageType = StageType.Normal;
 
+
     void Start()
     {
-        player = FindObjectOfType<PlayerController>().transform;
+        PlayerController controller = FindObjectOfType<PlayerController>();
+        if (controller == null)
+        {
+            Debug.LogError("❌ PlayerController를 씬에서 찾을 수 없습니다.");
+            return;
+        }
+
+        player = controller.transform;
+        Debug.Log($"✅ player 할당 성공 → {player.name}");
+
         SetupStage(StageType.Normal);
     }
 

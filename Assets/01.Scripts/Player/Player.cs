@@ -93,6 +93,10 @@ public class Player : MonoBehaviour, IEquipable, IDamagable
     public CharacterClass CharacterClass { get; protected set; } = CharacterClass.Warrior;
     
 
+    void Awake()
+    {
+        GameManager.Instance.player = this;
+    }
 
     void Start()
     {
