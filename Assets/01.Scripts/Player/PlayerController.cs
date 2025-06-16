@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerInput))]
@@ -9,31 +10,53 @@ public class PlayerController : MonoBehaviour
     private InputAction attackAction;
 
     private Rigidbody rb;
-    private Player player;
+    private Player player; // 기본 Player 클래스 (공통 필드 보유)
     private Animator animator;
-    private SpriteRenderer spriteRenderer; // Body의 스프라이트 렌더러
+    private SpriteRenderer spriteRenderer;
 
     private Vector2 inputVector;
+    private float attackCooldown = 0f;
+
+    [Header("전투 관련 컴포넌트")]
+    public WarriorAttackController warriorAttackController;
+    public ArcherAttackController archerAttackController;
+    public WizardAttackController wizardAttackController;
 
     private Warrior warrior;
-    private float attackCooldown = 0f; // 남은 쿨타임 시간
+    private Archer archer;
+    private Wizard wizard;
 
-    public WarriorAttackController attackController;
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
-        player = GetComponent<Player>();
         rb = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>();
-        spriteRenderer = GetComponentInChildren<SpriteRenderer>(); // Body 안에서 찾아짐
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
+        // 공통 Player 컴포넌트 가져오기
+        player = GetComponent<Player>();
+
+        // 직업 구분
         warrior = GetComponentInChildren<Warrior>();
-        if (warrior == null)
-        {
-            Debug.LogError("Warrior 스크립트를 찾을 수 없습니다.");
-        }
+        archer = GetComponentInChildren<Archer>();
+        wizard = GetComponentInChildren<Wizard>();
 
-        player = warrior != null ? warrior : GetComponent<Player>();
+        if (warrior != null)
+        {
+            player = warrior;
+        }
+        else if (archer != null)
+        {
+            player = archer;
+        }
+        else if (wizard != null)
+        {
+            player = wizard;
+        }
+        else
+        {
+            Debug.LogError("플레이어 직업 스크립트를 찾을 수 없습니다.");
+        }
     }
 
     private void OnEnable()
@@ -54,14 +77,13 @@ public class PlayerController : MonoBehaviour
         Vector2 move = inputVector * player.MoveSpeed * Time.fixedDeltaTime;
         player.Rb.MovePosition(player.Rb.position + move);
 
-        // 애니메이션 갱신
         animator.SetFloat("Run", inputVector.magnitude);
 
-        // 오른쪽 이동 중이면 flip, 왼쪽이면 원래 방향
+        // 방향 처리
         if (inputVector.x > 0.01f)
-            spriteRenderer.flipX = true;   // 오른쪽 → 반전
+            spriteRenderer.flipX = true;
         else if (inputVector.x < -0.01f)
-            spriteRenderer.flipX = false;  // 왼쪽 → 기본
+            spriteRenderer.flipX = false;
 
         if (attackCooldown > 0f)
             attackCooldown -= Time.fixedDeltaTime;
@@ -71,26 +93,36 @@ public class PlayerController : MonoBehaviour
 
     private void OnAttackPerformed(InputAction.CallbackContext context)
     {
-        if (attackCooldown > 0f || warrior == null)
+        if (attackCooldown > 0f || player == null)
             return;
 
-        // 공격 애니메이션 실행
         if (inputVector.magnitude > 0.1f)
             animator.SetTrigger("Run_Attack");
         else
             animator.SetTrigger("Idle_Attack");
 
-        // 쿨타임 설정 (초당 공격 횟수 기준 → 간격은 1 / 속도)
-        float delay = 1f / warrior.AttackSpeed;
-        attackCooldown = delay;
-
-        // 1) 마우스 스크린→월드 좌표 변환
         Vector3 ms = Mouse.current.position.ReadValue();
         Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(ms);
         mouseWorld.z = 0f;
 
-        // 2) 공격 컨트롤러 호출
-        attackController.AttackByMouse(mouseWorld);
-
+        // 직업별 공격 처리
+        if (warrior != null && warriorAttackController != null)
+        {
+            float delay = 1f / warrior.AttackSpeed;
+            attackCooldown = delay;
+            warriorAttackController.AttackByMouse(mouseWorld);
+        }
+        else if (archer != null && archerAttackController != null)
+        {
+            float delay = 1f / archer.AttackSpeed;
+            attackCooldown = delay;
+            archerAttackController.ShootArrow(mouseWorld);
+        }
+        else if (wizard != null && wizardAttackController != null)
+        {
+            float delay = 1f / wizard.AttackSpeed;
+            attackCooldown = delay;
+            wizardAttackController.CastSpell(mouseWorld);
+        }
     }
 }
