@@ -242,6 +242,9 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
     // [이벤트함수] Dead 애니메이션 마지막 프레임에 추가
     public virtual void OnDeadEnd()
     {
+        //var dropManager = FindObjectOfType<ItemDropManager>();
+        var player = GameManager.Instance.player;
+        float itemAP = player != null ? player.ItemAcquisitionProbability : 0f;
         itemDropManager.TryDropItem(transform.position);
         PoolManager.Instance.Push(this.gameObject);
     }
