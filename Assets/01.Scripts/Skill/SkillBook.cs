@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class SkillBook : MonoBehaviour
 {
+    
+    public static int MAX_SKILL_LEVEL = 6;
+    public static int MAX_SKILL_COUNT = 6;
 
     public void LoadSkill(SkillType skillType, int level)
     {
@@ -36,14 +39,30 @@ public class SkillBook : MonoBehaviour
                     // 뒤의 SkillIndex를 바꾸거나 추가로 AddSkill()을 할 것.
                     AddSkill(type, 10001);
                     LevelUpSkill(type);
-
-                    Debug.Log(SkillManager.Instance.SkillList[0]);
-                    Debug.Log(SkillManager.Instance.ActivatedSkills[0]);
-                    Debug.Log(SkillManager.Instance.SavedBattleSkill[SkillType.HolyProjectile]);
-                    Debug.Log(SkillManager.Instance.SavedBattleSkill.Count);
+                    // 이렇게 직접 레벨업 시키는 건 처음 시작시 세팅만 이렇고, 이후는 스킬카드UI의 버튼을 통해 LevelUpSkill이 실행됨
                 }
             }
         });
+    }
+
+    
+    public List<SkillBase> RecommendSkills()
+    {
+        List<SkillBase> skillList = SkillManager.Instance.SkillList.ToList();
+        List<SkillBase> activeSkills = skillList.FindAll(skill => skill.IsLearnedSkill);
+
+        if (activeSkills.Count == MAX_SKILL_COUNT)
+        {
+            List<SkillBase> recommendSkills = activeSkills.FindAll(s => s.Level < MAX_SKILL_LEVEL);
+            recommendSkills.Shuffle();
+            return recommendSkills.Take(3).ToList();
+        }
+        else
+        {
+            List<SkillBase> recommendSkills = skillList.FindAll(s => s.Level < MAX_SKILL_LEVEL);
+            recommendSkills.Shuffle();
+            return recommendSkills.Take(3).ToList();
+        }
     }
 
 
@@ -66,6 +85,7 @@ public class SkillBook : MonoBehaviour
     {
         SkillManager.Instance.ActivatedSkills.Add(skill);
     }
+    
 
     public void LevelUpSkill(SkillType skillType)
     {
