@@ -92,6 +92,12 @@ public class Player : MonoBehaviour, IEquipable, IDamagable
 
     public CharacterClass CharacterClass { get; protected set; } = CharacterClass.Warrior;
 
+    SpriteRenderer spriteRenderer;
+    private Coroutine hitFlashRoutine;
+    private Color originalColor;
+    private Color hitColor = Color.red;
+    private float flashDuration = 0.2f;
+
 
     void Awake()
     {
@@ -107,6 +113,7 @@ public class Player : MonoBehaviour, IEquipable, IDamagable
         transform.position = Vector3.zero;
 
         GameManager.Instance.player = this;
+        spriteRenderer = GetComponent<SpriteRenderer>();
         tf = GetComponent<Transform>();
         rb = GetComponent<Rigidbody2D>();
 
@@ -163,10 +170,35 @@ public class Player : MonoBehaviour, IEquipable, IDamagable
         hp -= damage;
         hp = Mathf.Max(hp, 0);
 
+        PlayHitFlash();
+
         if (hp <= 0)
         {
             Die();
         }
+    }
+    private void PlayHitFlash()
+    {
+        if (hitFlashRoutine != null)
+            StopCoroutine(hitFlashRoutine);
+
+        hitFlashRoutine = StartCoroutine(HitFlashRoutine());
+    }
+
+    private IEnumerator HitFlashRoutine()
+    {
+        spriteRenderer.color = hitColor;
+
+        float timer = 0f;
+        while (timer < flashDuration)
+        {
+            timer += Time.deltaTime;
+            float t = timer / flashDuration;
+            spriteRenderer.color = Color.Lerp(hitColor, originalColor, t);
+            yield return null;
+        }
+
+        spriteRenderer.color = originalColor;
     }
 
     private void Die()
