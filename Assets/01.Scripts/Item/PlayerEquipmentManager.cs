@@ -8,8 +8,10 @@ public class PlayerEquipmentManager : MonoBehaviour
 {
     public static PlayerEquipmentManager Instance { get; private set; }
     
-    private Dictionary<ItemType, GeneratedItem> equipped = new();
-    private IEquipable playerStats;
+    // 직업별 장착 정보
+    private Dictionary<CharacterClass, Dictionary<ItemType, GeneratedItem>> equippedPerClass = new();
+    private Dictionary<ItemType, GeneratedItem> currentEquipped => GetEquippedFor(player.CharacterClass);
+
     private Player player;
     
     public Dictionary<string, int> equippedSetCounts = new(); // 세트 이름별 장착 개수
@@ -19,10 +21,25 @@ public class PlayerEquipmentManager : MonoBehaviour
     {
         Instance = this;
         player = FindObjectOfType<Player>();
+        
+        foreach (CharacterClass cls in Enum.GetValues(typeof(CharacterClass)))
+        {
+            if (!equippedPerClass.ContainsKey(cls))
+                equippedPerClass[cls] = new Dictionary<ItemType, GeneratedItem>();
+        }
+    }
+    
+    private Dictionary<ItemType, GeneratedItem> GetEquippedFor(CharacterClass cls)
+    {
+        if (!equippedPerClass.ContainsKey(cls))
+            equippedPerClass[cls] = new Dictionary<ItemType, GeneratedItem>();
+        return equippedPerClass[cls];
     }
 
     public void Equip(GeneratedItem item)
     {
+        currentEquipped[item.itemType] = item;
+        
         // 일반 옵션 적용
         foreach (var opt in item.options)
         {
@@ -52,6 +69,9 @@ public class PlayerEquipmentManager : MonoBehaviour
 
     public void Unequip(GeneratedItem item)
     {
+        if (currentEquipped.ContainsKey(item.itemType))
+            currentEquipped.Remove(item.itemType);
+        
         // 일반 옵션 제거
         foreach (var opt in item.options)
         {
@@ -74,6 +94,37 @@ public class PlayerEquipmentManager : MonoBehaviour
         {
             RemoveSetBonuses(item.setItemData);
         }
+    }
+    
+    public void UnequipAll()
+    {
+        var equippedItems = new List<GeneratedItem>(currentEquipped.Values);
+        foreach (var item in equippedItems)
+        {
+            Unequip(item);
+        }
+    }
+    
+    public void SaveCurrentEquipment(CharacterClass cls)
+    {
+        equippedPerClass[cls] = new Dictionary<ItemType, GeneratedItem>(currentEquipped);
+    }
+    
+    public void LoadEquipmentForClass(CharacterClass cls)
+    {
+        if (!equippedPerClass.ContainsKey(cls)) return;
+
+        UnequipAll();
+
+        foreach (var kvp in equippedPerClass[cls])
+        {
+            Equip(kvp.Value);
+        }
+    }
+    
+    public Dictionary<ItemType, GeneratedItem> GetCurrentEquippedItems()
+    {
+        return new Dictionary<ItemType, GeneratedItem>(currentEquipped);
     }
     
     void ApplySetBonuses(SetItemData setItem)

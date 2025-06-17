@@ -89,6 +89,12 @@ public class JobChoicePanel : MonoBehaviour
     /// <param name="selectedClass">선택한 직업 프리팹</param>
     public void SetPlayerClass(GameObject selectedClass)
     {
+        // === 기존 장착 상태 저장 ===
+        if (GameManager.Instance != null && GameManager.Instance.player != null)
+        {
+            PlayerEquipmentManager.Instance.SaveCurrentEquipment(GameManager.Instance.player.CharacterClass);
+        }
+        
         // 기존의 플레이어 오브젝트(태그가 Player인)를 찾고 삭제합니다.
         GameObject existingPlayer = GameObject.FindWithTag("Player");
         if (existingPlayer != null)
@@ -102,6 +108,13 @@ public class JobChoicePanel : MonoBehaviour
         // 새 플레이어의 태그와 레이어를 설정
         newPlayer.tag = "Player";
         newPlayer.layer = LayerMask.NameToLayer("Player");
+        
+        // === 새 플레이어 등록 및 장비 로드 ===
+        GameManager.Instance.player = newPlayer.GetComponent<Player>();
+        PlayerEquipmentManager.Instance.LoadEquipmentForClass(GameManager.Instance.player.CharacterClass);
+        
+        // 장착 UI 자동 갱신
+        ItemEquipHandler.Instance.RefreshUI();
 
         Debug.Log("새 플레이어 생성됨: " + newPlayer.name + ", 위치: " + newPlayer.transform.position);
 
