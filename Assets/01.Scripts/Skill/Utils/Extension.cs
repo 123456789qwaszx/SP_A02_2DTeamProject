@@ -9,6 +9,10 @@ public static class Extension
     {
         return sb != null && sb.isActiveAndEnabled;
     }
+    public static bool IsValid(this MonsterBase mb)
+    {
+        return mb != null && mb.isActiveAndEnabled;
+    }
 
     // List를 섞는 용도. 랜덤한놈 뽑아서 리스트 끝으로 보내고, 그놈 제외, 반복
     public static void Shuffle<T>(this IList<T> list)
