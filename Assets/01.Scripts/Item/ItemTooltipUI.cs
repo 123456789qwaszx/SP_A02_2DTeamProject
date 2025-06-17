@@ -105,6 +105,27 @@ public class ItemTooltipUI : MonoBehaviour
             priceText.text = $"<b>판매 가격:</b> {item.sellPrice:N0} G";
         }
         
+        LayoutRebuilder.ForceRebuildLayoutImmediate(panel.GetComponent<RectTransform>());
+
+        // 이제 보여주기
+        panel.SetActive(true);
+        
+        // 한 프레임 뒤에 위치 조정
+        StartCoroutine(SetPositionDelayed(position));
+    }
+
+    private IEnumerator SetPositionDelayed(Vector3 basePosition)
+    {
+        yield return null; // 한 프레임 대기: Layout이 완전히 적용된 이후
+
+        Vector3 offset = new Vector3(260f, -210f, 0f);
+        Vector3 pos = basePosition + offset;
+
+        // 패널 크기 기반으로 화면 안에 맞게 위치 제한
+        RectTransform rect = panel.GetComponent<RectTransform>();
+        pos.x = Mathf.Min(pos.x, Screen.width - rect.rect.width);
+        pos.y = Mathf.Max(pos.y, rect.rect.height);
+        panel.transform.position = pos;
     }
 
     public void Hide()

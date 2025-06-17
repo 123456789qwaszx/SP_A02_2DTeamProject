@@ -5,8 +5,20 @@ using UnityEngine;
 
 public class ItemEquipHandler : MonoBehaviour
 {
+    public static ItemEquipHandler Instance { get; private set; }
+
     [SerializeField] private EquipmentslotUI[] equipmentSlots;
 
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+    }
+    
     /// <summary>
     /// 아이템을 해당 슬롯에 장착 시도
     /// </summary>
