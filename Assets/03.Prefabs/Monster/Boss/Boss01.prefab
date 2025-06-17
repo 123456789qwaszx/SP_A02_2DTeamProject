@@ -101,7 +101,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 20
+  m_Mass: 30
   m_LinearDrag: 7
   m_AngularDrag: 0
   m_GravityScale: 0
@@ -200,9 +200,9 @@ MonoBehaviour:
     m_Bits: 128
   knockbackForce: 3
   knockbackDuration: 0.1
+  warningPrefab: {fileID: 5039214428068450727, guid: 338d98dccbd42384f9ddbb85687cb89a, type: 3}
   phaseChangeEffect: {fileID: 0}
   phaseChangeSound: {fileID: 0}
-  warningPrefab: {fileID: 5039214428068450727, guid: 338d98dccbd42384f9ddbb85687cb89a, type: 3}
   canDashAttack: 1
 --- !u!1 &4226210471101452738
 GameObject:

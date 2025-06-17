@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41ecb1750091ae741b339afce7833228, type: 3}
+  m_Name: 07_WindCutter
+  m_EditorClassIdentifier: 
+  SkillIndex: 10071
+  Description: "\uBC94\uC704\uACF5\uACA9, \uAD00\uD1B5\uAC00\uB2A5"
+  Type: 10071
+  Icon: {fileID: 0}
+  SkillPrefabs: {fileID: -904468901469223701, guid: 99f38a0cd42f7b64ab8b8bfe5135621f, type: 3}
+  PrefabLabel: WindCutter
+  DamageMultiplire: 1
+  AttackInterval: 0.7
+  CoolTime: 0.7
+  CastingEffect: 0
+  CastingEffectPercentage: 0
+  projectileCount: 5
+  ScaleMultiplier: 1
+  projectileSpeed: 5
+  NumPenerations: 10
+  NumBounce: 0
+  BounceSpeed: 0
+  AngleBetweenProj: 0
+  BounceDist: 0
+  ProjRange: 0
+  ProjectileSpacing: 0
+  Duration: 5
+  attackRangeMultiplier: 1

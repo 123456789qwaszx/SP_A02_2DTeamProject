@@ -109,7 +109,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed8568c1abaa76e4985fe1c8d528c34d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackController: {fileID: 8001135491693849236}
+  warriorAttackController: {fileID: 8001135491693849236}
+  archerAttackController: {fileID: 6230439534645906233, guid: 76c797dc2d247c546b16d2b7dc611e02, type: 3}
+  wizardAttackController: {fileID: 6290640231568760597, guid: 2edb897d9bc751c4eafeb4f936ca14e9, type: 3}
 --- !u!114 &8166582688296708884
 MonoBehaviour:
   m_ObjectHideFlags: 0

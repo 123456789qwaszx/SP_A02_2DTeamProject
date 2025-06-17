@@ -11,7 +11,7 @@ public class ItemDropTest : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.G)) // G 키 누르면 드랍
         {
             Vector3 dropPos = transform.position;
-            dropManager.TryDropItem(dropPos);
+            dropManager.TryDropItem(dropPos, 100f);
         }
     }
 }

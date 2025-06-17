@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5382989704404599897}
   - component: {fileID: 3970348781095722153}
   - component: {fileID: 3597349425929305672}
-  - component: {fileID: 7067326600421885519}
+  - component: {fileID: 5625071855823266201}
   - component: {fileID: 3588375578952271104}
   m_Layer: 8
   m_Name: final_boss
@@ -74,8 +74,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1912248447
+  m_SortingLayer: 2
   m_SortingOrder: 6
   m_Sprite: {fileID: 161721063, guid: 56b59a0bbfd2d44b295ea9f04bcd5531, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -136,8 +136,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!61 &7067326600421885519
-BoxCollider2D:
+--- !u!58 &5625071855823266201
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -168,19 +168,9 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 8.816387, y: 7.93}
-    newSize: {x: 8.816387, y: 7.93}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Offset: {x: -0.10185051, y: 0.10185051}
   serializedVersion: 2
-  m_Size: {x: 8.816387, y: 7.93}
-  m_EdgeRadius: 0
+  m_Radius: 3.669775
 --- !u!114 &3588375578952271104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199,6 +189,10 @@ MonoBehaviour:
     m_Bits: 0
   knockbackForce: 5
   knockbackDuration: 0.1
+  warningPrefab: {fileID: 0}
   phase2Effect: {fileID: 0}
   phase3Effect: {fileID: 0}
   phaseChangeSound: {fileID: 0}
+  largeWarningPrefab: {fileID: 0}
+  explosionEffectPrefab: {fileID: 0}
+  aoeRadius: 1.5

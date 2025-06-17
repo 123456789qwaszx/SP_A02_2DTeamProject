@@ -13,7 +13,7 @@ public class ItemGenerator : MonoBehaviour
         {
             ItemType.Sword or ItemType.Axe => CharacterClass.Warrior,
             ItemType.Bow or ItemType.Crossbow => CharacterClass.Archer,
-            ItemType.Staff or ItemType.Wand => CharacterClass.Mage,
+            ItemType.Staff or ItemType.Wand => CharacterClass.Wizard,
             _ => CharacterClass.All
         };
     }
