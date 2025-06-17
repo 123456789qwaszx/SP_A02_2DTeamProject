@@ -91,27 +91,23 @@ public class ProjectileController : SkillBase
 
     IEnumerator CoHolyPulse()
     {
-        List<MonsterBase> target = ObjectManager.Instance.GetMonsterWithinCamera(1);
+        Vector3 targePoint = GameManager.Instance.controller.transform.position + _dir * Skill.SkillData.projectileSpeed * 3;
+
+        Sequence seq = DOTween.Sequence();
+
+
+        seq.Append(transform.DOMove(targePoint, 5f).SetEase(Ease.Linear));
+
+        yield return new WaitForSeconds(3f/*Skill.SkillData.Duration*/);
+
         while (true)
         {
-            _timer += Time.deltaTime;
-            if (_timer > 3 || target == null)
+            transform.position = Vector2.MoveTowards(this.transform.position, GameManager.Instance.controller.transform.position, Time.deltaTime * Skill.SkillData.projectileSpeed * 4f);
+            if (GameManager.Instance.controller.transform.position == transform.position)
             {
                 DestroyProjectile();
-                _timer = 0;
                 break;
             }
-
-            // if (target[0].IsValid() == false)
-            //     break;
-
-            Vector2 direction = (Vector2)target[0].transform.position - _rigid.position;
-            float rotateSpeed = Vector3.Cross(direction.normalized, transform.up).z;
-            _rigid.angularVelocity = -_rotateAmount * rotateSpeed;
-            _rigid.velocity = transform.up * Skill.SkillData.projectileSpeed;
-
-            //if (Vector2.Distance(_rigid.position, targetPos) < 0.3f)
-            //    ExplosionMeteor();
             yield return new WaitForFixedUpdate();
         }
     }
@@ -126,7 +122,6 @@ public class ProjectileController : SkillBase
 
     IEnumerator CoArrow()
     {
-
         Vector2 direction = (Vector2)GameManager.Instance.controller.transform.position + new Vector2(5, 0) - _rigid.position;
         float rotateSpeed = Vector3.Cross(direction.normalized, transform.up).z;
         _rigid.angularVelocity = -_rotateAmount * rotateSpeed;
@@ -232,6 +227,14 @@ public class ProjectileController : SkillBase
         switch (Skill.SkillType)
         {
             case SkillType.HolyProjectile:
+                _numPenerations--;
+                if (_numPenerations < 0)
+                {
+                    _rigid.velocity = Vector3.zero;
+                    //SpawnHolyImpact(Skill.transform.position);
+                    DestroyProjectile();
+                }
+                break;
             case SkillType.HolyPulse:
                 _numPenerations--;
                 if (_numPenerations < 0)
@@ -262,7 +265,6 @@ public class ProjectileController : SkillBase
             default:
                 break;
         }
-        Debug.Log(creature);
         creature.TakeDamage(Skill.TotalDamage);
     }
 
@@ -283,4 +285,30 @@ public class ProjectileController : SkillBase
             _coDotDamage = null;
         }
     }
+
+
+    // 스킬 이펙트
+    // 따로 클래스를 만들기엔 하나뿐이라 이렇게 빼둠.
+    // HolyProjectile에서 직접 연결해주기
+    // #region HolyImpact
+    // public GameObject holyImpact_Prefab;
+
+    // public ProjectileController SpawnHolyImpact(Vector2 position)
+    // {
+    //     GameObject go = PoolManager.Instance.Pop(holyImpact_Prefab);
+    //     go.transform.position = position;
+
+    //     ProjectileController sc = go.GetComponent<ProjectileController>();
+    //     sc.Init();
+
+    //     if (gameObject.activeInHierarchy)
+    //         StartCoroutine(CoCheckDestory());
+    //     return sc;
+    // }
+
+    // public void DeSpawnHolyImpact(ProjectileController go)
+    // {
+    //     PoolManager.Instance.Push(go.gameObject);
+    // }
+    // #endregion
 }

@@ -30,7 +30,7 @@ public class SkillBook : MonoBehaviour
                 // 직업 추가 등의 이유로 바꾸거나, 종류를 늘려주고 싶다면
                 // 뒤의 SkillIndex를 바꾸거나 추가로 AddSkill()을 할 것.
                 AddSkill(HolyProjectile, 10001);
-                LevelUpSkill(HolyProjectile);
+                //LevelUpSkill(HolyProjectile);
 
                 AddSkill(HolyPulse, 10011);
                 LevelUpSkill(HolyPulse);

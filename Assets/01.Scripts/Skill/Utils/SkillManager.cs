@@ -6,36 +6,6 @@ using UnityEngine;
 
 public class SkillManager : Singleton<SkillManager>
 {
-    #region HolyProjectile
-    public void DespawnHolyProJectile(ProjectileController go)
-    {
-        Instance.SpawnHolyImpact(go.transform.position);
-
-        PoolManager.Instance.Push(go.gameObject);
-    }
-    #endregion
-
-    #region HolyImpact
-    public GameObject holyImpact_Prefab;
-
-    public ProjectileController SpawnHolyImpact(Vector2 position)
-    {
-        GameObject go = PoolManager.Instance.Pop(holyImpact_Prefab);
-        go.transform.position = position;
-
-        ProjectileController sc = go.GetComponent<ProjectileController>();
-        sc.Init();
-
-        return sc;
-    }
-
-    public void DeSpawnHolyImpact(ProjectileController go)
-    {
-        PoolManager.Instance.Push(go.gameObject);
-    }
-    #endregion
-
-
     [SerializeField]
     private List<SkillBase> _skillList = new List<SkillBase>();
     public List<SkillBase> SkillList { get { return _skillList; } }

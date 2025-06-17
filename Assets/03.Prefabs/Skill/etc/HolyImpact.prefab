@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2138419697641803927}
   - component: {fileID: 1325595109690105809}
   - component: {fileID: 195621506506489583}
+  - component: {fileID: 7705741491717837656}
   m_Layer: 6
   m_Name: HolyImpact
   m_TagString: Untagged
@@ -152,3 +153,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &7705741491717837656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3719929905020187563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ace88a3780a848240a6fd3c0f7d62da7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  indicator: {fileID: 0}
+  SkillData: {fileID: 0}
+  NumProjectiles: 0
+  ProjectileSpacing: 0
+  _bounceCount: 1
+  _projectileSpeed: 1
+  _attackInterval: 0
+  holyImpact_Prefab: {fileID: 0}
