@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class StageManager : Singleton<StageManager>
@@ -8,9 +9,10 @@ public class StageManager : Singleton<StageManager>
     public StageType currentStageType;
 
     private MonsterSpawnManager monsterSpawnManager;
-
     private float stageTimer = 0f;
     private bool isStageCleared = false;
+
+    
 
     private void Awake()
     {
@@ -31,6 +33,8 @@ public class StageManager : Singleton<StageManager>
     {
         monsterSpawnManager = MonsterSpawnManager.Instance;
         SetupStage(GameManager.Instance.currentStage);
+
+        GameObject playTimeTxt = GameObject.Find("PlayTimeTxt");
     }
 
     private void Update()
@@ -40,17 +44,19 @@ public class StageManager : Singleton<StageManager>
 
         stageTimer += Time.deltaTime;
 
+        UIManager.Instance.UpdatePlayTime(stageTimer);
+
         if (Input.GetKeyDown(KeyCode.F))
         {
-            ForceClear(); // 디버그용 강제 클리어
+            ForceClear();
         }
 
         if (currentStageType == StageType.Normal && stageTimer >= 900f)
         {
             StageClear();
         }
-        // 보스 및 최종보스는 OnDeadEnd()에서 StageClear 호출
     }
+
 
     public void SetupStage(int stage)
     {
@@ -60,7 +66,7 @@ public class StageManager : Singleton<StageManager>
         SetupStageType(stage);
     }
 
-    void SetupStageType(int stage)
+    private void SetupStageType(int stage)
     {
         string sceneName = SceneManager.GetActiveScene().name;
 
