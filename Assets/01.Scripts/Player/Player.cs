@@ -125,6 +125,8 @@ public class Player : MonoBehaviour, IEquipable, IDamagable
 
     void Start()
     {
+        Initialize();
+
         DontDestroyOnLoad(gameObject);
 
         // 씬 전환 시 자동으로 (0,0,0) 위치로 재배치
