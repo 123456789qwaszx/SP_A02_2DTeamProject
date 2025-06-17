@@ -6,8 +6,15 @@ using static StageManager;
 public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
 {
     [Header("몬스터 프리팹")]
-    public GameObject[] regularMonsterPrefabs;
-    public GameObject[] eliteMonsterPrefabs;
+    public GameObject[] regularPrefabs_1_5;
+    public GameObject[] elitePrefabs_1_5;
+
+    public GameObject[] regularPrefabs_6_10;
+    public GameObject[] elitePrefabs_6_10;
+
+    public GameObject[] regularPrefabs_11_16;
+    public GameObject[] elitePrefabs_11_16;
+
     public GameObject[] midBossPrefabs;
     public GameObject[] bossPrefabs;
     public GameObject finalBossPrefab;
@@ -38,14 +45,8 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
     void Start()
     {
         PlayerController controller = FindObjectOfType<PlayerController>();
-        if (controller == null)
-        {
-            Debug.LogError("❌ PlayerController를 씬에서 찾을 수 없습니다.");
-            return;
-        }
-
+        
         player = controller.transform;
-        Debug.Log($"✅ player 할당 성공 → {player.name}");
 
         SetupStage(StageType.Normal);
     }
@@ -66,7 +67,7 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
         {
             if (playTime >= timing && !triggeredTimes.Contains(timing))
             {
-                SpawnFromPool(eliteMonsterPrefabs);
+                SpawnFromPool(GetElitePrefabs());
                 triggeredTimes.Add(timing);
             }
         }
@@ -98,7 +99,8 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
         while (isSpawning)
         {
             Vector3 pos = GetValidSpawnPosition();
-            GameObject prefab = regularMonsterPrefabs[Random.Range(0, regularMonsterPrefabs.Length)];
+            GameObject[] prefabs = GetRegularPrefabs();
+            GameObject prefab = prefabs[Random.Range(0, prefabs.Length)];
             GameObject monster = PoolManager.Instance.Pop(prefab);
             
             MonsterBase monsterBase = monster.GetComponent<MonsterBase>();
@@ -116,7 +118,8 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
             if (playTime >= 900f) yield break;
 
             float radius = (minSpawnDistance + maxSpawnDistance) / 2f;
-            GameObject prefab = regularMonsterPrefabs[Random.Range(0, 2)];
+            GameObject[] prefabs = GetRegularPrefabs();
+            GameObject prefab = prefabs[Random.Range(0, 6)];
 
             for (int i = 0; i < surroundMonstersCount; i++)
             {
@@ -131,6 +134,29 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
                 }
             }
         }
+    }
+    private GameObject[] GetRegularPrefabs()
+    {
+        int stage = GameManager.Instance.currentStage;
+
+        if (stage >= 1 && stage <= 5)
+            return regularPrefabs_1_5;
+        else if (stage >= 6 && stage <= 10)
+            return regularPrefabs_6_10;
+        else
+            return regularPrefabs_11_16;
+    }
+
+    private GameObject[] GetElitePrefabs()
+    {
+        int stage = GameManager.Instance.currentStage;
+
+        if (stage >= 1 && stage <= 5)
+            return elitePrefabs_1_5;
+        else if (stage >= 6 && stage <= 10)
+            return elitePrefabs_6_10;
+        else
+            return elitePrefabs_11_16;
     }
 
     void SpawnFromPool(GameObject[] prefabs)
@@ -243,8 +269,8 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
             switch (phase)
             {
                 case 2:
-                    SpawnFromPool(eliteMonsterPrefabs);
-                    SpawnFromPool(regularMonsterPrefabs);
+                    SpawnFromPool(GetElitePrefabs());
+                    SpawnFromPool(GetRegularPrefabs());
                     break;
 
                 case 3:
