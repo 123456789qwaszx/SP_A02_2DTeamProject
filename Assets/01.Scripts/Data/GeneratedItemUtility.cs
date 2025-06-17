@@ -30,7 +30,8 @@ public static class GeneratedItemUtility
             buyPrice = data.buyPrice,
             sellPrice = data.sellPrice,
             usableClass = data.usableClass,
-            options = data.options.Select(opt => (Enum.Parse<ItemOptionType>(opt.optionName), opt.value)).ToList()
+            options = data.options.Select(opt => (Enum.Parse<ItemOptionType>(opt.optionName), opt.value)).ToList(),
+            //icon = ItemIconManager.Instance.GetIcon(data.itemType)
         };
     }
 }
