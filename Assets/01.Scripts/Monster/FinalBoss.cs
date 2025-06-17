@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FinalBoss : MonsterBase
 {
@@ -219,5 +220,6 @@ public class FinalBoss : MonsterBase
     {
         base.OnDeadEnd();
         StageManager.Instance.StageClear();
+        SceneManager.LoadScene("EndingScene");
     }
 }

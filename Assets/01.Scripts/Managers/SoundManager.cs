@@ -11,7 +11,8 @@ public enum SceneType
     Lv2_Poison,
     Lv3_Desert,
     Lv4_Gold,
-    Final
+    Final,
+    EndingScene
 }
 
 public class SoundManager : Singleton<SoundManager>
@@ -27,6 +28,7 @@ public class SoundManager : Singleton<SoundManager>
     [SerializeField] private AudioClip bgm_Lv3Desert;
     [SerializeField] private AudioClip bgm_Lv4Gold;
     [SerializeField] private AudioClip bgm_Final;
+    [SerializeField] private AudioClip endingScene;
 
     [Header("SFX Pooling")]
     [SerializeField] private int sfxSourcePoolSize = 20;
@@ -78,6 +80,7 @@ public class SoundManager : Singleton<SoundManager>
             case "Dun_Lv.3_DesertScene": return SceneType.Lv3_Desert;
             case "Dun_Lv.4_GoldScene": return SceneType.Lv4_Gold;
             case "Dun_FinalScene": return SceneType.Final;
+            case "EndingScene": return SceneType.EndingScene;
 
             default: return SceneType.Main;
         }
@@ -111,11 +114,17 @@ public class SoundManager : Singleton<SoundManager>
             case SceneType.Final:
                 ChangeBGM(bgm_Final);
                 break;
+            case SceneType.EndingScene:
+                ChangeBGM(endingScene, 1f, 0.5f);
+                break;
+            default:
+                ChangeBGM(bgm_Main);
+                break;
         }
     }
 
     // BGM 전환 (자동 페이드)
-    public void ChangeBGM(AudioClip newClip, float fadeDuration = 2f, float targetVolume = 1f)
+    public void ChangeBGM(AudioClip newClip, float fadeDuration = 1f, float targetVolume = 0.8f)
     {
         if (bgmFadeCoroutine != null)
             StopCoroutine(bgmFadeCoroutine);
