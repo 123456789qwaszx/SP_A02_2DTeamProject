@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: 03_DirtySwing
   m_EditorClassIdentifier: 
   SkillIndex: 10031
-  Description: "\uBC94\uC704\uACF5\uACA9, \uAD00\uD1B5\uAC00\uB2A5"
+  Description: "\uBC94\uC704 \uD0C0\uACA9"
   Type: 10031
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: ea1367ce3402f1c45bdadbd351d0417b, type: 3}
   SkillPrefabs: {fileID: -2600564982684947179, guid: 40925d71a21585f41b7b62a194f09f24, type: 3}
   PrefabLabel: DirtySwing
   DamageMultiplire: 15
@@ -32,5 +32,6 @@ MonoBehaviour:
   AngleBetweenProj: 0
   BounceDist: 0
   ProjRange: 0
+  ProjectileSpacing: 0
   Duration: 5
   attackRangeMultiplier: 1

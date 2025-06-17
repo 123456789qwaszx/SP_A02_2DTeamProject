@@ -6,19 +6,8 @@ using UnityEngine;
 
 public class SkillBook : MonoBehaviour
 {
-
     public static int MAX_SKILL_LEVEL = 6;
     public static int MAX_SKILL_COUNT = 6;
-
-    public void LoadSkill(SkillType skillType, int level)
-    {
-        AddSkill(skillType);
-        for (int i = 0; i < level; i++)
-        {
-            LevelUpSkill(skillType);
-        }
-    }
-
 
     void Start()
     {
@@ -30,39 +19,45 @@ public class SkillBook : MonoBehaviour
             {
                 SkillManager.Instance.StartSkillLoad();
 
-                SkillType type = Util.GetSkillTypeFromInt(10001); //HolyProjectile
-                SkillType type1 = Util.GetSkillTypeFromInt(10011); // HolyPulse
+                SkillType HolyProjectile = SkillManager.Instance.GetSkillTypeFromInt(10001);
+                SkillType HolyPulse = SkillManager.Instance.GetSkillTypeFromInt(10011);
+                SkillType DarkArrow = SkillManager.Instance.GetSkillTypeFromInt(10021);
+                SkillType WindCutter = SkillManager.Instance.GetSkillTypeFromInt(10071);
+                SkillType BloodChain = SkillManager.Instance.GetSkillTypeFromInt(10111);
 
-                SkillType type2 = Util.GetSkillTypeFromInt(10021); // DarkArrow
-                SkillType type7 = Util.GetSkillTypeFromInt(10071); // WindCutter
-                SkillType type11 = Util.GetSkillTypeFromInt(10111); // BloodChain
-
-                //Test
-                //SkillType type2 = Util.GetSkillTypeFromInt(10021);
 
                 // 처음 무조건 들고 있는 스킬들.
                 // 직업 추가 등의 이유로 바꾸거나, 종류를 늘려주고 싶다면
                 // 뒤의 SkillIndex를 바꾸거나 추가로 AddSkill()을 할 것.
-                AddSkill(type, 10001);
-                LevelUpSkill(type);
+                AddSkill(HolyProjectile, 10001);
+                //LevelUpSkill(HolyProjectile);
 
-                AddSkill(type1, 10011);
-                LevelUpSkill(type1);
+                AddSkill(HolyPulse, 10011);
+                LevelUpSkill(HolyPulse);
 
-                AddSkill(type2, 10021);
-                LevelUpSkill(type2);
+                AddSkill(DarkArrow, 10021);
+                //LevelUpSkill(DarkArrow);
 
-                AddSkill(type7, 10071);
-                LevelUpSkill(type7);
+                AddSkill(WindCutter, 10071);
+                //LevelUpSkill(WindCutter);
 
-                AddSkill(type11, 10111);
-                //LevelUpSkill(type1);
+                AddSkill(BloodChain, 10111);
+                //LevelUpSkill(BloodChain);
                 // 이렇게 직접 레벨업 시키는 건 처음 시작시 세팅만 이렇고, 이후는 스킬카드UI의 버튼을 통해 LevelUpSkill이 실행됨
 
             }
         });
     }
 
+    
+    public void LoadSkill(SkillType skillType, int level)
+    {
+        AddSkill(skillType);
+        for (int i = 0; i < level; i++)
+        {
+            LevelUpSkill(skillType);
+        }
+    }
 
     public List<SkillBase> RecommendSkills()
     {
@@ -124,67 +119,4 @@ public class SkillBook : MonoBehaviour
     {
         SkillManager.Instance.SavedBattleSkill.Clear();
     }
-
-
-
-    #region Refactor예정
-    [Header("HolyProjectile")]
-    public Transform indicator;
-
-
-    #region HolyProjectile
-    Coroutine _coProjectile;
-
-    public void StartProjectile()
-    {
-        if (_coProjectile != null)
-            StopCoroutine(_coProjectile);
-
-        _coProjectile = StartCoroutine(CoStartProjectile());
-    }
-
-    IEnumerator CoStartProjectile()
-    {
-        do
-        {
-            Vector2 dir = -(transform.position - indicator.position).normalized;
-
-            ProjectileController skill = SkillManager.Instance.SpawnHolyProjectile(transform.position);
-            skill.transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
-
-
-            skill.SetInfo(GameManager.Instance.controller, GameManager.Instance.controller.transform.position, -(transform.position - indicator.position).normalized, indicator.transform.position, skill);
-            yield return new WaitForSeconds(skill._attackInterval);
-        }
-
-        while (true);
-    }
-    #endregion
-
-    #region HolyPulse
-    // Coroutine _coPulse;
-
-    // void StartPulse()
-    // {
-    //     if (_coPulse != null)
-    //         StopCoroutine(_coPulse);
-
-    //     _coPulse = StartCoroutine(CoStartPulse());
-    // }
-
-    // IEnumerator CoStartPulse()
-    // {
-    //     do
-
-    //     {
-    //         ProjectileController skill = SkillManager.Instance.SpawnHolyPulse(transform.position);
-
-    //         skill.SetInfo(GameManager.Instance.controller, GameManager.Instance.controller.transform.position, -(transform.position - indicator.position).normalized, indicator.transform.position, );
-    //         yield return new WaitForSeconds(skill._attackInterval);
-    //     }
-
-    //     while (true);
-    // }
-    #endregion
-    #endregion
 }

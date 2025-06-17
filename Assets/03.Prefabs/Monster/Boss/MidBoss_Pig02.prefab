@@ -198,8 +198,10 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 128
-  knockbackForce: 5
+  knockbackForce: 2.5
   knockbackDuration: 0.1
+  hitSFX: {fileID: 8300000, guid: 358b677ceec55294aa7d771f96dbeb26, type: 3}
+  deathSFX: {fileID: 8300000, guid: 17f390e2660183c4c8b25f1f3c94b875, type: 3}
   warningPrefab: {fileID: 0}
   baseDropChance: 5
   minDropCount: 1

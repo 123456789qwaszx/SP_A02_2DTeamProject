@@ -7,6 +7,8 @@ public class MonsterStateDead : MonsterStateBase
 
     public override void Enter()
     {
+        if (monster.deathSFX != null)
+            SoundManager.Instance.PlaySFX(monster.deathSFX);
         animator.SetTrigger("Dead");
     }
 }

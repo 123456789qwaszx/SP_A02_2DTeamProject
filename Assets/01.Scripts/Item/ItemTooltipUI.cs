@@ -28,7 +28,7 @@ public class ItemTooltipUI : MonoBehaviour
 
     public void Show(GeneratedItem item, Vector3 position)
     {
-        if (item == null) return;
+        if (item == null || Instance == null || iconImage == null) return;
         
         panel.SetActive(true);
         Vector3 offset = new Vector3(260f, -210f, 0f);

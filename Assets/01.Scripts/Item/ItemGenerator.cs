@@ -54,6 +54,8 @@ public class ItemGenerator : MonoBehaviour
             float val = opt.GetRandomValue(rarity);
             item.options.Add((opt.optionType, val));
         }
+        
+        item.sellPrice = ItemPriceCalculator.GetSellPrice(item);
 
         return item;
     }
@@ -78,6 +80,8 @@ public class ItemGenerator : MonoBehaviour
             item.uniqueOption = (data.uniqueOption.optionName, data.uniqueOption.value);
         }
 
+        item.sellPrice = ItemPriceCalculator.GetSellPrice(item);
+        
         return item;
     }
 
@@ -104,6 +108,8 @@ public class ItemGenerator : MonoBehaviour
             item.setBonuses.Add((bonus.optionName, bonus.value));
         }
 
+        item.sellPrice = ItemPriceCalculator.GetSellPrice(item);
+        
         return item;
     }
 }

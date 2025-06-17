@@ -110,5 +110,7 @@ public class PlayerLevel : MonoBehaviour
         currentLevel++;
         Debug.Log($"레벨업! 현재 레벨: {currentLevel}");
         // 레벨업 시 UI 업데이트, 효과음 재생 등 추가 가능
+        GameObject go = PoolManager.Instance.Pop(SkillManager.Instance.skillSelectPopup_Prefab);
+        Debug.Log("스킬선택창 팝업, 확인 후 삭제");
     }
 }

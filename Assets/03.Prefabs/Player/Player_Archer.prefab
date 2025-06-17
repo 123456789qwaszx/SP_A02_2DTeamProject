@@ -111,6 +111,7 @@ MonoBehaviour:
   warriorAttackController: {fileID: 8001135491693849236, guid: 7cc8fc202efe2f14798e023948e11f84, type: 3}
   archerAttackController: {fileID: 6230439534645906233}
   wizardAttackController: {fileID: 6290640231568760597, guid: 2edb897d9bc751c4eafeb4f936ca14e9, type: 3}
+  sklilbook: {fileID: 0}
 --- !u!70 &3531820447080114670
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -174,9 +175,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 0
   attackSpeed: 0
-  STR: 0
-  DEX: 0
-  INT: 0
+  str: 0
+  dex: 0
+  ints: 0
   hp: 0
   mp: 0
   maxHP: 0
@@ -235,7 +236,7 @@ GameObject:
   - component: {fileID: 8141099755012840009}
   - component: {fileID: 992576611036107926}
   - component: {fileID: 2165719685715943950}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}

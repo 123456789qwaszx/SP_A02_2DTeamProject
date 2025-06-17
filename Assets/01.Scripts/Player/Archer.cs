@@ -21,8 +21,10 @@ public class Archer : Player
         str = 10;
         dex = 20;
         ints = 10;
-        hp = 120;
-        mp = 50;
+        maxHP = 120; 
+    hp = maxHP;  
+    maxMP = 50;
+    mp = maxMP;
         itemAP = 0.1f;
 
         moveSpeed = 1 + DEX * 0.06f;
@@ -69,5 +71,33 @@ public class Archer : Player
         {
             return Attack;
         }
+    }
+
+    public override PlayerData GetPlayerData()
+    {
+        PlayerData data = base.GetPlayerData();
+        data.jobType = "Archer";
+        data.archerData = GetArcherData();
+        return data;
+    }
+
+    // Archer 전용 데이터를 반환하는 메서드
+    public ArcherData GetArcherData()
+    {
+        ArcherData data = new ArcherData();
+
+        BasePlayerData baseData = GetPlayerData().baseData;
+        // Base 스탯을 복사
+        data.CopyFrom(baseData);
+
+        // Archer 전용 스탯 복사
+        data.critBonus_Normal = this.critBonus_Normal;
+        data.critBonus_Special = this.critBonus_Special;
+        data.critBonus_Skill = this.critBonus_Skill;
+        data.critDamage_Normal = this.critDamage_Normal;
+        data.critDamage_Special = this.critDamage_Special;
+        data.critDamage_Skill = this.critDamage_Skill;
+
+        return data;
     }
 }

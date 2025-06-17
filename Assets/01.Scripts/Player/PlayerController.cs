@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        sklilbook = GetComponent<SkillBook>();
 
         // 공통 Player 컴포넌트 가져오기
         player = GetComponent<Player>();

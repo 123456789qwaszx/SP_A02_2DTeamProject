@@ -10,6 +10,8 @@ public class InventorySlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExit
     public Image rarityBorder;
 
     private GeneratedItem item;
+    
+    public SellConfirmPopup sellPopup;
 
     public void SetItem(GeneratedItem newItem)
     {
@@ -46,25 +48,28 @@ public class InventorySlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (item != null)
+        if (item != null && ItemTooltipUI.Instance != null)
             ItemTooltipUI.Instance.Show(item, transform.position);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        ItemTooltipUI.Instance.Hide();
+        if (ItemTooltipUI.Instance != null)
+            ItemTooltipUI.Instance.Hide();
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
         if (item == null) return;
 
-        if (eventData.button == PointerEventData.InputButton.Right)
+        if (ShopUIManager.Instance.IsShopOpen)
         {
-            bool equipped = FindObjectOfType<ItemEquipHandler>()?.TryEquipItem(item) ?? false;
 
-            if (equipped)
-                Clear(); // 장착 성공 시 슬롯 비움
+            if (sellPopup != null)
+            {
+                sellPopup.Open(item);
+            }
+            return;
         }
     }
 }
