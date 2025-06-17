@@ -22,7 +22,7 @@ public class Player : MonoBehaviour, IEquipable, IDamagable
     private CapsuleCollider col;
 
 
-    
+
     public float GetHP() => hp;
     public float GetMP() => mp;
     public float GetMaxHP() => maxHP; // 임시값, 나중에 성장 시스템 연동 가능
@@ -43,11 +43,11 @@ public class Player : MonoBehaviour, IEquipable, IDamagable
     [SerializeField] protected float hpRegenInterval; // HP회복속도 증가
     [SerializeField] protected float mpRegenInterval; // MP회복속도 증가
     [SerializeField] protected float itemAP;            // Item Acquisition Probability 아이템 획득 확률
-    
+
     [SerializeField] protected float projectileSpeed = 1.0f;  // 투사체 속도 배율
     [SerializeField] protected int projectileCount = 1;       // 투사체 수
     [SerializeField] protected float attackRangeMultiplier = 1.0f; // 공격 범위 배율
-    
+
     [Header("전투 스탯")]
     [SerializeField] protected float attack;           // 공격력
     [SerializeField] protected float specialAttack;    // 특수 공격력
@@ -55,7 +55,7 @@ public class Player : MonoBehaviour, IEquipable, IDamagable
     [SerializeField] protected float defense;          // 방어력
     [SerializeField] protected float critical;         // 크리티컬 확률 (%)
     [SerializeField] protected float critMultiplier;   // 치명타 피해량 증가
-    
+
     [Header("회복 스탯")]
     [SerializeField] public float hpRecovery;
     [SerializeField] public float mpRecovery;
@@ -86,12 +86,12 @@ public class Player : MonoBehaviour, IEquipable, IDamagable
     public float Critical => critical;
     public float CritMultiplier => critMultiplier;
 
-// 회복 스탯
+    // 회복 스탯
     public float HpRecovery => hpRecovery;
     public float MpRecovery => mpRecovery;
 
     public CharacterClass CharacterClass { get; protected set; } = CharacterClass.Warrior;
-    
+
 
     void Awake()
     {
@@ -149,7 +149,7 @@ public class Player : MonoBehaviour, IEquipable, IDamagable
             case ItemOptionType.투사체수증가: projectileCount += (int)value; break;
             case ItemOptionType.투사체속도증가: projectileSpeed += value; break; // 배율식 증가
             case ItemOptionType.공격범위증가: attackRangeMultiplier += value; break; // 예: 1.2배
-            // 필요한 항목만 점차 추가해도 됨
+                                                                               // 필요한 항목만 점차 추가해도 됨
         }
     }
 
@@ -173,4 +173,45 @@ public class Player : MonoBehaviour, IEquipable, IDamagable
     {
         // 사망 했을 때 어떻게 될지
     }
+
+    // 기본 스탯만 수집하는 헬퍼 메서드
+    public BasePlayerData GetBasePlayerData()
+    {
+        BasePlayerData baseData = new BasePlayerData();
+        baseData.moveSpeed = moveSpeed;
+        baseData.attackSpeed = attackSpeed;
+        baseData.str = str;
+        baseData.dex = dex;
+        baseData.ints = ints;
+        baseData.hp = hp;
+        baseData.mp = mp;
+        baseData.maxHP = maxHP;
+        baseData.maxMP = maxMP;
+        baseData.hpRegenAmount = hpRegenAmount;
+        baseData.mpRegenAmount = mpRegenAmount;
+        baseData.hpRegenInterval = hpRegenInterval;
+        baseData.mpRegenInterval = mpRegenInterval;
+        baseData.itemAP = itemAP;
+        baseData.projectileSpeed = projectileSpeed;
+        baseData.projectileCount = projectileCount;
+        baseData.attackRangeMultiplier = attackRangeMultiplier;
+        baseData.attack = attack;
+        baseData.specialAttack = specialAttack;
+        baseData.skillAttack = skillAttack;
+        baseData.defense = defense;
+        baseData.critical = critical;
+        baseData.critMultiplier = critMultiplier;
+        baseData.hpRecovery = hpRecovery;
+        baseData.mpRecovery = mpRecovery;
+
+        return baseData;
+    }
+
+    public virtual PlayerData GetPlayerData()
+    {
+        PlayerData data = new PlayerData();
+        data.baseData = GetBasePlayerData(); // GetBasePlayerData()는 BasePlayerData를 반환
+        return data;
+    }
+
 }

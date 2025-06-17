@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening.Core.Easing;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -22,7 +23,29 @@ public class GameManager : Singleton<GameManager>
     public int maxUnlockedStage = 1;
     public bool[] stageCleared = new bool[16];
 
-    public void UdateStageInfo()
+    public SaveManager saveManager;
+    public SaveData currentData;
+
+    private void Awake()
+    {
+        // SaveManager가 할당되어 있지 않으면 찾아서 할당
+        if (saveManager == null)
+        {
+            saveManager = FindObjectOfType<SaveManager>();
+        }
+
+        // 저장된 데이터 로드
+        currentData = saveManager.LoadGame();
+        if (currentData == null)
+        {
+            currentData = new SaveData(); // 데이터가 없으면 새로 생성
+        }
+
+        // 씬 전환 시 삭제되지 않도록 함
+        DontDestroyOnLoad(gameObject);
+    }
+
+    public void UpdateStageInfo()
     {
         int stage = currentStage;
         stageCleared[stage - 1] = true;
@@ -43,4 +66,54 @@ public class GameManager : Singleton<GameManager>
             _moveDir = value;
         }
     }
+    public void UpdateSaveData()
+    {
+        // SaveData 내의 플레이어 리스트 초기화
+        currentData.players = new List<PlayerData>();
+
+        // 모든 플레이어(예: FindObjectsOfType<Player> 사용)
+        Player[] players = FindObjectsOfType<Player>();
+        foreach (Player p in players)
+        {
+            PlayerData psd = new PlayerData();
+            // 여기서 p.GetPlayerData()는 PlayerData를 반환하므로, 그 안의 baseData를 가져와야 함
+            psd.baseData = p.GetPlayerData().baseData;
+
+            // 각 직업 정보 갱신
+            if (p.GetComponent<Archer>() != null)
+            {
+                Archer archer = p.GetComponent<Archer>();
+                psd.archerData = archer.GetArcherData();
+                psd.jobType = "Archer";
+            }
+            else if (p.GetComponent<Warrior>() != null)
+            {
+                Warrior warrior = p.GetComponent<Warrior>();
+                psd.warriorData = warrior.GetWarriorData();
+                psd.jobType = "Warrior";
+            }
+            else if (p.GetComponent<Wizard>() != null)
+            {
+                Wizard wizard = p.GetComponent<Wizard>();
+                psd.wizardData = wizard.GetWizardData();
+                psd.jobType = "Wizard";
+            }
+            else
+            {
+                psd.jobType = "None";
+            }
+
+            currentData.players.Add(psd);
+        }
+    }
+
+    // 모든 플레이어 데이터를 갱신한 후 저장하는 함수
+    public void SaveGameData()
+    {
+        // 저장 전에 현재 게임 상태를 최신화
+        UpdateSaveData();
+        // 현재 최신화된 데이터를 실제 파일에 저장
+        saveManager.SaveGame(currentData);
+    }
+
 }
