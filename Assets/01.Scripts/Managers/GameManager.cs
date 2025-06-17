@@ -45,16 +45,16 @@ public class GameManager : Singleton<GameManager>
         {
             currentData = new SaveData(); // 데이터가 없으면 새로 생성
         }
-        else
-        {
-            Gold = currentData.gold;
-            InventoryManager.Instance.LoadFromSave(currentData.inventoryItems);
-
-            if (currentData.equippedItemsPerClass != null)
-            {
-                PlayerEquipmentManager.Instance.LoadAllEquippedItems(currentData.equippedItemsPerClass);
-            }
-        }
+        // else
+        // {
+        //     Gold = currentData.gold;
+        //     InventoryManager.Instance.LoadFromSave(currentData.inventoryItems);
+        //
+        //     if (currentData.equippedItemsPerClass != null)
+        //     {
+        //         PlayerEquipmentManager.Instance.LoadAllEquippedItems(currentData.equippedItemsPerClass);
+        //     }
+        // }
 
         // 씬 전환 시 삭제되지 않도록 함
         if (Instance != this)
@@ -66,6 +66,24 @@ public class GameManager : Singleton<GameManager>
         DontDestroyOnLoad(gameObject);
 
         SkillManager.Instance.LoadSkill();
+    }
+    
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F5))
+        {
+            SaveGameData(); // 저장
+            Debug.Log("게임 저장됨");
+        }
+
+        if (Input.GetKeyDown(KeyCode.F9))
+        {
+            currentData = saveManager.LoadGame();
+            Gold = currentData.gold;
+            InventoryManager.Instance.LoadFromSave(currentData.inventoryItems);
+            PlayerEquipmentManager.Instance.LoadAllEquippedItems(currentData.equippedItemsPerClass);
+            Debug.Log("게임 불러옴");
+        }
     }
     
     public void AddGold(int amount)

@@ -86,7 +86,7 @@ public class Warrior : Player
     {
         WarriorData data = new WarriorData();
 
-        BasePlayerData baseData = GetPlayerData().baseData;
+        
         // Base 스탯을 복사
         data.CopyFrom(GetBasePlayerData());
 
