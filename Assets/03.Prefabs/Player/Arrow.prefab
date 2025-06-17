@@ -100,13 +100,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 921bc1879c9d40a469367c789561d0d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRange: 7
   arrowMoveSpeed: 3
+  attackRange: 7
   monsterLayer:
     serializedVersion: 2
     m_Bits: 256
-  arrowPrefab: {fileID: 6082971973693057719}
-  archer: {fileID: 2206360076389969512, guid: 76c797dc2d247c546b16d2b7dc611e02, type: 3}
 --- !u!50 &5050864605371041263
 Rigidbody2D:
   serializedVersion: 4
@@ -115,7 +113,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6082971973693057719}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -191,6 +189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b1baa3a43fc5d747882307f68dfc366, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameOverPanel: {fileID: 0}
   moveSpeed: 0
   attackSpeed: 0
   str: 0

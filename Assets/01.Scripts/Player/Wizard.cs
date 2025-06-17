@@ -22,9 +22,9 @@ public class Wizard : Player
         dex = 10;
         ints = 20;
         maxHP = 120; 
-    hp = maxHP;  
-    maxMP = 50;
-    mp = maxMP;
+        hp = maxHP;  
+        maxMP = 50;
+        mp = maxMP;
         itemAP = 0.1f;
 
         moveSpeed = 0.8f + DEX * 0.04f;
@@ -85,6 +85,8 @@ public class Wizard : Player
     public WizardData GetWizardData()
     {
         WizardData data = new WizardData();
+
+        BasePlayerData baseData = GetPlayerData().baseData;
         // Base 스탯을 복사
         data.CopyFrom(GetBasePlayerData());
 
@@ -98,5 +100,4 @@ public class Wizard : Player
 
         return data;
     }
-
 }

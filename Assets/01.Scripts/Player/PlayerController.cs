@@ -119,13 +119,11 @@ public class PlayerController : MonoBehaviour
         {
             // 마우스가 오른쪽에 있으면 flipX = true (즉, 오른쪽을 바라보도록)
             spriteRenderer.flipX = true;
-            Debug.Log("플레이어: 오른쪽 바라봄");
         }
         else
         {
             // 마우스가 왼쪽에 있으면 flipX = false (즉, 왼쪽을 바라보도록)
             spriteRenderer.flipX = false;
-            Debug.Log("플레이어: 왼쪽 바라봄");
         }
 
         // 직업별 공격 처리

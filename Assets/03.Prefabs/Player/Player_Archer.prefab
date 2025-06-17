@@ -108,7 +108,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed8568c1abaa76e4985fe1c8d528c34d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameOverPanel: {fileID: 5123519538291247374, guid: d24762f511322fc43addfca9a900f842, type: 3}
   warriorAttackController: {fileID: 8001135491693849236, guid: 7cc8fc202efe2f14798e023948e11f84, type: 3}
   archerAttackController: {fileID: 6230439534645906233}
   wizardAttackController: {fileID: 6290640231568760597, guid: 2edb897d9bc751c4eafeb4f936ca14e9, type: 3}
@@ -208,7 +207,7 @@ MonoBehaviour:
   arrowMoveSpeed: 3
   monsterLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   arrowPrefab: {fileID: 6082971973693057719, guid: 29f102f01b9ade54dac84f043ddecf4b, type: 3}
   archer: {fileID: 2206360076389969512}
 --- !u!114 &1918387645171341593

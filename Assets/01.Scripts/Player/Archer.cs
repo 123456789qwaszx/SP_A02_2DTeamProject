@@ -22,9 +22,9 @@ public class Archer : Player
         dex = 20;
         ints = 10;
         maxHP = 120; 
-    hp = maxHP;  
-    maxMP = 50;
-    mp = maxMP;
+        hp = maxHP;  
+        maxMP = 50;
+        mp = maxMP;
         itemAP = 0.1f;
 
         moveSpeed = 1 + DEX * 0.06f;
