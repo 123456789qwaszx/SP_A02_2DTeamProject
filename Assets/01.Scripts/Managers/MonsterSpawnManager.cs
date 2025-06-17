@@ -41,12 +41,15 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
 
     private StageType currentStageType = StageType.Normal;
 
-
-    void Start()
+    private void Awake()
     {
-        PlayerController controller = FindObjectOfType<PlayerController>();
-        
-        player = controller.transform;
+        DontDestroyOnLoad(gameObject);
+    }
+
+    IEnumerator Start()
+    {
+        while (GameManager.Instance.player == null)
+            yield return null;
 
         SetupStage(StageType.Normal);
     }

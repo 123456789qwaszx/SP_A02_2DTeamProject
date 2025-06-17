@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class StageManager : Singleton<StageManager>
 {
@@ -11,6 +12,11 @@ public class StageManager : Singleton<StageManager>
     private float stageTimer = 0f;
     private bool isStageCleared = false;
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
     private void Start()
     {
         SetupStage(GameManager.Instance.currentStage);
@@ -21,6 +27,12 @@ public class StageManager : Singleton<StageManager>
         if (isStageCleared) return;
 
         stageTimer += Time.deltaTime;
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            // 디버그용 강제 클리어
+            ForceClear();
+        }
 
         if (currentStageType == StageType.Normal && stageTimer >= 900f)
         {
@@ -94,6 +106,8 @@ public class StageManager : Singleton<StageManager>
         isStageCleared = true;
         monsterSpawnManager.StopSpawn();
         GameManager.Instance.UdateStageInfo();
+
+        SceneManager.LoadScene("MainScene");
     }
 
     public void ForceClear()
