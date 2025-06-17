@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 7566942073395804990}
   - component: {fileID: 3186327564593207444}
   - component: {fileID: 3531820447080114670}
-  - component: {fileID: 1918387645171341593}
   - component: {fileID: 2206360076389969512}
   - component: {fileID: 6230439534645906233}
+  - component: {fileID: 1918387645171341593}
+  - component: {fileID: -8936387417432878398}
   m_Layer: 7
   m_Name: Player_Archer
   m_TagString: Player
@@ -147,20 +148,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0.013871312, y: 0}
   m_Size: {x: 0.94943047, y: 1.3440084}
   m_Direction: 0
---- !u!114 &1918387645171341593
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7077670872666168251}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8073fba75cacf864eb4114e49f9a6db1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentLevel: 1
-  currentExp: 0
 --- !u!114 &2206360076389969512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,6 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b1baa3a43fc5d747882307f68dfc366, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameOverPanel: {fileID: 5123519538291247374, guid: d24762f511322fc43addfca9a900f842, type: 3}
   moveSpeed: 0
   attackSpeed: 0
   str: 0
@@ -220,9 +208,35 @@ MonoBehaviour:
   arrowMoveSpeed: 3
   monsterLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   arrowPrefab: {fileID: 6082971973693057719, guid: 29f102f01b9ade54dac84f043ddecf4b, type: 3}
   archer: {fileID: 2206360076389969512}
+--- !u!114 &1918387645171341593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7077670872666168251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8073fba75cacf864eb4114e49f9a6db1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentLevel: 1
+  currentExp: 0
+--- !u!114 &-8936387417432878398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7077670872666168251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ac329c9c224b3e45a2fabd8e9952b9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8353157128871243933
 GameObject:
   m_ObjectHideFlags: 0

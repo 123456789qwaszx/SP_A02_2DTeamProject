@@ -22,9 +22,9 @@ public class Warrior : Player
         dex = 10;
         ints = 10;
         maxHP = 120; 
-    hp = maxHP;  
-    maxMP = 50;
-    mp = maxMP;
+        hp = maxHP;  
+        maxMP = 50;
+        mp = maxMP;
         itemAP = 0.1f;
 
         moveSpeed = 1 + DEX * 0.05f;
@@ -85,6 +85,8 @@ public class Warrior : Player
     public WarriorData GetWarriorData()
     {
         WarriorData data = new WarriorData();
+
+        BasePlayerData baseData = GetPlayerData().baseData;
         // Base 스탯을 복사
         data.CopyFrom(GetBasePlayerData());
 

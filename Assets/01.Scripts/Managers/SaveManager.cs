@@ -2,7 +2,7 @@
 using UnityEngine;
 using Newtonsoft.Json;  // JSON.NET 사용 시
 
-public class SaveManager : MonoBehaviour
+public class SaveManager : Singleton<SaveManager>
 {
     private string savePath;
 
@@ -11,6 +11,12 @@ public class SaveManager : MonoBehaviour
         // 예시: 데이터를 저장할 경로 설정
         savePath = Path.Combine(Application.persistentDataPath, "save.json");
         Debug.Log("Save path: " + savePath);
+
+        if (Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
 
         DontDestroyOnLoad(gameObject);
     }

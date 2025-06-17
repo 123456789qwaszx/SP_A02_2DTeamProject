@@ -12,6 +12,9 @@ GameObject:
   - component: {fileID: 8715298512587119916}
   - component: {fileID: 8258915116895075237}
   - component: {fileID: 7174607517574636901}
+  - component: {fileID: 1089573760041793282}
+  - component: {fileID: -2461764806150322700}
+  - component: {fileID: 7525907365590607078}
   m_Layer: 0
   m_Name: ShopNPC
   m_TagString: Untagged
@@ -152,3 +155,41 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1089573760041793282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4447442603367717297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2de94538f0df714696bd4e2765ec2c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-2461764806150322700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4447442603367717297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9756a05e858eb4546a9ae0f388c4f4ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7525907365590607078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4447442603367717297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c557341a5f2d4574ea9b83959ddf4dcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemCount: 5
+  itemGenerator: {fileID: 0}

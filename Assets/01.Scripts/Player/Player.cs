@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using static UnityEditor.Progress;
+using UnityEngine.SceneManagement;
 
 public interface IEquipable
 {
@@ -14,6 +15,8 @@ public interface IDamagable
 
 public class Player : MonoBehaviour, IEquipable, IDamagable
 {
+    public GameObject gameOverPanel;
+
     protected Rigidbody2D rb;
     protected Transform tf;
 
@@ -99,6 +102,8 @@ public class Player : MonoBehaviour, IEquipable, IDamagable
     private float flashDuration = 0.2f;
 
 
+
+
     void Awake()
     {
         GameManager.Instance.player = this;
@@ -107,6 +112,14 @@ public class Player : MonoBehaviour, IEquipable, IDamagable
     void Start()
     {
         // DontDestroyOnLoad 적용으로 씬 전환 시에도 삭제되지 않음
+        Player[] uis = FindObjectsOfType<Player>();
+
+        if (uis.Length > 1)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         DontDestroyOnLoad(gameObject);
 
         // 씬 전환 시 자동으로 (0,0,0) 위치로 재배치
@@ -122,6 +135,16 @@ public class Player : MonoBehaviour, IEquipable, IDamagable
             Debug.LogError("Rigidbody not found on Player!");
 
         col = GetComponent<CapsuleCollider>();
+
+        if (gameOverPanel == null)
+        {
+            GameObject prefab = Resources.Load<GameObject>("GameOverPanel");
+            if (prefab != null)
+            {
+                gameOverPanel = Instantiate(prefab);
+                Debug.Log("GameOverPanel 프리팹 인스턴스 생성됨.");
+            }
+        }
     }
 
     void Update()
@@ -204,7 +227,22 @@ public class Player : MonoBehaviour, IEquipable, IDamagable
 
     private void Die()
     {
-        // 사망 했을 때 어떻게 될지
+        Debug.Log("Player has died.");
+
+        // 게임 멈추기
+        Time.timeScale = 0f;
+
+        // GameOverPanel 프리팹 인스턴스 생성 및 활성화
+        if (gameOverPanel != null)
+        {
+            GameObject instance = Instantiate(gameOverPanel);
+            instance.SetActive(true);
+            Debug.Log("GameOverPanel 인스턴스 생성됨.");
+        }
+        else
+        {
+            Debug.LogError("GameOverPanel 프리팹이 할당되지 않았습니다! Inspector를 확인하세요.");
+        }
     }
 
     // 기본 스탯만 수집하는 헬퍼 메서드

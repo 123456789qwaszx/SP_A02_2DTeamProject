@@ -163,9 +163,10 @@ GameObject:
   - component: {fileID: 4724032576759028112}
   - component: {fileID: 7164905455717327185}
   - component: {fileID: 5248846826876623910}
-  - component: {fileID: 7343829132457352334}
-  - component: {fileID: 6290640231568760597}
   - component: {fileID: -7142348540131475106}
+  - component: {fileID: 6290640231568760597}
+  - component: {fileID: 7343829132457352334}
+  - component: {fileID: -3866489448128799729}
   m_Layer: 7
   m_Name: Player_Wizard
   m_TagString: Player
@@ -261,6 +262,7 @@ MonoBehaviour:
   warriorAttackController: {fileID: 8001135491693849236, guid: 7cc8fc202efe2f14798e023948e11f84, type: 3}
   archerAttackController: {fileID: 6230439534645906233, guid: 76c797dc2d247c546b16d2b7dc611e02, type: 3}
   wizardAttackController: {fileID: 6290640231568760597}
+  sklilbook: {fileID: 0}
 --- !u!70 &5248846826876623910
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -296,39 +298,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0.013871312, y: 0}
   m_Size: {x: 0.94943047, y: 1.3440084}
   m_Direction: 0
---- !u!114 &7343829132457352334
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6273740758479994372}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8073fba75cacf864eb4114e49f9a6db1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentLevel: 1
-  currentExp: 0
---- !u!114 &6290640231568760597
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6273740758479994372}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f745cf328c77d20478fbbfd0ffaa533b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackRange: 5
-  showTime: 0.3
-  attackCircleSize: 1
-  allowedAngle: 20
-  monsterLayer:
-    serializedVersion: 2
-    m_Bits: 256
 --- !u!114 &-7142348540131475106
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341,11 +310,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54361035b84ef164fbf9f19ffb80c40d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameOverPanel: {fileID: 0}
   moveSpeed: 0
   attackSpeed: 0
-  STR: 0
-  DEX: 0
-  INT: 0
+  str: 0
+  dex: 0
+  ints: 0
   hp: 0
   mp: 0
   maxHP: 0
@@ -372,3 +342,48 @@ MonoBehaviour:
   critDamage_Normal: 0
   critDamage_Special: 0
   critDamage_Skill: 0
+--- !u!114 &6290640231568760597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6273740758479994372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f745cf328c77d20478fbbfd0ffaa533b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackRange: 5
+  showTime: 0.3
+  attackCircleSize: 1
+  allowedAngle: 20
+  monsterLayer:
+    serializedVersion: 2
+    m_Bits: 256
+--- !u!114 &7343829132457352334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6273740758479994372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8073fba75cacf864eb4114e49f9a6db1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentLevel: 1
+  currentExp: 0
+--- !u!114 &-3866489448128799729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6273740758479994372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ac329c9c224b3e45a2fabd8e9952b9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

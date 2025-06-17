@@ -11,7 +11,7 @@ public class OptionPoolGenerator
     public static void GenerateOptionPoolsFromCSV()
     {
         string csvPath = "Assets/05.Data/ItemData/Final_OptionPool.csv";
-        string saveFolder = "Assets/05.Data/OptionPool";
+        string saveFolder = "Assets/05.Data/ItemData/OptionPools";
 
         if (!File.Exists(csvPath))
         {
@@ -22,6 +22,8 @@ public class OptionPoolGenerator
         var lines = File.ReadAllLines(csvPath).Skip(1);
         var optionPools = new Dictionary<ItemType, OptionPool>();
 
+        ItemType[] allItemTypes = (ItemType[])System.Enum.GetValues(typeof(ItemType));
+
         foreach (string line in lines)
         {
             var tokens = line.Split(',');
@@ -29,39 +31,90 @@ public class OptionPoolGenerator
             if (tokens.Length < 5)
                 continue;
 
-            if (!System.Enum.TryParse(tokens[0], out ItemType itemType)) continue;
+            string rawItemType = tokens[0];
             if (!System.Enum.TryParse(tokens[1], out ItemOptionType optionType)) continue;
             if (!System.Enum.TryParse(tokens[2], out ItemRarity rarity)) continue;
 
             float minValue = float.Parse(tokens[3]);
             float maxValue = float.Parse(tokens[4]);
 
-            if (!optionPools.TryGetValue(itemType, out var pool))
-            {
-                pool = ScriptableObject.CreateInstance<OptionPool>();
-                pool.itemType = itemType;
-                pool.possibleOptions = new List<ItemOptionWithRarity>();
-                optionPools[itemType] = pool;
-            }
+            List<ItemType> targetTypes = new();
+            if (rawItemType == "All")
+                targetTypes.AddRange(allItemTypes);
+            else if (System.Enum.TryParse(rawItemType, out ItemType parsedType))
+                targetTypes.Add(parsedType);
 
-            var existing = pool.possibleOptions.FirstOrDefault(o => o.optionType == optionType);
-            if (existing == null)
+            foreach (var itemType in targetTypes)
             {
-                existing = new ItemOptionWithRarity
+                if (!optionPools.TryGetValue(itemType, out var pool))
                 {
-                    optionType = optionType,
-                    rarityRanges = new List<RarityRange>()
-                };
-                pool.possibleOptions.Add(existing);
-            }
+                    pool = ScriptableObject.CreateInstance<OptionPool>();
+                    pool.itemType = itemType;
+                    pool.possibleOptions = new List<ItemOptionWithRarity>();
+                    optionPools[itemType] = pool;
+                }
 
-            existing.rarityRanges.Add(new RarityRange
-            {
-                rarity = rarity,
-                minValue = minValue,
-                maxValue = maxValue
-            });
+                var existing = pool.possibleOptions.FirstOrDefault(o => o.optionType == optionType);
+                if (existing == null)
+                {
+                    existing = new ItemOptionWithRarity
+                    {
+                        optionType = optionType,
+                        rarityRanges = new List<RarityRange>()
+                    };
+                    pool.possibleOptions.Add(existing);
+                }
+
+                existing.rarityRanges.Add(new RarityRange
+                {
+                    rarity = rarity,
+                    minValue = minValue,
+                    maxValue = maxValue
+                });
+            }
         }
+        // var optionPools = new Dictionary<ItemType, OptionPool>();
+        //
+        // foreach (string line in lines)
+        // {
+        //     var tokens = line.Split(',');
+        //
+        //     if (tokens.Length < 5)
+        //         continue;
+        //
+        //     if (!System.Enum.TryParse(tokens[0], out ItemType itemType)) continue;
+        //     if (!System.Enum.TryParse(tokens[1], out ItemOptionType optionType)) continue;
+        //     if (!System.Enum.TryParse(tokens[2], out ItemRarity rarity)) continue;
+        //
+        //     float minValue = float.Parse(tokens[3]);
+        //     float maxValue = float.Parse(tokens[4]);
+        //
+        //     if (!optionPools.TryGetValue(itemType, out var pool))
+        //     {
+        //         pool = ScriptableObject.CreateInstance<OptionPool>();
+        //         pool.itemType = itemType;
+        //         pool.possibleOptions = new List<ItemOptionWithRarity>();
+        //         optionPools[itemType] = pool;
+        //     }
+        //
+        //     var existing = pool.possibleOptions.FirstOrDefault(o => o.optionType == optionType);
+        //     if (existing == null)
+        //     {
+        //         existing = new ItemOptionWithRarity
+        //         {
+        //             optionType = optionType,
+        //             rarityRanges = new List<RarityRange>()
+        //         };
+        //         pool.possibleOptions.Add(existing);
+        //     }
+        //
+        //     existing.rarityRanges.Add(new RarityRange
+        //     {
+        //         rarity = rarity,
+        //         minValue = minValue,
+        //         maxValue = maxValue
+        //     });
+        // }
 
         // Save all OptionPools
         if (!Directory.Exists(saveFolder))

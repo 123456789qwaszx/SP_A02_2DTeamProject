@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
@@ -60,5 +61,22 @@ public class InventoryManager : MonoBehaviour
     public bool IsFull()
     {
         return items.Count >= maxSlotCount;
+    }
+    
+    /// <summary>
+    /// 저장을 위한 아이템 데이터 반환
+    /// </summary>
+    public List<ItemData> GetSaveItems()
+    {
+        return items.Select(GeneratedItemUtility.ToItemData).ToList();
+    }
+
+    /// <summary>
+    /// 저장된 데이터를 불러와 인벤토리 복원
+    /// </summary>
+    public void LoadFromSave(List<ItemData> itemDatas)
+    {
+        items = itemDatas.Select(GeneratedItemUtility.ToGeneratedItem).ToList();
+        InventoryUIManager.instance?.RefreshInventory();
     }
 }

@@ -24,6 +24,8 @@ public class InventoryUIController : MonoBehaviour
             inventoryPanel.SetActive(isOpen);
             equipmentPanel.SetActive(isOpen);
             tooltipPanel.SetActive(isOpen);
+            
+            Time.timeScale = isOpen ? 0f : 1f;
 
             if (isOpen)
                 InventoryUIManager.instance?.RefreshInventory();
@@ -45,6 +47,7 @@ public class InventoryUIController : MonoBehaviour
                 inventoryPanel.SetActive(false);
                 equipmentPanel.SetActive(false);
                 tooltipPanel.SetActive(false);
+                Time.timeScale = 1f;
                 return;
             }
         }

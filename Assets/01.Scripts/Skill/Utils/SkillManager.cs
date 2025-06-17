@@ -106,8 +106,45 @@ public class SkillManager : Singleton<SkillManager>
     }
 
     // 나중에 UIManager 추가되면 그곳으로 이동
-    void Start()
+    public void LoadSkill()
     {
+        ResourceManager.Instance.LoadAllAsync<GameObject>("Skill_Prefabs", (key, count, totalCount) =>
+        {
+            Debug.Log($"{key} {count}/{totalCount}");
+
+            if (count == totalCount)
+            {
+                SkillManager.Instance.StartSkillLoad();
+
+                SkillType HolyProjectile = SkillManager.Instance.GetSkillTypeFromInt(10001);
+                SkillType HolyPulse = SkillManager.Instance.GetSkillTypeFromInt(10011);
+                SkillType DarkArrow = SkillManager.Instance.GetSkillTypeFromInt(10021);
+                SkillType WindCutter = SkillManager.Instance.GetSkillTypeFromInt(10071);
+                SkillType BloodChain = SkillManager.Instance.GetSkillTypeFromInt(10111);
+
+
+                // 처음 무조건 들고 있는 스킬들.
+                // 직업 추가 등의 이유로 바꾸거나, 종류를 늘려주고 싶다면
+                // 뒤의 SkillIndex를 바꾸거나 추가로 AddSkill()을 할 것.
+                GameManager.Instance.controller.sklilbook.AddSkill(HolyProjectile, 10001);
+                //GameManager.Instance.controller.sklilbook.LevelUpSkill(HolyProjectile);
+
+                GameManager.Instance.controller.sklilbook.AddSkill(HolyPulse, 10011);
+                //GameManager.Instance.controller.sklilbook.LevelUpSkill(HolyPulse);
+
+                GameManager.Instance.controller.sklilbook.AddSkill(DarkArrow, 10021);
+                //GameManager.Instance.controller.sklilbook.LevelUpSkill(DarkArrow);
+
+                GameManager.Instance.controller.sklilbook.AddSkill(WindCutter, 10071);
+                //GameManager.Instance.controller.sklilbook.LevelUpSkill(WindCutter);
+
+                GameManager.Instance.controller.sklilbook.AddSkill(BloodChain, 10111);
+                //GameManager.Instance.controller.sklilbook.LevelUpSkill(BloodChain);
+                // 이렇게 직접 레벨업 시키는 건 처음 시작시 세팅만 이렇고, 이후는 스킬카드UI의 버튼을 통해 LevelUpSkill이 실행됨
+
+            }
+        });
+
         ResourceManager.Instance.LoadAllAsync<GameObject>("UI_Prefabs", (key, count, totalCount) =>
         {
             Debug.Log($"{key} {count}/{totalCount}");

@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class HealthManaUI : MonoBehaviour
@@ -17,9 +17,17 @@ public class HealthManaUI : MonoBehaviour
     [SerializeField] private float smoothSpeed = 5f; // 부드럽게 전환되는 속도
 
     private void Awake()
-{
-    DontDestroyOnLoad(gameObject);
-}
+    {
+        HealthManaUI[] uis = FindObjectsOfType<HealthManaUI>();
+
+        if (uis.Length > 1)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        DontDestroyOnLoad(gameObject);
+    }
 
 
     private void Start()
