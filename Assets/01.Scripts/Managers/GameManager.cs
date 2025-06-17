@@ -47,6 +47,12 @@ public class GameManager : Singleton<GameManager>
         }
 
         // 씬 전환 시 삭제되지 않도록 함
+        if (Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         DontDestroyOnLoad(gameObject);
 
         SkillManager.Instance.LoadSkill();
