@@ -2,7 +2,7 @@
 using UnityEngine;
 using Newtonsoft.Json;  // JSON.NET 사용 시
 
-public class SaveManager : MonoBehaviour
+public class SaveManager : Singleton<SaveManager>
 {
     private string savePath;
 

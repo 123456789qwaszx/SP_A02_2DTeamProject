@@ -13,6 +13,12 @@ public class UIManager : Singleton<UIManager>
     [Header("닫기 버튼")]
     public Button closeBtn;
 
+    private SaveData data;
+
+    private void Start()
+    {
+        data = SaveManager.Instance.LoadGame();
+    }
     public void OpenStageSelectUI()
     {
         stageSelectPanel.SetActive(true);
@@ -54,22 +60,27 @@ public class UIManager : Singleton<UIManager>
                     // ~4 Stage: Castle
                     if (stageIndex <= 3)
                     {
+                        SaveManager.Instance.SaveGame(data);
                         SceneManager.LoadScene("Dun_Lv.1_CastleScene");
                     }
                     else if (stageIndex <= 7)
                     {
+                        SaveManager.Instance.SaveGame(data);
                         SceneManager.LoadScene("Dun_Lv.2_PoisonScene");
                     }
                     else if (stageIndex <= 11)
                     {
+                        SaveManager.Instance.SaveGame(data);
                         SceneManager.LoadScene("Dun_Lv.3_DesertScene");
                     }
                     else if (stageIndex <= 14)
                     {
+                        SaveManager.Instance.SaveGame(data);
                         SceneManager.LoadScene("Dun_Lv.4_GoldScene");
                     }
                     else if (stageIndex == 15)
                     {
+                        SaveManager.Instance.SaveGame(data);
                         SceneManager.LoadScene("Dun_FinalScene");
                     }
                 });

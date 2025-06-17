@@ -22,6 +22,7 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
     [SerializeField] protected GameObject warningPrefab;
     
     [Header("드랍 관련")]
+    [SerializeField] private GameObject expItem; // 드랍 UI 프리팹
     [SerializeField] private float baseDropChance = 5f;   // 기본 드랍 확률
     [SerializeField] private int minDropCount = 1;         // 최소 드랍 수
     [SerializeField] private int maxDropCount = 1;         // 최대 드랍 수 (보스는 3~5 등)
