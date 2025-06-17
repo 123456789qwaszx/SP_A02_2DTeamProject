@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: 04_DirtyHalo
   m_EditorClassIdentifier: 
   SkillIndex: 10041
-  Description: "\uBC94\uC704\uACF5\uACA9, \uAD00\uD1B5\uAC00\uB2A5"
+  Description: "\uD314\uB791\uD314\uB791"
   Type: 10041
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: 47e7a6c1683bfdc47b10cb70ccd21cd1, type: 3}
   SkillPrefabs: {fileID: -3578616081814334202, guid: 5b299f085d1fedd4f95032e197b2c061, type: 3}
   PrefabLabel: DirtyHalo
   DamageMultiplire: 15
@@ -32,5 +32,6 @@ MonoBehaviour:
   AngleBetweenProj: 0
   BounceDist: 0
   ProjRange: 0
+  ProjectileSpacing: 0
   Duration: 5
   attackRangeMultiplier: 1
