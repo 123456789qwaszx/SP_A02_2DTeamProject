@@ -15,6 +15,10 @@ public interface IDamagable
 
 public class Player : MonoBehaviour, IEquipable, IDamagable
 {
+    [Header("사운드 클립")]
+    [SerializeField] private AudioClip hitSFX;
+    [SerializeField] private AudioClip deathSFX;
+
     public GameObject gameOverPanel;
 
     protected Rigidbody2D rb;
@@ -197,6 +201,9 @@ public class Player : MonoBehaviour, IEquipable, IDamagable
 
         PlayHitFlash();
 
+        if (hitSFX != null)
+            SoundManager.Instance.PlaySFX(hitSFX);
+
         if (hp <= 0)
         {
             Die();
@@ -229,6 +236,10 @@ public class Player : MonoBehaviour, IEquipable, IDamagable
     private void Die()
     {
         Debug.Log("Player has died.");
+
+        SoundManager.Instance.StopBGM();
+        if (deathSFX != null)
+            SoundManager.Instance.PlaySFX(deathSFX);
 
         // 게임 멈추기
         Time.timeScale = 0f;
