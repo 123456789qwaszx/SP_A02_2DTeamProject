@@ -100,6 +100,9 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
             Vector3 pos = GetValidSpawnPosition();
             GameObject prefab = regularMonsterPrefabs[Random.Range(0, regularMonsterPrefabs.Length)];
             GameObject monster = PoolManager.Instance.Pop(prefab);
+            
+            MonsterBase monsterBase = monster.GetComponent<MonsterBase>();
+            ObjectManager.Instance.Monsters.Add(monsterBase);
             InitPooledMonster(monster, pos);
             yield return new WaitForSeconds(spawnInterval);
         }

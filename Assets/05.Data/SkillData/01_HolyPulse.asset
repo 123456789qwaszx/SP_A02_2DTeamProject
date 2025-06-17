@@ -12,22 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41ecb1750091ae741b339afce7833228, type: 3}
   m_Name: 01_HolyPulse
   m_EditorClassIdentifier: 
-  SkillIndex: 10031
+  SkillIndex: 10011
   Description: "\uBC94\uC704\uACF5\uACA9, \uAD00\uD1B5\uAC00\uB2A5"
-  Type: 10021
+  Type: 10011
   Icon: {fileID: 0}
   SkillPrefabs: {fileID: -5752677909494740475, guid: 4d03f659247acf946855a4f296cf23b2, type: 3}
-  DamageMultiplire: 15
+  PrefabLabel: HolyPulse
+  DamageMultiplire: 1
   AttackInterval: 0.7
   CoolTime: 0.7
   CastingEffect: 0
   CastingEffectPercentage: 0
   projectileCount: 1
   ScaleMultiplier: 1
-  projectileSpeed: 1
-  NumPenerations: 10
-  NumBounce: 0
+  projectileSpeed: 4
+  NumPenerations: 99
+  NumBounce: 1
   BounceSpeed: 0
-  AngleBetweenProj: 0
+  AngleBetweenProj: 1
+  BounceDist: 1
+  ProjRange: 1
+  ProjectileSpacing: 0
   Duration: 5
   attackRangeMultiplier: 1

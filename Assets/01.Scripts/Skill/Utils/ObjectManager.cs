@@ -11,6 +11,7 @@ public class ObjectManager : Singleton<ObjectManager>
     // MonsterBase monsterBase = monster.GetComponent<MonsterBase>();
     // ObjectManager.Instance.Monsters.Add(monsterBase);
     public HashSet<MonsterBase> Monsters { get; } = new HashSet<MonsterBase>();
+    public PlayerController Player { get; private set; }
 
     public List<MonsterBase> GetMonsterWithinCamera(int count = 1)
     {
@@ -34,7 +35,7 @@ public class ObjectManager : Singleton<ObjectManager>
         return monsterList.Take(count).ToList();
     }
 
-    
+
     public List<Transform> GetFindMonstersInFanShape(Vector3 origin, Vector3 forward, float radius = 2, float angleRange = 80)
     {
         List<Transform> listMonster = new List<Transform>();
@@ -52,12 +53,36 @@ public class ObjectManager : Singleton<ObjectManager>
 
         return listMonster;
     }
-    
-    
+
+
     bool IsWithInCamera(Vector3 pos)
     {
-        if(pos.x >= 0 && pos.x <=1 && pos.y >= 0 && pos.y <= 1)
+        if (pos.x >= 0 && pos.x <= 1 && pos.y >= 0 && pos.y <= 1)
             return true;
         return false;
+    }
+    
+
+    
+    public List<MonsterBase> GetNearestMonsters(int count = 1, int distanceThreshold = 0)
+    {
+        Player = GameManager.Instance.controller;
+        List<MonsterBase> monsterList = Monsters.OrderBy(monster => (Player.transform.position - monster.transform.position ).sqrMagnitude).ToList();
+
+        if(distanceThreshold > 0)
+            monsterList = monsterList.Where(monster => (Player.transform.position  - monster.transform.position ).magnitude > distanceThreshold).ToList();
+
+        int min = Mathf.Min(count, monsterList.Count);
+
+        List<MonsterBase> nearestMonsters = monsterList.Take(min).ToList();
+    
+        if (nearestMonsters.Count == 0) return null;
+
+        while (nearestMonsters.Count < count)
+        {
+            nearestMonsters.Add(nearestMonsters.Last());
+        }
+
+        return nearestMonsters;
     }
 }
