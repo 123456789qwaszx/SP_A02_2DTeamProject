@@ -7,10 +7,17 @@ public enum SkillType
 {
     None = 0,
     HolyProjectile = 10001,
-    HolyImpact = 10011,
-    HolyPulse = 10021,
-    FireSkill = 10031,
-    IceSkill = 10041
+    HolyPulse = 10011,
+    DarkArrow = 10021,
+    DirtySwing = 10031,
+    DirtyHalo = 10041,
+    DirtyWing = 10051,
+    PoisionBomb = 10061,
+    WindCutter = 10071,
+    Waterfall = 10081,
+    FireExplosion = 10091,
+    FireSwing = 10101,
+    BloodChain = 10111
     //만들 것을 나중에 추가
 }
 
@@ -44,7 +51,7 @@ public class SkillBase : MonoBehaviour
     #endregion
 
 
-    public int TotalDamage { get; set; } = 0;
+    public int TotalDamage { get; set; } = 100;
 
     
     void Awake()

@@ -1,0 +1,40 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class DarkArrow : RepeatSkill
+{
+    private void Awake()
+    {
+        SkillType = SkillType.DarkArrow;
+    }
+
+    public override void OnChangedSkillData()
+    {
+    }
+
+    IEnumerator SetDarkArrow()
+    {
+        string prefabName = SkillData.PrefabLabel;
+
+        if (GameManager.Instance.controller != null)
+        {
+            List<MonsterBase> target = ObjectManager.Instance.GetNearestMonsters(SkillData.projectileCount);
+            if(target == null)
+                yield break;
+
+            for (int i = 0; i < target.Count; i++)
+            {
+                Vector3 dir = (target[i].transform.position - GameManager.Instance.controller.transform.position).normalized;
+                Vector3 startPos = GameManager.Instance.transform.position;
+                GenerateProjectile(GameManager.Instance.controller, prefabName, startPos, dir, Vector3.zero, this);
+                yield return new WaitForSeconds(SkillData.ProjectileSpacing);
+            }
+        }
+    }
+
+    protected override void DoSkillJob()
+    {
+        StartCoroutine(SetDarkArrow());
+    }
+}

@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class SkillBook : MonoBehaviour
 {
-    
+
     public static int MAX_SKILL_LEVEL = 6;
     public static int MAX_SKILL_COUNT = 6;
 
@@ -24,36 +24,46 @@ public class SkillBook : MonoBehaviour
     {
         ResourceManager.Instance.LoadAllAsync<GameObject>("Skill_Prefabs", (key, count, totalCount) =>
         {
-            //Debug.Log($"{key} {count}/{totalCount}");
+            Debug.Log($"{key} {count}/{totalCount}");
 
             if (count == totalCount)
             {
                 SkillManager.Instance.StartSkillLoad();
 
-                SkillType type = Util.GetSkillTypeFromInt(10001);
+                SkillType type = Util.GetSkillTypeFromInt(10001); //HolyProjectile
+                SkillType type1 = Util.GetSkillTypeFromInt(10011); // HolyPulse
+
+                SkillType type2 = Util.GetSkillTypeFromInt(10021); // DarkArrow
+                SkillType type7 = Util.GetSkillTypeFromInt(10071); // WindCutter
+                SkillType type11 = Util.GetSkillTypeFromInt(10111); // BloodChain
 
                 //Test
                 //SkillType type2 = Util.GetSkillTypeFromInt(10021);
 
-                if (type != SkillType.None)
-                {
-                    // 처음 무조건 들고 있는 스킬들.
-                    // 직업 추가 등의 이유로 바꾸거나, 종류를 늘려주고 싶다면
-                    // 뒤의 SkillIndex를 바꾸거나 추가로 AddSkill()을 할 것.
-                    AddSkill(type, 10001);
-                    LevelUpSkill(type);
-                    // 이렇게 직접 레벨업 시키는 건 처음 시작시 세팅만 이렇고, 이후는 스킬카드UI의 버튼을 통해 LevelUpSkill이 실행됨
+                // 처음 무조건 들고 있는 스킬들.
+                // 직업 추가 등의 이유로 바꾸거나, 종류를 늘려주고 싶다면
+                // 뒤의 SkillIndex를 바꾸거나 추가로 AddSkill()을 할 것.
+                AddSkill(type, 10001);
+                LevelUpSkill(type);
 
-                    //Test
-                    // AddSkill(type2, 10021);
-                    // LevelUpSkill(type2);
+                AddSkill(type1, 10011);
+                LevelUpSkill(type1);
 
-                }
+                AddSkill(type2, 10021);
+                LevelUpSkill(type2);
+
+                AddSkill(type7, 10071);
+                LevelUpSkill(type7);
+
+                AddSkill(type11, 10111);
+                //LevelUpSkill(type1);
+                // 이렇게 직접 레벨업 시키는 건 처음 시작시 세팅만 이렇고, 이후는 스킬카드UI의 버튼을 통해 LevelUpSkill이 실행됨
+
             }
         });
     }
 
-    
+
     public List<SkillBase> RecommendSkills()
     {
         List<SkillBase> skillList = SkillManager.Instance.SkillList.ToList();
@@ -92,7 +102,7 @@ public class SkillBook : MonoBehaviour
     {
         SkillManager.Instance.ActivatedSkills.Add(skill);
     }
-    
+
 
     public void LevelUpSkill(SkillType skillType)
     {

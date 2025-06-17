@@ -8,18 +8,30 @@ public class HolyPulse : RepeatSkill
     {
         SkillType = SkillType.HolyPulse;
     }
+
+    public override void OnChangedSkillData()
+    {
+    }
+
+    IEnumerator SetHolyPulse()
+    {
+        string prefabName = SkillData.PrefabLabel;
+
+        if (GameManager.Instance.controller != null)
+        {
+            for (int i = 0; i < SkillData.projectileCount; i++)
+            {
+                Vector3 dir = Vector3.one;
+                Vector3 startPos = GameManager.Instance.controller.transform.position;
+                GenerateProjectile(GameManager.Instance.controller, prefabName, startPos, dir, Vector3.zero, this);
+
+                yield return new WaitForSeconds(SkillData.ProjectileSpacing);
+            }
+        }
+    }
+
     protected override void DoSkillJob()
     {
-        throw new System.NotImplementedException();
-    }
-
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
+        StartCoroutine(SetHolyPulse());
     }
 }

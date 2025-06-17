@@ -116,6 +116,15 @@ public class Player : MonoBehaviour, IEquipable, IDamagable
         col = GetComponent<CapsuleCollider>();
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            // 디버그용 속도업
+            moveSpeed *= 2f;
+        }
+    }
+
     public void ApplyOption(ItemOptionType type, float value)
     {
         switch (type)
