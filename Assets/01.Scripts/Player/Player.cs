@@ -109,17 +109,18 @@ public class Player : MonoBehaviour, IEquipable, IDamagable
         GameManager.Instance.player = this;
     }
 
-    void Start()
+    public void Initialize()
     {
-        // DontDestroyOnLoad 적용으로 씬 전환 시에도 삭제되지 않음
-        Player[] uis = FindObjectsOfType<Player>();
-
-        if (uis.Length > 1)
+        Player[] players = FindObjectsOfType<Player>();
+        if (players.Length > 1)
         {
             Destroy(gameObject);
-            return;
+            Debug.Log("Initialize()에서 중복으로 제거됨");
         }
+    }
 
+    void Start()
+    {
         DontDestroyOnLoad(gameObject);
 
         // 씬 전환 시 자동으로 (0,0,0) 위치로 재배치
