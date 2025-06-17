@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +24,6 @@ public class GameManager : Singleton<GameManager>
     public int maxUnlockedStage = 1;
     public bool[] stageCleared = new bool[16];
 
-    public SaveManager saveManager;
     public SaveData currentData;
     
     // 골드 관련
@@ -33,18 +32,6 @@ public class GameManager : Singleton<GameManager>
 
     private void Awake()
     {
-        // SaveManager가 할당되어 있지 않으면 찾아서 할당
-        if (saveManager == null)
-        {
-            saveManager = FindObjectOfType<SaveManager>();
-        }
-
-        // 저장된 데이터 로드
-        currentData = saveManager.LoadGame();
-        if (currentData == null)
-        {
-            currentData = new SaveData(); // 데이터가 없으면 새로 생성
-        }
         // else
         // {
         //     Gold = currentData.gold;
@@ -72,13 +59,11 @@ public class GameManager : Singleton<GameManager>
     {
         if (Input.GetKeyDown(KeyCode.F5))
         {
-            SaveGameData(); // 저장
             Debug.Log("게임 저장됨");
         }
 
         if (Input.GetKeyDown(KeyCode.F9))
         {
-            currentData = saveManager.LoadGame();
             Gold = currentData.gold;
             InventoryManager.Instance.LoadFromSave(currentData.inventoryItems);
             PlayerEquipmentManager.Instance.LoadAllEquippedItems(currentData.equippedItemsPerClass);
@@ -181,12 +166,5 @@ public class GameManager : Singleton<GameManager>
     }
 
     // 모든 플레이어 데이터를 갱신한 후 저장하는 함수
-    public void SaveGameData()
-    {
-        // 저장 전에 현재 게임 상태를 최신화
-        UpdateSaveData();
-        // 현재 최신화된 데이터를 실제 파일에 저장
-        saveManager.SaveGame(currentData);
-    }
 
 }
