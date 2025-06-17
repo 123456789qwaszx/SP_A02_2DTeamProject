@@ -70,11 +70,11 @@ public class SkillBase : MonoBehaviour
         // Level 같이 동적인 데이터를 보관하기 위한 별도의 static 공간이 필요함.
         
         // 만약 바로 수정할거면, 키에서 Type을 받은 다음. 그 타입의 데이터를 가져오면 됨.
-        SkillData skillData = SkillData;
-        SkillManager.Instance._objects.TryGetValue($"{id}", out UnityEngine.Object obj);
-        if (!skillData == obj)
+        SkillData _skillData = SkillData;
+        SkillManager.Instance._skillData.TryGetValue($"{id}", out SkillData obj);
+        if (!_skillData == obj)
             return SkillData;
-        SkillData = skillData;
+        SkillData = _skillData;
 
         OnChangedSkillData();
 
