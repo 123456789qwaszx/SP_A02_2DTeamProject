@@ -136,10 +136,6 @@ public class Player : MonoBehaviour, IEquipable, IDamagable
                 gameOverPanel = Instantiate(prefab);
                 Debug.Log("GameOverPanel 프리팹 인스턴스 생성됨.");
             }
-            else
-            {
-                Debug.LogError("GameOverPanel 프리팹을 찾을 수 없습니다. Resources 폴더를 확인하세요.");
-            }
         }
     }
 
