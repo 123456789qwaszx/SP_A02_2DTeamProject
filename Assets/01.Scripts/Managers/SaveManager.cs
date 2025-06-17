@@ -11,6 +11,8 @@ public class SaveManager : MonoBehaviour
         // 예시: 데이터를 저장할 경로 설정
         savePath = Path.Combine(Application.persistentDataPath, "save.json");
         Debug.Log("Save path: " + savePath);
+
+        DontDestroyOnLoad(gameObject);
     }
 
     // SaveData 객체를 JSON 파일에 저장하는 함수
