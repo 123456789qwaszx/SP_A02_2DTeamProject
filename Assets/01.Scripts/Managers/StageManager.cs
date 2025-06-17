@@ -7,7 +7,7 @@ public class StageManager : Singleton<StageManager>
 
     public StageType currentStageType;
 
-    [SerializeField] private MonsterSpawnManager monsterSpawnManager;
+    private MonsterSpawnManager monsterSpawnManager;
 
     private float stageTimer = 0f;
     private bool isStageCleared = false;
@@ -19,6 +19,7 @@ public class StageManager : Singleton<StageManager>
 
     private void Start()
     {
+        monsterSpawnManager = MonsterSpawnManager.Instance;
         SetupStage(GameManager.Instance.currentStage);
     }
 

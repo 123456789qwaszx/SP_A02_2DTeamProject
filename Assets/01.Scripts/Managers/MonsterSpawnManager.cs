@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using static StageManager;
 
 public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
@@ -56,6 +57,9 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
 
     void Update()
     {
+        if (SceneManager.GetActiveScene().name == "MainScene")
+            return;
+
         if (!isSpawning) return;
 
         playTime += Time.deltaTime;
@@ -213,6 +217,11 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
 
     public void SetupStage(StageType type)
     {
+        player = GameManager.Instance.player.transform;
+
+        if (player == null)
+            Debug.LogError("MonsterSpawnManager의 player가 null!");
+
         currentStageType = type;
         isSpawning = true;
         playTime = 0f;

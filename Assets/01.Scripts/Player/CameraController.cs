@@ -15,7 +15,7 @@ public class CameraController : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         // 씬 전환 시 자동으로 (0,0,0) 위치로 재배치
-        transform.position = Vector3.zero;
+        transform.position = new Vector3(0f, 0f, -10f);
 
         if (Target == null)
             Target = GetPlayerFromLayer();
