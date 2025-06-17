@@ -27,7 +27,7 @@ public class ShopManager : MonoBehaviour
     
     public void SellItem(GeneratedItem item)
     {
-        PlayerGoldManager.Instance.AddGold(item.sellPrice);
+        GameManager.Instance.AddGold(item.sellPrice);
         InventoryManager.Instance.RemoveItem(item);
         if (ShopInventoryUIManager.instance != null)
             ShopInventoryUIManager.instance.RefreshInventory();
@@ -37,13 +37,13 @@ public class ShopManager : MonoBehaviour
     
     public bool BuyItem(GeneratedItem item)
     {
-        if (PlayerGoldManager.Instance.currentGold < item.sellPrice)
+        if (GameManager.Instance.Gold < item.sellPrice)
         {
             Debug.Log("골드 부족!");
             return false;
         }
 
-        PlayerGoldManager.Instance.SpendGold(item.buyPrice);
+        GameManager.Instance.SpendGold(item.buyPrice);
         InventoryManager.Instance.AddItem(item);
         ShopInventoryUIManager.instance?.RefreshInventory();
         

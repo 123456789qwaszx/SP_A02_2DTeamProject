@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -83,6 +84,13 @@ public class JobChoicePanel : MonoBehaviour
         ItemEquipHandler.Instance.RefreshUI();
 
         Debug.Log("새 플레이어 생성됨: " + newPlayer.name);
+        
+        var goldObj = GameObject.Find("GoldText");
+        if (goldObj != null)
+        {
+            var goldText = goldObj.GetComponent<TextMeshProUGUI>();
+            GameManager.Instance.SetGoldText(goldText);
+        }
 
         RemoveExistingEffects();
         ClosePanel();
