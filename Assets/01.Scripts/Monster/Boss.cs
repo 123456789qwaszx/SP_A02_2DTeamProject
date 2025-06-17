@@ -47,7 +47,7 @@ public class Boss : MonsterBase
         //빨갛게
         if (spriteRenderer != null)
         {
-            Color newColor = new Color(1f, 0.1f, 0.1f); // 원하는 색
+            Color newColor = new Color(1f, 0.5f, 0.1f); // 원하는 색
             spriteRenderer.color = newColor;
 
             // 원래 색상도 덮어쓰기
