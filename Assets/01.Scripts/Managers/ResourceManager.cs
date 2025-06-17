@@ -9,7 +9,7 @@ using Object = UnityEngine.Object;
 
 public class ResourceManager : Singleton<ResourceManager>
 {
-    public Dictionary<string, Object> _resources = new Dictionary<string, Object>();
+    Dictionary<string, Object> _resources = new Dictionary<string, Object>();
 
 
     // 키 값을 이용해 _resources에 등록된 프리팹을 생성함

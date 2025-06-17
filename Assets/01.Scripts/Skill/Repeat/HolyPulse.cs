@@ -9,10 +9,6 @@ public class HolyPulse : RepeatSkill
         SkillType = SkillType.HolyPulse;
     }
 
-    public override void OnChangedSkillData()
-    {
-    }
-
     IEnumerator SetHolyPulse()
     {
         string prefabName = SkillData.PrefabLabel;

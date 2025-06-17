@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,13 +38,13 @@ public class SkillManager : Singleton<SkillManager>
 
     [SerializeField]
     private List<SkillBase> _skillList = new List<SkillBase>();
-    public List<SkillBase> SkillList { get { return _skillList; }}
+    public List<SkillBase> SkillList { get { return _skillList; } }
 
     public List<SkillBase> ActivatedSkills
     {
         get { return SkillList.Where(skill => skill.IsLearnedSkill).ToList(); }
     }
-    
+
     public Dictionary<SkillType, int> SavedBattleSkill = new Dictionary<SkillType, int>();
 
     #region SkillData
@@ -153,5 +154,23 @@ public class SkillManager : Singleton<SkillManager>
     public void StartSkillUILoad()
     {
         skillSelectPopup_Prefab = ResourceManager.Instance.Load<GameObject>("UI_SkillCardSelectPopup");
+    }
+    
+    
+    public SkillType GetSkillTypeFromInt(int value)
+    {
+        foreach (SkillType skillType in Enum.GetValues(typeof(SkillType)))
+        {
+            int minValue = (int)skillType;
+            int maxValue = minValue + 5; // 100501~ 100506 사이 값이면 100501값 리턴
+
+            if (value >= minValue && value <= maxValue)
+            {
+                return skillType;
+            }
+        }
+
+        Debug.LogError($" Faild add skill : {value}");
+        return SkillType.None;
     }
 }
