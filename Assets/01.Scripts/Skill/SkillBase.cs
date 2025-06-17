@@ -53,7 +53,6 @@ public class SkillBase : MonoBehaviour
 
     public int TotalDamage { get; set; } = 100;
 
-    
     void Awake()
     {
         Init();
@@ -71,8 +70,7 @@ public class SkillBase : MonoBehaviour
         // Level 같이 동적인 데이터를 보관하기 위한 별도의 static 공간이 필요함.
         
         // 만약 바로 수정할거면, 키에서 Type을 받은 다음. 그 타입의 데이터를 가져오면 됨.
-        Debug.Log("수정필요");
-        SkillData skillData = new SkillData();
+        SkillData skillData = SkillData;
         SkillManager.Instance._objects.TryGetValue($"{id}", out UnityEngine.Object obj);
         if (!skillData == obj)
             return SkillData;

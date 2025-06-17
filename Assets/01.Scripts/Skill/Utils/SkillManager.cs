@@ -6,27 +6,11 @@ using UnityEngine;
 public class SkillManager : Singleton<SkillManager>
 {
     #region HolyProjectile
-    public GameObject holyProjectile_Prefab;
-
-    public ProjectileController SpawnHolyProjectile(Vector2 position)
-    {
-        GameObject go = PoolManager.Instance.Pop(holyProjectile_Prefab);
-        go.transform.position = position;
-
-        ProjectileController sc = go.GetComponent<ProjectileController>();
-        Projectiles.Add(sc);
-        sc.Init();
-
-        return sc;
-    }
-
     public void DespawnHolyProJectile(ProjectileController go)
     {
-        Projectiles.Remove(go);
         Instance.SpawnHolyImpact(go.transform.position);
 
         PoolManager.Instance.Push(go.gameObject);
-
     }
     #endregion
 
@@ -46,28 +30,6 @@ public class SkillManager : Singleton<SkillManager>
 
     public void DeSpawnHolyImpact(ProjectileController go)
     {
-        PoolManager.Instance.Push(go.gameObject);
-    }
-    #endregion
-
-
-    #region HolyPulse
-    public GameObject holyPulse_Prefab;
-
-    public ProjectileController SpawnHolyPulse(Vector2 position)
-    {
-        GameObject go = PoolManager.Instance.Pop(holyPulse_Prefab);
-        go.transform.position = position;
-
-        ProjectileController sc = go.GetComponent<ProjectileController>();
-        sc.Init();
-
-        return sc;
-    }
-
-    public void DeSpawnHolyPulse(ProjectileController go)
-    {
-        Projectiles.Remove(go);
         PoolManager.Instance.Push(go.gameObject);
     }
     #endregion
@@ -123,37 +85,22 @@ public class SkillManager : Singleton<SkillManager>
     #endregion
 
 
+    public GameObject holyProjectile_Prefab;
+    public GameObject holyPulse_Prefab;
     GameObject fire00_Prefab;
 
-    SkillBase iceSkill_Prefab;
-
+    // 스킬북에서 로드 중
+    // 이 부분이 틀려지면 데이터를 다른 곳에서 받아옴.
+    // 아마 _object의 Value를 프리팹으로 넣는 대신에, 그냥 저 프리팹의 데이터를 밸류로 넣어주자고...
     public void StartSkillLoad()
     {
-        // 250617_1540 이제 안쓰는듯?
-        holyProjectile_Prefab = ResourceManager.Instance.Load<GameObject>("Skill_00_HolyProjectile.prefab");
-        holyImpact_Prefab = ResourceManager.Instance.Load<GameObject>("Skill_01_HolyImpact.prefab");
-        holyPulse_Prefab = ResourceManager.Instance.Load<GameObject>("Skill_02_HolyPulse.prefab");
-        fire00_Prefab = ResourceManager.Instance.Load<GameObject>("Skill_10_Fire00.prefab");
-
-
-        // 스킬고유 인덱스와 skill을 넣어준다. scriptableObject를 활용했기때문에 prefab만 넣어도 데이터를 추출가능하다.
-        // SkillBase skill10001 = holyProjectile_Prefab.GetComponent<SkillBase>();
-        // SkillBase skill10011 = holyImpact_Prefab.GetComponent<SkillBase>();
-        // SkillBase skill10021 = holyPulse_Prefab.GetComponent<SkillBase>();
-        // SkillBase skill10031 = fire00_Prefab.GetComponent<SkillBase>();
-
         _objects.Add("10001", holyProjectile_Prefab);
         _objects.Add("10011", holyImpact_Prefab);
         _objects.Add("10021", holyPulse_Prefab);
         _objects.Add("10031", fire00_Prefab);
-
-        // 이렇게 추가하는 걸 아래처럼 직접하는 게 아니라, AddSkill()메소드로 뺄것 : SkillBook에 추가
-        // _skillList.Add(skill10001);
-        // _skillList.Add(skill10011);
-        // _skillList.Add(skill10021);
-        // _skillList.Add(skill10031);
     }
 
+    // 나중에 UIManager 추가되면 그곳으로 이동
     void Start()
     {
         ResourceManager.Instance.LoadAllAsync<GameObject>("UI_Prefabs", (key, count, totalCount) =>
@@ -172,10 +119,5 @@ public class SkillManager : Singleton<SkillManager>
     public void StartSkillUILoad()
     {
         skillSelectPopup_Prefab = ResourceManager.Instance.Load<GameObject>("UI_SkillCardSelectPopup");
-    }
-
-    void Update()
-    {
-
     }
 }

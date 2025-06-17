@@ -88,7 +88,7 @@ public class ProjectileController : SkillBase
     float _timer = 0;
     private float _rotateAmount = 1000;
 
-    
+
     IEnumerator CoHolyPulse()
     {
         List<MonsterBase> target = ObjectManager.Instance.GetMonsterWithinCamera(1);
@@ -116,7 +116,7 @@ public class ProjectileController : SkillBase
         }
     }
 
-    
+
     IEnumerator CoChainLightning(Vector3 startPos, Vector3 endPos, bool isFollow = false)
     {
         yield return new WaitForSeconds(0.25f);
@@ -127,7 +127,7 @@ public class ProjectileController : SkillBase
     IEnumerator CoArrow()
     {
 
-        Vector2 direction = (Vector2)GameManager.Instance.controller.transform.position +new Vector2(5,0) - _rigid.position;
+        Vector2 direction = (Vector2)GameManager.Instance.controller.transform.position + new Vector2(5, 0) - _rigid.position;
         float rotateSpeed = Vector3.Cross(direction.normalized, transform.up).z;
         _rigid.angularVelocity = -_rotateAmount * rotateSpeed;
         _rigid.velocity = transform.up * Skill.SkillData.projectileSpeed;

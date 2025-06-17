@@ -6,19 +6,8 @@ using UnityEngine;
 
 public class SkillBook : MonoBehaviour
 {
-
     public static int MAX_SKILL_LEVEL = 6;
     public static int MAX_SKILL_COUNT = 6;
-
-    public void LoadSkill(SkillType skillType, int level)
-    {
-        AddSkill(skillType);
-        for (int i = 0; i < level; i++)
-        {
-            LevelUpSkill(skillType);
-        }
-    }
-
 
     void Start()
     {
@@ -56,13 +45,22 @@ public class SkillBook : MonoBehaviour
                 LevelUpSkill(type7);
 
                 AddSkill(type11, 10111);
-                //LevelUpSkill(type1);
+                //LevelUpSkill(type11);
                 // 이렇게 직접 레벨업 시키는 건 처음 시작시 세팅만 이렇고, 이후는 스킬카드UI의 버튼을 통해 LevelUpSkill이 실행됨
 
             }
         });
     }
 
+    
+    public void LoadSkill(SkillType skillType, int level)
+    {
+        AddSkill(skillType);
+        for (int i = 0; i < level; i++)
+        {
+            LevelUpSkill(skillType);
+        }
+    }
 
     public List<SkillBase> RecommendSkills()
     {
@@ -124,67 +122,4 @@ public class SkillBook : MonoBehaviour
     {
         SkillManager.Instance.SavedBattleSkill.Clear();
     }
-
-
-
-    #region Refactor예정
-    [Header("HolyProjectile")]
-    public Transform indicator;
-
-
-    #region HolyProjectile
-    Coroutine _coProjectile;
-
-    public void StartProjectile()
-    {
-        if (_coProjectile != null)
-            StopCoroutine(_coProjectile);
-
-        _coProjectile = StartCoroutine(CoStartProjectile());
-    }
-
-    IEnumerator CoStartProjectile()
-    {
-        do
-        {
-            Vector2 dir = -(transform.position - indicator.position).normalized;
-
-            ProjectileController skill = SkillManager.Instance.SpawnHolyProjectile(transform.position);
-            skill.transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
-
-
-            skill.SetInfo(GameManager.Instance.controller, GameManager.Instance.controller.transform.position, -(transform.position - indicator.position).normalized, indicator.transform.position, skill);
-            yield return new WaitForSeconds(skill._attackInterval);
-        }
-
-        while (true);
-    }
-    #endregion
-
-    #region HolyPulse
-    // Coroutine _coPulse;
-
-    // void StartPulse()
-    // {
-    //     if (_coPulse != null)
-    //         StopCoroutine(_coPulse);
-
-    //     _coPulse = StartCoroutine(CoStartPulse());
-    // }
-
-    // IEnumerator CoStartPulse()
-    // {
-    //     do
-
-    //     {
-    //         ProjectileController skill = SkillManager.Instance.SpawnHolyPulse(transform.position);
-
-    //         skill.SetInfo(GameManager.Instance.controller, GameManager.Instance.controller.transform.position, -(transform.position - indicator.position).normalized, indicator.transform.position, );
-    //         yield return new WaitForSeconds(skill._attackInterval);
-    //     }
-
-    //     while (true);
-    // }
-    #endregion
-    #endregion
 }
