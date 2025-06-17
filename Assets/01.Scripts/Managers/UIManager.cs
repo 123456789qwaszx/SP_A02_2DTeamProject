@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -13,12 +14,64 @@ public class UIManager : Singleton<UIManager>
     [Header("닫기 버튼")]
     public Button closeBtn;
 
+    [Header("플레이타임 표시")]
+    private TextMeshProUGUI playTimeText;
+
     private SaveData data;
+
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
 
     private void Start()
     {
         data = SaveManager.Instance.LoadGame();
     }
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // 던전 씬에서 텍스트만 다시 찾아서 할당
+        playTimeText = GameObject.Find("PlayTimeTxt")?.GetComponent<TextMeshProUGUI>();
+    }
+
+    public void UpdatePlayTime(float time)
+    {
+        if (playTimeText == null) return;
+
+        // 15분에서 멈추기
+        if (time >= 900f)
+        {
+            playTimeText.text = "15:00";
+            playTimeText.color = Color.red;
+            return;
+        }
+
+        int minute = Mathf.FloorToInt(time / 60f);
+        int second = Mathf.FloorToInt(time % 60f);
+        playTimeText.text = $"{minute:00}:{second:00}";
+
+        // 14분 이상부터 점점 빨개짐
+        if (time >= 840f)
+        {
+            float t = Mathf.InverseLerp(840f, 900f, time);
+            playTimeText.color = Color.Lerp(Color.white, Color.red, t);
+        }
+        else
+        {
+            playTimeText.color = Color.white;
+        }
+    }
+
     public void OpenStageSelectUI()
     {
         stageSelectPanel.SetActive(true);
