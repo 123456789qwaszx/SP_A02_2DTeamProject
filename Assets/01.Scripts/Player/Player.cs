@@ -113,7 +113,8 @@ public class Player : MonoBehaviour, IEquipable, IDamagable
         transform.position = Vector3.zero;
 
         GameManager.Instance.player = this;
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        originalColor = spriteRenderer.color;
         tf = GetComponent<Transform>();
         rb = GetComponent<Rigidbody2D>();
 
