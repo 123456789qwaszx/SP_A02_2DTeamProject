@@ -17,10 +17,19 @@ public class StageManager : Singleton<StageManager>
         DontDestroyOnLoad(gameObject);
     }
 
-    private void Start()
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         monsterSpawnManager = MonsterSpawnManager.Instance;
-
         SetupStage(GameManager.Instance.currentStage);
     }
 
@@ -40,7 +49,7 @@ public class StageManager : Singleton<StageManager>
         {
             StageClear();
         }
-        // 보스와 최종보스는 OnDeadEnd()에서 StageClear 호출됨
+        // 보스 및 최종보스는 OnDeadEnd()에서 StageClear 호출
     }
 
     public void SetupStage(int stage)

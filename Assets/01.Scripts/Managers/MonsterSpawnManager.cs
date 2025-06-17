@@ -46,11 +46,20 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
     {
         DontDestroyOnLoad(gameObject);
     }
-
-    IEnumerator Start()
+    private void OnEnable()
     {
-        while (GameManager.Instance.player == null)
-            yield return null;
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (GameManager.Instance.player != null)
+            player = GameManager.Instance.player.transform;
     }
 
     void Update()
@@ -237,6 +246,11 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
 
     public void SetupStage(StageType type)
     {
+        if (GameManager.Instance.player != null)
+            player = GameManager.Instance.player.transform;
+        else
+            Debug.LogWarning("스폰매니저에서 플레이어를 할당받지 못했습니다!");
+
         if (type == StageType.None)
         {
             isSpawning = false;
