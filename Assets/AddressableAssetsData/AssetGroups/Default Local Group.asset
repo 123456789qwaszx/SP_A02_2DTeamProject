@@ -90,10 +90,16 @@ MonoBehaviour:
     - Skill_Prefabs
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 61f8702fe428a4b489f00af53bbc550e
-    m_Address: Assets/03.Prefabs/UI/UI_SkillCardSelectPopup.prefab
+    m_Address: UI_SkillCardSelectPopup
     m_ReadOnly: 0
     m_SerializedLabels:
     - UI_Prefabs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7cc8fc202efe2f14798e023948e11f84
+    m_Address: Player_Warrior
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: a22d370fdbdb96446bf81d169c3e5ba9, type: 2}

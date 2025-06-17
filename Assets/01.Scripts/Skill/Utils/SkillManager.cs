@@ -154,6 +154,17 @@ public class SkillManager : Singleton<SkillManager>
                 StartSkillUILoad();
             }
         });
+        
+        ResourceManager.Instance.LoadAllAsync<GameObject>("default", (key, count, totalCount) =>
+        {
+            Debug.Log($"{key} {count}/{totalCount}");
+
+            if (count == totalCount)
+            {
+                GameObject go = ResourceManager.Instance.Load<GameObject>("Player_Warrior");
+                GameManager.Instance.player = go.GetComponent<Player>();
+            }
+        });
     }
 
     public GameObject skillSelectPopup_Prefab;
