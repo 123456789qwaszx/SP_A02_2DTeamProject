@@ -15,9 +15,9 @@ MonoBehaviour:
   monsterName: Final_Boss
   maxHP: 30000
   attackPower: 50
-  moveSpeed: 10
-  attackCooldown: 10
-  attackRange: 7
+  moveSpeed: 2
+  attackCooldown: 3
+  attackRange: 10
   type: 8
   projectilePrefab: {fileID: 0}
   bossProjectilePrefab: {fileID: 8867785314995736797, guid: 53a3d4a18fdcd41978e665f22401573b, type: 3}

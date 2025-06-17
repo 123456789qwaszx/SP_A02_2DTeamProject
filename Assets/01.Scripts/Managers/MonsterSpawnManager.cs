@@ -188,6 +188,8 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
 
             for (int i = 0; i < surroundMonstersCount; i++)
             {
+                player = GameManager.Instance.player.transform;
+
                 float angle = 360f * i / surroundMonstersCount;
                 Vector3 dir = Quaternion.Euler(0, 0, angle) * Vector3.right;
                 Vector3 pos = player.position + dir * radius;

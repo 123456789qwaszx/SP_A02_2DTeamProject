@@ -66,7 +66,10 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
 
         InitializeStates();
     }
-
+    void Start()
+    {
+        ResetMonster();
+    }
     // 보스, 최종보스는 오버라이드
     protected virtual void InitializeStates()
     {
@@ -80,10 +83,10 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
             StateMeleeAttack = new MonsterStateAttackMelee(this, animator);
     }
 
-    private void OnEnable()
-    {
-        ResetMonster();
-    }
+    //private void OnEnable()
+    //{
+    //    ResetMonster();
+    //}
 
     protected virtual void Update()
     {
