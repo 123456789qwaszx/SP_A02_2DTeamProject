@@ -55,7 +55,8 @@ public class ItemGenerator : MonoBehaviour
             item.options.Add((opt.optionType, val));
         }
         
-        item.sellPrice = ItemPriceCalculator.GetSellPrice(item);
+        item.buyPrice = ItemPriceCalculator.GetBuyPrice(item);
+        item.sellPrice = ItemPriceCalculator.GetSellPriceFromBuyPrice(item.buyPrice);
 
         return item;
     }
@@ -80,7 +81,8 @@ public class ItemGenerator : MonoBehaviour
             item.uniqueOption = (data.uniqueOption.optionName, data.uniqueOption.value);
         }
 
-        item.sellPrice = ItemPriceCalculator.GetSellPrice(item);
+        item.buyPrice = ItemPriceCalculator.GetBuyPrice(item);
+        item.sellPrice = ItemPriceCalculator.GetSellPriceFromBuyPrice(item.buyPrice);
         
         return item;
     }
@@ -108,7 +110,8 @@ public class ItemGenerator : MonoBehaviour
             item.setBonuses.Add((bonus.optionName, bonus.value));
         }
 
-        item.sellPrice = ItemPriceCalculator.GetSellPrice(item);
+        item.buyPrice = ItemPriceCalculator.GetBuyPrice(item);
+        item.sellPrice = ItemPriceCalculator.GetSellPriceFromBuyPrice(item.buyPrice);
         
         return item;
     }

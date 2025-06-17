@@ -43,7 +43,7 @@ public class ShopManager : MonoBehaviour
             return false;
         }
 
-        PlayerGoldManager.Instance.SpendGold(item.sellPrice);
+        PlayerGoldManager.Instance.SpendGold(item.buyPrice);
         InventoryManager.Instance.AddItem(item);
         ShopInventoryUIManager.instance?.RefreshInventory();
         

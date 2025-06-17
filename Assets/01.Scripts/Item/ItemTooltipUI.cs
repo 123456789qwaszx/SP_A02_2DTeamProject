@@ -26,7 +26,7 @@ public class ItemTooltipUI : MonoBehaviour
         Hide();
     }
 
-    public void Show(GeneratedItem item, Vector3 position)
+    public void Show(GeneratedItem item, Vector3 position, bool isShopItem = false)
     {
         if (item == null || Instance == null || iconImage == null) return;
         
@@ -88,6 +88,21 @@ public class ItemTooltipUI : MonoBehaviour
 
                 text.text = $"[세트 {bonus.requiredCount}개] {bonus.optionName} +{bonus.value}";
             }
+        }
+        
+        // 구매/판매 가격 표시
+        var priceGO = Instantiate(optionTextPrefab, optionContainer);
+        var priceText = priceGO.GetComponent<TextMeshProUGUI>();
+
+        if (isShopItem)
+        {
+            priceText.color = Color.yellow;
+            priceText.text = $"<b>구매 가격:</b> {item.buyPrice:N0} G";
+        }
+        else
+        {
+            priceText.color = Color.cyan;
+            priceText.text = $"<b>판매 가격:</b> {item.sellPrice:N0} G";
         }
         
     }
