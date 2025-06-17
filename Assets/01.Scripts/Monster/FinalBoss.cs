@@ -5,6 +5,7 @@ using UnityEngine;
 public class FinalBoss : MonsterBase
 {
     [Header("최종보스 페이즈 연출")]
+    [SerializeField] private Cinemachine.CinemachineImpulseSource impulseSource;
     [SerializeField] private GameObject phase2Effect;
     [SerializeField] private GameObject phase3Effect;
     [SerializeField] private AudioClip phaseChangeSound;
@@ -23,6 +24,7 @@ public class FinalBoss : MonsterBase
 
     private bool tryMultiShot = true;
     private bool tryExplodingAoE = true;
+    private bool isInvincible = false;
 
     protected override void Update()
     {
@@ -60,7 +62,7 @@ public class FinalBoss : MonsterBase
         {
             case 2:
                 isPhase2 = true;
-                monsterData.attackPower += 5;
+                monsterData.attackPower += 10;
                 monsterData.moveSpeed += 1;
                 if (phase2Effect != null)
                     Instantiate(phase2Effect, transform.position, Quaternion.identity);
@@ -71,7 +73,7 @@ public class FinalBoss : MonsterBase
 
             case 3:
                 isPhase3 = true;
-                monsterData.attackPower += 10;
+                monsterData.attackPower += 20;
                 monsterData.moveSpeed += 1;
                 if (phase3Effect != null)
                     Instantiate(phase3Effect, transform.position, Quaternion.identity);
@@ -80,6 +82,23 @@ public class FinalBoss : MonsterBase
                     spriteRenderer.color = new Color(1f, 0.4f, 0.4f);
                 break;
         }
+
+        SoundManager.Instance.PlaySFX(phaseChangeSound);
+        // 일시정지 및 일시 무적 상태
+        StartCoroutine(PhaseTransitionRoutine());
+    }
+    private IEnumerator PhaseTransitionRoutine()
+    {
+        isInvincible = true;
+        StopMoving();
+
+        if (impulseSource != null)
+            impulseSource.GenerateImpulse();
+
+        // 4초간 정지
+        yield return new WaitForSeconds(4f);
+
+        isInvincible = false;
     }
 
     // [이벤트함수] 최종보스 공격
@@ -189,6 +208,11 @@ public class FinalBoss : MonsterBase
 
         Destroy(warning);
         Destroy(explosion, 1f);
+    }
+    public override void TakeDamage(float amount)
+    {
+        if (isInvincible) return;
+        base.TakeDamage(amount);
     }
 
     public override void OnDeadEnd()
