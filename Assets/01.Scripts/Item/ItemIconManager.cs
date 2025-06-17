@@ -11,16 +11,29 @@ public class ItemIconManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        
+        Debug.Log($"[ItemIconManager] Awake 호출됨. visuals 개수: {visuals.Count}");
+        foreach (var v in visuals)
+        {
+            Debug.Log($"▶ 아이콘 등록됨: {v.itemType} / {v.itemIcon}");
+        }
     }
     
     public Sprite GetIcon(ItemType type)
     {
         var v = visuals.FirstOrDefault(v => v.itemType == type);
-        if (v == null || v.itemIcon == null)
+
+        if (v == null)
         {
-            Debug.LogWarning($"[ItemIconManager] 아이콘을 찾을 수 없음: {type}");
+            Debug.LogWarning($"[ItemIconManager] ❌ 아이콘 매핑 없음: {type}");
             return null;
         }
-        return v != null ? v.itemIcon : null;
+
+        if (v.itemIcon == null)
+        {
+            Debug.LogWarning($"[ItemIconManager] ⚠️ 아이콘 스프라이트가 null: {type} (ItemVisualData는 있음)");
+        }
+
+        return v.itemIcon;
     }
 }
