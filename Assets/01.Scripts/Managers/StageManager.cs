@@ -50,6 +50,11 @@ public class StageManager : Singleton<StageManager>
 
         stageTimer += Time.deltaTime;
 
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            stageTimer += 60f;
+        }
+
         UIManager.Instance.UpdatePlayTime(stageTimer);
 
         if (Input.GetKeyDown(KeyCode.F))

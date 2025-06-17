@@ -6,7 +6,7 @@ using static StageManager;
 
 public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
 {
-    [Header("몬스터 프리팹")]
+    [Header("\u2022 몬스터 프리팹")]
     public GameObject[] regularPrefabs_1_5;
     public GameObject[] elitePrefabs_1_5;
 
@@ -20,16 +20,16 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
     public GameObject[] bossPrefabs;
     public GameObject finalBossPrefab;
 
-    [Header("스폰 설정")]
+    [Header("\u2022 스폰 설정")]
     public float spawnInterval = 2f;
     public float surroundInterval = 120f;
     public float minSpawnDistance = 7f;
     public float maxSpawnDistance = 12f;
     public int surroundMonstersCount = 20;
 
-    [Header("스폰 타이밍 트리거")]
-    private float[] eliteSpawnTimes = { 180f, 420f, 780f }; // 3분, 7분, 13분
-    private float[] midBossTimes = { 720f }; // 12분에 중간 보스 스폰
+    [Header("\u2022 스폰 타이밍 트리거")]
+    private float[] eliteSpawnTimes = { 180f, 420f, 780f };
+    private float[] midBossTimes = { 720f };
 
     private Transform player;
     private float playTime;
@@ -52,9 +52,9 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
             Destroy(gameObject);
             return;
         }
-
         DontDestroyOnLoad(gameObject);
     }
+
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -71,19 +71,24 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
             player = GameManager.Instance.player.transform;
     }
 
-    void Update()
+    private void Update()
     {
-        if (SceneManager.GetActiveScene().name == "MainScene")
+        if (SceneManager.GetActiveScene().name == "MainScene" || !isSpawning)
             return;
-
-        if (!isSpawning) return;
 
         playTime += Time.deltaTime;
 
+        // 경고 메시지 처리
         if (!midBossWarned && playTime >= 720f)
         {
             UIManager.Instance.ShowWarning("아주 강력한 몬스터가 다가옵니다!", 3f);
             midBossWarned = true;
+        }
+
+        if (playTime >= nextSurroundWarning && playTime < 900f)
+        {
+            UIManager.Instance.ShowWarning("곧 몬스터가 몰려옵니다!");
+            nextSurroundWarning += surroundInterval;
         }
 
         if (currentStageType == StageType.Boss && !countdownStarted && playTime >= 890f)
@@ -98,6 +103,7 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
             return;
         }
 
+        // 몬스터 스폰 트리거들
         foreach (float timing in eliteSpawnTimes)
         {
             if (playTime >= timing && !triggeredTimes.Contains(timing))
@@ -112,15 +118,8 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
             if (playTime >= timing && !triggeredTimes.Contains(timing))
             {
                 int stage = GameManager.Instance.currentStage;
+                int spawnCount = stage <= 5 ? 1 : stage <= 10 ? 2 : 3;
 
-                // 중간보스 1마리 / 2마리 / 3마리 스폰
-                int spawnCount = 1;
-                if (stage >= 6 && stage <= 10)
-                    spawnCount = 2;
-                else if (stage >= 11 && stage <= 15)
-                    spawnCount = 3;
-
-                // 중복 방지 스폰
                 List<int> selectedIndex = new List<int>();
                 while (selectedIndex.Count < spawnCount)
                 {
@@ -130,9 +129,7 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
                 }
 
                 foreach (int index in selectedIndex)
-                {
                     SpawnFromPool(midBossPrefabs[index]);
-                }
 
                 triggeredTimes.Add(timing);
             }
@@ -140,15 +137,21 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
 
         if (currentStageType == StageType.Boss && playTime >= 900f && !bossSpawned)
         {
-            if (GameManager.Instance.currentStage == 5)
-                SpawnFromPool(bossPrefabs[0]);
-            else if (GameManager.Instance.currentStage == 10)
-                SpawnFromPool(bossPrefabs[1]);
-            else if (GameManager.Instance.currentStage == 15)
-                SpawnFromPool(bossPrefabs[2]);
-
+            int stage = GameManager.Instance.currentStage;
+            int bossIndex = stage == 5 ? 0 : stage == 10 ? 1 : 2;
+            SpawnFromPool(bossPrefabs[bossIndex]);
             bossSpawned = true;
         }
+    }
+
+    IEnumerator BossCountdownRoutine()
+    {
+        for (int i = 10; i >= 1; i--)
+        {
+            UIManager.Instance.ShowWarning($"..{i}", 1f);
+            yield return new WaitForSeconds(1f);
+        }
+        UIManager.Instance.ShowWarning("보스 출현!", 2f);
     }
 
     IEnumerator SpawnRegularMonsters()
@@ -168,7 +171,7 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
                 InitPooledMonster(monster, pos);
             }
 
-            yield return new WaitForSeconds(spawnInterval); // 3마리 스폰 후 딜레이
+            yield return new WaitForSeconds(spawnInterval);
         }
     }
 
@@ -197,35 +200,27 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
             }
         }
     }
+
     private GameObject[] GetRegularPrefabs()
     {
         int stage = GameManager.Instance.currentStage;
-
-        if (stage >= 1 && stage <= 5)
-            return regularPrefabs_1_5;
-        else if (stage >= 6 && stage <= 10)
-            return regularPrefabs_6_10;
-        else
-            return regularPrefabs_11_16;
+        if (stage <= 5) return regularPrefabs_1_5;
+        if (stage <= 10) return regularPrefabs_6_10;
+        return regularPrefabs_11_16;
     }
 
     private GameObject[] GetElitePrefabs()
     {
         int stage = GameManager.Instance.currentStage;
-
-        if (stage >= 1 && stage <= 5)
-            return elitePrefabs_1_5;
-        else if (stage >= 6 && stage <= 10)
-            return elitePrefabs_6_10;
-        else
-            return elitePrefabs_11_16;
+        if (stage <= 5) return elitePrefabs_1_5;
+        if (stage <= 10) return elitePrefabs_6_10;
+        return elitePrefabs_11_16;
     }
 
     void SpawnFromPool(GameObject[] prefabs)
     {
         GameObject prefab = prefabs[Random.Range(0, prefabs.Length)];
-        GameObject monster = PoolManager.Instance.Pop(prefab);
-        InitPooledMonster(monster, GetValidSpawnPosition());
+        SpawnFromPool(prefab);
     }
 
     public void SpawnFromPool(GameObject prefab)
@@ -241,8 +236,7 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
         monster.SetActive(true);
 
         IMonster resettable = monster.GetComponent<IMonster>();
-        if (resettable != null)
-            resettable.ResetMonster();
+        resettable?.ResetMonster();
     }
 
     Vector3 GetValidSpawnPosition()
@@ -278,6 +272,7 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
             StopAllCoroutines();
             return;
         }
+
         if (GameManager.Instance.player != null)
             player = GameManager.Instance.player.transform;
 
@@ -286,6 +281,8 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
         playTime = 0f;
         nextSurroundWarning = surroundInterval - 10f;
         bossSpawned = false;
+        midBossWarned = false;
+        countdownStarted = false;
         triggeredTimes.Clear();
 
         switch (type)
@@ -300,19 +297,9 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
                 break;
         }
     }
-    IEnumerator BossCountdownRoutine()
-    {
-        for (int i = 10; i >= 1; i--)
-        {
-            UIManager.Instance.ShowWarning($"..{i}", 1f);
-            yield return new WaitForSeconds(1f);
-        }
 
-        UIManager.Instance.ShowWarning("보스 출현!", 2f);
-    }
     void SpawnFinalBoss()
     {
-        // 플레이어 위쪽에 스폰
         Vector3 spawnPos = player.position + Vector3.up * 10f;
         spawnedFinalBoss = Instantiate(finalBossPrefab, spawnPos, Quaternion.identity);
         finalBossScript = spawnedFinalBoss.GetComponent<FinalBoss>();
@@ -324,18 +311,16 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
 
         float hpPercent = finalBossScript.HPPercent;
 
-        // 2페이즈일때 중간보스도 추가로 10초마다 스폰
         if (hpPercent <= 0.3f && !triggeredTimes.Contains(0.3f))
         {
             finalBossScript.EnterPhase(3);
-            StartCoroutine(FinalBossPhaseRoutine(phase: 3));
+            StartCoroutine(FinalBossPhaseRoutine(3));
             triggeredTimes.Add(0.3f);
         }
-        // 1페이즈일때 일반 몬스터, 엘리트 몬스터 10초마다 스폰
         else if (hpPercent <= 0.6f && !triggeredTimes.Contains(0.6f))
         {
             finalBossScript.EnterPhase(2);
-            StartCoroutine(FinalBossPhaseRoutine(phase: 2));
+            StartCoroutine(FinalBossPhaseRoutine(2));
             triggeredTimes.Add(0.6f);
         }
     }
@@ -350,12 +335,10 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
                     SpawnFromPool(GetElitePrefabs());
                     SpawnFromPool(GetRegularPrefabs());
                     break;
-
                 case 3:
                     SpawnFromPool(midBossPrefabs);
                     break;
             }
-
             yield return new WaitForSeconds(10f);
         }
     }
