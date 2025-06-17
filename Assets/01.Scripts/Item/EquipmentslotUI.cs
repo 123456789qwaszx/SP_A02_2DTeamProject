@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -16,15 +17,28 @@ public class EquipmentslotUI : MonoBehaviour, IPointerClickHandler, IPointerEnte
     public void SetItem(GeneratedItem item)
     {
         equippedItem = item;
-        iconImage.enabled = true;
-        iconImage.sprite = ItemIconManager.Instance.GetIcon(item.itemType);
-        rarityBorder.enabled = true;
-        rarityBorder.color = GetRarityColor(item.rarity);
+        
+        if (item != null)
+        {
+            Sprite icon = ItemIconManager.Instance.GetIcon(item.itemType);
+            Debug.Log($"[SetItem] {item.itemName} | type: {item.itemType} | icon: {(icon != null ? icon.name : "NULL")}");
+            
+            iconImage.enabled = true;
+            iconImage.sprite = ItemIconManager.Instance.GetIcon(item.itemType);
+            rarityBorder.enabled = true;
+            rarityBorder.color = GetRarityColor(item.rarity);
+        }
+        else
+        {
+            iconImage.enabled = false;
+            iconImage.sprite = null;
+            rarityBorder.enabled = false;
+        }
     }
 
     public bool CanEquip(ItemType type)
     {
-        return allowedItemTypes.Contains(type);
+        return allowedItemTypes.Any(t => t.ToString() == type.ToString());
     }
 
     private Color GetRarityColor(ItemRarity rarity)
