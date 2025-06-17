@@ -14,7 +14,11 @@ public class MonsterStateIdle : MonsterStateBase
         monster.Flip();
         if (monster.CanAttack())
         {
-            if (monster is Boss boss)
+            if (monster is FinalBoss finalBoss)
+            {
+                monster.ChangeState(finalBoss.StateAttackFinalBoss);
+            }
+            else if (monster is Boss boss)
             {
                 monster.ChangeState(boss.StateAttackBoss);
             }

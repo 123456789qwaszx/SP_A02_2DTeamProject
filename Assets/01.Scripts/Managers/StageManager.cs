@@ -50,6 +50,12 @@ public class StageManager : Singleton<StageManager>
 
         stageTimer += Time.deltaTime;
 
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            stageTimer += 60f;
+            Debug.Log("치트 발동: 1분 추가됨! 현재 시간: " + stageTimer);
+        }
+
         UIManager.Instance.UpdatePlayTime(stageTimer);
 
         if (Input.GetKeyDown(KeyCode.F))
@@ -57,12 +63,24 @@ public class StageManager : Singleton<StageManager>
             ForceClear();
         }
 
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            Cheat_ClearAllStages();
+        }
+
         if (currentStageType == StageType.Normal && stageTimer >= 900f)
         {
             StageClear();
         }
     }
-
+    private void Cheat_ClearAllStages()
+    {
+        for (int i = 0; i < GameManager.Instance.stageCleared.Length; i++)
+        {
+            GameManager.Instance.stageCleared[i] = true;
+        }
+        Debug.Log("모든 스테이지 클리어 완료 (치트)");
+    }
 
     public void SetupStage(int stage)
     {
@@ -103,6 +121,7 @@ public class StageManager : Singleton<StageManager>
         GameManager.Instance.UpdateStageInfo();
 
         SceneManager.LoadScene("MainScene");
+        GameManager.Instance.player.transform.position = Vector3.zero;
     }
 
     public void ForceClear()

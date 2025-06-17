@@ -50,7 +50,6 @@ public class UIManager : Singleton<UIManager>
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // 던전 씬에서 텍스트만 다시 찾아서 할당
         playTimeText = GameObject.Find("PlayTimeTxt")?.GetComponent<TextMeshProUGUI>();
     }
 
