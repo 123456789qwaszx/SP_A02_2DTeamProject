@@ -52,7 +52,7 @@ public class ItemTooltipUI : MonoBehaviour
         {
             var go = Instantiate(optionTextPrefab, optionContainer);
             var text = go.GetComponent<TextMeshProUGUI>();
-            text.text = $"{opt.Item1}: +{opt.Item2}";
+            text.text = $"{opt.Item1}: +{opt.Item2:F2}";
         }
 
         // 유니크 고유 옵션
@@ -61,7 +61,7 @@ public class ItemTooltipUI : MonoBehaviour
             var go = Instantiate(optionTextPrefab, optionContainer);
             var text = go.GetComponent<TextMeshProUGUI>();
             text.color = new Color(0.9f, 0.4f, 0f);
-            text.text = $"<i>고유 효과: {item.uniqueOption.Value.optionName} +{item.uniqueOption.Value.value}</i>";
+            text.text = $"<i>고유 효과: {item.uniqueOption.Value.optionName} +{item.uniqueOption.Value.value:F2}</i>";
         }
 
         // 세트 효과
