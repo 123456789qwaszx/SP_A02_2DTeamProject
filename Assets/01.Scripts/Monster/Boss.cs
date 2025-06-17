@@ -74,6 +74,13 @@ public class Boss : MonsterBase
     public override void OnDeadEnd()
     {
         base.OnDeadEnd();
+
+        StartCoroutine(ClearStageAfterDelay());
+    }
+
+    private IEnumerator ClearStageAfterDelay()
+    {
+        yield return new WaitForSeconds(10f);
         StageManager.Instance.StageClear();
     }
 

@@ -21,8 +21,10 @@ public class Wizard : Player
         str = 10;
         dex = 10;
         ints = 20;
-        hp = 120;
-        mp = 50;
+        maxHP = 120; 
+    hp = maxHP;  
+    maxMP = 50;
+    mp = maxMP;
         itemAP = 0.1f;
 
         moveSpeed = 0.8f + DEX * 0.04f;
