@@ -1,0 +1,236 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 925cb927aba53cf4d97f42ad200165ec, type: 3}
+  m_Name: Gloves_OptionPool
+  m_EditorClassIdentifier: 
+  itemType: 10
+  possibleOptions:
+  - optionType: 0
+    rarityRanges:
+    - rarity: 0
+      minValue: 1
+      maxValue: 5
+    - rarity: 1
+      minValue: 3
+      maxValue: 10
+    - rarity: 2
+      minValue: 6
+      maxValue: 15
+  - optionType: 1
+    rarityRanges:
+    - rarity: 0
+      minValue: 1
+      maxValue: 4
+    - rarity: 1
+      minValue: 3
+      maxValue: 8
+    - rarity: 2
+      minValue: 6
+      maxValue: 12
+  - optionType: 2
+    rarityRanges:
+    - rarity: 0
+      minValue: 0.01
+      maxValue: 0.03
+    - rarity: 1
+      minValue: 0.02
+      maxValue: 0.05
+    - rarity: 2
+      minValue: 0.04
+      maxValue: 0.08
+  - optionType: 3
+    rarityRanges:
+    - rarity: 0
+      minValue: 0.01
+      maxValue: 0.03
+    - rarity: 1
+      minValue: 0.02
+      maxValue: 0.05
+    - rarity: 2
+      minValue: 0.04
+      maxValue: 0.08
+  - optionType: 4
+    rarityRanges:
+    - rarity: 0
+      minValue: 0.01
+      maxValue: 0.03
+    - rarity: 1
+      minValue: 0.02
+      maxValue: 0.05
+    - rarity: 2
+      minValue: 0.04
+      maxValue: 0.07
+  - optionType: 5
+    rarityRanges:
+    - rarity: 0
+      minValue: 0.1
+      maxValue: 0.3
+    - rarity: 1
+      minValue: 0.2
+      maxValue: 0.5
+    - rarity: 2
+      minValue: 0.3
+      maxValue: 0.7
+  - optionType: 6
+    rarityRanges:
+    - rarity: 0
+      minValue: 0.01
+      maxValue: 0.03
+    - rarity: 1
+      minValue: 0.02
+      maxValue: 0.05
+    - rarity: 2
+      minValue: 0.04
+      maxValue: 0.08
+  - optionType: 7
+    rarityRanges:
+    - rarity: 0
+      minValue: 10
+      maxValue: 30
+    - rarity: 1
+      minValue: 20
+      maxValue: 50
+    - rarity: 2
+      minValue: 40
+      maxValue: 80
+  - optionType: 8
+    rarityRanges:
+    - rarity: 0
+      minValue: 5
+      maxValue: 20
+    - rarity: 1
+      minValue: 15
+      maxValue: 40
+    - rarity: 2
+      minValue: 30
+      maxValue: 70
+  - optionType: 9
+    rarityRanges:
+    - rarity: 0
+      minValue: 0.5
+      maxValue: 1.5
+    - rarity: 1
+      minValue: 1
+      maxValue: 2.5
+    - rarity: 2
+      minValue: 2
+      maxValue: 4
+  - optionType: 10
+    rarityRanges:
+    - rarity: 0
+      minValue: 0.5
+      maxValue: 1.5
+    - rarity: 1
+      minValue: 1
+      maxValue: 2.5
+    - rarity: 2
+      minValue: 2
+      maxValue: 4
+  - optionType: 11
+    rarityRanges:
+    - rarity: 0
+      minValue: 0.01
+      maxValue: 0.05
+    - rarity: 1
+      minValue: 0.03
+      maxValue: 0.07
+    - rarity: 2
+      minValue: 0.05
+      maxValue: 0.1
+  - optionType: 12
+    rarityRanges:
+    - rarity: 0
+      minValue: 0.01
+      maxValue: 0.05
+    - rarity: 1
+      minValue: 0.03
+      maxValue: 0.07
+    - rarity: 2
+      minValue: 0.05
+      maxValue: 0.1
+  - optionType: 13
+    rarityRanges:
+    - rarity: 0
+      minValue: 1
+      maxValue: 3
+    - rarity: 1
+      minValue: 2
+      maxValue: 5
+    - rarity: 2
+      minValue: 3
+      maxValue: 7
+  - optionType: 14
+    rarityRanges:
+    - rarity: 0
+      minValue: 1
+      maxValue: 3
+    - rarity: 1
+      minValue: 2
+      maxValue: 5
+    - rarity: 2
+      minValue: 3
+      maxValue: 7
+  - optionType: 15
+    rarityRanges:
+    - rarity: 0
+      minValue: 1
+      maxValue: 3
+    - rarity: 1
+      minValue: 2
+      maxValue: 5
+    - rarity: 2
+      minValue: 3
+      maxValue: 7
+  - optionType: 16
+    rarityRanges:
+    - rarity: 0
+      minValue: 1
+      maxValue: 1
+    - rarity: 1
+      minValue: 1
+      maxValue: 2
+    - rarity: 2
+      minValue: 2
+      maxValue: 3
+  - optionType: 17
+    rarityRanges:
+    - rarity: 0
+      minValue: 0.1
+      maxValue: 0.3
+    - rarity: 1
+      minValue: 0.2
+      maxValue: 0.5
+    - rarity: 2
+      minValue: 0.4
+      maxValue: 0.8
+  - optionType: 18
+    rarityRanges:
+    - rarity: 0
+      minValue: 2
+      maxValue: 6
+    - rarity: 1
+      minValue: 4
+      maxValue: 10
+    - rarity: 2
+      minValue: 6
+      maxValue: 15
+  - optionType: 19
+    rarityRanges:
+    - rarity: 0
+      minValue: 0.05
+      maxValue: 0.1
+    - rarity: 1
+      minValue: 0.1
+      maxValue: 0.2
+    - rarity: 2
+      minValue: 0.2
+      maxValue: 0.3

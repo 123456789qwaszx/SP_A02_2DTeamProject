@@ -27,7 +27,7 @@ public class ShopItemSlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         return rarity switch
         {
             ItemRarity.Normal => Color.gray,
-            ItemRarity.Magic => Color.blue,
+            ItemRarity.Magic => Color.cyan,
             ItemRarity.Rare => new Color(1f, 0.84f, 0f), // 금색
             ItemRarity.Unique => new Color(0.9f, 0.4f, 0f),
             ItemRarity.Set => Color.green,
