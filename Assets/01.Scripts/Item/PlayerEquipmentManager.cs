@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -203,6 +204,37 @@ public class PlayerEquipmentManager : MonoBehaviour
 
                 appliedSetBonusCounts[setName] = bonus.requiredCount - 1;
             }
+        }
+    }
+    
+    public Dictionary<CharacterClass, List<ItemData>> GetAllEquippedItems()
+    {
+        var result = new Dictionary<CharacterClass, List<ItemData>>();
+
+        foreach (var pair in equippedPerClass)
+        {
+            List<ItemData> itemList = pair.Value.Values
+                                          .Select(GeneratedItemUtility.ToItemData)
+                                          .ToList();
+            result[pair.Key] = itemList;
+        }
+
+        return result;
+    }
+    
+    public void LoadAllEquippedItems(Dictionary<CharacterClass, List<ItemData>> data)
+    {
+        foreach (var pair in data)
+        {
+            var equippedDict = new Dictionary<ItemType, GeneratedItem>();
+
+            foreach (var itemData in pair.Value)
+            {
+                var item = GeneratedItemUtility.ToGeneratedItem(itemData);
+                equippedDict[item.itemType] = item;
+            }
+
+            equippedPerClass[pair.Key] = equippedDict;
         }
     }
 

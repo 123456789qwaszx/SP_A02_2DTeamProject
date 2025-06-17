@@ -45,6 +45,16 @@ public class GameManager : Singleton<GameManager>
         {
             currentData = new SaveData(); // 데이터가 없으면 새로 생성
         }
+        else
+        {
+            Gold = currentData.gold;
+            InventoryManager.Instance.LoadFromSave(currentData.inventoryItems);
+
+            if (currentData.equippedItemsPerClass != null)
+            {
+                PlayerEquipmentManager.Instance.LoadAllEquippedItems(currentData.equippedItemsPerClass);
+            }
+        }
 
         // 씬 전환 시 삭제되지 않도록 함
         DontDestroyOnLoad(gameObject);
@@ -138,6 +148,12 @@ public class GameManager : Singleton<GameManager>
 
             currentData.players.Add(psd);
         }
+        
+        currentData.gold = Gold; // 골드 저장
+        currentData.inventoryItems = InventoryManager.Instance.GetSaveItems(); // 인벤토리 저장
+
+        // 장착 아이템 저장
+        currentData.equippedItemsPerClass = PlayerEquipmentManager.Instance.GetAllEquippedItems();
     }
 
     // 모든 플레이어 데이터를 갱신한 후 저장하는 함수
