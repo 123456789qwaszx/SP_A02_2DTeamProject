@@ -39,11 +39,20 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
 
     private GameObject spawnedFinalBoss;
     private FinalBoss finalBossScript;
+    private float nextSurroundWarning;
+    private bool midBossWarned = false;
+    private bool countdownStarted = false;
 
     private StageType currentStageType = StageType.Normal;
 
     private void Awake()
     {
+        if (Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         DontDestroyOnLoad(gameObject);
     }
     private void OnEnable()
@@ -70,6 +79,18 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
         if (!isSpawning) return;
 
         playTime += Time.deltaTime;
+
+        if (!midBossWarned && playTime >= 720f)
+        {
+            UIManager.Instance.ShowWarning("아주 강력한 몬스터가 다가옵니다!", 3f);
+            midBossWarned = true;
+        }
+
+        if (currentStageType == StageType.Boss && !countdownStarted && playTime >= 890f)
+        {
+            countdownStarted = true;
+            StartCoroutine(BossCountdownRoutine());
+        }
 
         if (currentStageType == StageType.FinalBoss)
         {
@@ -136,7 +157,7 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
         {
             GameObject[] prefabs = GetRegularPrefabs();
 
-            for (int i = 0; i < 3; i++) // 🔥 3마리 스폰
+            for (int i = 0; i < 3; i++)
             {
                 Vector3 pos = GetValidSpawnPosition();
                 GameObject prefab = prefabs[Random.Range(0, prefabs.Length)];
@@ -251,23 +272,19 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
 
     public void SetupStage(StageType type)
     {
-        if (GameManager.Instance.player != null)
-            player = GameManager.Instance.player.transform;
-        else
-            Debug.LogWarning("스폰매니저에서 플레이어를 할당받지 못했습니다!");
-
         if (type == StageType.None)
         {
             isSpawning = false;
             StopAllCoroutines();
             return;
         }
-
-        player = GameManager.Instance.player.transform;
+        if (GameManager.Instance.player != null)
+            player = GameManager.Instance.player.transform;
 
         currentStageType = type;
         isSpawning = true;
         playTime = 0f;
+        nextSurroundWarning = surroundInterval - 10f;
         bossSpawned = false;
         triggeredTimes.Clear();
 
@@ -283,8 +300,16 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
                 break;
         }
     }
+    IEnumerator BossCountdownRoutine()
+    {
+        for (int i = 10; i >= 1; i--)
+        {
+            UIManager.Instance.ShowWarning($"..{i}", 1f);
+            yield return new WaitForSeconds(1f);
+        }
 
-
+        UIManager.Instance.ShowWarning("보스 출현!", 2f);
+    }
     void SpawnFinalBoss()
     {
         // 플레이어 위쪽에 스폰

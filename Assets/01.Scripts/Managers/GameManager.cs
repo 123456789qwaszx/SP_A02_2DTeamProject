@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening.Core.Easing;
+using TMPro;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -25,6 +26,10 @@ public class GameManager : Singleton<GameManager>
 
     public SaveManager saveManager;
     public SaveData currentData;
+    
+    // 골드 관련
+    public int Gold { get; private set; }
+    [SerializeField] private TextMeshProUGUI goldText;
 
     private void Awake()
     {
@@ -42,9 +47,41 @@ public class GameManager : Singleton<GameManager>
         }
 
         // 씬 전환 시 삭제되지 않도록 함
+        if (Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         DontDestroyOnLoad(gameObject);
 
         SkillManager.Instance.LoadSkill();
+    }
+    
+    public void AddGold(int amount)
+    {
+        Gold += amount;
+        UpdateGoldUI();
+    }
+
+    public bool SpendGold(int amount)
+    {
+        if (Gold < amount) return false;
+        Gold -= amount;
+        UpdateGoldUI();
+        return true;
+    }
+
+    public void SetGoldText(TextMeshProUGUI text)
+    {
+        goldText = text;
+        UpdateGoldUI();
+    }
+
+    public void UpdateGoldUI()
+    {
+        if (goldText != null)
+            goldText.text = $"{Gold:N0} G";
     }
 
     public void UpdateStageInfo()

@@ -80,4 +80,22 @@ public class ItemEquipHandler : MonoBehaviour
                 return false;
         }
     }
+    
+    public void RefreshUI()
+    {
+        var equippedItems = PlayerEquipmentManager.Instance.GetCurrentEquippedItems();
+
+        foreach (var slot in equipmentSlots)
+        {
+            var match = equippedItems.FirstOrDefault(kvp => slot.CanEquip(kvp.Key));
+            if (!match.Equals(default(KeyValuePair<ItemType, GeneratedItem>)))
+            {
+                slot.SetItem(match.Value);
+            }
+            else
+            {
+                slot.ClearSlot();
+            }
+        }
+    }
 }

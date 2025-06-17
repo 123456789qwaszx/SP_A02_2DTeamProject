@@ -38,6 +38,12 @@ public class SoundManager : Singleton<SoundManager>
 
     private void Awake()
     {
+        if (Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         DontDestroyOnLoad(gameObject);
 
         // SFX 풀 생성

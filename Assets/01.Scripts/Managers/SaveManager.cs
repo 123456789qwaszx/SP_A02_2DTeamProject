@@ -12,6 +12,12 @@ public class SaveManager : Singleton<SaveManager>
         savePath = Path.Combine(Application.persistentDataPath, "save.json");
         Debug.Log("Save path: " + savePath);
 
+        if (Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         DontDestroyOnLoad(gameObject);
     }
 
