@@ -15,6 +15,7 @@ public class InventoryTabButton : MonoBehaviour
 {
     public InventoryTabType tabType; // 전체, 무기, 방어구, 장신구
     public InventoryUIManager inventoryUI;
+    public ShopInventoryUIManager shopInventoryUI;
 
     private Button button;
 
@@ -26,6 +27,13 @@ public class InventoryTabButton : MonoBehaviour
 
     void OnClick()
     {
-        inventoryUI.FilterItems(tabType);
+        if (inventoryUI != null)
+        {
+            inventoryUI.FilterItems(tabType);
+        }
+        else if (shopInventoryUI != null)
+        {
+            shopInventoryUI.FilterItems(tabType);
+        }
     }
 }

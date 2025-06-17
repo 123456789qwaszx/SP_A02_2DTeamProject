@@ -29,6 +29,8 @@ public class InventoryUIController : MonoBehaviour
 
             if (isOpen)
                 InventoryUIManager.instance?.RefreshInventory();
+            else
+                ItemTooltipUI.Instance?.Hide();
         }
 
         // ESC 키: 닫기 우선순위
@@ -48,6 +50,7 @@ public class InventoryUIController : MonoBehaviour
                 equipmentPanel.SetActive(false);
                 tooltipPanel.SetActive(false);
                 Time.timeScale = 1f;
+                ItemTooltipUI.Instance?.Hide();
                 return;
             }
         }
