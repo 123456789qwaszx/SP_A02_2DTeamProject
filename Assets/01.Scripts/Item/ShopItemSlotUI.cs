@@ -1,38 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class InventorySlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+public class ShopItemSlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
-    public Image iconImage;
     public Image rarityBorder;
+    public Image itemIcon;
 
     private GeneratedItem item;
-    
-    public SellConfirmPopup sellPopup;
+    public ShopBuyPopup shopBuyPopup;
 
-    public void SetItem(GeneratedItem newItem)
+    public void Set(GeneratedItem newItem)
     {
         item = newItem;
         var sprite = ItemIconManager.Instance.GetIcon(item.itemType);
-        iconImage.sprite = sprite;
-        iconImage.enabled = sprite != null;
+        itemIcon.sprite = sprite;
+        itemIcon.enabled = sprite != null;
         rarityBorder.color = GetRarityColor(item.rarity);
         rarityBorder.enabled = true;
     }
     
-    public void Clear()
-    {
-        item = null;
-        iconImage.sprite = null;
-        iconImage.enabled = false;
-        rarityBorder.enabled = false;
-    }
-
-    public bool IsEmpty => item == null;
-
     private Color GetRarityColor(ItemRarity rarity)
     {
         return rarity switch
@@ -49,25 +38,28 @@ public class InventorySlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExit
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (item != null && ItemTooltipUI.Instance != null)
+        {
             ItemTooltipUI.Instance.Show(item, transform.position);
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         if (ItemTooltipUI.Instance != null)
+        {
             ItemTooltipUI.Instance.Hide();
+        }
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
         if (item == null) return;
-
+        
         if (ShopUIManager.Instance.IsShopOpen)
         {
-
-            if (sellPopup != null)
+            if (item != null)
             {
-                sellPopup.Open(item);
+                shopBuyPopup?.Open(item);
             }
             return;
         }
