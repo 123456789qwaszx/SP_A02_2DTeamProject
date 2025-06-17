@@ -16,7 +16,7 @@ public class ShopBuyPopup : MonoBehaviour
 
         if (confirmText != null)
         {
-            confirmText.text = $"<b>{item.itemName}</b>을(를)\n<b>{item.sellPrice:N0}G</b>에 구매하시겠습니까?";
+            confirmText.text = $"<b>{item.itemName}</b>을(를)\n<b>{item.buyPrice:N0}G</b>에 구매하시겠습니까?";
         }
     }
 

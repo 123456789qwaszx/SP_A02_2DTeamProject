@@ -21,9 +21,8 @@ public static class ItemPriceCalculator
         return GetBasePrice(item.itemType, item.rarity);
     }
 
-    public static int GetSellPrice(GeneratedItem item)
+    public static int GetSellPriceFromBuyPrice(int buyPrice)
     {
-        int buyPrice = GetBuyPrice(item);
         return Mathf.RoundToInt(buyPrice * SellMultiplier);
     }
 

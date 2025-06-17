@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Net;
 using UnityEngine;
 
 public interface IMonster
@@ -20,9 +21,11 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
 
     [Header("장판")]
     [SerializeField] protected GameObject warningPrefab;
-    
+
     [Header("드랍 관련")]
-    [SerializeField] private GameObject expItem; // 드랍 UI 프리팹
+    [SerializeField] private GameObject ExpItem_Nor;
+    [SerializeField] private GameObject ExpItem_MidBoss;
+    [SerializeField] protected GameObject ExpItem_Boss;
     [SerializeField] private float baseDropChance = 5f;   // 기본 드랍 확률
     [SerializeField] private int minDropCount = 1;         // 최소 드랍 수
     [SerializeField] private int maxDropCount = 1;         // 최대 드랍 수 (보스는 3~5 등)
@@ -268,6 +271,23 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
         for (int i = 0; i < dropCount; i++)
         {
             itemDropManager.TryDropItem(transform.position, finalDropChance);
+        }
+        
+        if (monsterData.type == MonsterData.MonsterType.Boss)
+        {
+            Instantiate(ExpItem_Boss, transform.position, Quaternion.identity);
+        }
+        else if (monsterData.type == MonsterData.MonsterType.MidBoss)
+        {
+            Instantiate(ExpItem_MidBoss, transform.position, Quaternion.identity);
+        }
+        else if (monsterData.type == MonsterData.MonsterType.FinalBoss)
+        {
+            return;
+        }
+        else 
+        {
+            Instantiate(ExpItem_Nor, transform.position, Quaternion.identity);
         }
 
         PoolManager.Instance.Push(this.gameObject);
