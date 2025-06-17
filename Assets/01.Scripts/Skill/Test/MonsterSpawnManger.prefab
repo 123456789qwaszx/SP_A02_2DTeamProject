@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7102126913023508180
+--- !u!1 &2315852111106938572
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1021219521210311839}
-  - component: {fileID: 8352701817937393147}
+  - component: {fileID: 2178542453281921444}
+  - component: {fileID: 2565951339429764588}
   m_Layer: 0
   m_Name: MonsterSpawnManger
   m_TagString: Untagged
@@ -17,13 +17,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1021219521210311839
+--- !u!4 &2178542453281921444
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7102126913023508180}
+  m_GameObject: {fileID: 2315852111106938572}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -32,24 +32,69 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8352701817937393147
+--- !u!114 &2565951339429764588
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7102126913023508180}
+  m_GameObject: {fileID: 2315852111106938572}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 88f13bdfdd8385c4fa062c65df81e03e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  regularMonsterPrefabs:
+  regularPrefabs_1_5:
+  - {fileID: 6176887607946884782, guid: f9760a75ad6d89343bc7e59546bf0955, type: 3}
+  - {fileID: 9051968096622449738, guid: 72db75acbbcc81a43a028a390ab4cfe3, type: 3}
+  - {fileID: 6502034215830212637, guid: c07d6d64397fa604e9fa16f064f075fe, type: 3}
+  - {fileID: 3935142189955880125, guid: c754afabc4754d345b8bde107a4a7cce, type: 3}
+  - {fileID: 547030887876731280, guid: d47ec98dea24d364090aacada620651b, type: 3}
+  - {fileID: 1373372410336325639, guid: a328d1fd59750e84898c98884b685ade, type: 3}
+  - {fileID: 527278585553940259, guid: 1de29db1506b2404eb3691d61c0e4c6a, type: 3}
+  - {fileID: 2582082258805426327, guid: f496aabcd1f69ab47a9b68f9bc7d5762, type: 3}
+  - {fileID: 3282592368413087820, guid: c1dbf4b8ea7a0f647af0f82afd93b35e, type: 3}
+  elitePrefabs_1_5:
+  - {fileID: 6545580868249765420, guid: 97453a664d37dfa4a94b9c5242c4da57, type: 3}
+  - {fileID: 2707873398637266366, guid: 7d2c466785b31ed4f96ca6446df136a1, type: 3}
+  - {fileID: 8618301521522700347, guid: 7eb874b8cc3532b4f82e63cd4b3fbae8, type: 3}
+  regularPrefabs_6_10:
+  - {fileID: 6502034215830212637, guid: c07d6d64397fa604e9fa16f064f075fe, type: 3}
+  - {fileID: 3935142189955880125, guid: c754afabc4754d345b8bde107a4a7cce, type: 3}
+  - {fileID: 547030887876731280, guid: d47ec98dea24d364090aacada620651b, type: 3}
+  - {fileID: 1373372410336325639, guid: a328d1fd59750e84898c98884b685ade, type: 3}
   - {fileID: 3255926119417431729, guid: a13a9673a8a3c4a44adafb9288c8c51a, type: 3}
-  eliteMonsterPrefabs: []
-  midBossPrefabs: []
-  bossPrefabs: []
-  finalBossPrefab: {fileID: 0}
+  - {fileID: 3255926119417431729, guid: 6e9a9c1aaff851c4a8e15d98e4e58f6c, type: 3}
+  - {fileID: 2582082258805426327, guid: f496aabcd1f69ab47a9b68f9bc7d5762, type: 3}
+  - {fileID: 3282592368413087820, guid: c1dbf4b8ea7a0f647af0f82afd93b35e, type: 3}
+  - {fileID: 3255926119417431729, guid: 41ccab052d120fe47ac51c84557c3cee, type: 3}
+  elitePrefabs_6_10:
+  - {fileID: 2707873398637266366, guid: 7d2c466785b31ed4f96ca6446df136a1, type: 3}
+  - {fileID: 8618301521522700347, guid: 7eb874b8cc3532b4f82e63cd4b3fbae8, type: 3}
+  - {fileID: 3255926119417431729, guid: d2aad60972937124695de4180a217a91, type: 3}
+  regularPrefabs_11_16:
+  - {fileID: 547030887876731280, guid: d47ec98dea24d364090aacada620651b, type: 3}
+  - {fileID: 1373372410336325639, guid: a328d1fd59750e84898c98884b685ade, type: 3}
+  - {fileID: 3255926119417431729, guid: a13a9673a8a3c4a44adafb9288c8c51a, type: 3}
+  - {fileID: 3255926119417431729, guid: 6e9a9c1aaff851c4a8e15d98e4e58f6c, type: 3}
+  - {fileID: 5971244421649333600, guid: afc45c3d6c6ef1142b223759192a02e7, type: 3}
+  - {fileID: 1381283980275399693, guid: e6c220ab53c64f344b21145a14351411, type: 3}
+  - {fileID: 3282592368413087820, guid: c1dbf4b8ea7a0f647af0f82afd93b35e, type: 3}
+  - {fileID: 3255926119417431729, guid: 41ccab052d120fe47ac51c84557c3cee, type: 3}
+  - {fileID: 5388259512198221485, guid: cc1c8610acba8b642ba6be2e85965ff7, type: 3}
+  elitePrefabs_11_16:
+  - {fileID: 8618301521522700347, guid: 7eb874b8cc3532b4f82e63cd4b3fbae8, type: 3}
+  - {fileID: 3255926119417431729, guid: d2aad60972937124695de4180a217a91, type: 3}
+  - {fileID: 8916870043613910324, guid: e4a3a2545c7ada848b5212d34355851e, type: 3}
+  midBossPrefabs:
+  - {fileID: 4798769956009045327, guid: dc322481cac0b964d948ef72590b1533, type: 3}
+  - {fileID: 7314118805252834935, guid: 187bafff3ed574448be65b54cdafcac3, type: 3}
+  - {fileID: 76592091309844651, guid: 0e373e8480998e24faf7b47b1f646857, type: 3}
+  bossPrefabs:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  finalBossPrefab: {fileID: 5266629136397012078, guid: 334e9e75ec6a94a60abc4f353f9104a4, type: 3}
   spawnInterval: 2
   surroundInterval: 120
   minSpawnDistance: 7
