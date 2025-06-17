@@ -436,7 +436,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f5d9f177e38fd246866938c339106cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropManager: {fileID: 2060960266}
+  dropManager: {fileID: 1799240578}
 --- !u!4 &98564256
 Transform:
   m_ObjectHideFlags: 0
@@ -2949,7 +2949,7 @@ GameObject:
   - component: {fileID: 527728857}
   - component: {fileID: 527728856}
   m_Layer: 5
-  m_Name: Gold
+  m_Name: GoldText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7251,7 +7251,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1237353980
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13504,6 +13504,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256f1f9e609d86f49958b01b77b74ef8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameOverPanel: {fileID: 0}
   moveSpeed: 0
   attackSpeed: 0
   str: 0
@@ -14316,7 +14317,6 @@ GameObject:
   - component: {fileID: 5643920956746044656}
   - component: {fileID: 180304245846447360}
   - component: {fileID: 3052420281600450055}
-  - component: {fileID: 9115513587721867870}
   - component: {fileID: 9115513587721867869}
   m_Layer: 7
   m_Name: Player_Warrior
@@ -14664,20 +14664,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ac329c9c224b3e45a2fabd8e9952b9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &9115513587721867870
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7337216442750428670}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 264f3ae0e7fd8054798ffd28877ce9d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentGold: 0
-  goldText: {fileID: 527728856}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
