@@ -1,0 +1,93 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1315599383297776490
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1553985865586111666}
+  - component: {fileID: 5581508826056353531}
+  m_Layer: 0
+  m_Name: MonsterSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1553985865586111666
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1315599383297776490}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5581508826056353531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1315599383297776490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88f13bdfdd8385c4fa062c65df81e03e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  regularPrefabs_1_5:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  elitePrefabs_1_5:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  regularPrefabs_6_10:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  elitePrefabs_6_10:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  regularPrefabs_11_16:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  elitePrefabs_11_16:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  midBossPrefabs:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  bossPrefabs:
+  - {fileID: 565693731309111933, guid: 64496e40252efaa41bb5a4c93c52b2f6, type: 3}
+  - {fileID: 565693731309111933, guid: 64496e40252efaa41bb5a4c93c52b2f6, type: 3}
+  - {fileID: 565693731309111933, guid: 64496e40252efaa41bb5a4c93c52b2f6, type: 3}
+  finalBossPrefab: {fileID: 5266629136397012078, guid: 334e9e75ec6a94a60abc4f353f9104a4, type: 3}
+  spawnInterval: 2
+  surroundInterval: 120
+  minSpawnDistance: 7
+  maxSpawnDistance: 12
+  surroundMonstersCount: 20

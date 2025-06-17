@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37314c0bef24a034c943a9351ff468c7, type: 3}
   m_Name: Ranged_MidBoss
   m_EditorClassIdentifier: 
-  monsterName: 
-  maxHP: 30
+  monsterName: Ranged_MidBoss
+  maxHP: 60
   attackPower: 100
   moveSpeed: 2
   attackCooldown: 3
   attackRange: 6
   type: 6
-  projectilePrefab: {fileID: 0}
+  projectilePrefab: {fileID: 3395379805850720308, guid: 0b4d09b834936e94aa03dbb47a56b037, type: 3}
   bossProjectilePrefab: {fileID: 0}
