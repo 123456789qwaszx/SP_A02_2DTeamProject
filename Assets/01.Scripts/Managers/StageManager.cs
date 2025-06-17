@@ -16,6 +16,12 @@ public class StageManager : Singleton<StageManager>
 
     private void Awake()
     {
+        if (Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         DontDestroyOnLoad(gameObject);
     }
 
