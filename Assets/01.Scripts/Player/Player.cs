@@ -112,6 +112,14 @@ public class Player : MonoBehaviour, IEquipable, IDamagable
     void Start()
     {
         // DontDestroyOnLoad 적용으로 씬 전환 시에도 삭제되지 않음
+        Player[] uis = FindObjectsOfType<Player>();
+
+        if (uis.Length > 1)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         DontDestroyOnLoad(gameObject);
 
         // 씬 전환 시 자동으로 (0,0,0) 위치로 재배치

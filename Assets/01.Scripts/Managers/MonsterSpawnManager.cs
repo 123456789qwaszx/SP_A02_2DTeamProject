@@ -47,6 +47,12 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
 
     private void Awake()
     {
+        if (Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         DontDestroyOnLoad(gameObject);
     }
     private void OnEnable()
