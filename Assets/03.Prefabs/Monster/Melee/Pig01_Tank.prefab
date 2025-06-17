@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.07, y: -0.02, z: 0}
-  m_LocalScale: {x: 1.4227201, y: 1.4227201, z: 1.4227201}
+  m_LocalScale: {x: 1.6, y: 1.6, z: 1.6}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8199098567097171251}
@@ -200,6 +200,8 @@ MonoBehaviour:
     m_Bits: 128
   knockbackForce: 5
   knockbackDuration: 0.1
+  hitSFX: {fileID: 8300000, guid: d030a0ae0fd5ec34ba3da6892f517e6d, type: 3}
+  deathSFX: {fileID: 8300000, guid: 17f390e2660183c4c8b25f1f3c94b875, type: 3}
   warningPrefab: {fileID: 0}
   baseDropChance: 5
   minDropCount: 1

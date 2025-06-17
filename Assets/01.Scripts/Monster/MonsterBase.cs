@@ -14,6 +14,10 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
     [SerializeField] private float knockbackForce = 5f;
     [SerializeField] private float knockbackDuration = 0.1f;
 
+    [Header("사운드 연출")]
+    [SerializeField] public AudioClip hitSFX;
+    [SerializeField] public AudioClip deathSFX;
+
     [Header("장판")]
     [SerializeField] protected GameObject warningPrefab;
     
@@ -95,8 +99,13 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
     public virtual void TakeDamage(float amount)
     {
         currentHP -= amount;
-        PlayHitFlash(); // 맞으면 반짝
-        KnockbackFrom(player.position); // 넉백
+        // 피격 사운드
+        if (hitSFX != null)
+            SoundManager.Instance.PlaySFX(hitSFX);
+        // 맞으면 반짝
+        PlayHitFlash();
+        // 넉백
+        KnockbackFrom(player.position);
 
         if (currentHP <= 0)
         {

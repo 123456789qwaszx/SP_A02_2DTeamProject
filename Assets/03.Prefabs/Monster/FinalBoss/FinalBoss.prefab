@@ -191,6 +191,8 @@ MonoBehaviour:
     m_Bits: 128
   knockbackForce: 5
   knockbackDuration: 0.1
+  hitSFX: {fileID: 8300000, guid: 12b13b88bff7b1243845a5b4af3b988c, type: 3}
+  deathSFX: {fileID: 8300000, guid: f4983f8dd94d770429a0640658cb9b16, type: 3}
   warningPrefab: {fileID: 8893260104251344135, guid: 9f7629dda067a2d4395bf18b28d5bf70, type: 3}
   baseDropChance: 5
   minDropCount: 1
@@ -198,10 +200,10 @@ MonoBehaviour:
   impulseSource: {fileID: 7623346765518983643}
   phase2Effect: {fileID: 6481321066876551545, guid: 92b5bc2b1a2994942b09d5677b5be842, type: 3}
   phase3Effect: {fileID: 3011237293035384600, guid: c4c54de15bb512245baf37f6188f133a, type: 3}
-  phaseChangeSound: {fileID: 0}
+  phaseChangeSound: {fileID: 8300000, guid: c69658fd331a0a24a8808377bf749917, type: 3}
   largeWarningPrefab: {fileID: 329055827581300637, guid: fc85c7f7a2f804042ab5316ecc48d278, type: 3}
   explosionEffectPrefab: {fileID: 905458183029064146, guid: 2dbf90b550fd04530a5f9543706fe515, type: 3}
-  aoeRadius: 1.5
+  aoeRadius: 1.2
 --- !u!114 &7623346765518983643
 MonoBehaviour:
   m_ObjectHideFlags: 0
