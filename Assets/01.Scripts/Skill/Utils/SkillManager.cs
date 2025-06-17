@@ -106,7 +106,7 @@ public class SkillManager : Singleton<SkillManager>
     }
 
     // 나중에 UIManager 추가되면 그곳으로 이동
-    void Start()
+    public void LoadSkill()
     {
         ResourceManager.Instance.LoadAllAsync<GameObject>("Skill_Prefabs", (key, count, totalCount) =>
         {
