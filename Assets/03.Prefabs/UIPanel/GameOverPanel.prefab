@@ -718,6 +718,7 @@ GameObject:
   - component: {fileID: 6232273519444053894}
   - component: {fileID: 2636195952996763671}
   - component: {fileID: 3831703688312155752}
+  - component: {fileID: 3795297479068712160}
   m_Layer: 5
   m_Name: GameOverPanel
   m_TagString: Untagged
@@ -770,7 +771,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 60
   m_TargetDisplay: 0
 --- !u!114 &2636195952996763671
 MonoBehaviour:
@@ -812,6 +813,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &3795297479068712160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5123519538291247374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b40ab17b1e0b9fb4d8b9aada17684c88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6224943652856997521
 GameObject:
   m_ObjectHideFlags: 0
@@ -932,7 +945,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3906027964628359018}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3795297479068712160}
+        m_TargetAssemblyTypeName: GameOver, Assembly-CSharp
+        m_MethodName: ClosePanel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6261377955925545728
 GameObject:
   m_ObjectHideFlags: 0
