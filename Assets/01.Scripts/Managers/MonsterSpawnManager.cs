@@ -134,15 +134,20 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
     {
         while (isSpawning)
         {
-            Vector3 pos = GetValidSpawnPosition();
             GameObject[] prefabs = GetRegularPrefabs();
-            GameObject prefab = prefabs[Random.Range(0, prefabs.Length)];
-            GameObject monster = PoolManager.Instance.Pop(prefab);
-            
-            MonsterBase monsterBase = monster.GetComponent<MonsterBase>();
-            ObjectManager.Instance.Monsters.Add(monsterBase);
-            InitPooledMonster(monster, pos);
-            yield return new WaitForSeconds(spawnInterval);
+
+            for (int i = 0; i < 3; i++) // 🔥 3마리 스폰
+            {
+                Vector3 pos = GetValidSpawnPosition();
+                GameObject prefab = prefabs[Random.Range(0, prefabs.Length)];
+                GameObject monster = PoolManager.Instance.Pop(prefab);
+
+                MonsterBase monsterBase = monster.GetComponent<MonsterBase>();
+                ObjectManager.Instance.Monsters.Add(monsterBase);
+                InitPooledMonster(monster, pos);
+            }
+
+            yield return new WaitForSeconds(spawnInterval); // 3마리 스폰 후 딜레이
         }
     }
 
