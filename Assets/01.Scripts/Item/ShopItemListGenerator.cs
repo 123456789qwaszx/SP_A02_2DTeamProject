@@ -23,6 +23,8 @@ public class ShopItemListGenerator : MonoBehaviour
             var rarity = GetRandomRarity();
             var type = GetRandomType();
             var item = itemGenerator.GenerateRandomItem(rarity, type);
+            item.buyPrice = ItemPriceCalculator.GetBuyPrice(item); // 구매가
+            item.sellPrice = ItemPriceCalculator.GetSellPriceFromBuyPrice(item.buyPrice); // 판매가 = 구매가 * 0.2
 
             currentItems.Add(item);
         }

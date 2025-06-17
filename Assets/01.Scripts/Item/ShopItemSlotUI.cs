@@ -39,7 +39,7 @@ public class ShopItemSlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     {
         if (item != null && ItemTooltipUI.Instance != null)
         {
-            ItemTooltipUI.Instance.Show(item, transform.position);
+            ItemTooltipUI.Instance.Show(item, transform.position, true);
         }
     }
 
