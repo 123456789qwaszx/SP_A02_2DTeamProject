@@ -106,7 +106,7 @@ public class StageManager : Singleton<StageManager>
     {
         isStageCleared = true;
         monsterSpawnManager.StopSpawn();
-        GameManager.Instance.UdateStageInfo();
+        GameManager.Instance.UpdateStageInfo();
 
         SceneManager.LoadScene("MainScene");
     }
