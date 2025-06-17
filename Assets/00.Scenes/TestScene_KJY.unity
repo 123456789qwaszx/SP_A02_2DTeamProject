@@ -958,6 +958,9 @@ MonoBehaviour:
   saveManager: {fileID: 0}
   currentData:
     players: []
+    gold: 0
+    inventoryItems: []
+  goldText: {fileID: 0}
 --- !u!4 &809907781
 Transform:
   m_ObjectHideFlags: 0
