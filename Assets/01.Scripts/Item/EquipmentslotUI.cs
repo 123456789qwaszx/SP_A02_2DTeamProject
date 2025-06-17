@@ -17,23 +17,18 @@ public class EquipmentslotUI : MonoBehaviour, IPointerClickHandler, IPointerEnte
     public void SetItem(GeneratedItem item)
     {
         equippedItem = item;
-        
-        if (item != null)
-        {
-            Sprite icon = ItemIconManager.Instance.GetIcon(item.itemType);
-            Debug.Log($"[SetItem] {item.itemName} | type: {item.itemType} | icon: {(icon != null ? icon.name : "NULL")}");
-            
-            iconImage.enabled = true;
-            iconImage.sprite = ItemIconManager.Instance.GetIcon(item.itemType);
-            rarityBorder.enabled = true;
-            rarityBorder.color = GetRarityColor(item.rarity);
-        }
-        else
-        {
-            iconImage.enabled = false;
-            iconImage.sprite = null;
-            rarityBorder.enabled = false;
-        }
+
+        Debug.Log($"[SetItem] 슬롯 {allowedItemTypes[0]} → 아이템: {item?.itemName}, 타입: {item?.itemType}");
+
+        // 디버그용
+        var icon = ItemIconManager.Instance.GetIcon(item.itemType);
+        Debug.Log($"[SetItem] 아이콘 가져오기 시도: {icon}, itemType: {item.itemType}");
+
+        iconImage.sprite = icon;
+        iconImage.enabled = icon != null;
+
+        rarityBorder.enabled = true;
+        rarityBorder.color = GetRarityColor(item.rarity);
     }
 
     public bool CanEquip(ItemType type)

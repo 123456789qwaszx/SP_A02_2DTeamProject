@@ -27,6 +27,22 @@ public class ItemDropManager : MonoBehaviour
     public GameObject dropItemUIPrefab;         // 드랍된 UI 프리팹
     public ItemIconManager iconManager;         // 아이콘 매니저 참조
     
+    private void Awake()
+    {
+        if (iconManager == null)
+        {
+            iconManager = ItemIconManager.Instance;
+            if (iconManager == null)
+            {
+                Debug.LogError("❌ ItemIconManager 인스턴스를 찾을 수 없습니다!");
+            }
+            else
+            {
+                Debug.Log("✅ ItemIconManager 자동 할당 완료");
+            }
+        }
+    }
+    
     // 몬스터 사망시 호출될 아이템 드랍 시도 매서드 ItemDropManager.TryDropItem(transform.position)
     public void TryDropItem(Vector3 dropPosition, float finalDropChance)
     {
