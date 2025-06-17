@@ -99,12 +99,11 @@ public class InventoryUIManager : MonoBehaviour
     
     public void DelayedRefresh()
     {
-        StartCoroutine(RefreshNextFrame());
+        Invoke(nameof(Refresh), 0f);
     }
 
-    private IEnumerator RefreshNextFrame()
+    private void Refresh()
     {
-        yield return null; // 한 프레임 뒤로 미룸
-        RefreshInventory(); // 원래 함수 호출
+        RefreshInventory();
     }
 }

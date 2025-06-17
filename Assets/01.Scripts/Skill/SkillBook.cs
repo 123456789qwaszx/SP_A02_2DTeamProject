@@ -33,13 +33,13 @@ public class SkillBook : MonoBehaviour
                 //LevelUpSkill(HolyProjectile);
 
                 AddSkill(HolyPulse, 10011);
-                LevelUpSkill(HolyPulse);
+                //LevelUpSkill(HolyPulse);
 
                 AddSkill(DarkArrow, 10021);
                 //LevelUpSkill(DarkArrow);
 
                 AddSkill(WindCutter, 10071);
-                //LevelUpSkill(WindCutter);
+                LevelUpSkill(WindCutter);
 
                 AddSkill(BloodChain, 10111);
                 //LevelUpSkill(BloodChain);

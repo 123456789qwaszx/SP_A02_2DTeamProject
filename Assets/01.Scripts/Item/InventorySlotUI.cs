@@ -62,14 +62,17 @@ public class InventorySlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExit
     {
         if (item == null) return;
 
+        // 상점이 열려 있으면 판매 처리
         if (ShopUIManager.Instance.IsShopOpen)
         {
-
             if (sellPopup != null)
             {
                 sellPopup.Open(item);
             }
             return;
         }
+
+        // 상점이 닫혀 있으면 장착 처리
+        ItemEquipHandler.Instance.TryEquipItem(item);
     }
 }

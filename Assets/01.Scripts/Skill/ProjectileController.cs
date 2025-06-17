@@ -9,7 +9,6 @@ using UnityEngine;
 // 생성 된 후 코루틴을 돌려 파괴될 때 까지 계속 지정한 대로 움직임
 public class ProjectileController : SkillBase
 {
-    // 혹시 나중에 몬스터도 쏘면 바꿀 것
     PlayerController _owner;
     SkillBase Skill;
     Vector2 _spawnPos;
@@ -22,7 +21,6 @@ public class ProjectileController : SkillBase
     public float _projectileSpeed = 1;
     public float _attackInterval;
 
-    // 나중에 몬스터도 스킬 쏘면 바꿀 것
     List<MonsterBase> _enteredColliderList = new List<MonsterBase>();
     Coroutine _coDotDamage;
 
@@ -218,8 +216,8 @@ public class ProjectileController : SkillBase
     void OnTriggerEnter2D(Collider2D collision)
     {
         MonsterBase creature = collision.transform.GetComponent<MonsterBase>();
-        // if (creature.IsValid() == false)
-        //     return;
+         if (creature.IsValid() == false)
+             return;
 
         if (this.IsValid() == false)
             return;
@@ -271,8 +269,8 @@ public class ProjectileController : SkillBase
     void OnTriggerExit2D(Collider2D collision)
     {
         MonsterBase target = collision.transform.GetComponent<MonsterBase>();
-        // if (target.IsValid() == false)
-        //     return;
+         if (target.IsValid() == false)
+             return;
 
         if (this.IsValid() == false)
             return;

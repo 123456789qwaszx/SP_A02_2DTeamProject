@@ -234,8 +234,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: 0.004760742, y: 8.203247}
-  m_SizeDelta: {x: -61.661255, y: 151.35367}
+  m_AnchoredPosition: {x: -71.7152, y: 1.2632}
+  m_SizeDelta: {x: -379.7838, y: 285.4929}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &345040647432052265
 CanvasRenderer:
@@ -467,8 +467,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09daa7edb19034011b2a2cca44ea68f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthSlider: {fileID: 6691324292411083032}
-  manaSlider: {fileID: 3040998547918079728}
+  healthFillImage: {fileID: 143758989919013154}
+  manaFillImage: {fileID: 8633542103784580275}
   smoothSpeed: 5
 --- !u!1 &4913176145032134043
 GameObject:
@@ -505,8 +505,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -782.72, y: -365.94}
-  m_SizeDelta: {x: 345.0054, y: 335.5205}
+  m_AnchoredPosition: {x: -717, y: -356}
+  m_SizeDelta: {x: 663.128, y: 67.2421}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6691324292411083032
 MonoBehaviour:
@@ -593,7 +593,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0.000030517578}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2118060742713839584
@@ -667,8 +667,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: 9.412231, y: -9.675415}
-  m_SizeDelta: {x: -90.73401, y: 70.634094}
+  m_AnchoredPosition: {x: -62.30771, y: -16.6154}
+  m_SizeDelta: {x: -408.8566, y: 204.7733}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &8485408442199141728
 GameObject:

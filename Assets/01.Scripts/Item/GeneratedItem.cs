@@ -8,7 +8,8 @@ public class GeneratedItem
     public string itemName;
     public ItemRarity rarity;
     public ItemType itemType;
-    public int sellPrice;
+    public int buyPrice;  // 구매 가격
+    public int sellPrice; // 판매 가격
     public CharacterClass usableClass;
 
     public List<(ItemOptionType optionType, float value)> options = new();

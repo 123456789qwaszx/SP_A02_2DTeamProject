@@ -100,14 +100,14 @@ public class ShopInventoryUIManager : MonoBehaviour
         Debug.Log($"슬롯 {count} 생성됨");
     }
     
-    public void DelayedRefresh()
-    {
-        StartCoroutine(RefreshNextFrame());
-    }
-
-    private IEnumerator RefreshNextFrame()
-    {
-        yield return null; // 한 프레임 뒤로 미룸
-        RefreshInventory(); // 원래 함수 호출
-    }
+    // public void DelayedRefresh()
+    // {
+    //     StartCoroutine(RefreshNextFrame());
+    // }
+    //
+    // private IEnumerator RefreshNextFrame()
+    // {
+    //     yield return null; // 한 프레임 뒤로 미룸
+    //     RefreshInventory(); // 원래 함수 호출
+    // }
 }

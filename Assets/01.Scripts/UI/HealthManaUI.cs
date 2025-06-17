@@ -3,57 +3,52 @@ using UnityEngine.UI;
 
 public class HealthManaUI : MonoBehaviour
 {
-    [Header("슬라이더 참조")]
-    [SerializeField] private Slider healthSlider;
-    [SerializeField] private Slider manaSlider;
+    public Image healthFillImage;
+    public Image manaFillImage;
 
     private Player player;
 
-    private float currentHpFill = 1f;
-    private float currentMpFill = 1f;
+    private float maxHP = 100f;
+    private float maxMP = 100f;
 
-    [SerializeField] private float smoothSpeed = 5f; // 보간 속도
+    private float currentHpFill;
+    private float currentMpFill;
+
+    [SerializeField] private float smoothSpeed = 5f; // 부드럽게 전환되는 속도
 
     private void Awake()
-    {
-        DontDestroyOnLoad(gameObject);
-    }
+{
+    DontDestroyOnLoad(gameObject);
+}
+
 
     private void Start()
     {
-        player = GameManager.Instance.player;
+        player = FindObjectOfType<Player>();
 
-        if (player == null)
+        if (player != null)
         {
-            Debug.LogError("GameManager에서 Player를 참조하지 못했습니다.");
-            return;
+            maxHP = player.GetMaxHP();
+            maxMP = player.GetMaxMP();
         }
 
-        if (healthSlider != null) healthSlider.value = 1f;
-        if (manaSlider != null) manaSlider.value = 1f;
+        // 초기값 설정
+        currentHpFill = 1f;
+        currentMpFill = 1f;
     }
 
     private void Update()
     {
-        player = GameManager.Instance.player;
         if (player == null) return;
 
-        float currentHP = player.GetHP();
-        float currentMP = player.GetMP();
-        float maxHP = Mathf.Max(player.GetMaxHP(), 1f);
-        float maxMP = Mathf.Max(player.GetMaxMP(), 1f);
+        float targetHpFill = Mathf.Clamp01(player.GetHP() / maxHP);
+        float targetMpFill = Mathf.Clamp01(player.GetMP() / maxMP);
 
-        float targetHpRatio = Mathf.Clamp01(currentHP / maxHP);
-        float targetMpRatio = Mathf.Clamp01(currentMP / maxMP);
+        // 부드럽게 보간
+        currentHpFill = Mathf.Lerp(currentHpFill, targetHpFill, Time.deltaTime * smoothSpeed);
+        currentMpFill = Mathf.Lerp(currentMpFill, targetMpFill, Time.deltaTime * smoothSpeed);
 
-        // 💡 감쇠 함수 기반 보간 (변화량 크면 빨라지고, 작으면 천천히)
-        float hpLerpSpeed = 1f - Mathf.Pow(1f - 0.8f, Time.deltaTime * smoothSpeed);
-        float mpLerpSpeed = 1f - Mathf.Pow(1f - 0.8f, Time.deltaTime * smoothSpeed);
-
-        currentHpFill = Mathf.Lerp(currentHpFill, targetHpRatio, hpLerpSpeed);
-        currentMpFill = Mathf.Lerp(currentMpFill, targetMpRatio, mpLerpSpeed);
-
-        if (healthSlider != null) healthSlider.value = currentHpFill;
-        if (manaSlider != null) manaSlider.value = currentMpFill;
+        healthFillImage.fillAmount = currentHpFill;
+        manaFillImage.fillAmount = currentMpFill;
     }
 }
