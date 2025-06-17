@@ -5,6 +5,7 @@ using System.Linq;
 using DG.Tweening.Core.Easing;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Object = UnityEngine.Object;
 
 public class GameManager : Singleton<GameManager>
@@ -67,7 +68,30 @@ public class GameManager : Singleton<GameManager>
             Gold = currentData.gold;
             InventoryManager.Instance.LoadFromSave(currentData.inventoryItems);
             PlayerEquipmentManager.Instance.LoadAllEquippedItems(currentData.equippedItemsPerClass);
+            PlayerEquipmentManager.Instance.ApplyEquippedItemsToCurrentPlayer();
+            // ItemEquipHandler.Instance.RefreshAllEquipSlotIcons();
+            ItemEquipHandler.Instance.RefreshUI();
             Debug.Log("게임 불러옴");
+        }
+    }
+    
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "MainScene")
+        {
+            Debug.Log("🔁 메인 씬 복귀 → 장비 UI 갱신 시도");
+            PlayerEquipmentManager.Instance?.ApplyEquippedItemsToCurrentPlayer();
+            ItemEquipHandler.Instance?.RefreshUI();
         }
     }
     

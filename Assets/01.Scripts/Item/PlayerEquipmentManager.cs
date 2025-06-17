@@ -237,6 +237,33 @@ public class PlayerEquipmentManager : MonoBehaviour
             equippedPerClass[pair.Key] = equippedDict;
         }
     }
+    
+    public void ApplyEquippedItemsToCurrentPlayer()
+    {
+        var currentClass = player.CharacterClass;
+
+        if (!equippedPerClass.TryGetValue(currentClass, out var equippedItems))
+            return;
+
+        UnequipAll(); // 현재 장착된 아이템 초기화
+
+        foreach (var kvp in equippedItems)
+        {
+            Equip(kvp.Value); // 메모리에 저장된 아이템을 다시 장착
+        }
+    }
+    
+    public GeneratedItem GetEquippedItem(CharacterClass characterClass, ItemType itemType)
+    {
+        if (equippedPerClass.TryGetValue(characterClass, out var items))
+        {
+            if (items.TryGetValue(itemType, out var item))
+            {
+                return item;
+            }
+        }
+        return null;
+    }
 
     private ItemOptionType ParseEnum(string name) => Enum.TryParse(name, out ItemOptionType t) ? t : ItemOptionType.공격력;
 }
