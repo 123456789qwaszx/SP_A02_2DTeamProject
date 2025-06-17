@@ -304,7 +304,6 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
 
         UIManager.Instance.ShowWarning("보스 출현!", 2f);
     }
-
     void SpawnFinalBoss()
     {
         // 플레이어 위쪽에 스폰
