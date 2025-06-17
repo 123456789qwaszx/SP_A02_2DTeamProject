@@ -38,4 +38,9 @@ public class UISkillSelectPopup : MonoBehaviour
         item2.GetComponent<UI_SkillCard>().SetInfo(List[1]);
         item3.GetComponent<UI_SkillCard>().SetInfo(List[2]);
     }
+
+    public void ClosePopup()
+    {
+        PoolManager.Instance.Push(gameObject);
+    }
 }

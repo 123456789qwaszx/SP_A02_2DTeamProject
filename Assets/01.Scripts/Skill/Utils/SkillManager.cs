@@ -129,6 +129,7 @@ public class SkillManager : Singleton<SkillManager>
 
     public void StartSkillLoad()
     {
+        // 250617_1540 이제 안쓰는듯?
         holyProjectile_Prefab = ResourceManager.Instance.Load<GameObject>("Skill_00_HolyProjectile.prefab");
         holyImpact_Prefab = ResourceManager.Instance.Load<GameObject>("Skill_01_HolyImpact.prefab");
         holyPulse_Prefab = ResourceManager.Instance.Load<GameObject>("Skill_02_HolyPulse.prefab");
@@ -151,6 +152,26 @@ public class SkillManager : Singleton<SkillManager>
         // _skillList.Add(skill10011);
         // _skillList.Add(skill10021);
         // _skillList.Add(skill10031);
+    }
+
+    void Start()
+    {
+        ResourceManager.Instance.LoadAllAsync<GameObject>("UI_Prefabs", (key, count, totalCount) =>
+        {
+            Debug.Log($"{key} {count}/{totalCount}");
+
+            if (count == totalCount)
+            {
+                StartSkillUILoad();
+            }
+        });
+    }
+
+    public GameObject skillSelectPopup_Prefab;
+
+    public void StartSkillUILoad()
+    {
+        skillSelectPopup_Prefab = ResourceManager.Instance.Load<GameObject>("UI_SkillCardSelectPopup");
     }
 
     void Update()

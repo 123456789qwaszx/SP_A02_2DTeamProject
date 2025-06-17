@@ -48,6 +48,10 @@ public class UI_SkillCard : MonoBehaviour
     {
         GameManager.Instance.controller.sklilbook.LevelUpSkill(_skill.SkillType);
         // UI 닫기
-        //ResourceManager.Instance.Destroy(gameObject);
+        UISkillSelectPopup go = GetComponentInParent<UISkillSelectPopup>();
+        Debug.Log("파괴");
+        Debug.Log(go.name);
+        go.ClosePopup();
+
     }
 }
