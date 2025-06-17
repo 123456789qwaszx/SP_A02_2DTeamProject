@@ -5,6 +5,9 @@
 /// </summary>
 public class PlayerLevel : MonoBehaviour
 {
+    [Header("사운드 클립")]
+    [SerializeField] private AudioClip levelUpSFX;
+
     [SerializeField] private int currentLevel = 1;
     [SerializeField] private int currentExp = 0;
 
@@ -114,8 +117,10 @@ public class PlayerLevel : MonoBehaviour
 {
     currentLevel++;
     CurrentLevel = currentLevel; // ✅ 프로퍼티 동기화
+        if (levelUpSFX != null)
+            SoundManager.Instance.PlaySFX(levelUpSFX);
 
-    Debug.Log($"레벨업! 현재 레벨: {currentLevel}");
+        Debug.Log($"레벨업! 현재 레벨: {currentLevel}");
 
     GameObject go = PoolManager.Instance.Pop(SkillManager.Instance.skillSelectPopup_Prefab);
     Debug.Log("스킬선택창 팝업, 확인 후 삭제");
