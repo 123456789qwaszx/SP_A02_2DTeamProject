@@ -70,4 +70,32 @@ public class Archer : Player
             return Attack;
         }
     }
+
+    public override PlayerData GetPlayerData()
+    {
+        PlayerData data = base.GetPlayerData();
+        data.jobType = "Archer";
+        data.archerData = GetArcherData();
+        return data;
+    }
+
+    // Archer 전용 데이터를 반환하는 메서드
+    public ArcherData GetArcherData()
+    {
+        ArcherData data = new ArcherData();
+
+        BasePlayerData baseData = GetPlayerData().baseData;
+        // Base 스탯을 복사
+        data.CopyFrom(baseData);
+
+        // Archer 전용 스탯 복사
+        data.critBonus_Normal = this.critBonus_Normal;
+        data.critBonus_Special = this.critBonus_Special;
+        data.critBonus_Skill = this.critBonus_Skill;
+        data.critDamage_Normal = this.critDamage_Normal;
+        data.critDamage_Special = this.critDamage_Special;
+        data.critDamage_Skill = this.critDamage_Skill;
+
+        return data;
+    }
 }

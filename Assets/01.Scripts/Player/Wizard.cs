@@ -70,4 +70,31 @@ public class Wizard : Player
             return Attack;
         }
     }
+
+    public override PlayerData GetPlayerData()
+    {
+        PlayerData data = base.GetPlayerData();
+        data.jobType = "Wizard";
+        data.wizardData = GetWizardData();
+        return data;
+    }
+
+    // Wizard용 데이터를 반환하는 메서드
+    public WizardData GetWizardData()
+    {
+        WizardData data = new WizardData();
+        // Base 스탯을 복사
+        data.CopyFrom(GetBasePlayerData());
+
+        // Wizard 전용 스탯 할당
+        data.critBonus_Normal = this.critBonus_Normal;
+        data.critBonus_Special = this.critBonus_Special;
+        data.critBonus_Skill = this.critBonus_Skill;
+        data.critDamage_Normal = this.critDamage_Normal;
+        data.critDamage_Special = this.critDamage_Special;
+        data.critDamage_Skill = this.critDamage_Skill;
+
+        return data;
+    }
+
 }
