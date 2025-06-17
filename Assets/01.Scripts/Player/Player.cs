@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using static UnityEditor.Progress;
+using UnityEngine.SceneManagement;
 
 public interface IEquipable
 {
@@ -238,9 +239,6 @@ public class Player : MonoBehaviour, IEquipable, IDamagable
         {
             Debug.LogError("GameOverPanel 프리팹이 할당되지 않았습니다! Inspector를 확인하세요.");
         }
-
-        // 일정 시간 후 메인 씬으로 이동
-        Invoke("MainScene", 0.5f);
     }
 
     // 기본 스탯만 수집하는 헬퍼 메서드
