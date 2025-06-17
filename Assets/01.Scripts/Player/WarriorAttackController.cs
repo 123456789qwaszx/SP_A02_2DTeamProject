@@ -142,10 +142,19 @@ public class WarriorAttackController : MonoBehaviour
         Vector3 offset = direction * attackCircleRadius;
         while (elapsed < duration)
         {
+            // effectGo가 파괴되었는지 확인
+            if (effectGo == null)
+            {
+                yield break;  // effectGo가 null이면 코루틴 종료
+            }
+
             effectGo.transform.position = transform.position + offset;
             elapsed += Time.deltaTime;
             yield return null;
         }
-        Destroy(effectGo);
+
+        // 이후에도 혹시 null이 아니라면 Destroy 호출
+        if (effectGo != null)
+            Destroy(effectGo);
     }
 }
