@@ -1003,7 +1003,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!82 &1900216124
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1113,13 +1113,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bgmSource: {fileID: 1900216124}
-  bgm_Title: {fileID: 0}
-  bgm_Main: {fileID: 0}
-  bgm_Lv1Castle: {fileID: 0}
-  bgm_Lv2Poison: {fileID: 0}
-  bgm_Lv3Desert: {fileID: 0}
-  bgm_Lv4Gold: {fileID: 0}
-  bgm_Final: {fileID: 0}
+  bgm_Title: {fileID: 8300000, guid: a83d95b718227544a9ed656174a11529, type: 3}
+  bgm_Main: {fileID: 8300000, guid: a83d95b718227544a9ed656174a11529, type: 3}
+  bgm_Lv1Castle: {fileID: 8300000, guid: a83d95b718227544a9ed656174a11529, type: 3}
+  bgm_Lv2Poison: {fileID: 8300000, guid: a83d95b718227544a9ed656174a11529, type: 3}
+  bgm_Lv3Desert: {fileID: 8300000, guid: a83d95b718227544a9ed656174a11529, type: 3}
+  bgm_Lv4Gold: {fileID: 8300000, guid: a83d95b718227544a9ed656174a11529, type: 3}
+  bgm_Final: {fileID: 8300000, guid: a83d95b718227544a9ed656174a11529, type: 3}
   sfxSourcePoolSize: 20
 --- !u!4 &1900216126
 Transform:

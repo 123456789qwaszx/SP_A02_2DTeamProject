@@ -28,8 +28,8 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
     public int surroundMonstersCount = 20;
 
     [Header("스폰 타이밍 트리거")]
-    private float[] eliteSpawnTimes = { 180f, 420f, 780f };
-    private float[] midBossTimes = { 720f };
+    private float[] eliteSpawnTimes = { 180f, 420f, 780f }; // 3분, 7분, 13분
+    private float[] midBossTimes = { 720f }; // 12분에 중간 보스 스폰
 
     private Transform player;
     private float playTime;
@@ -51,8 +51,6 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
     {
         while (GameManager.Instance.player == null)
             yield return null;
-
-        SetupStage(StageType.Normal);
     }
 
     void Update()
@@ -83,7 +81,29 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
         {
             if (playTime >= timing && !triggeredTimes.Contains(timing))
             {
-                SpawnFromPool(midBossPrefabs);
+                int stage = GameManager.Instance.currentStage;
+
+                // 중간보스 1마리 / 2마리 / 3마리 스폰
+                int spawnCount = 1;
+                if (stage >= 6 && stage <= 10)
+                    spawnCount = 2;
+                else if (stage >= 11 && stage <= 15)
+                    spawnCount = 3;
+
+                // 중복 방지 스폰
+                List<int> selectedIndex = new List<int>();
+                while (selectedIndex.Count < spawnCount)
+                {
+                    int randomIndex = Random.Range(0, midBossPrefabs.Length);
+                    if (!selectedIndex.Contains(randomIndex))
+                        selectedIndex.Add(randomIndex);
+                }
+
+                foreach (int index in selectedIndex)
+                {
+                    SpawnFromPool(midBossPrefabs[index]);
+                }
+
                 triggeredTimes.Add(timing);
             }
         }
@@ -217,10 +237,14 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
 
     public void SetupStage(StageType type)
     {
-        player = GameManager.Instance.player.transform;
+        if (type == StageType.None)
+        {
+            isSpawning = false;
+            StopAllCoroutines();
+            return;
+        }
 
-        if (player == null)
-            Debug.LogError("MonsterSpawnManager의 player가 null!");
+        player = GameManager.Instance.player.transform;
 
         currentStageType = type;
         isSpawning = true;
@@ -238,11 +262,9 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
             case StageType.FinalBoss:
                 SpawnFinalBoss();
                 break;
-            case StageType.Event:
-                isSpawning = false;
-                break;
         }
     }
+
 
     void SpawnFinalBoss()
     {

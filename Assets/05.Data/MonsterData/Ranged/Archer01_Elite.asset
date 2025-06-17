@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37314c0bef24a034c943a9351ff468c7, type: 3}
-  m_Name: Pig_01_Tanker
+  m_Name: Archer01_Elite
   m_EditorClassIdentifier: 
-  monsterName: Pig_02
+  monsterName: Goblin_01
   maxHP: 15
-  attackPower: 1
-  moveSpeed: 0.3
-  attackCooldown: 4
-  attackRange: 1.3
-  type: 1
-  projectilePrefab: {fileID: 0}
+  attackPower: 6
+  moveSpeed: 0.7
+  attackCooldown: 5
+  attackRange: 4
+  type: 0
+  projectilePrefab: {fileID: 3395379805850720308, guid: 84503448735680a4f893274f63479897, type: 3}
+  bossProjectilePrefab: {fileID: 0}
