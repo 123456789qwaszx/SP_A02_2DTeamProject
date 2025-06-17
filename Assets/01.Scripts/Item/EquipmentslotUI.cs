@@ -60,7 +60,10 @@ public class EquipmentslotUI : MonoBehaviour, IPointerClickHandler, IPointerEnte
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        ItemTooltipUI.Instance.Hide();
+        if (ItemTooltipUI.Instance != null)
+        {
+            ItemTooltipUI.Instance.Hide();
+        }
     }
 
     

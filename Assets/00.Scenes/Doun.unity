@@ -1072,8 +1072,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdb2aad84303cc9449325142c358aeed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tabType: 0
+  tabType: 3
   inventoryUI: {fileID: 244971721}
+  shopInventoryUI: {fileID: 0}
 --- !u!1 &198652963
 GameObject:
   m_ObjectHideFlags: 0
@@ -2380,7 +2381,7 @@ GameObject:
   - component: {fileID: 411507234}
   - component: {fileID: 411507233}
   - component: {fileID: 411507232}
-  - component: {fileID: 411507231}
+  - component: {fileID: 411507235}
   m_Layer: 5
   m_Name: AllTabButton
   m_TagString: Untagged
@@ -2408,20 +2409,6 @@ RectTransform:
   m_AnchoredPosition: {x: 45, y: -30}
   m_SizeDelta: {x: 70, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &411507231
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 411507229}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdb2aad84303cc9449325142c358aeed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tabType: 0
-  inventoryUI: {fileID: 244971721}
 --- !u!114 &411507232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2504,6 +2491,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 411507229}
   m_CullTransparentMesh: 1
+--- !u!114 &411507235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 411507229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdb2aad84303cc9449325142c358aeed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tabType: 0
+  inventoryUI: {fileID: 0}
+  shopInventoryUI: {fileID: 1092119181}
 --- !u!1 &423861455
 GameObject:
   m_ObjectHideFlags: 0
@@ -2717,7 +2719,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &451717250
@@ -4314,6 +4316,7 @@ GameObject:
   - component: {fileID: 787814471}
   - component: {fileID: 787814470}
   - component: {fileID: 787814474}
+  - component: {fileID: 787814475}
   m_Layer: 5
   m_Name: ItemTooltipUI
   m_TagString: Untagged
@@ -4437,6 +4440,18 @@ MonoBehaviour:
   itemNameText: {fileID: 451717249}
   optionContainer: {fileID: 1849854522}
   optionTextPrefab: {fileID: 8015596899934727126, guid: abafdde1263a34d4e83a2404f65ec834, type: 3}
+--- !u!225 &787814475
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 787814467}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &791961796
 GameObject:
   m_ObjectHideFlags: 0
@@ -5198,6 +5213,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tabType: 0
   inventoryUI: {fileID: 244971721}
+  shopInventoryUI: {fileID: 0}
 --- !u!1 &918087088
 GameObject:
   m_ObjectHideFlags: 0
@@ -5752,7 +5768,7 @@ GameObject:
   - component: {fileID: 1016403361}
   - component: {fileID: 1016403360}
   - component: {fileID: 1016403359}
-  - component: {fileID: 1016403358}
+  - component: {fileID: 1016403362}
   m_Layer: 5
   m_Name: ArmorTabButton
   m_TagString: Untagged
@@ -5780,20 +5796,6 @@ RectTransform:
   m_AnchoredPosition: {x: 185, y: -30}
   m_SizeDelta: {x: 70, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1016403358
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1016403356}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdb2aad84303cc9449325142c358aeed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tabType: 0
-  inventoryUI: {fileID: 244971721}
 --- !u!114 &1016403359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5876,6 +5878,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1016403356}
   m_CullTransparentMesh: 1
+--- !u!114 &1016403362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1016403356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdb2aad84303cc9449325142c358aeed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tabType: 2
+  inventoryUI: {fileID: 0}
+  shopInventoryUI: {fileID: 1092119181}
 --- !u!1 &1028912274
 GameObject:
   m_ObjectHideFlags: 0
@@ -7231,8 +7248,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdb2aad84303cc9449325142c358aeed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tabType: 0
+  tabType: 2
   inventoryUI: {fileID: 244971721}
+  shopInventoryUI: {fileID: 0}
 --- !u!1 &1237353979
 GameObject:
   m_ObjectHideFlags: 0
@@ -7824,6 +7842,61 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1328859389}
   m_CullTransparentMesh: 1
+--- !u!1 &1342575371
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1342575373}
+  - component: {fileID: 1342575372}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1342575372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1342575371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0fc5feebda52fe4b9b317536dca5d87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 4017162980714635754}
+  controller: {fileID: 7659122613046838770}
+  currentStage: 1
+  maxUnlockedStage: 1
+  stageCleared: 00000000000000000000000000000000
+  saveManager: {fileID: 889080973}
+  currentData:
+    players: []
+    gold: 0
+    inventoryItems: []
+  goldText: {fileID: 527728856}
+--- !u!4 &1342575373
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1342575371}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 960, y: 540.00006, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1349072136
 GameObject:
   m_ObjectHideFlags: 0
@@ -8096,7 +8169,7 @@ GameObject:
   - component: {fileID: 1401970749}
   - component: {fileID: 1401970748}
   - component: {fileID: 1401970747}
-  - component: {fileID: 1401970746}
+  - component: {fileID: 1401970750}
   m_Layer: 5
   m_Name: AccTabButton
   m_TagString: Untagged
@@ -8124,20 +8197,6 @@ RectTransform:
   m_AnchoredPosition: {x: 255, y: -30}
   m_SizeDelta: {x: 70, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1401970746
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1401970744}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdb2aad84303cc9449325142c358aeed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tabType: 0
-  inventoryUI: {fileID: 244971721}
 --- !u!114 &1401970747
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8220,6 +8279,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1401970744}
   m_CullTransparentMesh: 1
+--- !u!114 &1401970750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1401970744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdb2aad84303cc9449325142c358aeed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tabType: 3
+  inventoryUI: {fileID: 0}
+  shopInventoryUI: {fileID: 1092119181}
 --- !u!1 &1402760792
 GameObject:
   m_ObjectHideFlags: 0
@@ -9280,7 +9354,7 @@ GameObject:
   - component: {fileID: 1536562374}
   - component: {fileID: 1536562373}
   - component: {fileID: 1536562372}
-  - component: {fileID: 1536562371}
+  - component: {fileID: 1536562375}
   m_Layer: 5
   m_Name: WeaponTabButton
   m_TagString: Untagged
@@ -9308,20 +9382,6 @@ RectTransform:
   m_AnchoredPosition: {x: 115, y: -30}
   m_SizeDelta: {x: 70, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1536562371
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1536562369}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdb2aad84303cc9449325142c358aeed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tabType: 0
-  inventoryUI: {fileID: 244971721}
 --- !u!114 &1536562372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9404,6 +9464,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1536562369}
   m_CullTransparentMesh: 1
+--- !u!114 &1536562375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1536562369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdb2aad84303cc9449325142c358aeed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tabType: 1
+  inventoryUI: {fileID: 0}
+  shopInventoryUI: {fileID: 1092119181}
 --- !u!1 &1588865970
 GameObject:
   m_ObjectHideFlags: 0
@@ -10015,8 +10090,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdb2aad84303cc9449325142c358aeed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tabType: 0
+  tabType: 1
   inventoryUI: {fileID: 244971721}
+  shopInventoryUI: {fileID: 0}
 --- !u!1 &1691993194
 GameObject:
   m_ObjectHideFlags: 0
@@ -14686,3 +14762,4 @@ SceneRoots:
   - {fileID: 889080974}
   - {fileID: 1749427717244013687}
   - {fileID: 543222014187495567}
+  - {fileID: 1342575373}
