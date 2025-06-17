@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -5,93 +6,25 @@ using UnityEngine;
 
 public class SkillManager : Singleton<SkillManager>
 {
-    #region HolyProjectile
-    public GameObject holyProjectile_Prefab;
-
-    public ProjectileController SpawnHolyProjectile(Vector2 position)
-    {
-        GameObject go = PoolManager.Instance.Pop(holyProjectile_Prefab);
-        go.transform.position = position;
-
-        ProjectileController sc = go.GetComponent<ProjectileController>();
-        Projectiles.Add(sc);
-        sc.Init();
-
-        return sc;
-    }
-
-    public void DespawnHolyProJectile(ProjectileController go)
-    {
-        Projectiles.Remove(go);
-        Instance.SpawnHolyImpact(go.transform.position);
-
-        PoolManager.Instance.Push(go.gameObject);
-
-    }
-    #endregion
-
-    #region HolyImpact
-    public GameObject holyImpact_Prefab;
-
-    public ProjectileController SpawnHolyImpact(Vector2 position)
-    {
-        GameObject go = PoolManager.Instance.Pop(holyImpact_Prefab);
-        go.transform.position = position;
-
-        ProjectileController sc = go.GetComponent<ProjectileController>();
-        sc.Init();
-
-        return sc;
-    }
-
-    public void DeSpawnHolyImpact(ProjectileController go)
-    {
-        PoolManager.Instance.Push(go.gameObject);
-    }
-    #endregion
-
-
-    #region HolyPulse
-    public GameObject holyPulse_Prefab;
-
-    public ProjectileController SpawnHolyPulse(Vector2 position)
-    {
-        GameObject go = PoolManager.Instance.Pop(holyPulse_Prefab);
-        go.transform.position = position;
-
-        ProjectileController sc = go.GetComponent<ProjectileController>();
-        sc.Init();
-
-        return sc;
-    }
-
-    public void DeSpawnHolyPulse(ProjectileController go)
-    {
-        Projectiles.Remove(go);
-        PoolManager.Instance.Push(go.gameObject);
-    }
-    #endregion
-
-
     [SerializeField]
     private List<SkillBase> _skillList = new List<SkillBase>();
-    public List<SkillBase> SkillList { get { return _skillList; }}
+    public List<SkillBase> SkillList { get { return _skillList; } }
 
     public List<SkillBase> ActivatedSkills
     {
         get { return SkillList.Where(skill => skill.IsLearnedSkill).ToList(); }
     }
-    
+
     public Dictionary<SkillType, int> SavedBattleSkill = new Dictionary<SkillType, int>();
 
     #region SkillData
-    public Dictionary<string, Object> _objects = new Dictionary<string, Object>();
+    public Dictionary<string, SkillData> _skillData = new Dictionary<string, SkillData>();
 
-    public T Load<T>(string key) where T : Object
+    public T LoadSkillData<T>(string key) where T : SkillData
     {
-        if (_objects.TryGetValue(key, out Object obj))
+        if (_skillData.TryGetValue(key, out SkillData skillData))
         {
-            return obj as T;
+            return skillData as T;
         }
         return null;
     }
@@ -123,38 +56,91 @@ public class SkillManager : Singleton<SkillManager>
     #endregion
 
 
-    GameObject fire00_Prefab;
-
-    SkillBase iceSkill_Prefab;
-
+    // 스킬북에서 로드 중
+    // 이 부분을 오타내면 이상한 데이터를 받음.
+    // 아마 _object의 Value를 프리팹으로 넣는 대신에, 그냥 저 프리팹의 데이터를 밸류로 넣어주자고...
     public void StartSkillLoad()
     {
-        holyProjectile_Prefab = ResourceManager.Instance.Load<GameObject>("Skill_00_HolyProjectile.prefab");
-        holyImpact_Prefab = ResourceManager.Instance.Load<GameObject>("Skill_01_HolyImpact.prefab");
-        holyPulse_Prefab = ResourceManager.Instance.Load<GameObject>("Skill_02_HolyPulse.prefab");
-        fire00_Prefab = ResourceManager.Instance.Load<GameObject>("Skill_10_Fire00.prefab");
+        // 지금은 하드코딩 했는데, 데이터가 있으면 바꿀 수 있을 듯.
+        // 직업별 스킬 데이터를 가지고 온다음,
+        // 그 데이터의 이름을 Load하는 식으로...
+        // 또 앞의 변수도 이렇게 하나하나 쓰는게 아니라 +10을 하는식으로 할 수도 있는데 나중에 데이터 생기면 완성하자
+        GameObject s_10001 = ResourceManager.Instance.Load<GameObject>("HolyProjectile");
+        GameObject s_10011 = ResourceManager.Instance.Load<GameObject>("HolyPulse");
+        GameObject s_10021 = ResourceManager.Instance.Load<GameObject>("DarkArrow");
+        GameObject s_10031 = ResourceManager.Instance.Load<GameObject>("DirtySwing");
+        GameObject s_10041 = ResourceManager.Instance.Load<GameObject>("DirtyHalo");
+        GameObject s_10051 = ResourceManager.Instance.Load<GameObject>("DirtyWing");
+        GameObject s_10061 = ResourceManager.Instance.Load<GameObject>("PoisionBomb");
+        GameObject s_10071 = ResourceManager.Instance.Load<GameObject>("WindCutter");
+        GameObject s_10081 = ResourceManager.Instance.Load<GameObject>("Waterfall");
+        GameObject s_10091 = ResourceManager.Instance.Load<GameObject>("FireExplosion");
+        GameObject s_10101 = ResourceManager.Instance.Load<GameObject>("FireSwing");
+        GameObject s_10111 = ResourceManager.Instance.Load<GameObject>("BloodChain");
 
+        SkillBase _10001 = s_10001.GetComponent<SkillBase>();
+        SkillBase _10011 = s_10011.GetComponent<SkillBase>();
+        SkillBase _10021 = s_10021.GetComponent<SkillBase>();
+        SkillBase _10031 = s_10031.GetComponent<SkillBase>();
+        SkillBase _10041 = s_10041.GetComponent<SkillBase>();
+        SkillBase _10051 = s_10051.GetComponent<SkillBase>();
+        SkillBase _10061 = s_10061.GetComponent<SkillBase>();
+        SkillBase _10071 = s_10071.GetComponent<SkillBase>();
+        SkillBase _10081 = s_10081.GetComponent<SkillBase>();
+        SkillBase _10091 = s_10091.GetComponent<SkillBase>();
+        SkillBase _10101 = s_10101.GetComponent<SkillBase>();
+        SkillBase _10111 = s_10111.GetComponent<SkillBase>();
 
-        // 스킬고유 인덱스와 skill을 넣어준다. scriptableObject를 활용했기때문에 prefab만 넣어도 데이터를 추출가능하다.
-        // SkillBase skill10001 = holyProjectile_Prefab.GetComponent<SkillBase>();
-        // SkillBase skill10011 = holyImpact_Prefab.GetComponent<SkillBase>();
-        // SkillBase skill10021 = holyPulse_Prefab.GetComponent<SkillBase>();
-        // SkillBase skill10031 = fire00_Prefab.GetComponent<SkillBase>();
-
-        _objects.Add("10001", holyProjectile_Prefab);
-        _objects.Add("10011", holyImpact_Prefab);
-        _objects.Add("10021", holyPulse_Prefab);
-        _objects.Add("10031", fire00_Prefab);
-
-        // 이렇게 추가하는 걸 아래처럼 직접하는 게 아니라, AddSkill()메소드로 뺄것 : SkillBook에 추가
-        // _skillList.Add(skill10001);
-        // _skillList.Add(skill10011);
-        // _skillList.Add(skill10021);
-        // _skillList.Add(skill10031);
+        _skillData.Add("10001", _10001.SkillData);
+        _skillData.Add("10011", _10011.SkillData);
+        _skillData.Add("10021", _10021.SkillData);
+        _skillData.Add("10031", _10031.SkillData);
+        _skillData.Add("10041", _10041.SkillData);
+        _skillData.Add("10051", _10051.SkillData);
+        _skillData.Add("10061", _10061.SkillData);
+        _skillData.Add("10071", _10071.SkillData);
+        _skillData.Add("10081", _10081.SkillData);
+        _skillData.Add("10091", _10091.SkillData);
+        _skillData.Add("10101", _10101.SkillData);
+        _skillData.Add("10111", _10111.SkillData);
     }
 
-    void Update()
+    // 나중에 UIManager 추가되면 그곳으로 이동
+    void Start()
     {
+        ResourceManager.Instance.LoadAllAsync<GameObject>("UI_Prefabs", (key, count, totalCount) =>
+        {
+            Debug.Log($"{key} {count}/{totalCount}");
 
+            if (count == totalCount)
+            {
+                StartSkillUILoad();
+            }
+        });
+    }
+
+    public GameObject skillSelectPopup_Prefab;
+
+    public void StartSkillUILoad()
+    {
+        skillSelectPopup_Prefab = ResourceManager.Instance.Load<GameObject>("UI_SkillCardSelectPopup");
+    }
+    
+    
+    public SkillType GetSkillTypeFromInt(int value)
+    {
+        foreach (SkillType skillType in Enum.GetValues(typeof(SkillType)))
+        {
+            int minValue = (int)skillType;
+            int maxValue = minValue + 5; // 100501~ 100506 사이 값이면 100501값 리턴
+
+            if (value >= minValue && value <= maxValue)
+            {
+                return skillType;
+            }
+        }
+
+        Debug.LogError($" Faild add skill : {value}");
+        return SkillType.None;
     }
 }

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: 05_DirtyWing
   m_EditorClassIdentifier: 
   SkillIndex: 10051
-  Description: "\uBC94\uC704\uACF5\uACA9, \uAD00\uD1B5\uAC00\uB2A5"
+  Description: "\uB113\uC740 \uC18C\uD658\uD615"
   Type: 10051
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: cdc018fe003fce1418e674e3dccf82ca, type: 3}
   SkillPrefabs: {fileID: -7887578740612878512, guid: c515bbdd22b73834aa5a4fb68e53e099, type: 3}
   PrefabLabel: DirtyWing
   DamageMultiplire: 15
@@ -32,5 +32,6 @@ MonoBehaviour:
   AngleBetweenProj: 0
   BounceDist: 0
   ProjRange: 0
+  ProjectileSpacing: 0
   Duration: 5
   attackRangeMultiplier: 1

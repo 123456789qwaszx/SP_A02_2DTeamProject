@@ -17,9 +17,6 @@ public class UISkillSelectPopup : MonoBehaviour
     public UI_SkillCard item2;
     public UI_SkillCard item3;
 
-
-    // 나중엔 플레이어에게 SkillBook을 달아주고 그것을 가져다 쓸 것
-    public SkillBook _skillBook;
     public void Init()
     {
         // 각 스킬카드에 Skill을 기입
@@ -29,12 +26,15 @@ public class UISkillSelectPopup : MonoBehaviour
     void SetReCommendSkills()
     {
         // 총 3개의 랜덤한 스킬을 가져옴
-        List<SkillBase> List = _skillBook.RecommendSkills();
-        Debug.Log(List.Count);
+        List<SkillBase> List = GameManager.Instance.controller.sklilbook.RecommendSkills();
 
-        // 나중엔 (List[1]), (List[2])로 바꿀것
         item1.GetComponent<UI_SkillCard>().SetInfo(List[0]);
-        item2.GetComponent<UI_SkillCard>().SetInfo(List[0]);
-        item3.GetComponent<UI_SkillCard>().SetInfo(List[0]);
+        item2.GetComponent<UI_SkillCard>().SetInfo(List[1]);
+        item3.GetComponent<UI_SkillCard>().SetInfo(List[2]);
+    }
+
+    public void ClosePopup()
+    {
+        PoolManager.Instance.Push(gameObject);
     }
 }
