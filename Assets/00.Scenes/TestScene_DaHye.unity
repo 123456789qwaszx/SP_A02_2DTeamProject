@@ -193,6 +193,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &149391951
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 149391953}
+  - component: {fileID: 149391952}
+  m_Layer: 0
+  m_Name: SaveManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &149391952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 149391951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56b6c1ec113764e40b41f32f6d11bce2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &149391953
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 149391951}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &597201847
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -768,6 +812,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MonsterSpawnManger
       objectReference: {fileID: 0}
+    - target: {fileID: 1315599383297776490, guid: f41af939f4efbfb46b3aa09329cdaca1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1553985865586111666, guid: f41af939f4efbfb46b3aa09329cdaca1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -859,6 +907,10 @@ MonoBehaviour:
   currentStage: 1
   maxUnlockedStage: 1
   stageCleared: 00000000000000000000000000000000
+  saveManager: {fileID: 0}
+  currentData:
+    players: []
+  goldText: {fileID: 0}
 --- !u!4 &1206547253
 Transform:
   m_ObjectHideFlags: 0
@@ -906,6 +958,7 @@ MonoBehaviour:
   stageSelectPanel: {fileID: 2618052587494332385, guid: 3a2c672149f258048a69ee8a0704b09b, type: 3}
   stageButtons: []
   closeBtn: {fileID: 5955738359948693100}
+  warningTxt: {fileID: 0}
 --- !u!4 &1206866955
 Transform:
   m_ObjectHideFlags: 0
@@ -1193,7 +1246,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4698937f93e5d774798196e7e5efb895, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  indicator: {fileID: 0}
 --- !u!1001 &1824839781
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3691,3 +3743,4 @@ SceneRoots:
   - {fileID: 739049174}
   - {fileID: 2395002402063922784}
   - {fileID: 1530752664375441769}
+  - {fileID: 149391953}

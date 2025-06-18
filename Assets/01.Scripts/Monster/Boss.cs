@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class Boss : MonsterBase
@@ -29,6 +30,7 @@ public class Boss : MonsterBase
     protected override void Update()
     {
         base.Update();
+        Debug.Log($"[보스 공격 체크] CanAttack: {CanAttack()}, InAttackRange: {InAttackRange()}, 쿨타임 OK: {Time.time >= lastAttackTime + monsterData.attackCooldown}");
 
         // 체력 40% 이하 2페이즈
         if (!isPhase2 && currentHP <= monsterData.maxHP * 0.4f)
@@ -47,7 +49,7 @@ public class Boss : MonsterBase
         //빨갛게
         if (spriteRenderer != null)
         {
-            Color newColor = new Color(1f, 0.1f, 0.1f); // 원하는 색
+            Color newColor = new Color(1f, 0.5f, 0.1f); // 원하는 색
             spriteRenderer.color = newColor;
 
             // 원래 색상도 덮어쓰기

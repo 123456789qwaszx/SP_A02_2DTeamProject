@@ -5,6 +5,9 @@
 /// </summary>
 public class PlayerLevel : MonoBehaviour
 {
+    [Header("사운드 클립")]
+    [SerializeField] private AudioClip levelUpSFX;
+
     [SerializeField] private int currentLevel = 1;
     [SerializeField] private int currentExp = 0;
 
@@ -74,26 +77,26 @@ public class PlayerLevel : MonoBehaviour
     /// </summary>
     /// <param name="amount">추가할 경험치</param>
     public void AddExperience(int amount)
-{
-    Debug.Log($"경험치 획득! +{amount}");
-
-    if (currentLevel >= maxLevel)
-        return;
-
-    currentExp += amount;
-
-    // ✅ 프로퍼티와 동기화
-    CurrentExp = currentExp;
-
-    while (currentLevel < maxLevel && currentExp >= GetExpToNextLevel())
     {
-        currentExp -= GetExpToNextLevel();
-        LevelUp();
-    }
+        Debug.Log($"경험치 획득! +{amount}");
 
-    // ✅ 최종 경험치 동기화
-    CurrentExp = currentExp;
-}
+        if (currentLevel >= maxLevel)
+            return;
+
+        currentExp += amount;
+
+        // ✅ 프로퍼티와 동기화
+        CurrentExp = currentExp;
+
+        while (currentLevel < maxLevel && currentExp >= GetExpToNextLevel())
+        {
+            currentExp -= GetExpToNextLevel();
+            LevelUp();
+        }
+
+        // ✅ 최종 경험치 동기화
+        CurrentExp = currentExp;
+    }
 
     /// <summary>
     /// 다음 레벨업까지 필요한 경험치 반환
@@ -110,15 +113,17 @@ public class PlayerLevel : MonoBehaviour
     /// <summary>
     /// 레벨업 처리 (레벨 증가, 로그 출력)
     /// </summary>
-   private void LevelUp()
-{
-    currentLevel++;
-    CurrentLevel = currentLevel; // ✅ 프로퍼티 동기화
+    private void LevelUp()
+    {
+        currentLevel++;
+        CurrentLevel = currentLevel; // ✅ 프로퍼티 동기화
+        if (levelUpSFX != null)
+            SoundManager.Instance.PlaySFX(levelUpSFX);
 
-    Debug.Log($"레벨업! 현재 레벨: {currentLevel}");
+        Debug.Log($"레벨업! 현재 레벨: {currentLevel}");
 
-    GameObject go = PoolManager.Instance.Pop(SkillManager.Instance.skillSelectPopup_Prefab);
-    Debug.Log("스킬선택창 팝업, 확인 후 삭제");
-}
-    
+        GameObject go = PoolManager.Instance.Pop(SkillManager.Instance.skillSelectPopup_Prefab);
+        Debug.Log("스킬선택창 팝업, 확인 후 삭제");
+        Time.timeScale = 0.0f;
+    }
 }

@@ -1,3 +1,4 @@
+﻿using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -57,34 +58,45 @@ public class JobChoicePanel : MonoBehaviour
         UpdateButtonStates(wizardButton);
     }
 
-    private void SetPlayerClass(GameObject selectedClass)
+    public void SetPlayerClass(GameObject selectedClassPrefab)
     {
-        // === 기존 장착 상태 저장 ===
+        StartCoroutine(ChangeJobAndInitialize(selectedClassPrefab));
+    }
+
+
+    private IEnumerator ChangeJobAndInitialize(GameObject newJobPrefab)
+    {
+        // 기존 장비 저장
         if (GameManager.Instance != null && GameManager.Instance.player != null)
         {
             PlayerEquipmentManager.Instance.SaveCurrentEquipment(GameManager.Instance.player.CharacterClass);
         }
-        
-        // 기존의 플레이어 오브젝트(태그가 Player인)를 찾고 삭제합니다.
+
+        // 2. 기존 플레이어 제거
         GameObject existingPlayer = GameObject.FindWithTag("Player");
         if (existingPlayer != null)
         {
             Destroy(existingPlayer);
+            Debug.Log("기존 플레이어 삭제됨: " + existingPlayer.name);
         }
 
-        GameObject newPlayer = Instantiate(selectedClass, Vector3.zero, Quaternion.identity);
-        newPlayer.tag = "Player";
-        newPlayer.layer = LayerMask.NameToLayer("Player");
-        
-        // === 새 플레이어 등록 및 장비 로드 ===
-        GameManager.Instance.player = newPlayer.GetComponent<Player>();
+        yield return null; // 한 프레임 대기
+
+        // 새 플레이어 생성 및 초기화
+        GameObject newPlayer = Instantiate(newJobPrefab);
+        DontDestroyOnLoad(newPlayer);
+
+        Player playerComponent = newPlayer.GetComponent<Player>();
+        //playerComponent.Initialize(); // 중복 제거 체크를 Start 대신 수동으로 호출
+
+        GameManager.Instance.player = playerComponent;
+        Debug.Log("새 플레이어 생성됨: " + newPlayer.name);
+
+        // 장비 및 UI 재설정
         PlayerEquipmentManager.Instance.LoadEquipmentForClass(GameManager.Instance.player.CharacterClass);
-        
-        // 장착 UI 자동 갱신
         ItemEquipHandler.Instance.RefreshUI();
 
-        Debug.Log("새 플레이어 생성됨: " + newPlayer.name);
-        
+        // 골드 텍스트 다시 지정
         var goldObj = GameObject.Find("GoldText");
         if (goldObj != null)
         {
@@ -92,9 +104,11 @@ public class JobChoicePanel : MonoBehaviour
             GameManager.Instance.SetGoldText(goldText);
         }
 
+        // 이펙트 제거 및 UI 닫기
         RemoveExistingEffects();
         ClosePanel();
     }
+
 
     private void RemoveExistingEffects()
     {

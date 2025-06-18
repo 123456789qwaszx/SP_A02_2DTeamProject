@@ -14,6 +14,8 @@ public class ItemTooltipUI : MonoBehaviour
     public TextMeshProUGUI itemNameText;
     public Transform optionContainer;
     public GameObject optionTextPrefab; // 텍스트 프리팹
+    
+    private Coroutine currentPositionRoutine;
 
     private void Awake()
     {
@@ -25,10 +27,21 @@ public class ItemTooltipUI : MonoBehaviour
         Instance = this;
         Hide();
     }
+    
+    private void Update()
+    {
+        if (panel.activeSelf && !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+        {
+            Hide();
+        }
+    }
 
     public void Show(GeneratedItem item, Vector3 position, bool isShopItem = false)
     {
         if (item == null || Instance == null || iconImage == null) return;
+        
+        if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+            return;
         
         panel.SetActive(true);
         Vector3 offset = new Vector3(260f, -210f, 0f);
@@ -111,7 +124,9 @@ public class ItemTooltipUI : MonoBehaviour
         panel.SetActive(true);
         
         // 한 프레임 뒤에 위치 조정
-        StartCoroutine(SetPositionDelayed(position));
+        if (currentPositionRoutine != null)
+            StopCoroutine(currentPositionRoutine);
+        currentPositionRoutine = StartCoroutine(SetPositionDelayed(position));
     }
 
     private IEnumerator SetPositionDelayed(Vector3 basePosition)
@@ -130,6 +145,12 @@ public class ItemTooltipUI : MonoBehaviour
 
     public void Hide()
     {
+        if (currentPositionRoutine != null)
+        {
+            StopCoroutine(currentPositionRoutine);
+            currentPositionRoutine = null;
+        }
+        
         panel.SetActive(false);
     }
 

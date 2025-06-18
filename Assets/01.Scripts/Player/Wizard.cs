@@ -86,7 +86,7 @@ public class Wizard : Player
     {
         WizardData data = new WizardData();
 
-        BasePlayerData baseData = GetPlayerData().baseData;
+        
         // Base 스탯을 복사
         data.CopyFrom(GetBasePlayerData());
 

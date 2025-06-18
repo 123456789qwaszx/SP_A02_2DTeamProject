@@ -86,9 +86,9 @@ public class Archer : Player
     {
         ArcherData data = new ArcherData();
 
-        BasePlayerData baseData = GetPlayerData().baseData;
+        
         // Base 스탯을 복사
-        data.CopyFrom(baseData);
+        data.CopyFrom(GetBasePlayerData());
 
         // Archer 전용 스탯 복사
         data.critBonus_Normal = this.critBonus_Normal;

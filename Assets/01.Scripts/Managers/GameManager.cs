@@ -5,6 +5,7 @@ using System.Linq;
 using DG.Tweening.Core.Easing;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Object = UnityEngine.Object;
 
 public class GameManager : Singleton<GameManager>
@@ -45,16 +46,16 @@ public class GameManager : Singleton<GameManager>
         {
             currentData = new SaveData(); // 데이터가 없으면 새로 생성
         }
-        else
-        {
-            Gold = currentData.gold;
-            InventoryManager.Instance.LoadFromSave(currentData.inventoryItems);
-
-            if (currentData.equippedItemsPerClass != null)
-            {
-                PlayerEquipmentManager.Instance.LoadAllEquippedItems(currentData.equippedItemsPerClass);
-            }
-        }
+        // else
+        // {
+        //     Gold = currentData.gold;
+        //     InventoryManager.Instance.LoadFromSave(currentData.inventoryItems);
+        //
+        //     if (currentData.equippedItemsPerClass != null)
+        //     {
+        //         PlayerEquipmentManager.Instance.LoadAllEquippedItems(currentData.equippedItemsPerClass);
+        //     }
+        // }
 
         // 씬 전환 시 삭제되지 않도록 함
         if (Instance != this)
@@ -66,6 +67,47 @@ public class GameManager : Singleton<GameManager>
         DontDestroyOnLoad(gameObject);
 
         SkillManager.Instance.LoadSkill();
+    }
+    
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F5))
+        {
+            SaveGameData(); // 저장
+            Debug.Log("게임 저장됨");
+        }
+
+        if (Input.GetKeyDown(KeyCode.F9))
+        {
+            currentData = saveManager.LoadGame();
+            Gold = currentData.gold;
+            InventoryManager.Instance.LoadFromSave(currentData.inventoryItems);
+            PlayerEquipmentManager.Instance.LoadAllEquippedItems(currentData.equippedItemsPerClass);
+            PlayerEquipmentManager.Instance.ApplyEquippedItemsToCurrentPlayer();
+            // ItemEquipHandler.Instance.RefreshAllEquipSlotIcons();
+            ItemEquipHandler.Instance.RefreshUI();
+            Debug.Log("게임 불러옴");
+        }
+    }
+    
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "MainScene")
+        {
+            Debug.Log("🔁 메인 씬 복귀 → 장비 UI 갱신 시도");
+            PlayerEquipmentManager.Instance?.ApplyEquippedItemsToCurrentPlayer();
+            ItemEquipHandler.Instance?.RefreshUI();
+        }
     }
     
     public void AddGold(int amount)

@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class GameOver : MonoBehaviour
 {
+    public SaveData data;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +22,8 @@ public class GameOver : MonoBehaviour
         Time.timeScale = 1f;
 
         Debug.Log("판넬 닫힘! 게임 다시 진행");
+
+        //SaveGame(data);
 
         // DontDestroyOnLoad로 유지된 오브젝트들 정리
         foreach (GameObject obj in GameObject.FindObjectsOfType<GameObject>())

@@ -30,6 +30,10 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
     [SerializeField] private int minDropCount = 1;         // 최소 드랍 수
     [SerializeField] private int maxDropCount = 1;         // 최대 드랍 수 (보스는 3~5 등)
 
+    [Header("디버그/테스트")]
+    [SerializeField] private float hpMultiplier = 20f;
+    
+
     public MonsterStateIdle StateIdle { get; protected set; }
     public MonsterStateMove StateMove { get; protected set; }
     public MonsterStateAttackMelee StateMeleeAttack { get; private set; }
@@ -39,8 +43,8 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
     private MonsterStateMachine stateMachine;
     private ItemDropManager itemDropManager;
 
-    protected float currentHP;
-    private float lastAttackTime;
+    [SerializeField] protected float currentHP;
+    protected float lastAttackTime;
 
     protected Animator animator;
     protected Transform player;
@@ -66,7 +70,10 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
 
         InitializeStates();
     }
-
+    void Start()
+    {
+        ResetMonster();
+    }
     // 보스, 최종보스는 오버라이드
     protected virtual void InitializeStates()
     {
@@ -80,10 +87,10 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
             StateMeleeAttack = new MonsterStateAttackMelee(this, animator);
     }
 
-    private void OnEnable()
-    {
-        ResetMonster();
-    }
+    //private void OnEnable()
+    //{
+    //    ResetMonster();
+    //}
 
     protected virtual void Update()
     {
@@ -93,7 +100,7 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
     // 몬스터 초기화
     public virtual void ResetMonster()
     {
-        currentHP = monsterData.maxHP;
+        currentHP = monsterData.maxHP * hpMultiplier;
         /// 추후 초기화 할 거 있으면 추가
         lastAttackTime = Time.time;
         ChangeState(StateIdle);
@@ -103,6 +110,7 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
     public virtual void TakeDamage(float amount)
     {
         currentHP -= amount;
+        ObjectManager.Instance.Monsters.Remove(this);
         // 피격 사운드
         if (hitSFX != null)
             SoundManager.Instance.PlaySFX(hitSFX);

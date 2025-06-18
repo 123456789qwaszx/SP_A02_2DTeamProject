@@ -15,6 +15,10 @@ public interface IDamagable
 
 public class Player : MonoBehaviour, IEquipable, IDamagable
 {
+    [Header("사운드 클립")]
+    [SerializeField] private AudioClip hitSFX;
+    [SerializeField] private AudioClip deathSFX;
+
     public GameObject gameOverPanel;
 
     protected Rigidbody2D rb;
@@ -100,6 +104,7 @@ public class Player : MonoBehaviour, IEquipable, IDamagable
     private Color originalColor;
     private Color hitColor = Color.red;
     private float flashDuration = 0.2f;
+    private bool isinvincibility = false; // 무적 상태 여부
 
 
 
@@ -109,16 +114,19 @@ public class Player : MonoBehaviour, IEquipable, IDamagable
         GameManager.Instance.player = this;
     }
 
-    void Start()
+    public void Initialize()
     {
-        // DontDestroyOnLoad 적용으로 씬 전환 시에도 삭제되지 않음
-        Player[] uis = FindObjectsOfType<Player>();
-
-        if (uis.Length > 1)
+        Player[] players = FindObjectsOfType<Player>();
+        if (players.Length > 1)
         {
             Destroy(gameObject);
-            return;
+            Debug.Log("Initialize()에서 중복으로 제거됨");
         }
+    }
+
+    void Start()
+    {
+        Initialize();
 
         DontDestroyOnLoad(gameObject);
 
@@ -153,6 +161,10 @@ public class Player : MonoBehaviour, IEquipable, IDamagable
         {
             // 디버그용 속도업
             moveSpeed *= 2f;
+        }
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            isinvincibility = !isinvincibility;
         }
     }
 
@@ -191,10 +203,15 @@ public class Player : MonoBehaviour, IEquipable, IDamagable
 
     public void TakeDamage(float damage)
     {
+        if (isinvincibility) return;
+
         hp -= damage;
         hp = Mathf.Max(hp, 0);
 
         PlayHitFlash();
+
+        if (hitSFX != null)
+            SoundManager.Instance.PlaySFX(hitSFX);
 
         if (hp <= 0)
         {
@@ -228,6 +245,10 @@ public class Player : MonoBehaviour, IEquipable, IDamagable
     private void Die()
     {
         Debug.Log("Player has died.");
+
+        SoundManager.Instance.StopBGM();
+        if (deathSFX != null)
+            SoundManager.Instance.PlaySFX(deathSFX);
 
         // 게임 멈추기
         Time.timeScale = 0f;

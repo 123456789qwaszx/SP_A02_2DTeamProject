@@ -160,6 +160,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b1baa3a43fc5d747882307f68dfc366, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitSFX: {fileID: 8300000, guid: ecfbb9b6014a50f4f98e7adb83009d98, type: 3}
+  deathSFX: {fileID: 8300000, guid: 5690e6182b6d0944daa397e7a007af40, type: 3}
   gameOverPanel: {fileID: 5123519538291247374, guid: d24762f511322fc43addfca9a900f842, type: 3}
   moveSpeed: 0
   attackSpeed: 0
@@ -223,6 +225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8073fba75cacf864eb4114e49f9a6db1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelUpSFX: {fileID: 8300000, guid: b41c29c2f01f2cb41b80d14dee536ff9, type: 3}
   currentLevel: 1
   currentExp: 0
 --- !u!114 &-8936387417432878398

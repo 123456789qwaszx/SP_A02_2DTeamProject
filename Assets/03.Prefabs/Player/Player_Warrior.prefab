@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 3183684155981143147}
   - component: {fileID: 8035143969816886282}
   - component: {fileID: 128186131061212172}
-  - component: {fileID: 2050945784885898555}
   - component: {fileID: 796108154974377007}
   - component: {fileID: 842718527041800433}
   - component: {fileID: 8670325938926184392}
@@ -30,6 +29,10 @@ GameObject:
   - component: {fileID: 4929966168425619454}
   - component: {fileID: 7833505567877485817}
   - component: {fileID: -2581591662168713189}
+  - component: {fileID: 1111390552496138731}
+  - component: {fileID: 8016496215025823619}
+  - component: {fileID: 8934776991208375408}
+  - component: {fileID: 2982547150298811596}
   m_Layer: 7
   m_Name: Player_Warrior
   m_TagString: Player
@@ -174,6 +177,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256f1f9e609d86f49958b01b77b74ef8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitSFX: {fileID: 8300000, guid: ecfbb9b6014a50f4f98e7adb83009d98, type: 3}
+  deathSFX: {fileID: 8300000, guid: 5690e6182b6d0944daa397e7a007af40, type: 3}
   gameOverPanel: {fileID: 5123519538291247374, guid: d24762f511322fc43addfca9a900f842, type: 3}
   moveSpeed: 0
   attackSpeed: 0
@@ -237,6 +242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8073fba75cacf864eb4114e49f9a6db1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelUpSFX: {fileID: 8300000, guid: b41c29c2f01f2cb41b80d14dee536ff9, type: 3}
   currentLevel: 1
   currentExp: 0
 --- !u!114 &5935132841134765607
@@ -317,18 +323,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a7fc58def97b18419e532a1a81eed5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2050945784885898555
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2538152942525263616}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e192b8d7753f2f4a809ece4dff7a057, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &796108154974377007
@@ -427,6 +421,73 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ac329c9c224b3e45a2fabd8e9952b9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1111390552496138731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2538152942525263616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8458083ca968d8e4eaa11d3495693219, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8016496215025823619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2538152942525263616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d55380124e0cbe0479c9bc4157e3a8aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  equipmentSlots:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+--- !u!114 &8934776991208375408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2538152942525263616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4097da83f72cb124a94b7ecd613bf91f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  indicator: {fileID: 0}
+  SkillData: {fileID: 11400000, guid: 27156c81d2c149849a7c092b6d44e3cd, type: 2}
+  NumProjectiles: 0
+  ProjectileSpacing: 0
+--- !u!114 &2982547150298811596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2538152942525263616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b64b62c32fe84e41b6298d0c9f93dba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  indicator: {fileID: 0}
+  SkillData: {fileID: 11400000, guid: 6a95ab27f12d6674ab53faa69500aad9, type: 2}
+  NumProjectiles: 0
+  ProjectileSpacing: 0
 --- !u!1 &2565699394120561261
 GameObject:
   m_ObjectHideFlags: 0

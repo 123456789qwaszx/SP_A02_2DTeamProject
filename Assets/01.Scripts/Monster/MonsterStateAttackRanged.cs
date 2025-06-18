@@ -17,7 +17,7 @@ public class MonsterStateAttackRanged : MonsterStateBase
     {
         if (!monster.InAttackRange())
         {
-            monster.ChangeState(monster.StateMove);
+            monster.ChangeState(monster.StateIdle);
         }
     }
 }

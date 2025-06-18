@@ -17,6 +17,7 @@ public class ItemEquipHandler : MonoBehaviour
             return;
         }
         Instance = this;
+        Debug.Log(" ItemEquipHandler.Instance 초기화됨");
     }
     
     /// <summary>
@@ -83,19 +84,30 @@ public class ItemEquipHandler : MonoBehaviour
     
     public void RefreshUI()
     {
+        Debug.Log("▶ RefreshUI 실행됨");
+        Debug.Log($" 슬롯 수: {equipmentSlots.Length}");
         var equippedItems = PlayerEquipmentManager.Instance.GetCurrentEquippedItems();
+        Debug.Log($" 현재 클래스 장착 아이템 수: {equippedItems.Count}");
 
         foreach (var slot in equipmentSlots)
         {
+            foreach (var kvp in equippedItems)
+            {
+                Debug.Log($"[비교] 슬롯: {slot.name} | allowed: {string.Join(",", slot.allowedItemTypes)} | itemType: {kvp.Key} | Equal: {slot.allowedItemTypes.Contains(kvp.Key)}");
+            }
+
             var match = equippedItems.FirstOrDefault(kvp => slot.CanEquip(kvp.Key));
             if (!match.Equals(default(KeyValuePair<ItemType, GeneratedItem>)))
             {
+                Debug.Log($"[SetItem] 슬롯 {slot.name}에 아이템 {match.Value.itemName} 장착");
                 slot.SetItem(match.Value);
             }
             else
             {
+                Debug.Log($"[ClearSlot] 슬롯 {slot.name} 클리어");
                 slot.ClearSlot();
             }
         }
+        Debug.Log($" 슬롯 수: {equipmentSlots.Length}");
     }
 }

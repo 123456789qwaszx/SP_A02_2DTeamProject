@@ -52,6 +52,6 @@ public class UI_SkillCard : MonoBehaviour
         Debug.Log("파괴");
         Debug.Log(go.name);
         go.ClosePopup();
-
+        Time.timeScale = 1.0f;
     }
 }
