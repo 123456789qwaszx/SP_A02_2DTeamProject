@@ -12,11 +12,7 @@ public class ItemIconManager : MonoBehaviour
     {
         Instance = this;
         
-        Debug.Log($"[ItemIconManager] Awake 호출됨. visuals 개수: {visuals.Count}");
-        foreach (var v in visuals)
-        {
-            Debug.Log($"▶ 아이콘 등록됨: {v.itemType} / {v.itemIcon}");
-        }
+        Debug.Log("[ItemIconManager] Awake 호출됨");
     }
     
     public Sprite GetIcon(ItemType type)
