@@ -43,15 +43,6 @@ public class UIManager : Singleton<UIManager>
         data = SaveManager.Instance.LoadGame();
     }
 
-    private void Update()
-    {
-        if (stageClearPanel.activeSelf && Input.GetKeyDown(KeyCode.Escape))
-        {
-            OnCloseStageClearPanel();
-            CloseStageSelectUI();
-            Time.timeScale = 1f;
-        }
-    }
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
