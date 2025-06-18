@@ -267,6 +267,8 @@ public class ProjectileController : SkillBase
         }
     }
 
+
+
     IEnumerator CoCheckDestory()
     {
         while (true)
