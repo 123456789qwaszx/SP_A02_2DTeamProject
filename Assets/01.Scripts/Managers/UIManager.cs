@@ -118,28 +118,36 @@ public class UIManager : Singleton<UIManager>
                     GameManager.Instance.currentStage = selectedStage;
 
                     UIManager.Instance.CloseStageSelectUI();
-                    SaveManager.Instance.SaveGame(data);
-                    GameManager.Instance.player.transform.position = Vector3.zero;
 
                     // ~4 Stage: Castle
                     if (stageIndex <= 3)
                     {
+                        GameManager.Instance.player.transform.position = new Vector3(0, 0, 0);
+                        SaveManager.Instance.SaveGame(data);
                         SceneManager.LoadScene("Dun_Lv.1_CastleScene");
                     }
                     else if (stageIndex <= 7)
                     {
+                        GameManager.Instance.player.transform.position = new Vector3(0, 0, 0);
+                        SaveManager.Instance.SaveGame(data);
                         SceneManager.LoadScene("Dun_Lv.2_PoisonScene");
                     }
                     else if (stageIndex <= 11)
                     {
+                        GameManager.Instance.player.transform.position = new Vector3(0, 0, 0);
+                        SaveManager.Instance.SaveGame(data);
                         SceneManager.LoadScene("Dun_Lv.3_DesertScene");
                     }
                     else if (stageIndex <= 14)
                     {
+                        GameManager.Instance.player.transform.position = new Vector3(0, 0, 0);
+                        SaveManager.Instance.SaveGame(data);
                         SceneManager.LoadScene("Dun_Lv.4_GoldScene");
                     }
                     else if (stageIndex == 15)
                     {
+                        GameManager.Instance.player.transform.position = new Vector3(0, 0, 0);
+                        SaveManager.Instance.SaveGame(data);
                         SceneManager.LoadScene("Dun_FinalScene");
                     }
                 });
@@ -157,7 +165,7 @@ public class UIManager : Singleton<UIManager>
         if (warningRoutine != null)
             StopCoroutine(warningRoutine);
 
-        warningRoutine = StartCoroutine(WarningRoutine(message, duration));
+//        warningRoutine = StartCoroutine(WarningRoutine(message, duration));
     }
 
     private IEnumerator WarningRoutine(string message, float duration)
