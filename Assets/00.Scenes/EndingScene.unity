@@ -329,6 +329,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   smoothing: 1
   Target: {fileID: 0}
+
 --- !u!1 &1680688669
 GameObject:
   m_ObjectHideFlags: 0
@@ -450,6 +451,7 @@ RectTransform:
   m_AnchoredPosition: {x: 609.58, y: -379}
   m_SizeDelta: {x: 390.8391, y: 128.6492}
   m_Pivot: {x: 0.5, y: 0.5}
+
 --- !u!1 &1767747088
 GameObject:
   m_ObjectHideFlags: 0
@@ -571,6 +573,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1767747088}
   m_CullTransparentMesh: 1
+
 --- !u!1 &2030597391
 GameObject:
   m_ObjectHideFlags: 0
@@ -705,6 +708,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2030597391}
   m_CullTransparentMesh: 1
+
 --- !u!222 &27900717506636672
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1380,7 +1384,10 @@ GameObject:
   - component: {fileID: 8822702911639020923}
   - component: {fileID: 1080913703626973141}
   - component: {fileID: 681477623513234885}
+
   - component: {fileID: 8822702911639020924}
+
+
   m_Layer: 5
   m_Name: EndingPanel
   m_TagString: Untagged
@@ -2558,7 +2565,10 @@ RectTransform:
   - {fileID: 5658766281539425288}
   - {fileID: 6919877569840348741}
   - {fileID: 1767747089}
+
   - {fileID: 1680688673}
+
+
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2948,6 +2958,7 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+
 --- !u!114 &8822702911639020924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2961,6 +2972,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   returnToTitleButton: {fileID: 1680688670}
+
 --- !u!222 &8829195552168391958
 CanvasRenderer:
   m_ObjectHideFlags: 0
