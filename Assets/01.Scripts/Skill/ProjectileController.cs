@@ -113,8 +113,43 @@ public class ProjectileController : SkillBase
 
     IEnumerator CoChainLightning(Vector3 startPos, Vector3 endPos, bool isFollow = false)
     {
+        SetParticleSize(startPos, endPos);
         yield return new WaitForSeconds(0.25f);
         DestroyProjectile();
+    }
+    void SetParticleSize(Vector3 startPos, Vector3 endPos)
+    {
+        ParticleSystem particle = GetComponent<ParticleSystem>();
+        var main = particle.main;
+
+        // Scale
+        transform.position = startPos;
+        float dist = Vector3.Distance(startPos, endPos);
+        main.startSizeX  = dist;
+        main.startSizeY = 1;
+        // rotatate
+        Vector3 dir = (endPos - startPos).normalized;
+        float angle = Mathf.Atan2(dir.y, dir.x);
+        main.startRotation  = angle * -1f;
+
+        // Cast box
+        List<Transform> listMonster = new List<Transform>();
+        LayerMask targetLayer = LayerMask.GetMask("Monster");
+        float boxWidth = 1f;
+        Vector3 midPos = (startPos + endPos) / 2f;
+        Vector2 boxSize = new Vector2(boxWidth, boxWidth);
+        float angleRad = angle * Mathf.Deg2Rad;
+
+        RaycastHit2D[] colliders = Physics2D.BoxCastAll(midPos, boxSize, 0, dir, dist * 1.3f, targetLayer); 
+
+        foreach (RaycastHit2D hit in colliders)
+        {
+            MonsterBase monster = hit.transform.GetComponent<MonsterBase>();
+            if (monster != null)
+            {
+                monster.TakeDamage(Skill.TotalDamage);
+            }
+        }
     }
 
 
