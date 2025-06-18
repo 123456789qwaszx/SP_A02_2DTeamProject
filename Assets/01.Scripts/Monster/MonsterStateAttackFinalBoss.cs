@@ -18,7 +18,7 @@ public class MonsterStateAttackFinalBoss : MonsterStateBase
     {
         if (!monster.CanAttack())
         {
-            monster.ChangeState(monster.StateMove);
+            monster.ChangeState(monster.StateIdle);
         }
     }
 }

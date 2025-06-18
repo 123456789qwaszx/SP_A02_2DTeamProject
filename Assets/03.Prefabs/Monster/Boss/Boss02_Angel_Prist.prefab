@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a487fbd26152b8c49b8162eb42dbf1a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterData: {fileID: 11400000, guid: 669f6c72251a49b49aada46510acab8e, type: 2}
+  monsterData: {fileID: 11400000, guid: 62ae32276bec7824ab7ac2eff3ce5c73, type: 2}
   targetLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -114,6 +114,8 @@ MonoBehaviour:
   baseDropChance: 5
   minDropCount: 1
   maxDropCount: 1
+  hpMultiplier: 20
+  currentHP: 0
   phaseChangeEffect: {fileID: 6481321066876551545, guid: 92b5bc2b1a2994942b09d5677b5be842, type: 3}
   phaseChangeSound: {fileID: 0}
   canDashAttack: 1

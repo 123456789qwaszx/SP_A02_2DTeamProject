@@ -34,7 +34,7 @@ public class MonsterStateAttackBoss : MonsterStateBase
     {
         if (!monster.CanAttack())
         {
-            monster.ChangeState(monster.StateMove);
+            monster.ChangeState(monster.StateIdle);
         }
     }
 }
