@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -95,11 +95,11 @@ public class ItemEquipHandler : Singleton<ItemEquipHandler>
                 Debug.Log($"[SetItem] 슬롯 {slot.name}에 아이템 {match.Value.itemName} 장착");
                 slot.SetItem(match.Value);
             }
-            else
-            {
-                Debug.Log($"[ClearSlot] 슬롯 {slot.name} 클리어");
-                slot.ClearSlot();
-            }
+            //else
+            //{
+            //    Debug.Log($"[ClearSlot] 슬롯 {slot.name} 클리어");
+            //    slot.ClearSlot();
+            //}
         }
         Debug.Log($" 슬롯 수: {equipmentSlots.Length}");
     }
