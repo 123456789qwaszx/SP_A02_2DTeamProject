@@ -23,17 +23,23 @@ public class EquipmentslotUI : MonoBehaviour, IPointerClickHandler, IPointerEnte
     
     public void SetItem(GeneratedItem item)
     {
+        // equippedItem = item;
+        //
+        // Debug.Log($"[SetItem] 슬롯 {allowedItemTypes[0]} → 아이템: {item?.itemName}, 타입: {item?.itemType}");
+        //
+        // // 디버그용
+        // var icon = ItemIconManager.Instance.GetIcon(item.itemType);
+        // Debug.Log($"[SetItem] 아이콘 가져오기 시도: {icon}, itemType: {item.itemType}");
+        //
+        // iconImage.sprite = icon;
+        // iconImage.enabled = icon != null;
+        //
+        // rarityBorder.enabled = true;
+        // rarityBorder.color = GetRarityColor(item.rarity);
+        
         equippedItem = item;
-
-        Debug.Log($"[SetItem] 슬롯 {allowedItemTypes[0]} → 아이템: {item?.itemName}, 타입: {item?.itemType}");
-
-        // 디버그용
-        var icon = ItemIconManager.Instance.GetIcon(item.itemType);
-        Debug.Log($"[SetItem] 아이콘 가져오기 시도: {icon}, itemType: {item.itemType}");
-
-        iconImage.sprite = icon;
-        iconImage.enabled = icon != null;
-
+        iconImage.enabled = true;
+        iconImage.sprite = ItemIconManager.Instance.GetIcon(item.itemType);
         rarityBorder.enabled = true;
         rarityBorder.color = GetRarityColor(item.rarity);
     }
@@ -65,8 +71,8 @@ public class EquipmentslotUI : MonoBehaviour, IPointerClickHandler, IPointerEnte
     {
         equippedItem = null;
         iconImage.sprite = defaultSprite;
-        iconImage.enabled = false;
-        rarityBorder.enabled = false;
+        // iconImage.enabled = false;
+        // rarityBorder.enabled = false;
     }
     
     public void OnPointerEnter(PointerEventData eventData)
