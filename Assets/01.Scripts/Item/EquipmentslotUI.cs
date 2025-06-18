@@ -11,9 +11,15 @@ public class EquipmentslotUI : MonoBehaviour, IPointerClickHandler, IPointerEnte
     public List<ItemType> allowedItemTypes; // 이 슬롯에 장착 가능한 아이템 타입
     public Image iconImage;
     public Image rarityBorder;
+    private Sprite defaultSprite;
 
     private GeneratedItem equippedItem;
 
+    private void Awake()
+    {
+        defaultSprite = iconImage.sprite;
+    }
+    
     public void SetItem(GeneratedItem item)
     {
         equippedItem = item;
@@ -57,7 +63,7 @@ public class EquipmentslotUI : MonoBehaviour, IPointerClickHandler, IPointerEnte
     public void ClearSlot()
     {
         equippedItem = null;
-        iconImage.sprite = null;
+        iconImage.sprite = defaultSprite;
         iconImage.enabled = false;
         rarityBorder.enabled = false;
     }
