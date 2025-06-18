@@ -5,19 +5,20 @@ using UnityEngine;
 // 메테오 이펙트
 public class FireExplosion : MonoBehaviour
 {
-    bool reserved;
+    float _reserved = 0f;
     
     void Update()
     {
-        if (gameObject.activeInHierarchy && reserved == false)
+        if (gameObject.activeInHierarchy && _reserved !=0)
         StartCoroutine(CoCheckDestoryEffect(gameObject));
     }
 
     // 메테오 폭발 제거
     IEnumerator CoCheckDestoryEffect(GameObject go)
     {
-        reserved = true;
+        _reserved += 1;
         yield return new WaitForSeconds(3f);
         ResourceManager.Instance.Destroy(go);
+        _reserved -= 1;
     }
 }

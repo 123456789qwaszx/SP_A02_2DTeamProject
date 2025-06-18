@@ -145,7 +145,7 @@ public class SkillManager : Singleton<SkillManager>
                 GameManager.Instance.controller.sklilbook.LevelUpSkill(BloodChain);
 
                 GameManager.Instance.controller.sklilbook.AddSkill(GetSkillTypeFromInt(10121), 10121);
-                GameManager.Instance.controller.sklilbook.LevelUpSkill(GetSkillTypeFromInt(10121));
+                //GameManager.Instance.controller.sklilbook.LevelUpSkill(GetSkillTypeFromInt(10121));
                 // 이렇게 직접 레벨업 시키는 건 처음 시작시 세팅만 이렇고, 이후는 스킬카드UI의 버튼을 통해 LevelUpSkill이 실행됨
 
             }
