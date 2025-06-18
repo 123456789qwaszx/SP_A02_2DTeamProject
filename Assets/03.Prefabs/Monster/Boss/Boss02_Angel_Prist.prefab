@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 2015272244576946160}
   - component: {fileID: 9064637291802993062}
   - component: {fileID: -7380136744305863874}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Boss02_Angel_Prist
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112,9 +112,9 @@ MonoBehaviour:
   ExpItem_Nor: {fileID: 0}
   ExpItem_MidBoss: {fileID: 0}
   ExpItem_Boss: {fileID: 5138223587196166901, guid: 9b8d7fbd66c238e4b92ee84a4552c37a, type: 3}
-  baseDropChance: 5
-  minDropCount: 1
-  maxDropCount: 1
+  baseDropChance: 100
+  minDropCount: 3
+  maxDropCount: 6
   hpMultiplier: 20
   currentHP: 0
   phaseChangeEffect: {fileID: 6481321066876551545, guid: 92b5bc2b1a2994942b09d5677b5be842, type: 3}

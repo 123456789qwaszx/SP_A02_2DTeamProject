@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -94,5 +94,13 @@ public class ObjectManager : Singleton<ObjectManager>
         }
 
         return nearestMonsters;
+    }
+    public void RemoveMonster()
+    {
+        foreach (MonsterBase monster in Monsters.ToList())
+        {
+            Destroy(monster.gameObject);
+        }
+        Monsters.Clear();
     }
 }

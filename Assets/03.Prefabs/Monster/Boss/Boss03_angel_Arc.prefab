@@ -112,9 +112,9 @@ MonoBehaviour:
   ExpItem_Nor: {fileID: 0}
   ExpItem_MidBoss: {fileID: 0}
   ExpItem_Boss: {fileID: 5138223587196166901, guid: 9b8d7fbd66c238e4b92ee84a4552c37a, type: 3}
-  baseDropChance: 5
-  minDropCount: 1
-  maxDropCount: 1
+  baseDropChance: 100
+  minDropCount: 5
+  maxDropCount: 8
   hpMultiplier: 20
   currentHP: 0
   phaseChangeEffect: {fileID: 6481321066876551545, guid: 92b5bc2b1a2994942b09d5677b5be842, type: 3}
