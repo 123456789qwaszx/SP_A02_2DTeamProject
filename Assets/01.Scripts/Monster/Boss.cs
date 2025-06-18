@@ -30,10 +30,14 @@ public class Boss : MonsterBase
     protected override void Update()
     {
         base.Update();
-        Debug.Log($"[보스 공격 체크] CanAttack: {CanAttack()}, InAttackRange: {InAttackRange()}, 쿨타임 OK: {Time.time >= lastAttackTime + monsterData.attackCooldown}");
 
         // 체력 40% 이하 2페이즈
-        if (!isPhase2 && currentHP <= monsterData.maxHP * 0.4f)
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            TakeDamage(currentHP);
+            Debug.Log("보스 즉사");
+        }
+        else if (!isPhase2 && currentHP <= monsterData.maxHP * 0.4f)
         {
             EnterPhase2();
         }
@@ -76,14 +80,15 @@ public class Boss : MonsterBase
     public override void OnDeadEnd()
     {
         base.OnDeadEnd();
-
         StartCoroutine(ClearStageAfterDelay());
     }
 
     private IEnumerator ClearStageAfterDelay()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(5f);
         StageManager.Instance.StageClear();
+
+        PoolManager.Instance.Push(this.gameObject);
     }
 
     // [이벤트함수] 1페이즈 원거리공격 애니메이션
@@ -150,7 +155,7 @@ public class Boss : MonsterBase
         rb.AddForce(direction * 10f, ForceMode2D.Impulse);
         isDashing = true;
         RecordAttackTime();
-        Invoke(nameof(StopDashing), 2f); // 돌진 상태 유지 시간
+        Invoke(nameof(StopDashing), 3f); // 돌진 상태 유지 시간
     }
 
     private void StopDashing()

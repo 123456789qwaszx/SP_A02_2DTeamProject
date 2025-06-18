@@ -91,6 +91,7 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
         if (playTime >= nextSurroundWarning && playTime < 900f)
         {
             UIManager.Instance.ShowWarning("곧 몬스터가 몰려옵니다!");
+            Debug.Log("몬스터 몰려옴 경고: " + playTime);
             nextSurroundWarning += surroundInterval;
         }
 

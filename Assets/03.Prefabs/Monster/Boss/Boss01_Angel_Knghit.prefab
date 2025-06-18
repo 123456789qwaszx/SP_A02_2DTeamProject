@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2920648555092715961}
   - component: {fileID: 8495785648043817494}
   - component: {fileID: 907159049728653047}
+  - component: {fileID: 4895858192489872880}
   m_Layer: 8
   m_Name: Boss01_Angel_Knghit
   m_TagString: Monster
@@ -114,6 +115,8 @@ MonoBehaviour:
   baseDropChance: 5
   minDropCount: 1
   maxDropCount: 1
+  hpMultiplier: 20
+  currentHP: 0
   phaseChangeEffect: {fileID: 6481321066876551545, guid: 92b5bc2b1a2994942b09d5677b5be842, type: 3}
   phaseChangeSound: {fileID: 0}
   canDashAttack: 1
@@ -165,3 +168,48 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!61 &4895858192489872880
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3811577481413864514}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 3.64, y: 4.48}
+    newSize: {x: 3.57, y: 4.45}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 3.64, y: 4.48}
+  m_EdgeRadius: 0

@@ -298,7 +298,11 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
             Instantiate(ExpItem_Nor, transform.position, Quaternion.identity);
         }
 
-        PoolManager.Instance.Push(this.gameObject);
+        if (monsterData.type != MonsterData.MonsterType.FinalBoss &&
+        monsterData.type != MonsterData.MonsterType.Boss)
+        {
+            PoolManager.Instance.Push(this.gameObject);
+        }
     }
 
     // 원거리공격몬스터인지

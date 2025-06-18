@@ -9,11 +9,15 @@ public class UIManager : Singleton<UIManager>
     [Header("스테이지 선택 UI 판넬")]
     public GameObject stageSelectPanel;
 
+    [Header("스테이지 클리어 판넬")]
+    [SerializeField] private GameObject stageClearPanel;
+
     [Header("스테이지 버튼들")]
     public GameObject[] stageButtons;
 
     [Header("닫기 버튼")]
-    public Button closeBtn;
+    public Button StageSelectCloseBtn;
+    public Button StageClearCloseBtn;
 
     [Header("플레이타임 표시")]
     private TextMeshProUGUI playTimeText;
@@ -37,6 +41,16 @@ public class UIManager : Singleton<UIManager>
     private void Start()
     {
         data = SaveManager.Instance.LoadGame();
+    }
+
+    private void Update()
+    {
+        if (stageClearPanel.activeSelf && Input.GetKeyDown(KeyCode.Escape))
+        {
+            OnCloseStageClearPanel();
+            CloseStageSelectUI();
+            Time.timeScale = 1f;
+        }
     }
     private void OnEnable()
     {
@@ -89,12 +103,35 @@ public class UIManager : Singleton<UIManager>
 
     public void OnCloseButtonClicked()
     {
-        closeBtn.onClick.AddListener(CloseStageSelectUI);
+        StageSelectCloseBtn.onClick.AddListener(CloseStageSelectUI);
     }
 
     public void CloseStageSelectUI()
     {
         stageSelectPanel.SetActive(false);
+    }
+
+    public void ShowStageClearPanel()
+    {
+        if (stageClearPanel != null)
+            stageClearPanel.SetActive(true);
+    }
+
+    public void OnCloseStageClearPanel()
+    {
+        StartCoroutine(ClosePanelAfterDelay(0.5f));
+    }
+
+    private IEnumerator ClosePanelAfterDelay(float delay)
+    {
+        SceneManager.LoadScene("MainScene");
+
+        Time.timeScale = 1f;
+
+        yield return new WaitForSecondsRealtime(delay);
+
+        if (stageClearPanel != null)
+            stageClearPanel.SetActive(false);
     }
 
     public void UpdateStageButtons()
@@ -165,7 +202,7 @@ public class UIManager : Singleton<UIManager>
         if (warningRoutine != null)
             StopCoroutine(warningRoutine);
 
-//        warningRoutine = StartCoroutine(WarningRoutine(message, duration));
+        warningRoutine = StartCoroutine(WarningRoutine(message, duration));
     }
 
     private IEnumerator WarningRoutine(string message, float duration)

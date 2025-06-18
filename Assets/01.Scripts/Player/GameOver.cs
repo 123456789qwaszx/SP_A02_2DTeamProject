@@ -36,6 +36,6 @@ public class GameOver : MonoBehaviour
         }
 
         // 메인 씬으로 이동
-        SceneManager.LoadScene("TitleScene");
+        SceneManager.LoadScene("MainScene");
     }
 }
