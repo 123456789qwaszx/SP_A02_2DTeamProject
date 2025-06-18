@@ -22,7 +22,7 @@ public class TestMonsterSpawnSkill : MonoBehaviour
             MonsterBase monsterBase = go.GetComponent<MonsterBase>();
             ObjectManager.Instance.Monsters.Add(monsterBase);
         
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(1f);
         }
     }
 }

@@ -21,6 +21,8 @@ public class ProjectileController : SkillBase
     public float _projectileSpeed = 1;
     public float _attackInterval;
 
+    GameObject _meteorShadow;
+
     List<MonsterBase> _enteredColliderList = new List<MonsterBase>();
     Coroutine _coDotDamage;
 
@@ -69,8 +71,19 @@ public class ProjectileController : SkillBase
                     StartCoroutine(CoBoomerang());
                 break;
             case SkillType.BloodChain:
-                StartCoroutine(CoChainLightning(_spawnPos, _target, true));
+                StartCoroutine(CoBloodChain(_spawnPos, _target, true));
                 break;
+                case SkillType.Meteor:
+                _dir = (_target - transform.position).normalized;
+                transform.rotation = Quaternion.FromToRotation(Vector3.up, _dir);
+                _rigid.velocity = _dir * Skill.SkillData.projectileSpeed;
+                // 메테오 착단 지점
+                _meteorShadow = ResourceManager.Instance.Instantiate("MeteorShadow", pooling: true);
+                _meteorShadow.transform.position = target; //+ new Vector3(-0.5f, -0.45f, 1);
+                if (gameObject.activeInHierarchy)
+                    StartCoroutine(CoMeteor());
+                break;
+
             default:
                 transform.rotation = Quaternion.FromToRotation(Vector3.up, _dir);
                 _numPenerations = Skill.SkillData.NumPenerations;
@@ -85,6 +98,46 @@ public class ProjectileController : SkillBase
 
     float _timer = 0;
     private float _rotateAmount = 1000;
+
+    IEnumerator CoMeteor()
+    {
+        while (true)
+        {
+            if (_meteorShadow != null)
+            {
+                Vector2 shadowPosition = _meteorShadow.transform.position;
+
+                float distance = Vector2.Distance(shadowPosition, transform.position);
+                float scale = Mathf.Lerp(0f, 2.5f, 1 - distance / 10f);
+                _meteorShadow.transform.position = shadowPosition;
+                _meteorShadow.transform.localScale = new Vector3(scale, scale, 1f);
+            }
+            if (Vector2.Distance(_rigid.position, _target) < 0.3f)
+                ExplosionMeteor();
+            yield return new WaitForFixedUpdate();
+        }
+    }
+    
+    void ExplosionMeteor()
+    {
+        ResourceManager.Instance.Destroy(_meteorShadow);
+        float scanRange = 1.5f;
+        string prefabName = "FireExplosion";
+        GameObject obj =ResourceManager.Instance.Instantiate(prefabName, pooling : true);
+        obj.transform.position = transform.position;
+
+        RaycastHit2D[] _targets = Physics2D.CircleCastAll(transform.position, scanRange, Vector2.zero, 0);
+
+        foreach (RaycastHit2D _target in _targets)
+        {
+            MonsterBase creature = _target.transform.GetComponent<MonsterBase>();
+            if (!creature.IsValid())
+                return;
+            creature.TakeDamage(Skill.TotalDamage);
+        }
+
+        DestroyProjectile();
+    }
 
 
     IEnumerator CoHolyPulse()
@@ -111,7 +164,7 @@ public class ProjectileController : SkillBase
     }
 
 
-    IEnumerator CoChainLightning(Vector3 startPos, Vector3 endPos, bool isFollow = false)
+    IEnumerator CoBloodChain(Vector3 startPos, Vector3 endPos, bool isFollow = false)
     {
         SetParticleSize(startPos, endPos);
         yield return new WaitForSeconds(0.25f);

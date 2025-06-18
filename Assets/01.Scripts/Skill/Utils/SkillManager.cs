@@ -77,6 +77,7 @@ public class SkillManager : Singleton<SkillManager>
         GameObject s_10091 = ResourceManager.Instance.Load<GameObject>("FireExplosion");
         GameObject s_10101 = ResourceManager.Instance.Load<GameObject>("FireSwing");
         GameObject s_10111 = ResourceManager.Instance.Load<GameObject>("BloodChain");
+        GameObject s_10121 = ResourceManager.Instance.Load<GameObject>("Meteor");
 
         SkillBase _10001 = s_10001.GetComponent<SkillBase>();
         SkillBase _10011 = s_10011.GetComponent<SkillBase>();
@@ -90,6 +91,7 @@ public class SkillManager : Singleton<SkillManager>
         SkillBase _10091 = s_10091.GetComponent<SkillBase>();
         SkillBase _10101 = s_10101.GetComponent<SkillBase>();
         SkillBase _10111 = s_10111.GetComponent<SkillBase>();
+        SkillBase _10121 = s_10121.GetComponent<SkillBase>();
 
         _skillData.Add("10001", _10001.SkillData);
         _skillData.Add("10011", _10011.SkillData);
@@ -103,6 +105,7 @@ public class SkillManager : Singleton<SkillManager>
         _skillData.Add("10091", _10091.SkillData);
         _skillData.Add("10101", _10101.SkillData);
         _skillData.Add("10111", _10111.SkillData);
+        _skillData.Add("10121", _10111.SkillData);
     }
 
     // 나중에 UIManager 추가되면 그곳으로 이동
@@ -140,6 +143,9 @@ public class SkillManager : Singleton<SkillManager>
 
                 GameManager.Instance.controller.sklilbook.AddSkill(BloodChain, 10111);
                 GameManager.Instance.controller.sklilbook.LevelUpSkill(BloodChain);
+
+                GameManager.Instance.controller.sklilbook.AddSkill(GetSkillTypeFromInt(10121), 10121);
+                GameManager.Instance.controller.sklilbook.LevelUpSkill(GetSkillTypeFromInt(10121));
                 // 이렇게 직접 레벨업 시키는 건 처음 시작시 세팅만 이렇고, 이후는 스킬카드UI의 버튼을 통해 LevelUpSkill이 실행됨
 
             }

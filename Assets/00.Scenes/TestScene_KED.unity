@@ -2537,6 +2537,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dragon01_Dasher
       objectReference: {fileID: 0}
+    - target: {fileID: 527278585553940259, guid: 1de29db1506b2404eb3691d61c0e4c6a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1592335321724124290, guid: 1de29db1506b2404eb3691d61c0e4c6a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.28
@@ -2575,6 +2579,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1592335321724124290, guid: 1de29db1506b2404eb3691d61c0e4c6a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6041855591602713353, guid: 1de29db1506b2404eb3691d61c0e4c6a, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -2839,67 +2847,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3039952341000402216, guid: fe5126c8f46a0438dacd9e16d59108ed, type: 3}
   m_PrefabInstance: {fileID: 3124484429518196485}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &2088183910
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3106781475190862480, guid: 576d3619bbd614141be2bf5556712e70, type: 3}
-      propertyPath: InitialModule.startSize.scalar
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 3106781475190862483, guid: 576d3619bbd614141be2bf5556712e70, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3106781475190862483, guid: 576d3619bbd614141be2bf5556712e70, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3106781475190862483, guid: 576d3619bbd614141be2bf5556712e70, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3106781475190862483, guid: 576d3619bbd614141be2bf5556712e70, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3106781475190862483, guid: 576d3619bbd614141be2bf5556712e70, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3106781475190862483, guid: 576d3619bbd614141be2bf5556712e70, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3106781475190862483, guid: 576d3619bbd614141be2bf5556712e70, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3106781475190862483, guid: 576d3619bbd614141be2bf5556712e70, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3106781475190862483, guid: 576d3619bbd614141be2bf5556712e70, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3106781475190862483, guid: 576d3619bbd614141be2bf5556712e70, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3106781475190862494, guid: 576d3619bbd614141be2bf5556712e70, type: 3}
-      propertyPath: m_Name
-      value: BloodChain
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 576d3619bbd614141be2bf5556712e70, type: 3}
 --- !u!1 &2110140629
 GameObject:
   m_ObjectHideFlags: 0
@@ -3305,6 +3252,7 @@ GameObject:
   - component: {fileID: 8166582689094649024}
   - component: {fileID: 8166582689094649025}
   - component: {fileID: 8166582689094649026}
+  - component: {fileID: 8166582689094649027}
   m_Layer: 7
   m_Name: Player_Warrior
   m_TagString: Player
@@ -4002,6 +3950,22 @@ MonoBehaviour:
   SkillData: {fileID: 11400000, guid: 213bcb5fcf750fd41ab3b4198f603e65, type: 2}
   NumProjectiles: 1
   ProjectileSpacing: 2
+--- !u!114 &8166582689094649027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2538152943321104555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b64b62c32fe84e41b6298d0c9f93dba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  indicator: {fileID: 0}
+  SkillData: {fileID: 11400000, guid: 6a95ab27f12d6674ab53faa69500aad9, type: 2}
+  NumProjectiles: 0
+  ProjectileSpacing: 0
 --- !u!224 &8657128403000220763
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4041,4 +4005,3 @@ SceneRoots:
   - {fileID: 2110140633}
   - {fileID: 1348767606}
   - {fileID: 1659070590}
-  - {fileID: 2088183910}
