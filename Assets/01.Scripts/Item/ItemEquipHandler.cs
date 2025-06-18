@@ -8,10 +8,25 @@ public class ItemEquipHandler : Singleton<ItemEquipHandler>
 {
     [SerializeField] private EquipmentslotUI[] equipmentSlots;
     
-    // public void InitializeSlots()
-    // {
-    //     equipmentSlots = GetComponentsInChildren<EquipmentslotUI>();
-    // }
+    [SerializeField] private Transform equipmentPanel;
+
+    public void InitializeSlots()
+    {
+        var panelObj = GameObject.Find("PlayerHelath_Mana");
+        if (panelObj == null)
+        {
+            // Debug.LogError("[ItemEquipHandler] PlayerHelath_Mana 오브젝트를 찾을 수 없습니다!");
+            return;
+        }
+
+        equipmentSlots = panelObj.GetComponentsInChildren<EquipmentslotUI>(true);
+        // Debug.Log($"[ItemEquipHandler] 슬롯 {equipmentSlots.Length}개를 자동 할당함");
+        //
+        // foreach (var slot in equipmentSlots)
+        // {
+        //     Debug.Log($"할당된 슬롯: {slot.name}");
+        // }
+    }
     
     /// <summary>
     /// 아이템을 해당 슬롯에 장착 시도
@@ -21,7 +36,7 @@ public class ItemEquipHandler : Singleton<ItemEquipHandler>
         var player = GameManager.Instance.player;
         if (!CanEquipForClass(player.CharacterClass, item.itemType))
         {
-            Debug.Log($"[{player.CharacterClass}]은 {item.itemType}을 장착할 수 없습니다.");
+            // Debug.Log($"[{player.CharacterClass}]은 {item.itemType}을 장착할 수 없습니다.");
             return false;
         }
         
@@ -77,17 +92,16 @@ public class ItemEquipHandler : Singleton<ItemEquipHandler>
     
     public void RefreshUI()
     {
-        Debug.Log("▶ RefreshUI 실행됨");
-        Debug.Log($" 슬롯 수: {equipmentSlots.Length}");
+        // Debug.Log("▶ RefreshUI 실행됨");
         var equippedItems = PlayerEquipmentManager.Instance.GetCurrentEquippedItems();
-        Debug.Log($" 현재 클래스 장착 아이템 수: {equippedItems.Count}");
+        // Debug.Log($" 현재 클래스 장착 아이템 수: {equippedItems.Count}");
 
         foreach (var slot in equipmentSlots)
         {
-            foreach (var kvp in equippedItems)
-            {
-                Debug.Log($"[비교] 슬롯: {slot.name} | allowed: {string.Join(",", slot.allowedItemTypes)} | itemType: {kvp.Key} | Equal: {slot.allowedItemTypes.Contains(kvp.Key)}");
-            }
+            // foreach (var kvp in equippedItems)
+            // {
+            //     Debug.Log($"[비교] 슬롯: {slot.name} | allowed: {string.Join(",", slot.allowedItemTypes)} | itemType: {kvp.Key} | Equal: {slot.allowedItemTypes.Contains(kvp.Key)}");
+            // }
 
             var match = equippedItems.FirstOrDefault(kvp => slot.CanEquip(kvp.Key));
             if (!match.Equals(default(KeyValuePair<ItemType, GeneratedItem>)))
@@ -95,12 +109,12 @@ public class ItemEquipHandler : Singleton<ItemEquipHandler>
                 Debug.Log($"[SetItem] 슬롯 {slot.name}에 아이템 {match.Value.itemName} 장착");
                 slot.SetItem(match.Value);
             }
-            //else
-            //{
-            //    Debug.Log($"[ClearSlot] 슬롯 {slot.name} 클리어");
-            //    slot.ClearSlot();
-            //}
+            else
+            {
+                // Debug.Log($"[ClearSlot] 슬롯 {slot.name} 클리어");
+                // slot.ClearSlot();
+            }
         }
-        Debug.Log($" 슬롯 수: {equipmentSlots.Length}");
+        // Debug.Log($" 슬롯 수: {equipmentSlots.Length}");
     }
 }
