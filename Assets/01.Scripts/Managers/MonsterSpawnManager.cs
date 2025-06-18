@@ -201,6 +201,8 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
                 if (IsOutsideCameraView(pos))
                 {
                     GameObject monster = PoolManager.Instance.Pop(prefab);
+                MonsterBase monsterBase = monster.GetComponent<MonsterBase>();
+                ObjectManager.Instance.Monsters.Add(monsterBase);
                     InitPooledMonster(monster, pos);
                 }
             }
@@ -232,6 +234,9 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
     public void SpawnFromPool(GameObject prefab)
     {
         GameObject monster = PoolManager.Instance.Pop(prefab);
+                MonsterBase monsterBase = monster.GetComponent<MonsterBase>();
+                ObjectManager.Instance.Monsters.Add(monsterBase);
+
         InitPooledMonster(monster, GetValidSpawnPosition());
     }
 

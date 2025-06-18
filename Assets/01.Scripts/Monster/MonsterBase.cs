@@ -121,6 +121,8 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
 
         if (currentHP <= 0)
         {
+            ObjectManager.Instance.Monsters.Remove(this);
+            Debug.Log(ObjectManager.Instance.Monsters.Count);
             ChangeState(StateDead);
         }
     }

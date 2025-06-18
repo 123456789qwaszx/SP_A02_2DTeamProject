@@ -36,6 +36,16 @@ public class ObjectManager : Singleton<ObjectManager>
     }
 
 
+    public void RemoveMonster()
+    {
+        foreach (MonsterBase monster in Monsters.ToList())
+        {
+            Destroy(monster.gameObject);
+        }
+        Monsters.Clear();   
+    }
+
+
     public List<Transform> GetFindMonstersInFanShape(Vector3 origin, Vector3 forward, float radius = 2, float angleRange = 80)
     {
         List<Transform> listMonster = new List<Transform>();
