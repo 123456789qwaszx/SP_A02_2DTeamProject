@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-
+using Project.Enums;
 [System.Serializable]
 public class SaveData
 {

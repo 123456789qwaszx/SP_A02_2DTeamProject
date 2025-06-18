@@ -2,12 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Project.Enums;
 
 public class ItemEquipHandler : MonoBehaviour
 {
     public static ItemEquipHandler Instance { get; private set; }
 
     [SerializeField] private EquipmentslotUI[] equipmentSlots;
+    
+    public void InitializeSlots()
+    {
+        equipmentSlots = GetComponentsInChildren<EquipmentslotUI>();
+    }
 
     private void Awake()
     {

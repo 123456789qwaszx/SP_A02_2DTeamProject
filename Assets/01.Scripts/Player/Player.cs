@@ -2,6 +2,7 @@
 using System.Collections;
 using static UnityEditor.Progress;
 using UnityEngine.SceneManagement;
+using Project.Enums;
 
 public interface IEquipable
 {
@@ -97,7 +98,7 @@ public class Player : MonoBehaviour, IEquipable, IDamagable
     public float HpRecovery => hpRecovery;
     public float MpRecovery => mpRecovery;
 
-    public CharacterClass CharacterClass { get; protected set; } = CharacterClass.Warrior;
+    public CharacterClass CharacterClass;
 
     SpriteRenderer spriteRenderer;
     private Coroutine hitFlashRoutine;
@@ -111,17 +112,22 @@ public class Player : MonoBehaviour, IEquipable, IDamagable
 
     void Awake()
     {
-        GameManager.Instance.player = this;
+        Debug.Log("Player Awake 호출됨");
+        RegisterSelf();
     }
 
     public void Initialize()
     {
-        Player[] players = FindObjectsOfType<Player>();
-        if (players.Length > 1)
+        Debug.Log("Player RegisterSelf 호출됨");
+
+        if (GameManager.Instance == null)
         {
-            Destroy(gameObject);
-            Debug.Log("Initialize()에서 중복으로 제거됨");
+            Debug.LogError("GameManager.Instance 가 null 입니다!");
+            return;
         }
+
+        GameManager.Instance.player = this;
+        GameManager.Instance.controller = GetComponent<PlayerController>();
     }
 
     void Start()
@@ -166,6 +172,12 @@ public class Player : MonoBehaviour, IEquipable, IDamagable
         {
             isinvincibility = !isinvincibility;
         }
+    }
+    
+    public void RegisterSelf()
+    {
+        GameManager.Instance.player = this;
+        GameManager.Instance.controller = GetComponent<PlayerController>();
     }
 
     public void ApplyOption(ItemOptionType type, float value)
