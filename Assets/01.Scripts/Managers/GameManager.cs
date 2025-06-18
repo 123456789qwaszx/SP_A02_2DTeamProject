@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -69,10 +70,20 @@ public class GameManager : Singleton<GameManager>
             Debug.Log("메인씬 진입: 기본 Warrior 생성");
             CreatePlayer(CharacterClass.Warrior);
             playerInitialized = true;
+            
+            StartCoroutine(DelayedInitializeSlots());
         }
 
         PlayerEquipmentManager.Instance?.ApplyEquippedItemsToCurrentPlayer();
         ItemEquipHandler.Instance?.RefreshUI();
+    }
+    
+    private IEnumerator DelayedInitializeSlots()
+    {
+        yield return null; // 한 프레임 쉬고
+
+        ItemEquipHandler.Instance.InitializeSlots();
+        ItemEquipHandler.Instance.RefreshUI();
     }
 
     public void CreatePlayer(CharacterClass cls)
@@ -103,6 +114,7 @@ public class GameManager : Singleton<GameManager>
         }
 
         CreatePlayer(cls);
+        ItemEquipHandler.Instance.InitializeSlots();
 
         PlayerEquipmentManager.Instance.LoadEquipmentForClass(player.CharacterClass);
         ItemEquipHandler.Instance.RefreshUI();
