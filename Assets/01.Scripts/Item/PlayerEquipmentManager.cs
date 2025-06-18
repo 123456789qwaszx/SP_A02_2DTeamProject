@@ -28,6 +28,7 @@ public class PlayerEquipmentManager : MonoBehaviour
             if (!equippedPerClass.ContainsKey(cls))
                 equippedPerClass[cls] = new Dictionary<ItemType, GeneratedItem>();
         }
+        Debug.Log("[PlayerEquipmentManager] Awake 호출됨");
     }
     
     private Dictionary<ItemType, GeneratedItem> GetEquippedFor(CharacterClass cls)
