@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,7 +14,6 @@ public class StageManager : Singleton<StageManager>
     private float stageTimer = 0f;
     private bool isStageCleared = false;
 
-    
 
     private void Awake()
     {

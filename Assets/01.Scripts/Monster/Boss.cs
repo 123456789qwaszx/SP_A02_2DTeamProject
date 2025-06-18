@@ -9,8 +9,6 @@ public class Boss : MonsterBase
     [SerializeField] private GameObject phaseChangeEffect;
     [SerializeField] private AudioClip phaseChangeSound;
 
-    
-
     private bool isDashing = false;
     public bool canDashAttack = true;
     private bool isPhase2 = false;
@@ -137,6 +135,7 @@ public class Boss : MonsterBase
             Destroy(warning, 1f); // 0.5초 후 사라지게
         }
     }
+
     private void FireProjectiles(List<Vector3> directions)
     {
         foreach (Vector3 dir in directions)
