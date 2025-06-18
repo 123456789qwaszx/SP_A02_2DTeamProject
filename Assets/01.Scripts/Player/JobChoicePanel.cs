@@ -87,7 +87,7 @@ public class JobChoicePanel : MonoBehaviour
         DontDestroyOnLoad(newPlayer);
 
         Player playerComponent = newPlayer.GetComponent<Player>();
-        playerComponent.Initialize(); // 중복 제거 체크를 Start 대신 수동으로 호출
+        //playerComponent.Initialize(); // 중복 제거 체크를 Start 대신 수동으로 호출
 
         GameManager.Instance.player = playerComponent;
         Debug.Log("새 플레이어 생성됨: " + newPlayer.name);
