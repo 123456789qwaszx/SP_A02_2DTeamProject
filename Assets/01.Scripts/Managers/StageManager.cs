@@ -125,13 +125,15 @@ public class StageManager : Singleton<StageManager>
     {
         isStageCleared = true;
         monsterSpawnManager.StopSpawn();
+
         PoolManager.Instance.Clear();
         GameManager.Instance.UpdateStageInfo();
 
         UIManager.Instance.ShowStageClearPanel();
 
-        playerLevel.ResetLevel();
         Time.timeScale = 0f;
+
+        playerLevel.ResetLevel();
         GameManager.Instance.player.transform.position = Vector3.zero;
     }
 
