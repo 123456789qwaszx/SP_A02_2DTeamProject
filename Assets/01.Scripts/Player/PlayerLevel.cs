@@ -11,8 +11,8 @@ public class PlayerLevel : MonoBehaviour
     [SerializeField] private int currentLevel = 1;
     [SerializeField] private int currentExp = 0;
 
-    public int CurrentLevel { get; private set; } = 1;
-    public int CurrentExp { get; private set; } = 0;
+    public int CurrentLevel { get;  private set; } = 1;
+    public int CurrentExp { get;  private set; } = 0;
 
 
     // 각 레벨업에 필요한 경험치 테이블 (1~50레벨 기준)
@@ -125,5 +125,13 @@ public class PlayerLevel : MonoBehaviour
         GameObject go = PoolManager.Instance.Pop(SkillManager.Instance.skillSelectPopup_Prefab);
         Debug.Log("스킬선택창 팝업, 확인 후 삭제");
         Time.timeScale = 0.0f;
+    }
+    
+    public void ResetLevel()
+    {
+        currentLevel = 1;
+        currentExp = 0;
+        CurrentLevel = currentLevel;
+        CurrentExp = currentExp;
     }
 }
