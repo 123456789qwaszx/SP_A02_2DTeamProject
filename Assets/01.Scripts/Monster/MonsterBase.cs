@@ -40,7 +40,7 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
     private ItemDropManager itemDropManager;
 
     protected float currentHP;
-    private float lastAttackTime;
+    protected float lastAttackTime;
 
     protected Animator animator;
     protected Transform player;
