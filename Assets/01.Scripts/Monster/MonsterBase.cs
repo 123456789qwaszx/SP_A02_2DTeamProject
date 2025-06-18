@@ -37,7 +37,7 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
     public MonsterStateDead StateDead { get; protected set; }
 
     private MonsterStateMachine stateMachine;
-    private ItemDropManager itemDropManager;
+    //private ItemDropManager itemDropManager;
 
     protected float currentHP;
     private float lastAttackTime;
@@ -60,7 +60,7 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
         originalColor = spriteRenderer.color;
 
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
-        itemDropManager = FindObjectOfType<ItemDropManager>();
+        //itemDropManager = FindObjectOfType<ItemDropManager>();
 
         stateMachine = new MonsterStateMachine();
 
@@ -273,7 +273,7 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
 
         for (int i = 0; i < dropCount; i++)
         {
-            itemDropManager.TryDropItem(transform.position, finalDropChance);
+            //itemDropManager.TryDropItem(transform.position, finalDropChance);
         }
         
         if (monsterData.type == MonsterData.MonsterType.Boss)

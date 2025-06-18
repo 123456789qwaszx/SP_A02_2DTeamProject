@@ -28,7 +28,7 @@ public abstract class RepeatSkill : SkillBase
 
     protected virtual IEnumerator CoStartSkill()
     {
-        WaitForSeconds wait = new WaitForSeconds(0.5f/*SkillData.CoolTime*/);
+        WaitForSeconds wait = new WaitForSeconds(SkillData.CoolTime);
        
         yield return wait;
         while (true)
