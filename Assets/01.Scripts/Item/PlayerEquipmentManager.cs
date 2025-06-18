@@ -14,6 +14,7 @@ public class PlayerEquipmentManager : MonoBehaviour
     private Dictionary<CharacterClass, Dictionary<ItemType, GeneratedItem>> equippedPerClass = new();
     private Dictionary<ItemType, GeneratedItem> currentEquipped => GetEquippedFor(player.CharacterClass);
 
+    [SerializeField]
     private Player player;
     
     public Dictionary<string, int> equippedSetCounts = new(); // 세트 이름별 장착 개수
