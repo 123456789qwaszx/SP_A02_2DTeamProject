@@ -113,7 +113,7 @@ public class SkillManager : Singleton<SkillManager>
     {
         ResourceManager.Instance.LoadAllAsync<GameObject>("Skill_Prefabs", (key, count, totalCount) =>
         {
-            Debug.Log($"{key} {count}/{totalCount}");
+            //Debug.Log($"{key} {count}/{totalCount}");
 
             if (count == totalCount)
             {
@@ -122,7 +122,7 @@ public class SkillManager : Singleton<SkillManager>
                 SkillType HolyProjectile = SkillManager.Instance.GetSkillTypeFromInt(10001);
                 SkillType HolyPulse = SkillManager.Instance.GetSkillTypeFromInt(10011);
                 SkillType DarkArrow = SkillManager.Instance.GetSkillTypeFromInt(10021);
-                SkillType WindCutter = SkillManager.Instance.GetSkillTypeFromInt(10071);
+                //SkillType WindCutter = SkillManager.Instance.GetSkillTypeFromInt(10071);
                 SkillType BloodChain = SkillManager.Instance.GetSkillTypeFromInt(10111);
 
 
@@ -138,11 +138,11 @@ public class SkillManager : Singleton<SkillManager>
                 GameManager.Instance.controller.sklilbook.AddSkill(DarkArrow, 10021);
                 //GameManager.Instance.controller.sklilbook.LevelUpSkill(DarkArrow);
 
-                GameManager.Instance.controller.sklilbook.AddSkill(WindCutter, 10071);
+                //GameManager.Instance.controller.sklilbook.AddSkill(WindCutter, 10071);
                 //GameManager.Instance.controller.sklilbook.LevelUpSkill(WindCutter);
 
                 GameManager.Instance.controller.sklilbook.AddSkill(BloodChain, 10111);
-                GameManager.Instance.controller.sklilbook.LevelUpSkill(BloodChain);
+                //GameManager.Instance.controller.sklilbook.LevelUpSkill(BloodChain);
 
                 GameManager.Instance.controller.sklilbook.AddSkill(GetSkillTypeFromInt(10121), 10121);
                 //GameManager.Instance.controller.sklilbook.LevelUpSkill(GetSkillTypeFromInt(10121));
@@ -153,7 +153,7 @@ public class SkillManager : Singleton<SkillManager>
 
         ResourceManager.Instance.LoadAllAsync<GameObject>("UI_Prefabs", (key, count, totalCount) =>
         {
-            Debug.Log($"{key} {count}/{totalCount}");
+            //Debug.Log($"{key} {count}/{totalCount}");
 
             if (count == totalCount)
             {
