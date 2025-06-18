@@ -165,7 +165,7 @@ public class UIManager : Singleton<UIManager>
         if (warningRoutine != null)
             StopCoroutine(warningRoutine);
 
-        warningRoutine = StartCoroutine(WarningRoutine(message, duration));
+//        warningRoutine = StartCoroutine(WarningRoutine(message, duration));
     }
 
     private IEnumerator WarningRoutine(string message, float duration)

@@ -13,7 +13,7 @@ public interface IDamagable
     void TakeDamage(float damage);
 }
 
-public class Player : Singleton<Player>, IEquipable, IDamagable
+public class Player : MonoBehaviour, IEquipable, IDamagable
 {
     [Header("사운드 클립")]
     [SerializeField] private AudioClip hitSFX;
@@ -28,6 +28,8 @@ public class Player : Singleton<Player>, IEquipable, IDamagable
     public Transform Tf => tf;
     private CapsuleCollider col;
 
+
+
     public float GetHP() => hp;
     public float GetMP() => mp;
     public float GetMaxHP() => maxHP; // 임시값, 나중에 성장 시스템 연동 가능
@@ -38,28 +40,28 @@ public class Player : Singleton<Player>, IEquipable, IDamagable
     [SerializeField] protected float attackSpeed;
     [SerializeField] protected float str;               // 힘
     [SerializeField] protected float dex;               // 민첩
-    [SerializeField] protected float ints;              // 지능
+    [SerializeField] protected float ints;               // 지능
     [SerializeField] protected float hp;
     [SerializeField] protected float mp;
     [SerializeField] protected float maxHP;
     [SerializeField] protected float maxMP;
-    [SerializeField] protected float hpRegenAmount;       // HP회복량 증가
-    [SerializeField] protected float mpRegenAmount;       // MP회복량 증가
-    [SerializeField] protected float hpRegenInterval;     // HP회복속도 증가
-    [SerializeField] protected float mpRegenInterval;     // MP회복속도 증가
-    [SerializeField] protected float itemAP;              // 아이템 획득 확률
+    [SerializeField] protected float hpRegenAmount;  // HP회복량 증가
+    [SerializeField] protected float mpRegenAmount;  // MP회복량 증가
+    [SerializeField] protected float hpRegenInterval; // HP회복속도 증가
+    [SerializeField] protected float mpRegenInterval; // MP회복속도 증가
+    [SerializeField] protected float itemAP;            // Item Acquisition Probability 아이템 획득 확률
 
-    [SerializeField] protected float projectileSpeed = 1.0f;    // 투사체 속도 배율
-    [SerializeField] protected int projectileCount = 1;         // 투사체 수
+    [SerializeField] protected float projectileSpeed = 1.0f;  // 투사체 속도 배율
+    [SerializeField] protected int projectileCount = 1;       // 투사체 수
     [SerializeField] protected float attackRangeMultiplier = 1.0f; // 공격 범위 배율
 
     [Header("전투 스탯")]
-    [SerializeField] protected float attack;          // 공격력
-    [SerializeField] protected float specialAttack;   // 특수 공격력
-    [SerializeField] protected float skillAttack;     // 특수 공격력
-    [SerializeField] protected float defense;         // 방어력
-    [SerializeField] protected float critical;        // 크리티컬 확률 (%)
-    [SerializeField] protected float critMultiplier;  // 치명타 피해량 증가
+    [SerializeField] protected float attack;           // 공격력
+    [SerializeField] protected float specialAttack;    // 특수 공격력
+    [SerializeField] protected float skillAttack;      // 특수 공격력
+    [SerializeField] protected float defense;          // 방어력
+    [SerializeField] protected float critical;         // 크리티컬 확률 (%)
+    [SerializeField] protected float critMultiplier;   // 치명타 피해량 증가
 
     [Header("회복 스탯")]
     [SerializeField] public float hpRecovery;
@@ -97,29 +99,50 @@ public class Player : Singleton<Player>, IEquipable, IDamagable
 
     public CharacterClass CharacterClass { get; protected set; } = CharacterClass.Warrior;
 
-    private SpriteRenderer spriteRenderer;
+    SpriteRenderer spriteRenderer;
     private Coroutine hitFlashRoutine;
     private Color originalColor;
     private Color hitColor = Color.red;
     private float flashDuration = 0.2f;
 
-    private void Awake()
-    {
-        tf = transform;
-        rb = GetComponent<Rigidbody2D>();
-        if (rb == null)
-            Debug.LogError("Rigidbody2D not found on Player!");
 
+
+
+    void Awake()
+    {
+        GameManager.Instance.player = this;
+    }
+
+    public void Initialize()
+    {
+        Player[] players = FindObjectsOfType<Player>();
+        if (players.Length > 1)
+        {
+            Destroy(gameObject);
+            Debug.Log("Initialize()에서 중복으로 제거됨");
+        }
+    }
+
+    void Start()
+    {
+        Initialize();
+
+        DontDestroyOnLoad(gameObject);
+
+        // 씬 전환 시 자동으로 (0,0,0) 위치로 재배치
+        transform.position = Vector3.zero;
+
+        GameManager.Instance.player = this;
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        if (spriteRenderer != null)
-            originalColor = spriteRenderer.color;
+        originalColor = spriteRenderer.color;
+        tf = GetComponent<Transform>();
+        rb = GetComponent<Rigidbody2D>();
+
+        if (Rb == null)
+            Debug.LogError("Rigidbody not found on Player!");
 
         col = GetComponent<CapsuleCollider>();
 
-        // GameManager와의 상호 참조 (필요에 따라 초기화)
-        GameManager.Instance.player = this;
-
-        // GameOverPanel이 할당되지 않았다면 자동 로드
         if (gameOverPanel == null)
         {
             GameObject prefab = Resources.Load<GameObject>("GameOverPanel");
@@ -131,17 +154,11 @@ public class Player : Singleton<Player>, IEquipable, IDamagable
         }
     }
 
-    private void Start()
-    {
-        // 씬 전환 시 자동으로 (0,0,0) 위치로 재배치
-        transform.position = Vector3.zero;
-    }
-
-    private void Update()
+    void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            // 디버그용 속도 업
+            // 디버그용 속도업
             moveSpeed *= 2f;
         }
     }
@@ -168,9 +185,9 @@ public class Player : Singleton<Player>, IEquipable, IDamagable
             case ItemOptionType.초당HP회복속도증가: hpRegenInterval *= (1f - value); break;
             case ItemOptionType.초당MP회복속도증가: mpRegenInterval *= (1f - value); break;
             case ItemOptionType.투사체수증가: projectileCount += (int)value; break;
-            case ItemOptionType.투사체속도증가: projectileSpeed += value; break;
-            case ItemOptionType.공격범위증가: attackRangeMultiplier += value; break;
-                // 추가 옵션이 필요한 경우 항목을 계속 추가
+            case ItemOptionType.투사체속도증가: projectileSpeed += value; break; // 배율식 증가
+            case ItemOptionType.공격범위증가: attackRangeMultiplier += value; break; // 예: 1.2배
+                                                                               // 필요한 항목만 점차 추가해도 됨
         }
     }
 
@@ -194,7 +211,6 @@ public class Player : Singleton<Player>, IEquipable, IDamagable
             Die();
         }
     }
-
     private void PlayHitFlash()
     {
         if (hitFlashRoutine != null)
@@ -205,20 +221,18 @@ public class Player : Singleton<Player>, IEquipable, IDamagable
 
     private IEnumerator HitFlashRoutine()
     {
-        if (spriteRenderer != null)
-        {
-            spriteRenderer.color = hitColor;
+        spriteRenderer.color = hitColor;
 
-            float timer = 0f;
-            while (timer < flashDuration)
-            {
-                timer += Time.deltaTime;
-                float t = timer / flashDuration;
-                spriteRenderer.color = Color.Lerp(hitColor, originalColor, t);
-                yield return null;
-            }
-            spriteRenderer.color = originalColor;
+        float timer = 0f;
+        while (timer < flashDuration)
+        {
+            timer += Time.deltaTime;
+            float t = timer / flashDuration;
+            spriteRenderer.color = Color.Lerp(hitColor, originalColor, t);
+            yield return null;
         }
+
+        spriteRenderer.color = originalColor;
     }
 
     private void Die()
@@ -244,8 +258,9 @@ public class Player : Singleton<Player>, IEquipable, IDamagable
             Debug.LogError("GameOverPanel 프리팹이 할당되지 않았습니다! Inspector를 확인하세요.");
         }
     }
+
     // 기본 스탯만 수집하는 헬퍼 메서드
-public BasePlayerData GetBasePlayerData()
+    public BasePlayerData GetBasePlayerData()
     {
         BasePlayerData baseData = new BasePlayerData();
         baseData.moveSpeed = moveSpeed;

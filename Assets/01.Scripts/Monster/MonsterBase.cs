@@ -106,6 +106,7 @@ public class MonsterBase : MonoBehaviour, IMonster, IDamagable
     public virtual void TakeDamage(float amount)
     {
         currentHP -= amount;
+        ObjectManager.Instance.Monsters.Remove(this);
         // 피격 사운드
         if (hitSFX != null)
             SoundManager.Instance.PlaySFX(hitSFX);

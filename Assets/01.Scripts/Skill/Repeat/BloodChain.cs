@@ -70,7 +70,7 @@ public class BloodChain : RepeatSkill
 
     public MonsterBase GetChainMonster(Vector3 origin, float minDistance, float maxDistance, float angleRange, List<MonsterBase> ignoreMonsters)
     {
-        LayerMask targetLayer = LayerMask.GetMask("Monster", "Boss");
+        LayerMask targetLayer = LayerMask.GetMask("Monster");
         Collider2D[] targets = Physics2D.OverlapCircleAll(origin, maxDistance, targetLayer);
 
         float closestDistance = Mathf.Infinity;

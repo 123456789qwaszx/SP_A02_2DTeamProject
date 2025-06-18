@@ -76,7 +76,7 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
         if (SceneManager.GetActiveScene().name == "MainScene" || !isSpawning)
             return;
 
-        playTime += Time.deltaTime;
+        playTime = StageManager.Instance.GetStageTime();
 
         // 경고 메시지 처리
         if (!midBossWarned && playTime >= 720f)
@@ -295,6 +295,8 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
                 StartCoroutine(SurroundSpawnRoutine());
                 break;
             case StageType.FinalBoss:
+                StartCoroutine(SpawnRegularMonsters());
+                StartCoroutine(SurroundSpawnRoutine());
                 SpawnFinalBoss();
                 break;
         }

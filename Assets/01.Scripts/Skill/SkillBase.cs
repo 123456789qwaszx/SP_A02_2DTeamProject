@@ -17,7 +17,8 @@ public enum SkillType
     Waterfall = 10081,
     FireExplosion = 10091,
     FireSwing = 10101,
-    BloodChain = 10111
+    BloodChain = 10111,
+    Meteor = 10121
     //만들 것을 나중에 추가
 }
 

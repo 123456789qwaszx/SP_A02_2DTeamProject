@@ -114,6 +114,11 @@ public class StageManager : Singleton<StageManager>
         monsterSpawnManager.SetupStage(currentStageType);
     }
 
+    public float GetStageTime()
+    {
+        return stageTimer;
+    }
+
     public void StageClear()
     {
         isStageCleared = true;
