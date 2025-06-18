@@ -4,27 +4,14 @@ using System.Linq;
 using UnityEngine;
 using Project.Enums;
 
-public class ItemEquipHandler : MonoBehaviour
+public class ItemEquipHandler : Singleton<ItemEquipHandler>
 {
-    public static ItemEquipHandler Instance { get; private set; }
-
     [SerializeField] private EquipmentslotUI[] equipmentSlots;
     
-    public void InitializeSlots()
-    {
-        equipmentSlots = GetComponentsInChildren<EquipmentslotUI>();
-    }
-
-    private void Awake()
-    {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        Instance = this;
-        Debug.Log(" ItemEquipHandler.Instance 초기화됨");
-    }
+    // public void InitializeSlots()
+    // {
+    //     equipmentSlots = GetComponentsInChildren<EquipmentslotUI>();
+    // }
     
     /// <summary>
     /// 아이템을 해당 슬롯에 장착 시도

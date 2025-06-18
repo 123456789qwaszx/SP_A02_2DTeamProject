@@ -105,8 +105,8 @@ public class GameManager : Singleton<GameManager>
             playerInitialized = true;
         }
 
-        // 새로 추가
-        ItemEquipHandler.Instance?.InitializeSlots();
+        // // 새로 추가
+        // ItemEquipHandler.Instance?.InitializeSlots();
 
         PlayerEquipmentManager.Instance?.ApplyEquippedItemsToCurrentPlayer();
         ItemEquipHandler.Instance?.RefreshUI();
