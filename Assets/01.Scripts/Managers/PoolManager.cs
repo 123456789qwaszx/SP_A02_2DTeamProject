@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -102,4 +102,5 @@ public class PoolManager : Singleton<PoolManager>
     {
         _pools.Clear();
     }
+
 }

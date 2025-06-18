@@ -1,4 +1,5 @@
-﻿using Unity.VisualScripting;
+﻿using System.Threading;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MonsterStateDead : MonsterStateBase
@@ -10,5 +11,11 @@ public class MonsterStateDead : MonsterStateBase
         if (monster.deathSFX != null)
             SoundManager.Instance.PlaySFX(monster.deathSFX);
         animator.SetTrigger("Dead");
+
+        if (monster is FinalBoss finalBoss || monster is Boss boss)
+        {
+            Debug.Log("보스 처치! 몬스터 제거");
+            ObjectManager.Instance.RemoveMonster();
+        }
     }
 }
