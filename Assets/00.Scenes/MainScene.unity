@@ -9517,11 +9517,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1378872894}
   m_CullTransparentMesh: 1
---- !u!224 &1384700180 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 8205453593909206035, guid: 6003abdf52dccea42ad72cf9553b871b, type: 3}
-  m_PrefabInstance: {fileID: 3302805981393178721}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1389298922
 GameObject:
   m_ObjectHideFlags: 0
@@ -14400,7 +14395,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1892051172
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17487,12 +17482,9 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 9142704799652405842, guid: 599ecac5cd8974ca39e7df48ae891128, type: 3}
       insertIndex: 0
-      addedObject: {fileID: 1384700180}
-    - targetCorrespondingSourceObject: {fileID: 9142704799652405842, guid: 599ecac5cd8974ca39e7df48ae891128, type: 3}
-      insertIndex: 1
       addedObject: {fileID: 67676624}
     - targetCorrespondingSourceObject: {fileID: 9142704799652405842, guid: 599ecac5cd8974ca39e7df48ae891128, type: 3}
-      insertIndex: 2
+      insertIndex: 1
       addedObject: {fileID: 1832867496}
     - targetCorrespondingSourceObject: {fileID: 9142704799652405842, guid: 599ecac5cd8974ca39e7df48ae891128, type: 3}
       insertIndex: -1
@@ -19296,3 +19288,4 @@ SceneRoots:
   - {fileID: 1319688593}
   - {fileID: 2064735061}
   - {fileID: 288467966}
+  - {fileID: 210024840}

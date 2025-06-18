@@ -12,7 +12,7 @@ public class ShopUIManager : MonoBehaviour
 
     void Awake() => Instance = this;
 
-    public bool IsShopOpen => shopPanel.activeSelf;
+    public bool IsShopOpen => shopPanel != null && shopPanel.activeSelf;
 
     public void OpenShopUI()
     {
