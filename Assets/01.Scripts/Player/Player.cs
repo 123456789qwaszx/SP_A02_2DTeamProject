@@ -104,6 +104,7 @@ public class Player : MonoBehaviour, IEquipable, IDamagable
     private Color originalColor;
     private Color hitColor = Color.red;
     private float flashDuration = 0.2f;
+    private bool isinvincibility = false; // 무적 상태 여부
 
 
 
@@ -161,6 +162,10 @@ public class Player : MonoBehaviour, IEquipable, IDamagable
             // 디버그용 속도업
             moveSpeed *= 2f;
         }
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            isinvincibility = !isinvincibility;
+        }
     }
 
     public void ApplyOption(ItemOptionType type, float value)
@@ -198,6 +203,8 @@ public class Player : MonoBehaviour, IEquipable, IDamagable
 
     public void TakeDamage(float damage)
     {
+        if (isinvincibility) return;
+
         hp -= damage;
         hp = Mathf.Max(hp, 0);
 
