@@ -57,6 +57,7 @@ public class EquipmentslotUI : MonoBehaviour, IPointerClickHandler, IPointerEnte
     public void ClearSlot()
     {
         equippedItem = null;
+        iconImage.sprite = null;
         iconImage.enabled = false;
         rarityBorder.enabled = false;
     }
