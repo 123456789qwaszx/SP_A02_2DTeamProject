@@ -9910,6 +9910,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2538152942525263616, guid: 7cc8fc202efe2f14798e023948e11f84, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1438978613}
+    - targetCorrespondingSourceObject: {fileID: 2538152942525263616, guid: 7cc8fc202efe2f14798e023948e11f84, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1438978616}
+    - targetCorrespondingSourceObject: {fileID: 2538152942525263616, guid: 7cc8fc202efe2f14798e023948e11f84, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1438978615}
   m_SourcePrefab: {fileID: 100100000, guid: 7cc8fc202efe2f14798e023948e11f84, type: 3}
 --- !u!1 &1438978612 stripped
 GameObject:
@@ -9951,6 +9957,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8458083ca968d8e4eaa11d3495693219, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1438978615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1438978612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b64b62c32fe84e41b6298d0c9f93dba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  indicator: {fileID: 0}
+  SkillData: {fileID: 11400000, guid: 6a95ab27f12d6674ab53faa69500aad9, type: 2}
+  NumProjectiles: 0
+  ProjectileSpacing: 0
+--- !u!114 &1438978616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1438978612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4097da83f72cb124a94b7ecd613bf91f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  indicator: {fileID: 0}
+  SkillData: {fileID: 11400000, guid: 27156c81d2c149849a7c092b6d44e3cd, type: 2}
+  NumProjectiles: 0
+  ProjectileSpacing: 0
 --- !u!1 &1480249873
 GameObject:
   m_ObjectHideFlags: 0
