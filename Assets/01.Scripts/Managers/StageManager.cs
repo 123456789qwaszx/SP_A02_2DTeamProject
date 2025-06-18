@@ -123,6 +123,8 @@ public class StageManager : Singleton<StageManager>
     {
         isStageCleared = true;
         monsterSpawnManager.StopSpawn();
+        PoolManager.Instance.Clear();
+
         GameManager.Instance.UpdateStageInfo();
 
         SceneManager.LoadScene("MainScene");
