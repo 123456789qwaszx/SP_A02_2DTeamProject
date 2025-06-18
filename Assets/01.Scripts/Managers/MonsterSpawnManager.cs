@@ -6,7 +6,7 @@ using static StageManager;
 
 public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
 {
-    [Header("\u2022 몬스터 프리팹")]
+    [Header("몬스터 프리팹")]
     public GameObject[] regularPrefabs_1_5;
     public GameObject[] elitePrefabs_1_5;
 
@@ -20,16 +20,19 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
     public GameObject[] bossPrefabs;
     public GameObject finalBossPrefab;
 
-    [Header("\u2022 스폰 설정")]
+    [Header("스폰 설정")]
     public float spawnInterval = 2f;
     public float surroundInterval = 120f;
     public float minSpawnDistance = 7f;
     public float maxSpawnDistance = 12f;
     public int surroundMonstersCount = 20;
 
-    [Header("\u2022 스폰 타이밍 트리거")]
+    [Header("스폰 타이밍 트리거")]
     private float[] eliteSpawnTimes = { 180f, 420f, 780f };
     private float[] midBossTimes = { 720f };
+
+    [Header("디버깅")]
+    private int regularSpawnCount = 5;
 
     private Transform player;
     private float playTime;
@@ -160,7 +163,7 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
         {
             GameObject[] prefabs = GetRegularPrefabs();
 
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < regularSpawnCount; i++)
             {
                 Vector3 pos = GetValidSpawnPosition();
                 GameObject prefab = prefabs[Random.Range(0, prefabs.Length)];
