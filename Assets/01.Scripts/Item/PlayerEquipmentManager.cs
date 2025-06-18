@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using Project.Enums;
 
 public class PlayerEquipmentManager : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class PlayerEquipmentManager : MonoBehaviour
     private Dictionary<CharacterClass, Dictionary<ItemType, GeneratedItem>> equippedPerClass = new();
     private Dictionary<ItemType, GeneratedItem> currentEquipped => GetEquippedFor(player.CharacterClass);
 
+    [SerializeField]
     private Player player;
     
     public Dictionary<string, int> equippedSetCounts = new(); // 세트 이름별 장착 개수
@@ -28,6 +30,7 @@ public class PlayerEquipmentManager : MonoBehaviour
             if (!equippedPerClass.ContainsKey(cls))
                 equippedPerClass[cls] = new Dictionary<ItemType, GeneratedItem>();
         }
+        Debug.Log("[PlayerEquipmentManager] Awake 호출됨");
     }
     
     private Dictionary<ItemType, GeneratedItem> GetEquippedFor(CharacterClass cls)

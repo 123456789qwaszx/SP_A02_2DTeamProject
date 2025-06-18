@@ -2,6 +2,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Project.Enums;
 
 public class JobChoicePanel : MonoBehaviour
 {
@@ -42,82 +43,85 @@ public class JobChoicePanel : MonoBehaviour
 
     public void ChooseWarrior()
     {
-        SetPlayerClass(playerWarrior);
+        GameManager.Instance.ChangePlayer(CharacterClass.Warrior);
         UpdateButtonStates(warriorButton);
+        ClosePanel();
     }
 
     public void ChooseArcher()
     {
-        SetPlayerClass(playerArcher);
+        GameManager.Instance.ChangePlayer(CharacterClass.Archer);
         UpdateButtonStates(archerButton);
+        ClosePanel();
     }
 
     public void ChooseWizard()
     {
-        SetPlayerClass(playerWizard);
+        GameManager.Instance.ChangePlayer(CharacterClass.Wizard);
         UpdateButtonStates(wizardButton);
-    }
-
-    public void SetPlayerClass(GameObject selectedClassPrefab)
-    {
-        StartCoroutine(ChangeJobAndInitialize(selectedClassPrefab));
-    }
-
-
-    private IEnumerator ChangeJobAndInitialize(GameObject newJobPrefab)
-    {
-        // 기존 장비 저장
-        if (GameManager.Instance != null && GameManager.Instance.player != null)
-        {
-            PlayerEquipmentManager.Instance.SaveCurrentEquipment(GameManager.Instance.player.CharacterClass);
-        }
-
-        // 2. 기존 플레이어 제거
-        GameObject existingPlayer = GameObject.FindWithTag("Player");
-        if (existingPlayer != null)
-        {
-            Destroy(existingPlayer);
-            Debug.Log("기존 플레이어 삭제됨: " + existingPlayer.name);
-        }
-
-        yield return null; // 한 프레임 대기
-
-        // 새 플레이어 생성 및 초기화
-        GameObject newPlayer = Instantiate(newJobPrefab);
-        DontDestroyOnLoad(newPlayer);
-
-        Player playerComponent = newPlayer.GetComponent<Player>();
-        playerComponent.Initialize(); // 중복 제거 체크를 Start 대신 수동으로 호출
-
-        GameManager.Instance.player = playerComponent;
-        Debug.Log("새 플레이어 생성됨: " + newPlayer.name);
-
-        // 장비 및 UI 재설정
-        PlayerEquipmentManager.Instance.LoadEquipmentForClass(GameManager.Instance.player.CharacterClass);
-        ItemEquipHandler.Instance.RefreshUI();
-
-        // 골드 텍스트 다시 지정
-        var goldObj = GameObject.Find("GoldText");
-        if (goldObj != null)
-        {
-            var goldText = goldObj.GetComponent<TextMeshProUGUI>();
-            GameManager.Instance.SetGoldText(goldText);
-        }
-
-        // 이펙트 제거 및 UI 닫기
-        RemoveExistingEffects();
         ClosePanel();
     }
 
+    // public void SetPlayerClass(GameObject selectedClassPrefab)
+    // {
+    //     StartCoroutine(ChangeJobAndInitialize(selectedClassPrefab));
+    // }
+    //
+    //
+    // private IEnumerator ChangeJobAndInitialize(GameObject newJobPrefab)
+    // {
+    //     // 기존 장비 저장
+    //     if (GameManager.Instance != null && GameManager.Instance.player != null)
+    //     {
+    //         PlayerEquipmentManager.Instance.SaveCurrentEquipment(GameManager.Instance.player.CharacterClass);
+    //     }
+    //
+    //     // 2. 기존 플레이어 제거
+    //     GameObject existingPlayer = GameObject.FindWithTag("Player");
+    //     if (existingPlayer != null)
+    //     {
+    //         Destroy(existingPlayer);
+    //         Debug.Log("기존 플레이어 삭제됨: " + existingPlayer.name);
+    //     }
+    //
+    //     yield return null; // 한 프레임 대기
+    //
+    //     // 새 플레이어 생성 및 초기화
+    //     GameObject newPlayer = Instantiate(newJobPrefab);
+    //     DontDestroyOnLoad(newPlayer);
+    //
+    //     Player playerComponent = newPlayer.GetComponent<Player>();
+    //     playerComponent.Initialize(); // 중복 제거 체크를 Start 대신 수동으로 호출
+    //
+    //     GameManager.Instance.player = playerComponent;
+    //     Debug.Log("새 플레이어 생성됨: " + newPlayer.name);
+    //
+    //     // 장비 및 UI 재설정
+    //     PlayerEquipmentManager.Instance.LoadEquipmentForClass(GameManager.Instance.player.CharacterClass);
+    //     ItemEquipHandler.Instance.RefreshUI();
+    //
+    //     // 골드 텍스트 다시 지정
+    //     var goldObj = GameObject.Find("GoldText");
+    //     if (goldObj != null)
+    //     {
+    //         var goldText = goldObj.GetComponent<TextMeshProUGUI>();
+    //         GameManager.Instance.SetGoldText(goldText);
+    //     }
+    //
+    //     // 이펙트 제거 및 UI 닫기
+    //     RemoveExistingEffects();
+    //     ClosePanel();
+    // }
 
-    private void RemoveExistingEffects()
-    {
-        GameObject[] existingEffects = GameObject.FindGameObjectsWithTag("AttackEffect");
-        foreach (GameObject effect in existingEffects)
-        {
-            Destroy(effect);
-        }
-    }
+
+    // private void RemoveExistingEffects()
+    // {
+    //     GameObject[] existingEffects = GameObject.FindGameObjectsWithTag("AttackEffect");
+    //     foreach (GameObject effect in existingEffects)
+    //     {
+    //         Destroy(effect);
+    //     }
+    // }
 
     private void UpdateButtonStates(Button selectedButton)
     {

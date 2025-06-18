@@ -39,7 +39,6 @@ public class StageManager : Singleton<StageManager>
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         monsterSpawnManager = MonsterSpawnManager.Instance;
-        playerLevel = GameManager.Instance.player.GetComponent<PlayerLevel>();
         SetupStage(GameManager.Instance.currentStage);
 
         GameObject playTimeTxt = GameObject.Find("PlayTimeTxt");
@@ -125,16 +124,18 @@ public class StageManager : Singleton<StageManager>
     {
         isStageCleared = true;
         monsterSpawnManager.StopSpawn();
-
         PoolManager.Instance.Clear();
         GameManager.Instance.UpdateStageInfo();
 
         UIManager.Instance.ShowStageClearPanel();
 
-        Time.timeScale = 0f;
-
+        playerLevel = GameManager.Instance.controller.GetComponent<PlayerLevel>();
         playerLevel.ResetLevel();
+
+        Time.timeScale = 0f;
         GameManager.Instance.player.transform.position = Vector3.zero;
+
+        ObjectManager.Instance.Monsters.Clear();
     }
 
     public void ForceClear()

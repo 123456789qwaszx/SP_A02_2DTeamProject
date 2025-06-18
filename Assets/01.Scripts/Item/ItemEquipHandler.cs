@@ -1,24 +1,17 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Project.Enums;
 
-public class ItemEquipHandler : MonoBehaviour
+public class ItemEquipHandler : Singleton<ItemEquipHandler>
 {
-    public static ItemEquipHandler Instance { get; private set; }
-
     [SerializeField] private EquipmentslotUI[] equipmentSlots;
-
-    private void Awake()
-    {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        Instance = this;
-        Debug.Log(" ItemEquipHandler.Instance 초기화됨");
-    }
+    
+    // public void InitializeSlots()
+    // {
+    //     equipmentSlots = GetComponentsInChildren<EquipmentslotUI>();
+    // }
     
     /// <summary>
     /// 아이템을 해당 슬롯에 장착 시도
@@ -102,11 +95,11 @@ public class ItemEquipHandler : MonoBehaviour
                 Debug.Log($"[SetItem] 슬롯 {slot.name}에 아이템 {match.Value.itemName} 장착");
                 slot.SetItem(match.Value);
             }
-            else
-            {
-                Debug.Log($"[ClearSlot] 슬롯 {slot.name} 클리어");
-                slot.ClearSlot();
-            }
+            //else
+            //{
+            //    Debug.Log($"[ClearSlot] 슬롯 {slot.name} 클리어");
+            //    slot.ClearSlot();
+            //}
         }
         Debug.Log($" 슬롯 수: {equipmentSlots.Length}");
     }

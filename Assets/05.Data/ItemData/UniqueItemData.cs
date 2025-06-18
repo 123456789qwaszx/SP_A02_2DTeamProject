@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Project.Enums;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Item/Unique Item")]

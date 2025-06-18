@@ -7,6 +7,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Object = UnityEngine.Object;
+using Project.Enums;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -18,6 +19,12 @@ public class GameManager : Singleton<GameManager>
 
     public Player player;
     public PlayerController controller;
+
+    public GameObject warriorPrefab;
+    public GameObject archerPrefab;
+    public GameObject wizardPrefab;
+    
+    private bool playerInitialized = false;
 
     // 16개의 던전 클리어 여부 저장
     // 예: 저장/로드 시스템과 연동하여 stageCleared를 유지
@@ -37,7 +44,7 @@ public class GameManager : Singleton<GameManager>
         // SaveManager가 할당되어 있지 않으면 찾아서 할당
         if (saveManager == null)
         {
-            saveManager = FindObjectOfType<SaveManager>();
+            saveManager = SaveManager.Instance;
         }
 
         // 저장된 데이터 로드
@@ -46,16 +53,6 @@ public class GameManager : Singleton<GameManager>
         {
             currentData = new SaveData(); // 데이터가 없으면 새로 생성
         }
-        // else
-        // {
-        //     Gold = currentData.gold;
-        //     InventoryManager.Instance.LoadFromSave(currentData.inventoryItems);
-        //
-        //     if (currentData.equippedItemsPerClass != null)
-        //     {
-        //         PlayerEquipmentManager.Instance.LoadAllEquippedItems(currentData.equippedItemsPerClass);
-        //     }
-        // }
 
         // 씬 전환 시 삭제되지 않도록 함
         if (Instance != this)
@@ -65,7 +62,6 @@ public class GameManager : Singleton<GameManager>
         }
 
         DontDestroyOnLoad(gameObject);
-
         SkillManager.Instance.LoadSkill();
     }
     
@@ -102,11 +98,46 @@ public class GameManager : Singleton<GameManager>
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == "MainScene")
+        if (scene.name == "MainScene" && !playerInitialized)
         {
-            Debug.Log("🔁 메인 씬 복귀 → 장비 UI 갱신 시도");
-            PlayerEquipmentManager.Instance?.ApplyEquippedItemsToCurrentPlayer();
-            ItemEquipHandler.Instance?.RefreshUI();
+            Debug.Log("메인씬 진입: 기본 Warrior 생성");
+            CreatePlayer(CharacterClass.Warrior);
+            playerInitialized = true;
+        }
+
+        // // 새로 추가
+        // ItemEquipHandler.Instance?.InitializeSlots();
+
+        PlayerEquipmentManager.Instance?.ApplyEquippedItemsToCurrentPlayer();
+        ItemEquipHandler.Instance?.RefreshUI();
+    }
+    
+    public void CreatePlayer(CharacterClass cls)
+    {
+        GameObject prefab = null;
+
+        switch (cls)
+        {
+            case CharacterClass.Warrior:
+                prefab = warriorPrefab;
+                break;
+            case CharacterClass.Archer:
+                prefab = archerPrefab;
+                break;
+            case CharacterClass.Wizard:
+                prefab = wizardPrefab;
+                break;
+        }
+
+        if (prefab != null)
+        {
+            var playerObj = Instantiate(prefab);
+            Debug.Log($"플레이어 인스턴스 생성됨: {playerObj.name}");
+
+            Debug.Log($"Position: {playerObj.transform.position}");
+
+            player = playerObj.GetComponent<Player>();
+            controller = playerObj.GetComponent<PlayerController>();
         }
     }
     
@@ -157,6 +188,43 @@ public class GameManager : Singleton<GameManager>
             _moveDir = value;
         }
     }
+    
+    public void ChangePlayer(CharacterClass cls)
+    {
+        // 기존 장비 저장
+        if (player != null)
+        {
+            PlayerEquipmentManager.Instance.SaveCurrentEquipment(player.CharacterClass);
+            Destroy(player.gameObject);
+        }
+
+        // 새 플레이어 생성
+        CreatePlayer(cls);
+
+        // 장비 및 UI 재적용
+        PlayerEquipmentManager.Instance.LoadEquipmentForClass(player.CharacterClass);
+        ItemEquipHandler.Instance.RefreshUI();
+
+        // 골드 텍스트 재지정 (혹시 필요시)
+        var goldObj = GameObject.Find("GoldText");
+        if (goldObj != null)
+        {
+            var goldText = goldObj.GetComponent<TextMeshProUGUI>();
+            SetGoldText(goldText);
+        }
+
+        RemoveExistingEffects();
+    }
+    
+    private void RemoveExistingEffects()
+    {
+        GameObject[] effects = GameObject.FindGameObjectsWithTag("AttackEffect");
+        foreach (var effect in effects)
+        {
+            Destroy(effect);
+        }
+    }
+    
     public void UpdateSaveData()
     {
         // SaveData 내의 플레이어 리스트 초기화
