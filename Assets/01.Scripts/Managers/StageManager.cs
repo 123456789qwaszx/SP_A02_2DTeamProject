@@ -136,6 +136,8 @@ public class StageManager : Singleton<StageManager>
         playerLevel = GameManager.Instance.player.GetComponent<PlayerLevel>();
         playerLevel.ResetLevel();
 
+        ObjectManager.Instance.Monsters.Clear();
+        PoolManager.Instance.Clear();
         GameManager.Instance.player.transform.position = Vector3.zero;
     }
 

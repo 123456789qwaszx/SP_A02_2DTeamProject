@@ -108,11 +108,21 @@ public class Player : MonoBehaviour, IEquipable, IDamagable
     private bool isinvincibility = false; // 무적 상태 여부
 
 
-
+    //private static Player instance;
 
     void Awake()
     {
-        Debug.Log("Player Awake 호출됨");
+        //Debug.Log("Player Awake 호출됨");
+        //// 같은 타입의 인스턴스가 이미 존재하면 자기 자신 제거
+        //if (instance != null && instance != this)
+        //{
+        //    Destroy(gameObject);
+        //    return;
+        //}
+
+        //instance = this;
+        //DontDestroyOnLoad(gameObject);
+
         RegisterSelf();
     }
 
@@ -132,9 +142,7 @@ public class Player : MonoBehaviour, IEquipable, IDamagable
 
     void Start()
     {
-        Initialize();
-
-        DontDestroyOnLoad(gameObject);
+        //Initialize();
 
         // 씬 전환 시 자동으로 (0,0,0) 위치로 재배치
         transform.position = Vector3.zero;
