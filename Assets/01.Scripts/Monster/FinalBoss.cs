@@ -30,14 +30,24 @@ public class FinalBoss : MonsterBase
     protected override void Update()
     {
         base.Update();
-        if (!isPhase2 && HPPercent <= 0.6f)
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            EnterPhase(2);
+            Debug.Log("최종보스 2페이즈 진입");
+        }
+        else if (Input.GetKeyDown(KeyCode.B))
+        {
+            EnterPhase(3);
+            Debug.Log("최종보스 3페이즈 진입");
+        }
+        else if (!isPhase2 && HPPercent <= 0.6f)
         {
             EnterPhase(2);
         }
         else if (!isPhase3 && HPPercent <= 0.3f)
         {
             EnterPhase(3);
-        }   
+        }
     }
 
     protected override void InitializeStates()
@@ -219,7 +229,15 @@ public class FinalBoss : MonsterBase
     public override void OnDeadEnd()
     {
         base.OnDeadEnd();
+        StartCoroutine(ClearStageAfterDelay());
+    }
+
+    private IEnumerator ClearStageAfterDelay()
+    {
+        yield return new WaitForSeconds(5f);
+
         StageManager.Instance.StageClear();
-        SceneManager.LoadScene("EndingScene");
+
+        PoolManager.Instance.Push(this.gameObject);
     }
 }
