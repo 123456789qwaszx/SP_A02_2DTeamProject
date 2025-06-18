@@ -169,7 +169,7 @@ public class SoundManager : Singleton<SoundManager>
     }
 
     // 효과음 재생
-    public void PlaySFX(AudioClip clip, float volume = 1f)
+    public void PlaySFX(AudioClip clip, float volume = 0.4f)
     {
         if (clip == null || sfxPool.Count == 0) return;
 
