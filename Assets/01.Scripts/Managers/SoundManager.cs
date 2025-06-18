@@ -30,6 +30,12 @@ public class SoundManager : Singleton<SoundManager>
     [SerializeField] private AudioClip bgm_Final;
     [SerializeField] private AudioClip endingScene;
 
+    public float BGMVolume => bgmSource.volume;
+    public float SFXVolume => sfxPool[0].volume;
+    public bool IsBGMMuted => bgmSource.mute;
+    public bool IsSFXMuted => sfxPool[0].mute;
+
+
     [Header("SFX Pooling")]
     [SerializeField] private int sfxSourcePoolSize = 20;
 
@@ -169,7 +175,7 @@ public class SoundManager : Singleton<SoundManager>
     }
 
     // 효과음 재생
-    public void PlaySFX(AudioClip clip, float volume = 0.4f)
+    public void PlaySFX(AudioClip clip, float volume = 0.1f)
     {
         if (clip == null || sfxPool.Count == 0) return;
 
@@ -179,4 +185,33 @@ public class SoundManager : Singleton<SoundManager>
 
         sfxPoolIndex = (sfxPoolIndex + 1) % sfxPool.Count;
     }
+
+    public void SetBGMVolume(float sliderValue)
+    {
+        float adjustedVolume = Mathf.Pow(sliderValue, 2f); // 지수 적용
+        bgmSource.volume = adjustedVolume;
+    }
+
+    public void SetSFXVolume(float sliderValue)
+    {
+        float adjustedVolume = Mathf.Pow(sliderValue, 2f); // 지수 적용
+        foreach (var source in sfxPool)
+        {
+            source.volume = adjustedVolume;
+        }
+    }
+
+    public void SetBGMMute(bool mute)
+    {
+        bgmSource.mute = mute;
+    }
+
+    public void SetSFXMute(bool mute)
+    {
+        foreach (var source in sfxPool)
+        {
+            source.mute = mute;
+        }
+    }
+
 }

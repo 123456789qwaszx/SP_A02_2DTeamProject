@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
@@ -12,10 +12,21 @@ public class PlayerExpUI : MonoBehaviour
     private float currentExpFill = 0f;
     [SerializeField] private float smoothSpeed = 5f; // 부드럽게 전환되는 속도
 
+    private static PlayerExpUI instance;
+
     private void Awake()
     {
+        // 이미 존재하는 경우 파괴
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        instance = this;
         DontDestroyOnLoad(gameObject);
     }
+
 
     private void Start()
     {
