@@ -63,19 +63,23 @@ public class SkillBase : MonoBehaviour
     {
         int id = 0;
         
-        // dataId값의 앞 네자리로 스킬타입, 뒷자리로 스킬레벨을 구분
+        // 2레벨 이상부터는 기존의 스킬인덱스에 레벨만큼의 숫자를 더함.
         if (dataId == 0)
             id = Level < 2 ? (int)SkillType : (int)SkillType + Level - 1;
         else
             id = dataId;
         
+        // 우선 지금 가지고 있는 스킬데이터를, 이 메소드에 가지고온다.
         SkillData _skillData = SkillData;
-        SkillManager.Instance._skillData.TryGetValue($"{id}", out SkillData obj);
-        // 만약 1레벨이라면 가장 기본타입.
-        if (!_skillData == obj)
+        // 키값을 냅다 넣어봐서, 아예 없는 경우를 제외하면 들어간 키값을 토대로 _SkillData를 가져온다.
+        // 따라서 스킬인덱스+레벨로 데이터를 가져옴.
+        // 즉 스킬별로 총 5개의 데이터를 각각 작성한 뒤, _skillData에 들어가있어야함.
+        if (SkillManager.Instance._skillData.TryGetValue($"{id}", out _skillData) == false)
             return SkillData;
 
-        // 아니라면 2~6레벨에 만즌 SkillData를 가지고 온뒤,
+
+        // 여기까지 왔으면,  2~6레벨에 만즌 SkillData를 가지고 온다??
+        
         // 플레이어 스탯이나 추가효과로 인한 버프를 적용 한다.
 
         // TODO<스킬데이터 최신화 공간>

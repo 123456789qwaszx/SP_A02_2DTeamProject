@@ -11,6 +11,23 @@ public class SkillDamage
     public float value;
 }
 
+public enum SkillLevel
+{
+    _1,
+    _2,
+    _3,
+    _4,
+    _5,
+    _6
+}
+
+[Serializable]
+public class SkillStatus
+{
+    public SkillLevel skillLevel;
+    public float value;
+}
+
 [CreateAssetMenu(fileName = "Skill", menuName = "New Skill")]
 
 public class SkillData : ScriptableObject
@@ -34,15 +51,21 @@ public class SkillData : ScriptableObject
 
     public float ScaleMultiplier = 1; // 투사체 크기계수
     public float projectileSpeed = 5.0f; // 발사체 속도 배율
-    
+
 
     public int NumPenerations = 0; // 관통 횟수
 
     public float BounceSpeed = 2; // 투사체 튕기는 속도
     public float AngleBetweenProj = 30f;// 투사체 사이 각도
     public float ProjectileSpacing; // 투사체 간의 거리
-    
+
 
     public float Duration; // 스킬 지속 시간
     public float attackRangeMultiplier = 1.0f; // 공격 범위 배율
+
+    [Header("SkillLevel")]
+    public SkillStatus[] skillLevel;
+    
+
+
 }
