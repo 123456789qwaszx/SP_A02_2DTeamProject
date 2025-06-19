@@ -62,19 +62,36 @@ public class SkillBase : MonoBehaviour
     public SkillData UpdateSkillData(int dataId = 0)
     {
         int id = 0;
+        
+        // dataId값의 앞 네자리로 스킬타입, 뒷자리로 스킬레벨을 구분
         if (dataId == 0)
             id = Level < 2 ? (int)SkillType : (int)SkillType + Level - 1;
         else
             id = dataId;
-        // 이부분 수정할것
-        // 지금은 바로바로 ScriptableObject로 뽑아오고 있다보니 고정 값인데,
-        // Level 같이 동적인 데이터를 보관하기 위한 별도의 static 공간이 필요함.
         
-        // 만약 바로 수정할거면, 키에서 Type을 받은 다음. 그 타입의 데이터를 가져오면 됨.
         SkillData _skillData = SkillData;
         SkillManager.Instance._skillData.TryGetValue($"{id}", out SkillData obj);
+        // 만약 1레벨이라면 가장 기본타입.
         if (!_skillData == obj)
             return SkillData;
+
+        // 아니라면 2~6레벨에 만즌 SkillData를 가지고 온뒤,
+        // 플레이어 스탯이나 추가효과로 인한 버프를 적용 한다.
+
+        // TODO<스킬데이터 최신화 공간>
+        // 레벨별 스킬데이터
+
+        // SupportSkill에 따른 가산치
+        // 이건 기존 Data랑 똑같은 구조와 방식을 가지지만, 딱 여기서만 사용되게 만들면 되겠다.
+        // 이런 느낌.
+        // foreach(SupportSkillData support in Managers.Game.Player.Skills.SupportSkills)
+        // 그 후에 만약 SkillType.ToString() == SupportSkillName.ToString()이라면,
+        // SkillData.ProjectileRange += supportSill.ProjectileRange;
+
+        // 플레이어 스탯에 따른 가산치
+
+        // 아이템 효과에 따른 가산치
+
         SkillData = _skillData;
 
         OnChangedSkillData();
