@@ -15,14 +15,14 @@ public class DarkArrow : RepeatSkill
 
         if (GameManager.Instance.controller != null)
         {
-            List<MonsterBase> target = ObjectManager.Instance.GetNearestMonsters(SkillData.projectileCount);
+            List<MonsterBase> target = ObjectManager.Instance.GetNearestMonsters(SkillData.skillLevel[Level].projectileCount);
             if (target != null)
             {
                 for (int i = 0; i < target.Count; i++)
                 {
                     Vector3 dir = (target[i].transform.position - GameManager.Instance.controller.transform.position).normalized;
                     Vector3 startPos = GameManager.Instance.controller.transform.position;
-                    GenerateProjectile(GameManager.Instance.controller, prefabName, startPos, dir, Vector3.zero, this);
+                    GenerateProjectile(GameManager.Instance.controller, prefabName, startPos, dir, Vector3.zero, this, Level);
                     //yield return new WaitForSeconds(SkillData.ProjectileSpacing);
                 }
             }

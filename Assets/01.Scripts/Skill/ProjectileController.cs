@@ -40,7 +40,7 @@ public class ProjectileController : SkillBase
         return true;
     }
 
-    public void SetInfo(PlayerController owner, Vector2 position, Vector2 dir, Vector2 target, SkillBase skill)
+    public void SetInfo(PlayerController owner, Vector2 position, Vector2 dir, Vector2 target, SkillBase skill, int skillLevel)
     {
         _owner = owner;
         _spawnPos = position;
@@ -49,26 +49,27 @@ public class ProjectileController : SkillBase
         _rigid = GetComponent<Rigidbody2D>();
 
         _target = target;
-        transform.localScale = Vector3.one * Skill.SkillData.ScaleMultiplier;
-        _numPenerations = Skill.SkillData.NumPenerations;
-        _bounceCount = Skill.SkillData.NumBounce;
-        _projectileSpeed = Skill.SkillData.projectileSpeed;
-        _attackInterval = Skill.SkillData.AttackInterval;
+        Debug.Log("스킬레벨체크");
+        transform.localScale = Vector3.one * Skill.SkillData.skillLevel[skillLevel].ScaleMultiplier;
+        _numPenerations = Skill.SkillData.skillLevel[skillLevel].NumPenerations;
+        _bounceCount = Skill.SkillData.skillLevel[skillLevel].NumBounce;
+        _projectileSpeed = Skill.SkillData.skillLevel[skillLevel].projectileSpeed;
+        _attackInterval = Skill.SkillData.skillLevel[skillLevel].AttackInterval;
 
         switch (Skill.SkillType)
         {
             case SkillType.HolyProjectile:
                 if (gameObject.activeInHierarchy)
                 {
-                    StartCoroutine(CoArrow());
+                    StartCoroutine(CoArrow(skillLevel));
                 }
                 break;
             case SkillType.HolyPulse:
-                StartCoroutine(CoHolyPulse());
+                StartCoroutine(CoHolyPulse(skillLevel));
                 break;
             case SkillType.WindCutter:
                 if (gameObject.activeInHierarchy)
-                    StartCoroutine(CoBoomerang());
+                    StartCoroutine(CoBoomerang(skillLevel));
                 break;
             case SkillType.BloodChain:
                 StartCoroutine(CoBloodChain(_spawnPos, _target, true));
@@ -76,7 +77,7 @@ public class ProjectileController : SkillBase
                 case SkillType.Meteor:
                 _dir = (_target - transform.position).normalized;
                 transform.rotation = Quaternion.FromToRotation(Vector3.up, _dir);
-                _rigid.velocity = _dir * Skill.SkillData.projectileSpeed;
+                _rigid.velocity = _dir * Skill.SkillData.skillLevel[skillLevel].projectileSpeed;
                 // 메테오 착단 지점
                 _meteorShadow = ResourceManager.Instance.Instantiate("MeteorShadow", pooling: true);
                 _meteorShadow.transform.position = target; //+ new Vector3(-0.5f, -0.45f, 1);
@@ -86,8 +87,8 @@ public class ProjectileController : SkillBase
 
             default:
                 transform.rotation = Quaternion.FromToRotation(Vector3.up, _dir);
-                _numPenerations = Skill.SkillData.NumPenerations;
-                _rigid.velocity = _dir * Skill.SkillData.projectileSpeed;
+                _numPenerations = Skill.SkillData.skillLevel[skillLevel].NumPenerations;
+                _rigid.velocity = _dir * Skill.SkillData.skillLevel[skillLevel].projectileSpeed;
                 break;
         }
 
@@ -96,7 +97,6 @@ public class ProjectileController : SkillBase
 
     }
 
-    float _timer = 0;
     private float _rotateAmount = 1000;
 
     IEnumerator CoMeteor()
@@ -140,9 +140,10 @@ public class ProjectileController : SkillBase
     }
 
 
-    IEnumerator CoHolyPulse()
+    IEnumerator CoHolyPulse(int skillLevel)
     {
-        Vector3 targePoint = GameManager.Instance.controller.transform.position + _dir * Skill.SkillData.projectileSpeed * 3;
+        Debug.Log("스킬레벨체크");
+        Vector3 targePoint = GameManager.Instance.controller.transform.position + _dir * Skill.SkillData.skillLevel[skillLevel].projectileSpeed * 3;
 
         Sequence seq = DOTween.Sequence();
 
@@ -153,7 +154,7 @@ public class ProjectileController : SkillBase
 
         while (true)
         {
-            transform.position = Vector2.MoveTowards(this.transform.position, GameManager.Instance.controller.transform.position, Time.deltaTime * Skill.SkillData.projectileSpeed * 4f);
+            transform.position = Vector2.MoveTowards(this.transform.position, GameManager.Instance.controller.transform.position, Time.deltaTime * Skill.SkillData.skillLevel[skillLevel].projectileSpeed * 4f);
             if (GameManager.Instance.controller.transform.position == transform.position)
             {
                 DestroyProjectile();
@@ -206,22 +207,22 @@ public class ProjectileController : SkillBase
     }
 
 
-    IEnumerator CoArrow()
+    IEnumerator CoArrow(int skillLevel)
     {
         Vector2 direction = (Vector2)GameManager.Instance.controller.transform.position + new Vector2(5, 0) - _rigid.position;
         float rotateSpeed = Vector3.Cross(direction.normalized, transform.up).z;
         _rigid.angularVelocity = -_rotateAmount * rotateSpeed;
-        _rigid.velocity = transform.up * Skill.SkillData.projectileSpeed;
+        _rigid.velocity = transform.up * Skill.SkillData.skillLevel[skillLevel].projectileSpeed;
 
         yield return new WaitForFixedUpdate();
 
     }
 
-    IEnumerator CoBoomerang()
+    IEnumerator CoBoomerang(int skillLevel)
     {
-        Vector3 targePoint = GameManager.Instance.controller.transform.position + _dir * Skill.SkillData.projectileSpeed;
+        Vector3 targePoint = GameManager.Instance.controller.transform.position + _dir * Skill.SkillData.skillLevel[skillLevel].projectileSpeed;
         transform.localScale = Vector3.zero;
-        transform.localScale = Vector3.one * Skill.SkillData.ScaleMultiplier;
+        transform.localScale = Vector3.one * Skill.SkillData.skillLevel[skillLevel].ScaleMultiplier;
 
         Sequence seq = DOTween.Sequence();
 
@@ -236,7 +237,7 @@ public class ProjectileController : SkillBase
 
         while (true)
         {
-            transform.position = Vector2.MoveTowards(this.transform.position, GameManager.Instance.controller.transform.position, Time.deltaTime * Skill.SkillData.projectileSpeed * 4f);
+            transform.position = Vector2.MoveTowards(transform.position, GameManager.Instance.controller.transform.position, Time.deltaTime * Skill.SkillData.skillLevel[skillLevel].projectileSpeed * 4f);
             if (GameManager.Instance.controller.transform.position == transform.position)
             {
                 DestroyProjectile();
@@ -248,7 +249,7 @@ public class ProjectileController : SkillBase
 
 
 
-    void BounceProjectile(MonsterBase creature)
+    void BounceProjectile(MonsterBase creature, int skillLevel)
     {
         List<Transform> list = new List<Transform>();
         list = ObjectManager.Instance.GetFindMonstersInFanShape(creature.transform.position, _dir, 5.5f, 240);
@@ -263,7 +264,7 @@ public class ProjectileController : SkillBase
         {
             int index = Random.Range(sortedList.Count / 2, sortedList.Count);
             _dir = (sortedList[index].position - transform.position).normalized;
-            _rigid.velocity = _dir * Skill.SkillData.BounceSpeed;
+            _rigid.velocity = _dir * Skill.SkillData.skillLevel[skillLevel].BounceSpeed;
         }
     }
 
@@ -291,9 +292,9 @@ public class ProjectileController : SkillBase
         }
     }
 
-    IEnumerator CoDestroy()
+    IEnumerator CoDestroy(int skillLevel)
     {
-        yield return new WaitForSeconds(Skill.SkillData.Duration);
+        yield return new WaitForSeconds(Skill.SkillData.skillLevel[skillLevel].Duration);
         DestroyProjectile();
     }
 
@@ -338,7 +339,6 @@ public class ProjectileController : SkillBase
                 break;
             case SkillType.DarkArrow:
                 _bounceCount--;
-                BounceProjectile(creature);
                 if (_bounceCount < 0)
                 {
                     _rigid.velocity = Vector3.zero;

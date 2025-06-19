@@ -12,26 +12,128 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41ecb1750091ae741b339afce7833228, type: 3}
   m_Name: 01_HolyPulse
   m_EditorClassIdentifier: 
-  SkillIndex: 10011
   Description: "\uBC94\uC704\uACF5\uACA9, \uAD00\uD1B5\uAC00\uB2A5"
+  PrefabLabel: HolyPulse
   Type: 10011
   Icon: {fileID: 21300000, guid: ff296491f66c2824aa535c3f79557e39, type: 3}
   SkillPrefabs: {fileID: -5752677909494740475, guid: 4d03f659247acf946855a4f296cf23b2, type: 3}
-  PrefabLabel: HolyPulse
-  DamageMultiplire: 1
-  AttackInterval: 0.7
-  CoolTime: 0.7
-  CastingEffect: 0
-  CastingEffectPercentage: 0
-  projectileCount: 1
-  ScaleMultiplier: 1
-  projectileSpeed: 4
-  NumPenerations: 99
-  NumBounce: 1
-  BounceSpeed: 0
-  AngleBetweenProj: 1
-  BounceDist: 1
-  ProjRange: 1
-  ProjectileSpacing: 0
-  Duration: 5
-  attackRangeMultiplier: 1
+  skillLevel:
+  - skillLevel: 0
+    SkillIndex: 0
+    DamageMultiplire: 0
+    AttackInterval: 0
+    CoolTime: 0
+    projectileCount: 0
+    BounceDist: 0
+    ProjRange: 0
+    NumBounce: 0
+    ScaleMultiplier: 0
+    projectileSpeed: 0
+    NumPenerations: 0
+    BounceSpeed: 0
+    AngleBetweenProj: 0
+    ProjectileSpacing: 0
+    Duration: 0
+    attackRangeMultiplier: 0
+  - skillLevel: 1
+    SkillIndex: 0
+    DamageMultiplire: 0
+    AttackInterval: 0
+    CoolTime: 0
+    projectileCount: 0
+    BounceDist: 0
+    ProjRange: 0
+    NumBounce: 0
+    ScaleMultiplier: 0
+    projectileSpeed: 0
+    NumPenerations: 0
+    BounceSpeed: 0
+    AngleBetweenProj: 0
+    ProjectileSpacing: 0
+    Duration: 0
+    attackRangeMultiplier: 0
+  - skillLevel: 2
+    SkillIndex: 0
+    DamageMultiplire: 0
+    AttackInterval: 0
+    CoolTime: 0
+    projectileCount: 0
+    BounceDist: 0
+    ProjRange: 0
+    NumBounce: 0
+    ScaleMultiplier: 0
+    projectileSpeed: 0
+    NumPenerations: 0
+    BounceSpeed: 0
+    AngleBetweenProj: 0
+    ProjectileSpacing: 0
+    Duration: 0
+    attackRangeMultiplier: 0
+  - skillLevel: 3
+    SkillIndex: 0
+    DamageMultiplire: 0
+    AttackInterval: 0
+    CoolTime: 0
+    projectileCount: 0
+    BounceDist: 0
+    ProjRange: 0
+    NumBounce: 0
+    ScaleMultiplier: 0
+    projectileSpeed: 0
+    NumPenerations: 0
+    BounceSpeed: 0
+    AngleBetweenProj: 0
+    ProjectileSpacing: 0
+    Duration: 0
+    attackRangeMultiplier: 0
+  - skillLevel: 4
+    SkillIndex: 0
+    DamageMultiplire: 0
+    AttackInterval: 0
+    CoolTime: 0
+    projectileCount: 0
+    BounceDist: 0
+    ProjRange: 0
+    NumBounce: 0
+    ScaleMultiplier: 0
+    projectileSpeed: 0
+    NumPenerations: 0
+    BounceSpeed: 0
+    AngleBetweenProj: 0
+    ProjectileSpacing: 0
+    Duration: 0
+    attackRangeMultiplier: 0
+  - skillLevel: 5
+    SkillIndex: 0
+    DamageMultiplire: 0
+    AttackInterval: 0
+    CoolTime: 0
+    projectileCount: 0
+    BounceDist: 0
+    ProjRange: 0
+    NumBounce: 0
+    ScaleMultiplier: 0
+    projectileSpeed: 0
+    NumPenerations: 0
+    BounceSpeed: 0
+    AngleBetweenProj: 0
+    ProjectileSpacing: 0
+    Duration: 0
+    attackRangeMultiplier: 0
+  - skillLevel: 6
+    SkillIndex: 0
+    DamageMultiplire: 0
+    AttackInterval: 0
+    CoolTime: 0
+    projectileCount: 0
+    BounceDist: 0
+    ProjRange: 0
+    NumBounce: 0
+    ScaleMultiplier: 0
+    projectileSpeed: 0
+    NumPenerations: 0
+    BounceSpeed: 0
+    AngleBetweenProj: 0
+    ProjectileSpacing: 0
+    Duration: 0
+    attackRangeMultiplier: 0

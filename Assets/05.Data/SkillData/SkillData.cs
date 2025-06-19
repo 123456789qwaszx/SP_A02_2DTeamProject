@@ -13,6 +13,7 @@ public class SkillDamage
 
 public enum SkillLevel
 {
+    _0,
     _1,
     _2,
     _3,
@@ -25,20 +26,8 @@ public enum SkillLevel
 public class SkillStatus
 {
     public SkillLevel skillLevel;
-    public float value;
-}
-
-[CreateAssetMenu(fileName = "Skill", menuName = "New Skill")]
-
-public class SkillData : ScriptableObject
-{
+    
     public int SkillIndex;
-    public string Description;
-
-    public SkillType Type;
-    public Sprite Icon;
-    public SkillBase SkillPrefabs;
-    public string PrefabLabel;
 
     public float DamageMultiplire = 5f; // 스킬 데미지
     public float AttackInterval = 1f; // 공격속도
@@ -62,6 +51,18 @@ public class SkillData : ScriptableObject
 
     public float Duration; // 스킬 지속 시간
     public float attackRangeMultiplier = 1.0f; // 공격 범위 배율
+}
+
+[CreateAssetMenu(fileName = "Skill", menuName = "New Skill")]
+
+public class SkillData : ScriptableObject
+{
+    public string Description;
+    public string PrefabLabel;
+
+    public SkillType Type;
+    public Sprite Icon;
+    public SkillBase SkillPrefabs;
 
     [Header("SkillLevel")]
     public SkillStatus[] skillLevel;

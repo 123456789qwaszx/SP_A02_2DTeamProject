@@ -20,20 +20,20 @@ public abstract class RepeatSkill : SkillBase
             StopCoroutine(_coSkill);
 
         gameObject.SetActive(true);
-       _coSkill = StartCoroutine(CoStartSkill());
+       _coSkill = StartCoroutine(CoStartSkill(Level));
     }
 
     // 실제 각 Reapeat스킬들의 동작 로직(각자 이것만 바꿔주면됨)
     protected abstract void DoSkillJob();
 
-    protected virtual IEnumerator CoStartSkill()
+    protected virtual IEnumerator CoStartSkill(int skillLevel)
     {
         WaitForSeconds wait = new WaitForSeconds(0.5f/*SkillData.CoolTime*/);
        
         yield return wait;
         while (true)
         {
-            if(SkillData.CoolTime != 0)
+            if(SkillData.skillLevel[skillLevel].CoolTime != 0)
             DoSkillJob();
             yield return wait;
         }

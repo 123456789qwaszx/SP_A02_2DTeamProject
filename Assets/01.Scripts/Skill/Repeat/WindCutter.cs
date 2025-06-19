@@ -16,11 +16,11 @@ public class WindCutter : RepeatSkill
         {
             Vector3 startPos = GameManager.Instance.controller.transform.position;
             Vector3 dir = GameManager.Instance.MoveDir;
-            for (int i = 0; i < SkillData.projectileCount; i++)
+            for (int i = 0; i < SkillData.skillLevel[Level].projectileCount; i++)
             {
-                float angle = SkillData.AngleBetweenProj * (i - (SkillData.projectileCount - 1) / 2f);
+                float angle = SkillData.skillLevel[Level].AngleBetweenProj * (i - (SkillData.skillLevel[Level].projectileCount - 1) / 2f);
                 Vector3 res = Quaternion.AngleAxis(angle, Vector3.forward) * dir;
-                GenerateProjectile(GameManager.Instance.controller, prefabName, startPos, res.normalized, Vector3.zero, this);
+                GenerateProjectile(GameManager.Instance.controller, prefabName, startPos, res.normalized, Vector3.zero, this, Level);
             }
         }
     }

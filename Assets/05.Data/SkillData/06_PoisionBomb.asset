@@ -12,26 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41ecb1750091ae741b339afce7833228, type: 3}
   m_Name: 06_PoisionBomb
   m_EditorClassIdentifier: 
-  SkillIndex: 10061
   Description: "\uD3ED\uBC1C \uBC0F \uD2F1\uB300\uBBF8\uC9C0"
+  PrefabLabel: PoisionBomb
   Type: 10061
   Icon: {fileID: 21300000, guid: a7b3ef9b535cbfd47bf25fbc4f1efa9b, type: 3}
   SkillPrefabs: {fileID: -8873556835135794178, guid: 09623e4138b659042a1c1d8d70c4944c, type: 3}
-  PrefabLabel: PoisionBomb
-  DamageMultiplire: 15
-  AttackInterval: 0.7
-  CoolTime: 0.7
-  CastingEffect: 0
-  CastingEffectPercentage: 0
-  projectileCount: 1
-  ScaleMultiplier: 1
-  projectileSpeed: 1
-  NumPenerations: 10
-  NumBounce: 0
-  BounceSpeed: 0
-  AngleBetweenProj: 0
-  BounceDist: 0
-  ProjRange: 0
-  ProjectileSpacing: 0
-  Duration: 5
-  attackRangeMultiplier: 1
+  skillLevel:
+  - skillLevel: 0
+    SkillIndex: 0
+    DamageMultiplire: 0
+    AttackInterval: 0
+    CoolTime: 0
+    projectileCount: 0
+    BounceDist: 0
+    ProjRange: 0
+    NumBounce: 0
+    ScaleMultiplier: 0
+    projectileSpeed: 0
+    NumPenerations: 0
+    BounceSpeed: 0
+    AngleBetweenProj: 0
+    ProjectileSpacing: 0
+    Duration: 0
+    attackRangeMultiplier: 0

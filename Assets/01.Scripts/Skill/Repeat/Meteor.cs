@@ -18,7 +18,7 @@ public class Meteor : RepeatSkill
 
     IEnumerator GenerateMeteor()
     {
-        List<MonsterBase> targets = ObjectManager.Instance.GetMonsterWithinCamera(SkillData.projectileCount);
+        List<MonsterBase> targets = ObjectManager.Instance.GetMonsterWithinCamera(SkillData.skillLevel[Level].projectileCount);
         
         if (targets == null)
             yield break;
@@ -27,8 +27,8 @@ public class Meteor : RepeatSkill
             if (targets[i].IsValid() == true)
             { 
                 Vector2 startPos = GetMeteorPositgion(targets[i].transform.position);
-                GenerateProjectile(GameManager.Instance.controller, "Meteor", startPos, Vector3.zero, targets[i].transform.position, this);
-                yield return new WaitForSeconds(SkillData.AttackInterval);
+                GenerateProjectile(GameManager.Instance.controller, "Meteor", startPos, Vector3.zero, targets[i].transform.position, this, Level);
+                yield return new WaitForSeconds(SkillData.skillLevel[Level].AttackInterval);
             }
         }
     }

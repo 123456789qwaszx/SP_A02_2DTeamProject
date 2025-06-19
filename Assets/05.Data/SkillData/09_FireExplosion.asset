@@ -12,26 +12,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41ecb1750091ae741b339afce7833228, type: 3}
   m_Name: 09_FireExplosion
   m_EditorClassIdentifier: 
-  SkillIndex: 10091
   Description: "\uD3ED\uBC1C \uACF5\uACA9"
+  PrefabLabel: FireExplosion
   Type: 10091
   Icon: {fileID: 21300000, guid: e9be75060a43d594db3d2b80e6c649ff, type: 3}
   SkillPrefabs: {fileID: 2713275388091649871, guid: 59d5f8716937e744aa8b8cc92327dbec, type: 3}
-  PrefabLabel: FireExplosion
-  DamageMultiplire: 15
-  AttackInterval: 0.7
-  CoolTime: 0.7
-  CastingEffect: 0
-  CastingEffectPercentage: 0
-  projectileCount: 1
-  ScaleMultiplier: 1
-  projectileSpeed: 1
-  NumPenerations: 10
-  NumBounce: 0
-  BounceSpeed: 0
-  AngleBetweenProj: 0
-  BounceDist: 0
-  ProjRange: 0
-  ProjectileSpacing: 0
-  Duration: 5
-  attackRangeMultiplier: 1
+  skillLevel:
+  - skillLevel: 0
+    SkillIndex: 0
+    DamageMultiplire: 0
+    AttackInterval: 0
+    CoolTime: 0
+    projectileCount: 0
+    BounceDist: 0
+    ProjRange: 0
+    NumBounce: 0
+    ScaleMultiplier: 0
+    projectileSpeed: 0
+    NumPenerations: 0
+    BounceSpeed: 0
+    AngleBetweenProj: 0
+    ProjectileSpacing: 0
+    Duration: 0
+    attackRangeMultiplier: 0
+  - skillLevel: 0
+    SkillIndex: 0
+    DamageMultiplire: 0
+    AttackInterval: 0
+    CoolTime: 0
+    projectileCount: 0
+    BounceDist: 0
+    ProjRange: 0
+    NumBounce: 0
+    ScaleMultiplier: 0
+    projectileSpeed: 0
+    NumPenerations: 0
+    BounceSpeed: 0
+    AngleBetweenProj: 0
+    ProjectileSpacing: 0
+    Duration: 0
+    attackRangeMultiplier: 0

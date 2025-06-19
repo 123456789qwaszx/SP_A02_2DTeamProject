@@ -20,12 +20,12 @@ public class BloodChain : RepeatSkill
 
         if (GameManager.Instance.controller != null)
         {
-            for (int i = 0; i < SkillData.projectileCount; i++)
+            for (int i = 0; i < SkillData.skillLevel[Level].projectileCount; i++)
             {
                 Vector3 startPos = GameManager.Instance.controller.transform.position;
-                int minDist = (int)SkillData.BounceDist - 1;
-                int maxDist = (int)SkillData.BounceDist + 1;
-                List<MonsterBase> targets = GetChainMonsters(SkillData.NumBounce, minDist, maxDist, index : i);
+                int minDist = (int)SkillData.skillLevel[Level].BounceDist - 1;
+                int maxDist = (int)SkillData.skillLevel[Level].BounceDist + 1;
+                List<MonsterBase> targets = GetChainMonsters(SkillData.skillLevel[Level].NumBounce, minDist, maxDist, index : i);
                 if (targets == null)
                     continue;
                 for (int j = 0; j < targets.Count; j++)
@@ -33,7 +33,7 @@ public class BloodChain : RepeatSkill
                     if (j > 0)
                         startPos = targets[j - 1].transform.position;
                     Vector3 dir = (targets[j].transform.position - startPos).normalized;
-                    GenerateProjectile(GameManager.Instance.controller, prefabName, startPos, dir, targets[j].transform.position, this);
+                    GenerateProjectile(GameManager.Instance.controller, prefabName, startPos, dir, targets[j].transform.position, this, Level);
                 }
                 yield return null;
             }
@@ -45,7 +45,7 @@ public class BloodChain : RepeatSkill
     {
         List<MonsterBase> chainMonsters = new List<MonsterBase>();
         // projRange �̻��� ���͸� �˻�
-        List<MonsterBase> nearestMonster = ObjectManager.Instance.GetNearestMonsters(SkillData.projectileCount, (int)SkillData.ProjRange);
+        List<MonsterBase> nearestMonster = ObjectManager.Instance.GetNearestMonsters(SkillData.skillLevel[Level].projectileCount, (int)SkillData.skillLevel[Level].ProjRange);
         if (nearestMonster != null)
         {
             int idx = Mathf.Min(index, nearestMonster.Count-1);

@@ -18,9 +18,9 @@ public class HolyProjectile : RepeatSkill
         Vector3 dir = GameManager.Instance.MoveDir;
         
         Vector3 position = GameManager.Instance.controller.transform.position;
-        for (int i = 0; i < SkillData.projectileCount; i++)
+        for (int i = 0; i < SkillData.skillLevel[Level].projectileCount; i++)
         {
-            GenerateProjectile(GameManager.Instance.controller, prefabName, position, dir, Vector3.zero, this);
+            GenerateProjectile(GameManager.Instance.controller, prefabName, position, dir, Vector3.zero, this, Level);
         }
     }
 }

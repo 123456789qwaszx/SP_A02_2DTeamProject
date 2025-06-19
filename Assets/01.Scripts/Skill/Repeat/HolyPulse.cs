@@ -17,9 +17,9 @@ public class HolyPulse : RepeatSkill
         Vector3 startPos = GameManager.Instance.controller.transform.position;
         Vector3 dir = GameManager.Instance.MoveDir;
 
-        for (int i = 0; i < SkillData.projectileCount; i++)
+        for (int i = 0; i < SkillData.skillLevel[Level].projectileCount; i++)
         {
-            GenerateProjectile(GameManager.Instance.controller, prefabName, startPos, dir, Vector3.zero, this);
+            GenerateProjectile(GameManager.Instance.controller, prefabName, startPos, dir, Vector3.zero, this, Level);
         }
 
     }

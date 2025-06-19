@@ -66,11 +66,11 @@ public class SkillManager : Singleton<SkillManager>
 
             if (count == totalCount)
             {
-                SkillType HolyProjectile = SkillManager.Instance.GetSkillTypeFromInt(10001);
-                SkillType HolyPulse = SkillManager.Instance.GetSkillTypeFromInt(10011);
-                SkillType DarkArrow = SkillManager.Instance.GetSkillTypeFromInt(10021);
-                //SkillType WindCutter = SkillManager.Instance.GetSkillTypeFromInt(10071);
-                SkillType BloodChain = SkillManager.Instance.GetSkillTypeFromInt(10111);
+                SkillType HolyProjectile = GetSkillTypeFromInt(10001);
+                SkillType HolyPulse = GetSkillTypeFromInt(10011);
+                SkillType DarkArrow = GetSkillTypeFromInt(10021);
+                //SkillType WindCutter = GetSkillTypeFromInt(10071);
+                SkillType BloodChain = GetSkillTypeFromInt(10111);
 
 
                 // 처음 무조건 들고 있는 스킬들.
