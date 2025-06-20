@@ -48,7 +48,7 @@ MonoBehaviour:
     projectileSpeed: 5
     NumPenerations: 0
     BounceSpeed: 2
-    AngleBetweenProj: 30
+    AngleBetweenProj: 0
     ProjectileSpacing: 0
     Duration: 0
     attackRangeMultiplier: 1
@@ -61,7 +61,7 @@ MonoBehaviour:
     BounceDist: 10
     ProjRange: 10
     NumBounce: 3
-    ScaleMultiplier: 1
+    ScaleMultiplier: 1.2
     projectileSpeed: 5
     NumPenerations: 0
     BounceSpeed: 2
@@ -74,11 +74,11 @@ MonoBehaviour:
     DamageMultiplire: 5
     AttackInterval: 1
     CoolTime: 1
-    projectileCount: 1
+    projectileCount: 2
     BounceDist: 10
     ProjRange: 10
     NumBounce: 3
-    ScaleMultiplier: 1
+    ScaleMultiplier: 1.4
     projectileSpeed: 5
     NumPenerations: 0
     BounceSpeed: 2
@@ -91,11 +91,11 @@ MonoBehaviour:
     DamageMultiplire: 5
     AttackInterval: 1
     CoolTime: 1
-    projectileCount: 1
+    projectileCount: 3
     BounceDist: 10
     ProjRange: 10
     NumBounce: 3
-    ScaleMultiplier: 1
+    ScaleMultiplier: 1.6
     projectileSpeed: 5
     NumPenerations: 0
     BounceSpeed: 2
@@ -108,11 +108,11 @@ MonoBehaviour:
     DamageMultiplire: 5
     AttackInterval: 1
     CoolTime: 1
-    projectileCount: 1
+    projectileCount: 4
     BounceDist: 10
     ProjRange: 10
     NumBounce: 3
-    ScaleMultiplier: 1
+    ScaleMultiplier: 1.8
     projectileSpeed: 5
     NumPenerations: 0
     BounceSpeed: 2
@@ -125,11 +125,11 @@ MonoBehaviour:
     DamageMultiplire: 5
     AttackInterval: 1
     CoolTime: 1
-    projectileCount: 1
+    projectileCount: 5
     BounceDist: 10
     ProjRange: 10
     NumBounce: 3
-    ScaleMultiplier: 1
+    ScaleMultiplier: 2
     projectileSpeed: 5
     NumPenerations: 0
     BounceSpeed: 2

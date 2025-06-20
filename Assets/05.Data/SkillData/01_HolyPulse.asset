@@ -20,12 +20,12 @@ MonoBehaviour:
   skillLevel:
   - skillLevel: 0
     SkillIndex: 0
-    DamageMultiplire: 0
-    AttackInterval: 0
-    CoolTime: 0
-    projectileCount: 0
+    DamageMultiplire: 4
+    AttackInterval: 1
+    CoolTime: 1
+    projectileCount: 1
     BounceDist: 0
-    ProjRange: 0
+    ProjRange: 5
     NumBounce: 0
     ScaleMultiplier: 0
     projectileSpeed: 0
@@ -37,15 +37,15 @@ MonoBehaviour:
     attackRangeMultiplier: 0
   - skillLevel: 1
     SkillIndex: 0
-    DamageMultiplire: 0
-    AttackInterval: 0
-    CoolTime: 0
-    projectileCount: 0
-    BounceDist: 0
-    ProjRange: 0
-    NumBounce: 0
-    ScaleMultiplier: 0
-    projectileSpeed: 0
+    DamageMultiplire: 6
+    AttackInterval: 0.1
+    CoolTime: 9
+    projectileCount: 1
+    BounceDist: 9
+    ProjRange: 5
+    NumBounce: 9
+    ScaleMultiplier: 1.5
+    projectileSpeed: 5
     NumPenerations: 0
     BounceSpeed: 0
     AngleBetweenProj: 0
@@ -54,15 +54,15 @@ MonoBehaviour:
     attackRangeMultiplier: 0
   - skillLevel: 2
     SkillIndex: 0
-    DamageMultiplire: 0
+    DamageMultiplire: 8
     AttackInterval: 0
     CoolTime: 0
-    projectileCount: 0
+    projectileCount: 1
     BounceDist: 0
-    ProjRange: 0
+    ProjRange: 8
     NumBounce: 0
-    ScaleMultiplier: 0
-    projectileSpeed: 0
+    ScaleMultiplier: 1
+    projectileSpeed: 5
     NumPenerations: 0
     BounceSpeed: 0
     AngleBetweenProj: 0
@@ -71,15 +71,15 @@ MonoBehaviour:
     attackRangeMultiplier: 0
   - skillLevel: 3
     SkillIndex: 0
-    DamageMultiplire: 0
+    DamageMultiplire: 10
     AttackInterval: 0
     CoolTime: 0
-    projectileCount: 0
+    projectileCount: 1
     BounceDist: 0
-    ProjRange: 0
+    ProjRange: 8
     NumBounce: 0
-    ScaleMultiplier: 0
-    projectileSpeed: 0
+    ScaleMultiplier: 1
+    projectileSpeed: 5
     NumPenerations: 0
     BounceSpeed: 0
     AngleBetweenProj: 0
@@ -88,15 +88,15 @@ MonoBehaviour:
     attackRangeMultiplier: 0
   - skillLevel: 4
     SkillIndex: 0
-    DamageMultiplire: 0
+    DamageMultiplire: 12
     AttackInterval: 0
     CoolTime: 0
-    projectileCount: 0
+    projectileCount: 1
     BounceDist: 0
-    ProjRange: 0
+    ProjRange: 8
     NumBounce: 0
-    ScaleMultiplier: 0
-    projectileSpeed: 0
+    ScaleMultiplier: 1
+    projectileSpeed: 5
     NumPenerations: 0
     BounceSpeed: 0
     AngleBetweenProj: 0
@@ -105,15 +105,15 @@ MonoBehaviour:
     attackRangeMultiplier: 0
   - skillLevel: 5
     SkillIndex: 0
-    DamageMultiplire: 0
+    DamageMultiplire: 14
     AttackInterval: 0
     CoolTime: 0
-    projectileCount: 0
+    projectileCount: 1
     BounceDist: 0
-    ProjRange: 0
+    ProjRange: 8
     NumBounce: 0
-    ScaleMultiplier: 0
-    projectileSpeed: 0
+    ScaleMultiplier: 1.2
+    projectileSpeed: 5
     NumPenerations: 0
     BounceSpeed: 0
     AngleBetweenProj: 0
@@ -122,15 +122,15 @@ MonoBehaviour:
     attackRangeMultiplier: 0
   - skillLevel: 6
     SkillIndex: 0
-    DamageMultiplire: 0
+    DamageMultiplire: 17
     AttackInterval: 0
     CoolTime: 0
-    projectileCount: 0
+    projectileCount: 1
     BounceDist: 0
-    ProjRange: 0
+    ProjRange: 8
     NumBounce: 0
-    ScaleMultiplier: 0
-    projectileSpeed: 0
+    ScaleMultiplier: 1.5
+    projectileSpeed: 5
     NumPenerations: 0
     BounceSpeed: 0
     AngleBetweenProj: 0

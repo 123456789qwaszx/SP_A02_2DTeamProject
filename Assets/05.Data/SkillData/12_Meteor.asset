@@ -22,11 +22,11 @@ MonoBehaviour:
     SkillIndex: 1
     DamageMultiplire: 10
     AttackInterval: 1
-    CoolTime: 1
+    CoolTime: -1
     projectileCount: 1
-    BounceDist: 1
-    ProjRange: 1
-    NumBounce: 1
+    BounceDist: -1
+    ProjRange: -1
+    NumBounce: -1
     ScaleMultiplier: 1
     projectileSpeed: 10
     NumPenerations: 1
@@ -39,19 +39,19 @@ MonoBehaviour:
     SkillIndex: 1
     DamageMultiplire: 12
     AttackInterval: 1
-    CoolTime: 1
+    CoolTime: -1
     projectileCount: 1
-    BounceDist: 1
-    ProjRange: 1
-    NumBounce: 1
+    BounceDist: -1
+    ProjRange: -1
+    NumBounce: -1
     ScaleMultiplier: 1
-    projectileSpeed: 12
-    NumPenerations: 1
-    BounceSpeed: 1
-    AngleBetweenProj: 1
-    ProjectileSpacing: 1
-    Duration: 1
-    attackRangeMultiplier: 1
+    projectileSpeed: 13
+    NumPenerations: -1
+    BounceSpeed: -1
+    AngleBetweenProj: -1
+    ProjectileSpacing: -1
+    Duration: -1
+    attackRangeMultiplier: -1
   - skillLevel: 2
     SkillIndex: 1
     DamageMultiplire: 14
@@ -61,8 +61,8 @@ MonoBehaviour:
     BounceDist: 1
     ProjRange: 1
     NumBounce: 1
-    ScaleMultiplier: 1
-    projectileSpeed: 14
+    ScaleMultiplier: 1.1
+    projectileSpeed: 13
     NumPenerations: 1
     BounceSpeed: 1
     AngleBetweenProj: 1
@@ -72,14 +72,14 @@ MonoBehaviour:
   - skillLevel: 3
     SkillIndex: 1
     DamageMultiplire: 16
-    AttackInterval: 1
+    AttackInterval: 0.9
     CoolTime: 1
-    projectileCount: 1
+    projectileCount: 2
     BounceDist: 1
     ProjRange: 1
     NumBounce: 1
-    ScaleMultiplier: 1
-    projectileSpeed: 16
+    ScaleMultiplier: 1.15
+    projectileSpeed: 13
     NumPenerations: 1
     BounceSpeed: 1
     AngleBetweenProj: 1
@@ -88,15 +88,15 @@ MonoBehaviour:
     attackRangeMultiplier: 1
   - skillLevel: 4
     SkillIndex: 1
-    DamageMultiplire: 18
-    AttackInterval: 1
+    DamageMultiplire: 15
+    AttackInterval: 0.8
     CoolTime: 1
-    projectileCount: 1
+    projectileCount: 2
     BounceDist: 1
     ProjRange: 1
     NumBounce: 1
-    ScaleMultiplier: 1
-    projectileSpeed: 18
+    ScaleMultiplier: 1.2
+    projectileSpeed: 13
     NumPenerations: 1
     BounceSpeed: 1
     AngleBetweenProj: 1
@@ -106,14 +106,14 @@ MonoBehaviour:
   - skillLevel: 5
     SkillIndex: 1
     DamageMultiplire: 20
-    AttackInterval: 1
+    AttackInterval: 0.7
     CoolTime: 1
-    projectileCount: 1
+    projectileCount: 2
     BounceDist: 1
     ProjRange: 1
     NumBounce: 1
-    ScaleMultiplier: 1
-    projectileSpeed: 20
+    ScaleMultiplier: 1.25
+    projectileSpeed: 13
     NumPenerations: 1
     BounceSpeed: 1
     AngleBetweenProj: 1
@@ -122,15 +122,15 @@ MonoBehaviour:
     attackRangeMultiplier: 1
   - skillLevel: 6
     SkillIndex: 1
-    DamageMultiplire: 22
-    AttackInterval: 1
+    DamageMultiplire: 30
+    AttackInterval: 0.4
     CoolTime: 1
-    projectileCount: 1
+    projectileCount: 3
     BounceDist: 1
     ProjRange: 1
     NumBounce: 1
-    ScaleMultiplier: 1
-    projectileSpeed: 22
+    ScaleMultiplier: 1.4
+    projectileSpeed: 13
     NumPenerations: 1
     BounceSpeed: 1
     AngleBetweenProj: 1
