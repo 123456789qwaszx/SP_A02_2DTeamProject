@@ -33,7 +33,7 @@ public class PlayerExpUI : MonoBehaviour
 
         if (playerLevel == null)
         {
-            Debug.LogError("PlayerLevel 컴포넌트를 찾을 수 없습니다.");
+            //Debug.LogError("PlayerLevel 컴포넌트를 찾을 수 없습니다.");
             return;
         }
 
