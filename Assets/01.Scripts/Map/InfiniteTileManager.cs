@@ -52,7 +52,7 @@ public class InfiniteTileManager : Singleton<InfiniteTileManager>
 
     private void Start()
     {
-        if (UIManager.Instance.GetSceneUI<UI_Base>() as UI_Title)
+        if (UIManager.Instance.GetSceneUI<UI_Base>() as UI_Title || UIManager.Instance.GetSceneUI<UI_Base>() as UI_GameScene) 
             return;
 
         Player player = GameManager.Instance?.player;
@@ -64,7 +64,7 @@ public class InfiniteTileManager : Singleton<InfiniteTileManager>
 
     private void Update()
     {
-        if (UIManager.Instance.GetSceneUI<UI_Base>() as UI_Title)
+        if (UIManager.Instance.GetSceneUI<UI_Base>() as UI_Title || UIManager.Instance.GetSceneUI<UI_Base>() as UI_GameScene) 
             return;
 
         UpdateTilesAroundPlayer();

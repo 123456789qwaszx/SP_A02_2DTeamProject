@@ -24,7 +24,6 @@ public class PlayerExpUI : MonoBehaviour
         }
 
         instance = this;
-        DontDestroyOnLoad(gameObject);
     }
 
 

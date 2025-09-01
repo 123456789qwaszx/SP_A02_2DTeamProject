@@ -43,6 +43,7 @@ public class UI_Title : UI_Scene
     {
         SceneManager.LoadScene("MainScene");
         UIManager.Instance.GetSceneUI<UI_Title>().gameObject.SetActive(false);
+        UIManager.Instance.ShowSceneUI<UI_GameScene>();
     }
 
     public void OnClickQuitGame(PointerEventData eventData)
