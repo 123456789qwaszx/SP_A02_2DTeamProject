@@ -15,8 +15,24 @@ public enum SceneType
     EndingScene
 }
 
-public class SoundManager : Singleton<SoundManager>
+public class SoundManager : MonoBehaviour
 {
+    public static SoundManager Instance;
+    
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+            Init();
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     [Header("BGM AudioSource")]
     [SerializeField] private AudioSource bgmSource;
 
@@ -44,17 +60,9 @@ public class SoundManager : Singleton<SoundManager>
     private List<AudioSource> sfxPool = new List<AudioSource>();
     private int sfxPoolIndex = 0;
 
-    private void Awake()
+
+    public void Init()
     {
-        if (Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        DontDestroyOnLoad(gameObject);
-
-        // SFX 풀 생성
         for (int i = 0; i < sfxSourcePoolSize; i++)
         {
             AudioSource newSource = gameObject.AddComponent<AudioSource>();

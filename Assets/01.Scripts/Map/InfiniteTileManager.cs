@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class DecorSet
@@ -7,10 +8,15 @@ public class DecorSet
     public GameObject[] prefabs; // 이 배열이 인스펙터에 보이게 됨
 }
 
-public class InfiniteTileManager : MonoBehaviour
+public class InfiniteTileManager : Singleton<InfiniteTileManager>
 {
     public int dungeonLevel = 0; // 현재 던전 레벨
     public GameObject[] tilePrefabsPerLevel; // 던전별 타일 프리팹 리스트
+
+    public GameObject tile1; // 던전별 타일 프리팹 리스트
+    public GameObject tile2; // 던전별 타일 프리팹 리스트
+    public GameObject tile3; // 던전별 타일 프리팹 리스트
+    public GameObject tile4; // 던전별 타일 프리팹 리스트
 
     [Header("장식 관련 설정")]
     public List<DecorSet> decorSetsPerLevel; // 각 레벨별 장식 프리팹 세트
@@ -23,14 +29,44 @@ public class InfiniteTileManager : MonoBehaviour
     private Transform playerTf;
     private int spawnRadius = 2;
 
+    void Awake()
+    {
+        Init();
+    }
+
+    public void Init()
+    {
+        ResourceManager.Instance.LoadAllAsync<GameObject>("Tile_Prefabs", (key, count, totalCount) =>
+        {
+            Debug.Log($"{key} {count}/{totalCount}");
+
+            if (count == totalCount)
+            {
+                tile1 = ResourceManager.Instance.Load<GameObject>("tile1");
+                tile2 = ResourceManager.Instance.Load<GameObject>("tile2");
+                tile3 = ResourceManager.Instance.Load<GameObject>("tile3");
+                tile4 = ResourceManager.Instance.Load<GameObject>("tile4");
+            }
+        });
+    }
+
     private void Start()
     {
-        playerTf = GameManager.Instance.player.transform;
+        if (UIManager.Instance.GetSceneUI<UI_Base>() as UI_Title)
+            return;
+
+        Player player = GameManager.Instance?.player;
+        if (player == null) return;
+
+        playerTf = player.transform;
         UpdateTilesAroundPlayer();
     }
 
     private void Update()
     {
+        if (UIManager.Instance.GetSceneUI<UI_Base>() as UI_Title)
+            return;
+
         UpdateTilesAroundPlayer();
     }
 
