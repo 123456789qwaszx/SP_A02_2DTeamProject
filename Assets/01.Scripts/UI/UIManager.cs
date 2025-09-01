@@ -41,6 +41,7 @@ public class UIManager : MonoBehaviour
     public void Init()
     {
         CacheUIs();
+        ShowSceneUI<UI_Title>();
     }
 
 
@@ -97,7 +98,7 @@ public class UIManager : MonoBehaviour
 
     public T GetSceneUI<T>() where T : UI_Base
     {
-        return SceneUI as T;
+        return _sceneUI as T;
     }
 
     public T MakeWorldSpaceUI<T>(Transform parent = null, string name = null) where T : UI_Base
@@ -144,7 +145,7 @@ public class UIManager : MonoBehaviour
 
         return sceneUI;
     }
-
+    
     public void ShowPopupUI<T>(Action<T> callback = null, Transform parent = null) where T : UI_Popup
     {
         String key = typeof(T).Name;
@@ -157,7 +158,7 @@ public class UIManager : MonoBehaviour
         T popup = ui as T;
 
         _popupList.Add(popup);
-        
+
         popup.gameObject.SetActive(true);
         _popupOrder++;
 
