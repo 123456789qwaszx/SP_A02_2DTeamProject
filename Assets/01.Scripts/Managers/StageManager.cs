@@ -58,7 +58,7 @@ public class StageManager : Singleton<StageManager>
             Debug.Log("치트 발동: 1분 추가됨! 현재 시간: " + stageTimer);
         }
 
-        UIManager.Instance.UpdatePlayTime(stageTimer);
+        UIController.Instance.UpdatePlayTime(stageTimer);
 
         if (Input.GetKeyDown(KeyCode.F))
         {
@@ -129,7 +129,7 @@ public class StageManager : Singleton<StageManager>
         PoolManager.Instance.Clear();
         GameManager.Instance.UpdateStageInfo();
 
-        UIManager.Instance.ShowStageClearPanel();
+        UIController.Instance.ShowStageClearPanel();
 
         Time.timeScale = 0f;
 

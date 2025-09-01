@@ -7,7 +7,7 @@ public class DungeonGate : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            UIManager.Instance.OpenStageSelectUI();
+            UIController.Instance.OpenStageSelectUI();
         }
     }
 }

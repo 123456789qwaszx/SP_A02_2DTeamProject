@@ -162,7 +162,7 @@ public class GameManager : Singleton<GameManager>
         if (stage > maxUnlockedStage)
             maxUnlockedStage = stage;
 
-        UIManager.Instance.UpdateStageButtons();
+        UIController.Instance.UpdateStageButtons();
     }
 
     private void RemoveExistingEffects()

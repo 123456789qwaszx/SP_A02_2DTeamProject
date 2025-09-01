@@ -84,13 +84,13 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
         // 경고 메시지 처리
         if (!midBossWarned && playTime >= 720f)
         {
-            UIManager.Instance.ShowWarning("아주 강력한 몬스터가 다가옵니다!", 3f);
+            UIController.Instance.ShowWarning("아주 강력한 몬스터가 다가옵니다!", 3f);
             midBossWarned = true;
         }
 
         if (playTime >= nextSurroundWarning && playTime < 900f)
         {
-            UIManager.Instance.ShowWarning("곧 몬스터가 몰려옵니다!");
+            UIController.Instance.ShowWarning("곧 몬스터가 몰려옵니다!");
             Debug.Log("몬스터 몰려옴 경고: " + playTime);
             nextSurroundWarning += surroundInterval;
         }
@@ -152,10 +152,10 @@ public class MonsterSpawnManager : Singleton<MonsterSpawnManager>
     {
         for (int i = 10; i >= 1; i--)
         {
-            UIManager.Instance.ShowWarning($"..{i}", 1f);
+            UIController.Instance.ShowWarning($"..{i}", 1f);
             yield return new WaitForSeconds(1f);
         }
-        UIManager.Instance.ShowWarning("보스 출현!", 2f);
+        UIController.Instance.ShowWarning("보스 출현!", 2f);
     }
 
     IEnumerator SpawnRegularMonsters()
