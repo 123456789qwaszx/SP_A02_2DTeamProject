@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class UIManager : Singleton<UIManager>
+public class UIController : Singleton<UIController>
 {
     [Header("스테이지 선택 UI 판넬")]
     public GameObject stageSelectPanel;
@@ -145,7 +145,7 @@ public class UIManager : Singleton<UIManager>
                     int selectedStage = stageIndex + 1;
                     GameManager.Instance.currentStage = selectedStage;
 
-                    UIManager.Instance.CloseStageSelectUI();
+                    UIController.Instance.CloseStageSelectUI();
 
                     // ~4 Stage: Castle
                     if (stageIndex <= 3)
