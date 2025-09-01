@@ -1,11 +1,19 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class UI_HPBar : UI_Base
+public class UI_HPBar : MonoBehaviour
 {
     public Image healthFillImage;
 
-    [SerializeField] private float smoothSpeed = 5f; // 부드럽게 전환되는 속도
+    //private float currentHpFill;
+
+    //[SerializeField] private float smoothSpeed = 5f; // 부드럽게 전환되는 속도
+
+
+    // private void Start()
+    // {
+    //     currentHpFill = 1f;
+    // }
 
     private void Update()
     {
